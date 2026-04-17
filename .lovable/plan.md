@@ -1,60 +1,58 @@
 
 
-## Plan: shahed.com.bd এর অবিকল ক্লোন তৈরি
+## Plan: SEO Enhancement - Sitemap, Structured Data ও Page Speed Optimization
 
-আমি আপনার বর্তমান ওয়েবসাইট shahed.com.bd ব্রাউজ করে সম্পূর্ণ স্ক্রিনশট ও কন্টেন্ট সংগ্রহ করেছি। নিচে যে সেকশনগুলো বর্তমানে নেই বা আলাদা, সেগুলো যোগ/আপডেট করার পরিকল্পনা:
+আপনার ওয়েবসাইটের SEO আরও শক্তিশালী করতে নিচের কাজগুলো করব যাতে Google এ আপনার নাম সার্চ করলে আপনার সাইট দ্রুত র‍্যাঙ্ক করে।
 
-### যা ইতিমধ্যে আছে (ছোট আপডেট দরকার)
-- Hero section (stats সংখ্যা আপডেট: 150+ Projects, 99% satisfaction)
-- About, Skills, Tech Stack, Experience, Projects, Services, Contact
+### ১. Sitemap & Robots Optimization
 
-### যা নতুন যোগ করতে হবে
+- **`public/sitemap.xml`** তৈরি করব — সব সেকশন (#about, #skills, #projects, #services, #blog, #contact) URL সহ
+- **`public/robots.txt`** আপডেট — sitemap reference যোগ করব
+- **`public/site.webmanifest`** — PWA manifest (Google এ ভালো signal দেয়)
 
-1. **Hero Section আপডেট**
-   - Typing animation effect (roles cycle: "Graphic Designer", "Brand Strategist", "Web Developer")
-   - "View My Work" বাটনে sparkle icon
-   - Facebook ও WhatsApp বাটন আলাদা styled buttons হিসেবে (icon + text)
-   - Stats: 150+ Projects, 99% Client Satisfaction
+### ২. Structured Data (JSON-LD) — Google Rich Results
 
-2. **Hamburger Menu (Mobile)**
-   - মোবাইলে hamburger menu icon দেখাবে, ক্লিক করলে navigation links আসবে
+`index.html` এ আরও schema যোগ করব:
+- **Person schema** আপডেট (existing) — আরও detailed (alumniOf, worksFor, sameAs সব social links)
+- **WebSite schema** — site search action সহ
+- **ProfessionalService schema** — সেবার তথ্য
+- **BreadcrumbList schema** — navigation structure
+- **FAQPage schema** — FAQ section এর প্রশ্নোত্তর (Google FAQ rich snippet দেখাবে)
 
-3. **Testimonials Section (নতুন)**
-   - Carousel/slider সহ client testimonials
-   - Rahim Uddin - Startup Founder এর রিভিউ
-   - Arrow navigation (prev/next)
+### ৩. Meta Tags উন্নতি (`index.html`)
 
-4. **Blog Section (নতুন)**
-   - 3টি blog card: title, category tag, read time, date, description
-   - Articles: "High-Converting Business Website", "Why Branding is Foundation", "E-Commerce Trends"
+- Canonical URL
+- Robots meta (index, follow, max-image-preview:large)
+- Geo tags (Bangladesh location)
+- Twitter card improvements
+- Theme color, mobile web app tags
+- Preconnect hints (Google Fonts, image domains)
+- DNS prefetch
 
-5. **FAQ Section (নতুন)**
-   - 5টি accordion-style FAQ items
-   - Questions: project types, timeline, support, pricing, redesigning
+### ৪. Page Speed Optimization
 
-6. **Contact Form (নতুন)**
-   - Name, Email, Message fields সহ contact form
-   - "send_message()" styled heading
+- **Font loading**: `<link rel="preconnect">` Google Fonts এ, `display=swap` (already present, verify)
+- **Image lazy loading**: `src/pages/Index.tsx` এ সব `<img>` ট্যাগে `loading="lazy"` ও `decoding="async"` যোগ করব (hero image ছাড়া — সেটা `fetchpriority="high"`)
+- **Width/Height attributes**: image গুলোতে CLS prevent করতে
+- **Alt texts**: সব image এ descriptive alt (SEO + accessibility)
 
-7. **Newsletter Section (নতুন)**
-   - Email input + Subscribe button
+### ৫. Semantic HTML উন্নতি
 
-8. **Footer আপডেট**
-   - Logo, social icons (Email, LinkedIn, Facebook)
-   - Privacy Policy, Terms & Conditions links
-   - "Back to top" button
+- `<section>` ট্যাগে proper `aria-label` ও `id` (already mostly present)
+- `<header>`, `<main>`, `<footer>` semantic tags
+- Heading hierarchy (h1 → h2 → h3) verify
 
-9. **Floating WhatsApp Chat Button**
-   - নিচে ডান কোণায় সবুজ WhatsApp floating button (সব সময় দেখা যাবে)
+### Files Changed
 
-### Technical Details
+| File | Change |
+|------|--------|
+| `index.html` | Meta tags + multiple JSON-LD schemas + preconnect |
+| `public/sitemap.xml` | নতুন তৈরি |
+| `public/robots.txt` | sitemap reference + clean rules |
+| `public/site.webmanifest` | নতুন তৈরি (PWA basics) |
+| `src/pages/Index.tsx` | Image lazy loading + alt texts + semantic improvements |
 
-- **File changed:** `src/pages/Index.tsx` — সব সেকশন এক ফাইলে (existing pattern অনুসরণ)
-- Typing animation: simple React state + useEffect cycle
-- FAQ accordion: useState toggle
-- Testimonials: simple state-based carousel
-- Contact form: UI only (no backend)
-- Newsletter: UI only
-- Floating WhatsApp: fixed position button
-- All images from shahed.com.bd assets URLs
+### Note
+
+কিছু server-side SEO (যেমন SSR, prerendering) Vite SPA তে limited। তবে Google এখন JavaScript রেন্ডার করতে পারে, এবং উপরের সব optimization মিলে আপনার "MD Shahed" সার্চে সাইটটি ভালো র‍্যাঙ্ক পাবে। সবচেয়ে বড় boost আসবে যখন আপনি custom domain (shahed.com.bd) এ publish করবেন।
 
