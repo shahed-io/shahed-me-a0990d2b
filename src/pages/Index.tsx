@@ -78,16 +78,57 @@ const Navbar = () => {
 
 const HeroSection = () => {
   const typedRole = useTypingAnimation(["Graphic Designer", "Brand Strategist", "Web Developer", "Entrepreneur"], 100, 50, 2000);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => setScrollY(window.scrollY));
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  // Subtle drift: photo moves up slightly slower than scroll, halo moves opposite, scale + fade
+  const photoTranslate = Math.min(scrollY * 0.25, 120);
+  const haloTranslate = Math.min(scrollY * -0.15, 0);
+  const photoScale = Math.max(1 - scrollY * 0.0006, 0.9);
+  const photoOpacity = Math.max(1 - scrollY * 0.002, 0.4);
 
   return (
     <section className="relative min-h-screen flex items-center bg-hero-gradient pt-20 overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="flex flex-col items-center text-center">
-          {/* Profile photo */}
-          <div className="relative mb-8">
-            <div className="absolute -inset-3 rounded-full bg-primary/20 blur-xl" />
-            <img src={profilePhoto} alt="MD Shahed - Web Developer and Entrepreneur from Bangladesh" width={160} height={160} fetchPriority="high" decoding="async" className="relative w-36 h-36 md:w-40 md:h-40 rounded-full object-cover border-2 border-primary/30 glow-blue" />
-            <div className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-accent flex items-center justify-center">
+          {/* Profile photo with parallax drift */}
+          <div className="relative mb-8" style={{ willChange: "transform" }}>
+            <div
+              className="absolute -inset-3 rounded-full bg-primary/20 blur-xl"
+              style={{ transform: `translate3d(0, ${haloTranslate}px, 0) scale(${1 + scrollY * 0.0008})` }}
+            />
+            <img
+              src={profilePhoto}
+              alt="MD Shahed - Web Developer and Entrepreneur from Bangladesh"
+              width={160}
+              height={160}
+              fetchPriority="high"
+              decoding="async"
+              className="relative w-36 h-36 md:w-40 md:h-40 rounded-full object-cover border-2 border-primary/30 glow-blue"
+              style={{
+                transform: `translate3d(0, ${photoTranslate}px, 0) scale(${photoScale})`,
+                opacity: photoOpacity,
+              }}
+            />
+            <div
+              className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-accent flex items-center justify-center"
+              style={{ transform: `translate3d(0, ${photoTranslate}px, 0) scale(${photoScale})`, opacity: photoOpacity }}
+            >
               <Code className="w-4 h-4 text-accent-foreground" />
             </div>
           </div>
