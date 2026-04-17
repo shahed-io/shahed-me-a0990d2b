@@ -85,7 +85,7 @@ const HeroSection = () => {
           {/* Profile photo */}
           <div className="relative mb-8">
             <div className="absolute -inset-3 rounded-full bg-primary/20 blur-xl" />
-            <img src={profilePhoto} alt="MD Shahed - Web Developer and Entrepreneur" width={160} height={160} className="relative w-36 h-36 md:w-40 md:h-40 rounded-full object-cover border-2 border-primary/30 glow-blue" />
+            <img src={profilePhoto} alt="MD Shahed - Web Developer and Entrepreneur from Bangladesh" width={160} height={160} fetchPriority="high" decoding="async" className="relative w-36 h-36 md:w-40 md:h-40 rounded-full object-cover border-2 border-primary/30 glow-blue" />
             <div className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-accent flex items-center justify-center">
               <Code className="w-4 h-4 text-accent-foreground" />
             </div>
@@ -170,7 +170,7 @@ const AboutSection = () => (
       <div className="grid lg:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
         <div className="relative flex justify-center">
           <div className="absolute -inset-4 rounded-2xl bg-primary/5 blur-2xl" />
-          <img src={profilePhoto} alt="MD Shahed" loading="lazy" width={400} height={400} className="relative w-72 h-72 md:w-80 md:h-80 object-cover rounded-2xl border border-border glow-blue" />
+          <img src={profilePhoto} alt="MD Shahed - Portrait" loading="lazy" decoding="async" width={400} height={400} className="relative w-72 h-72 md:w-80 md:h-80 object-cover rounded-2xl border border-border glow-blue" />
         </div>
         <div>
           <p className="text-muted-foreground text-base leading-relaxed mb-6">
@@ -292,7 +292,7 @@ const ProjectsSection = () => (
         {projects.map((project, i) => (
           <article key={i} className="group bg-card-gradient rounded-2xl border border-border overflow-hidden hover:border-primary/30 transition-all duration-300 hover:shadow-[var(--shadow-glow)]">
             <div className="aspect-video overflow-hidden">
-              <img src={project.img} alt={project.title} loading="lazy" width={400} height={225} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <img src={project.img} alt={`${project.title} — project by MD Shahed`} loading="lazy" decoding="async" width={400} height={225} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-6">
               <p className="font-mono text-accent text-xs mb-2">Project 0{i + 1}</p>
@@ -448,7 +448,7 @@ const BlogSection = () => (
         {blogPosts.map((post, i) => (
           <article key={i} className="group bg-card-gradient rounded-2xl border border-border overflow-hidden hover:border-primary/30 transition-all duration-300 hover:shadow-[var(--shadow-glow)]">
             <div className="aspect-video overflow-hidden">
-              <img src={post.img} alt={post.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <img src={post.img} alt={`${post.title} — MD Shahed blog article`} loading="lazy" decoding="async" width={400} height={225} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-6">
               <div className="flex items-center gap-3 mb-3">
