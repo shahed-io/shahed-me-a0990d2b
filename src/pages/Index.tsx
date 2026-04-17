@@ -48,8 +48,8 @@ const Navbar = () => {
           ))}
         </div>
         <div className="flex items-center gap-3">
-          <a href="https://wa.me/8801823378888" target="_blank" rel="noopener noreferrer" className="hidden md:inline-flex text-sm px-5 py-2 rounded-full border border-accent/30 text-accent hover:bg-accent/10 transition-colors">
-            WhatsApp
+          <a href="https://wa.me/8801823378888" target="_blank" rel="noopener noreferrer" className="hidden md:inline-flex items-center gap-2 text-sm px-5 py-2 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity">
+            Start a project
           </a>
           <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden text-foreground p-2">
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -105,8 +105,8 @@ const HeroSection = () => {
           </div>
 
           {/* Name */}
-          <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4">
-            MD <span className="text-gradient-blue">SHAHED</span>
+          <h1 className="font-heading text-display text-5xl md:text-7xl lg:text-8xl font-light tracking-tight mb-4">
+            MD <span className="text-gradient-green">SHAHED</span>
           </h1>
 
           {/* Typing Role */}
@@ -144,7 +144,7 @@ const HeroSection = () => {
               { value: "99%", label: "Client Satisfaction" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-gradient-blue">{stat.value}</div>
+                <div className="font-heading text-3xl md:text-5xl font-light tracking-tight text-foreground">{stat.value}</div>
                 <div className="text-xs text-muted-foreground mt-1">{stat.label}</div>
               </div>
             ))}

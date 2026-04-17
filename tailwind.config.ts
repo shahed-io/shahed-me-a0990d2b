@@ -14,8 +14,19 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ['Playfair Display', 'serif'],
-        body: ['DM Sans', 'sans-serif'],
+        heading: ['Manrope', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+        body: ['Inter', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+      },
+      fontWeight: {
+        ethereal: '300',
+        light: '330',
+        feather: '360',
+        regular: '400',
+        soft: '420',
+        book: '450',
+        medium: '500',
+        emphasis: '550',
       },
       colors: {
         border: "hsl(var(--border))",
@@ -66,6 +77,7 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        pill: "9999px",
       },
       keyframes: {
         "accordion-down": {
