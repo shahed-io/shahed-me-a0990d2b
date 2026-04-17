@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Mail, MapPin, Clock, ArrowDown, ArrowUp, ExternalLink, Facebook, Linkedin, MessageCircle, Code, Palette, ShoppingCart, PenTool, BarChart3, Zap, Menu, X, ChevronLeft, ChevronRight, Sparkles, Send, Star, Calendar, BookOpen } from "lucide-react";
+import { Reveal } from "@/hooks/use-scroll-reveal";
 
 const profilePhoto = "https://shahed.com.bd/assets/profile-photo-CtiUlvZF.jpg";
 
@@ -712,16 +713,16 @@ const Index = () => (
   <main>
     <Navbar />
     <HeroSection />
-    <AboutSection />
-    <SkillsSection />
-    <ExperienceSection />
-    <ProjectsSection />
-    <ServicesSection />
-    <TestimonialsSection />
-    <BlogSection />
-    <FAQSection />
-    <ContactSection />
-    <NewsletterSection />
+    <Reveal><AboutSection /></Reveal>
+    <Reveal><SkillsSection /></Reveal>
+    <Reveal><ExperienceSection /></Reveal>
+    <Reveal><ProjectsSection /></Reveal>
+    <Reveal><ServicesSection /></Reveal>
+    <Reveal><TestimonialsSection /></Reveal>
+    <Reveal><BlogSection /></Reveal>
+    <Reveal><FAQSection /></Reveal>
+    <Reveal><ContactSection /></Reveal>
+    <Reveal><NewsletterSection /></Reveal>
     <Footer />
     <FloatingButtons />
   </main>
