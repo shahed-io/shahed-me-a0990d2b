@@ -7,35 +7,26 @@ type Size = "sm" | "md" | "lg";
 export interface RippleButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant;
   size?: Size;
+  asChild?: boolean;
 }
 
-const variantClasses: Record<Variant, { bg: string; ripple: "light" | "dark" }> = {
-  primary: {
-    bg: "bg-foreground text-background hover:bg-foreground/90",
-    ripple: "light",
-  },
-  accent: {
-    bg: "bg-accent text-accent-foreground hover:bg-accent/90",
-    ripple: "light",
-  },
-  secondary: {
-    bg: "bg-secondary text-foreground hover:bg-muted",
-    ripple: "dark",
-  },
-  outline: {
-    bg: "border border-foreground text-foreground hover:bg-foreground hover:text-background",
-    ripple: "dark",
-  },
-  ghost: {
-    bg: "bg-transparent text-foreground hover:bg-secondary",
-    ripple: "dark",
-  },
+const variantClasses: Record<Variant, string> = {
+  primary:
+    "bg-gradient-primary text-primary-foreground shadow-elevated hover:shadow-[0_0_40px_-5px_hsl(var(--primary)/0.6)]",
+  accent:
+    "bg-gradient-accent text-primary-foreground shadow-elevated hover:shadow-[0_0_40px_-5px_hsl(var(--accent)/0.6)]",
+  secondary:
+    "glass text-foreground hover:bg-[hsl(var(--card)/0.8)]",
+  outline:
+    "border border-glass-border bg-transparent text-foreground hover:bg-[hsl(0_0%_100%/0.05)]",
+  ghost:
+    "bg-transparent text-foreground hover:bg-[hsl(0_0%_100%/0.06)]",
 };
 
 const sizeClasses: Record<Size, string> = {
-  sm: "px-4 py-2 text-xs rounded-full",
+  sm: "px-4 py-2 text-sm rounded-full",
   md: "px-6 py-3 text-sm rounded-full",
-  lg: "px-8 py-4 text-sm rounded-full",
+  lg: "px-8 py-4 text-base rounded-full",
 };
 
 export const RippleButton = React.forwardRef<HTMLButtonElement, RippleButtonProps>(
@@ -48,12 +39,12 @@ export const RippleButton = React.forwardRef<HTMLButtonElement, RippleButtonProp
 
       if (!reduced) {
         const rect = button.getBoundingClientRect();
-        const sz = Math.max(rect.width, rect.height);
+        const size = Math.max(rect.width, rect.height);
         const ripple = document.createElement("span");
-        ripple.className = `ripple-wave ${variantClasses[variant].ripple === "dark" ? "ripple-wave-dark" : ""}`;
-        ripple.style.width = ripple.style.height = `${sz}px`;
-        ripple.style.left = `${e.clientX - rect.left - sz / 2}px`;
-        ripple.style.top = `${e.clientY - rect.top - sz / 2}px`;
+        ripple.className = "ripple-wave";
+        ripple.style.width = ripple.style.height = `${size}px`;
+        ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+        ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
         button.appendChild(ripple);
         setTimeout(() => ripple.remove(), 700);
       }
@@ -66,8 +57,8 @@ export const RippleButton = React.forwardRef<HTMLButtonElement, RippleButtonProp
         ref={ref}
         onClick={handleClick}
         className={cn(
-          "ripple-container inline-flex items-center justify-center gap-2 font-medium tracking-wide transition-all duration-200 will-change-transform active:scale-[0.97] disabled:opacity-50 disabled:pointer-events-none uppercase",
-          variantClasses[variant].bg,
+          "ripple-container inline-flex items-center justify-center gap-2 font-medium transition-all duration-200 will-change-transform active:scale-[0.97] disabled:opacity-50 disabled:pointer-events-none",
+          variantClasses[variant],
           sizeClasses[size],
           className,
         )}

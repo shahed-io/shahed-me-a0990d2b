@@ -1,81 +1,110 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;420;450;500;550;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /*
- * Design system: Editorial luxury (Awwwards-inspired)
- * Light & sophisticated — off-white canvas, ink black, single warm amber accent.
- * Serif display × clean sans body × monospace metadata.
+ * Design system: Bold gradient + glassmorphism
+ * Vibrant violet/cyan/pink palette with frosted glass surfaces.
  * All colors are HSL.
  */
 
 @layer base {
   :root {
-    /* Surfaces — paper, ink, and shades of warmth */
-    --background: 36 30% 96%;             /* Warm paper #F7F3EC */
-    --foreground: 30 8% 10%;              /* Deep ink */
+    /* Surfaces — deep midnight with cool undertone */
+    --background: 240 30% 5%;            /* near-black with violet tint */
+    --foreground: 0 0% 98%;
 
-    --card: 36 25% 98%;                   /* Slightly raised paper */
-    --card-foreground: 30 8% 10%;
+    --card: 240 28% 8%;                  /* slightly raised dark */
+    --card-foreground: 0 0% 98%;
 
-    --popover: 36 25% 98%;
-    --popover-foreground: 30 8% 10%;
+    --popover: 240 28% 9%;
+    --popover-foreground: 0 0% 98%;
 
-    /* Primary: Pure ink black — sophisticated, used for primary CTA */
-    --primary: 30 8% 10%;
-    --primary-foreground: 36 30% 96%;
+    /* Primary: Electric violet */
+    --primary: 265 90% 65%;              /* #8B5CF6-ish */
+    --primary-foreground: 0 0% 100%;
 
-    /* Secondary: Warm cream */
-    --secondary: 36 20% 92%;
-    --secondary-foreground: 30 8% 10%;
+    /* Secondary: Cyan */
+    --secondary: 195 95% 55%;            /* #22D3EE */
+    --secondary-foreground: 240 30% 5%;
 
-    /* Muted: subtle warm gray */
-    --muted: 36 18% 90%;
-    --muted-foreground: 30 6% 40%;
+    /* Muted */
+    --muted: 240 20% 14%;
+    --muted-foreground: 240 8% 70%;
 
-    /* Accent: Warm amber — the single signature color */
-    --accent: 22 85% 55%;                 /* #E76F33-ish, warm coral-amber */
-    --accent-foreground: 36 30% 96%;
+    /* Accent: Hot pink */
+    --accent: 330 90% 65%;               /* #EC4899-ish */
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 36 30% 96%;
+    --destructive: 0 80% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 30 12% 85%;
-    --input: 30 12% 85%;
-    --ring: 22 85% 55%;
+    /* Glass borders */
+    --border: 240 20% 18%;
+    --input: 240 20% 14%;
+    --ring: 265 90% 65%;
 
-    --radius: 0.25rem;                    /* sharper editorial corners */
+    --radius: 1rem;
 
-    /* Typography — serif display × sans body × mono meta */
-    --font-display: 'Instrument Serif', 'Times New Roman', Georgia, serif;
+    /* Typography */
+    --font-heading: 'Space Grotesk', 'Inter', system-ui, sans-serif;
     --font-body: 'Inter', system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
-    /* Subtle, single-direction shadows (editorial, not dramatic) */
-    --shadow-sm: 0 1px 2px 0 hsl(30 30% 10% / 0.04);
-    --shadow-md: 0 4px 16px -4px hsl(30 30% 10% / 0.08);
-    --shadow-lg: 0 12px 40px -12px hsl(30 30% 10% / 0.12);
-    --shadow-focus: 0 0 0 3px hsl(22 85% 55% / 0.35);
+    /* Vibrant gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(265 90% 65%) 0%, hsl(195 95% 55%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(330 90% 65%) 0%, hsl(265 90% 65%) 50%, hsl(195 95% 55%) 100%);
+    --gradient-aurora: linear-gradient(135deg, hsl(265 90% 65% / 0.8) 0%, hsl(330 90% 65% / 0.6) 50%, hsl(195 95% 55% / 0.8) 100%);
+    --gradient-mesh:
+      radial-gradient(at 20% 20%, hsl(265 90% 65% / 0.4) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, hsl(330 90% 65% / 0.35) 0px, transparent 50%),
+      radial-gradient(at 0% 80%, hsl(195 95% 55% / 0.3) 0px, transparent 50%),
+      radial-gradient(at 80% 80%, hsl(265 90% 70% / 0.25) 0px, transparent 50%);
 
-    /* Subtle paper noise feel via gradient (very light) */
-    --gradient-paper: linear-gradient(180deg, hsl(36 30% 96%) 0%, hsl(36 25% 94%) 100%);
+    /* Glass surfaces */
+    --glass-bg: hsl(240 28% 12% / 0.5);
+    --glass-bg-strong: hsl(240 28% 14% / 0.75);
+    --glass-border: hsl(0 0% 100% / 0.08);
+    --glass-highlight: hsl(0 0% 100% / 0.1);
 
-    --sidebar-background: 36 30% 96%;
-    --sidebar-foreground: 30 8% 10%;
-    --sidebar-primary: 30 8% 10%;
-    --sidebar-primary-foreground: 36 30% 96%;
-    --sidebar-accent: 36 20% 92%;
-    --sidebar-accent-foreground: 30 8% 10%;
-    --sidebar-border: 30 12% 85%;
-    --sidebar-ring: 22 85% 55%;
+    /* Glows */
+    --glow-primary: 0 0 60px -10px hsl(265 90% 65% / 0.6);
+    --glow-accent: 0 0 60px -10px hsl(330 90% 65% / 0.5);
+    --glow-cyan: 0 0 60px -10px hsl(195 95% 55% / 0.5);
+
+    /* Multi-layer shadows */
+    --shadow-glass:
+      0 1px 0 0 hsl(0 0% 100% / 0.08) inset,
+      0 0 0 1px hsl(0 0% 100% / 0.05),
+      0 8px 32px hsl(240 50% 2% / 0.4),
+      0 24px 64px hsl(240 50% 2% / 0.3);
+
+    --shadow-elevated:
+      0 1px 0 0 hsl(0 0% 100% / 0.1) inset,
+      0 0 0 1px hsl(0 0% 100% / 0.08),
+      0 20px 60px hsl(240 50% 2% / 0.5),
+      0 0 80px -20px hsl(265 90% 65% / 0.3);
+
+    --shadow-focus: 0 0 0 3px hsl(265 90% 65% / 0.4);
+
+    /* Sidebar */
+    --sidebar-background: 240 30% 5%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 265 90% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 20% 14%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 240 20% 18%;
+    --sidebar-ring: 265 90% 65%;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+    font-feature-settings: "ss03" on, "cv11" on;
   }
 
   html {
@@ -85,16 +114,17 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-body);
-    font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Subtle mesh background on the whole page */
+    background-image: var(--gradient-mesh);
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display);
-    font-weight: 400;
+    font-family: var(--font-heading);
+    font-weight: 600;
     letter-spacing: -0.02em;
-    line-height: 0.95;
   }
 
   code, .font-mono {
@@ -104,88 +134,135 @@
   :focus-visible {
     outline: none;
     box-shadow: var(--shadow-focus);
-    border-radius: 4px;
+    border-radius: 8px;
   }
 
   ::selection {
-    background: hsl(var(--accent) / 0.25);
+    background: hsl(var(--primary) / 0.4);
     color: hsl(var(--foreground));
   }
 
-  /* Editorial scrollbar */
-  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
   ::-webkit-scrollbar-track { background: hsl(var(--background)); }
-  ::-webkit-scrollbar-thumb { background: hsl(var(--foreground) / 0.2); border-radius: 4px; }
-  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--foreground) / 0.4); }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, hsl(var(--primary) / 0.5), hsl(var(--accent) / 0.5));
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, hsl(var(--primary) / 0.8), hsl(var(--accent) / 0.8));
+  }
 }
 
 @layer utilities {
-  /* Display typography utilities */
-  .font-display {
-    font-family: var(--font-display);
+  /* Gradient text */
+  .text-gradient {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  .text-italic-display {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 400;
+  .text-gradient-primary {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  /* Single accent text */
-  .text-accent-warm {
-    color: hsl(var(--accent));
+  /* Backgrounds */
+  .bg-gradient-primary { background: var(--gradient-primary); }
+  .bg-gradient-accent { background: var(--gradient-accent); }
+  .bg-gradient-aurora { background: var(--gradient-aurora); }
+  .bg-gradient-mesh { background: var(--gradient-mesh); }
+
+  /* Glass surfaces */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-glass);
   }
 
-  /* Editorial number/eyebrow label */
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: hsl(var(--muted-foreground));
+  .glass-strong {
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(28px) saturate(200%);
+    -webkit-backdrop-filter: blur(28px) saturate(200%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-glass);
   }
 
-  /* Subtle paper background */
-  .bg-paper { background: var(--gradient-paper); }
-
-  /* Editorial card — minimal border, no glow */
-  .card-editorial {
-    background: hsl(var(--card));
-    border: 1px solid hsl(var(--border));
-    border-radius: var(--radius);
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-glass);
+    border-radius: 1.25rem;
   }
 
-  /* Underline link (animated from left) */
-  .link-underline {
+  /* Glows */
+  .glow-primary { box-shadow: var(--glow-primary); }
+  .glow-accent { box-shadow: var(--glow-accent); }
+  .glow-cyan { box-shadow: var(--glow-cyan); }
+
+  .shadow-elevated { box-shadow: var(--shadow-elevated); }
+
+  /* Animated gradient border */
+  .gradient-border {
     position: relative;
-    display: inline-block;
+    background: hsl(var(--card));
+    border-radius: 1.25rem;
   }
-  .link-underline::after {
+  .gradient-border::before {
     content: "";
     position: absolute;
-    left: 0; bottom: -2px;
-    width: 100%; height: 1px;
-    background: currentColor;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .link-underline:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: var(--gradient-accent);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
   }
 
-  /* Marquee for tech ticker */
-  .animate-marquee {
-    animation: marquee 30s linear infinite;
+  /* Animations */
+  .animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
+  .animate-fade-up { animation: fade-up 0.6s ease-out forwards; }
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  .animate-aurora { animation: aurora 14s linear infinite; background-size: 200% 200%; }
+  .animate-shimmer { animation: shimmer 2.5s linear infinite; }
+  .animate-page-in { animation: page-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(1deg); }
+  }
+  @keyframes aurora {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  @keyframes page-in {
+    from { opacity: 0; transform: translateY(8px) scale(0.995); filter: blur(4px); }
+    to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
   }
 
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-
-  /* Ripple effect (ink) */
+  /* Ripple effect container */
   .ripple-container {
     position: relative;
     overflow: hidden;
@@ -195,48 +272,35 @@
     position: absolute;
     border-radius: 9999px;
     transform: scale(0);
-    background: hsl(0 0% 100% / 0.35);
+    background: hsl(0 0% 100% / 0.4);
     pointer-events: none;
     animation: ripple 700ms ease-out forwards;
-  }
-  .ripple-wave-dark {
-    background: hsl(0 0% 0% / 0.12);
   }
   @keyframes ripple {
     to { transform: scale(4); opacity: 0; }
   }
 
-  /* Tilt card */
+  /* Tilt card 3D base */
   .tilt-card {
     transform-style: preserve-3d;
-    transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 200ms ease-out, box-shadow 300ms ease;
     will-change: transform;
   }
 
-  /* Magnetic */
+  /* Magnetic transitions */
   .magnetic {
-    transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
     will-change: transform;
-  }
-
-  /* Page in transition */
-  .animate-page-in { animation: page-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
-  @keyframes page-in {
-    from { opacity: 0; transform: translateY(8px); filter: blur(4px); }
-    to { opacity: 1; transform: translateY(0); filter: blur(0); }
-  }
-
-  .animate-fade-in { animation: fade-in 0.4s ease-out forwards; }
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
   }
 
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
-    .animate-marquee,
-    .animate-page-in,
     .animate-fade-in,
+    .animate-fade-up,
+    .animate-float,
+    .animate-aurora,
+    .animate-shimmer,
+    .animate-page-in,
     .ripple-wave,
     .tilt-card,
     .magnetic {
