@@ -1,9 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import {
-  Mail, MapPin, Clock, ArrowDown, ArrowUp, ExternalLink, Facebook, Linkedin,
+  Mail, MapPin, Clock, ArrowDown, ArrowUp, ArrowUpRight, Facebook, Linkedin,
   MessageCircle, Code, Palette, ShoppingCart, PenTool, BarChart3, Zap,
-  Menu, X, ChevronLeft, ChevronRight, Sparkles, Send, Star, Calendar, BookOpen,
-  ArrowUpRight,
+  Menu, X, ChevronLeft, ChevronRight, Send, Star, Calendar, BookOpen,
 } from "lucide-react";
 import { Reveal } from "@/hooks/use-scroll-reveal";
 import { RippleButton } from "@/components/ui/ripple-button";
@@ -37,15 +36,29 @@ const useTypingAnimation = (words: string[], typingSpeed = 100, deletingSpeed = 
   return text;
 };
 
-/* ---------- Section heading helper ---------- */
-const SectionHeading = ({ eyebrow, title, accent }: { eyebrow: string; title: string; accent?: string }) => (
-  <div className="text-center mb-16">
-    <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium text-muted-foreground tracking-wide mb-5">
-      <span className="w-1.5 h-1.5 rounded-full bg-gradient-accent" />
-      {eyebrow}
-    </span>
-    <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight">
-      {title} {accent && <span className="text-gradient">{accent}</span>}
+/* ---------- Section header (editorial) ---------- */
+const SectionHeader = ({
+  number,
+  eyebrow,
+  title,
+  italic,
+  align = "left",
+}: {
+  number: string;
+  eyebrow: string;
+  title: string;
+  italic?: string;
+  align?: "left" | "center";
+}) => (
+  <div className={`mb-16 md:mb-24 ${align === "center" ? "text-center" : ""}`}>
+    <div className={`flex items-center gap-4 mb-6 ${align === "center" ? "justify-center" : ""}`}>
+      <span className="eyebrow">{number}</span>
+      <span className="h-px w-12 bg-foreground/30" />
+      <span className="eyebrow">{eyebrow}</span>
+    </div>
+    <h2 className="font-display text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight">
+      {title}{" "}
+      {italic && <span className="text-italic-display text-accent-warm">{italic}</span>}
     </h2>
   </div>
 );
@@ -63,30 +76,35 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-3" : "py-5"}`}>
-      <div className="container mx-auto px-6">
-        <div className={`flex items-center justify-between rounded-full px-5 py-2.5 transition-all duration-300 ${scrolled ? "glass-strong" : "glass"}`}>
-          <a href="#" className="font-heading font-bold text-lg tracking-tight">
-            SHAHED<span className="text-gradient">.</span>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "py-3 bg-background/85 backdrop-blur-xl border-b border-border" : "py-6 bg-transparent"}`}>
+      <div className="container mx-auto px-6 lg:px-12">
+        <div className="flex items-center justify-between">
+          <a href="#" className="font-display text-2xl tracking-tight">
+            Shahed<span className="text-accent-warm">.</span>
           </a>
-          <div className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => (
+          <div className="hidden md:flex items-center gap-8">
+            {navItems.map((item, i) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className="px-4 py-1.5 text-sm text-muted-foreground hover:text-foreground rounded-full hover:bg-white/5 transition-colors"
+                className="text-sm text-foreground/70 hover:text-foreground link-underline transition-colors"
               >
+                <span className="font-mono text-[10px] text-foreground/40 mr-1.5">0{i + 1}</span>
                 {item}
               </a>
             ))}
           </div>
           <div className="flex items-center gap-3">
             <Magnetic strength={0.25} className="hidden md:inline-block">
-              <RippleButton variant="primary" size="sm" asChild={false} onClick={() => window.open("https://wa.me/8801823378888", "_blank")}>
-                <Sparkles className="w-3.5 h-3.5" /> Start a project
+              <RippleButton variant="primary" size="sm" onClick={() => window.open("https://wa.me/8801823378888", "_blank")}>
+                Let's Talk <ArrowUpRight className="w-3.5 h-3.5" />
               </RippleButton>
             </Magnetic>
-            <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden text-foreground p-1.5" aria-label="Toggle menu">
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="md:hidden text-foreground p-1.5"
+              aria-label="Toggle menu"
+            >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
@@ -94,15 +112,16 @@ const Navbar = () => {
       </div>
 
       {mobileOpen && (
-        <div className="md:hidden mt-3 mx-6 glass-strong rounded-2xl animate-fade-in">
-          <div className="p-5 flex flex-col gap-2">
-            {navItems.map((item) => (
+        <div className="md:hidden mt-3 mx-6 bg-card border border-border rounded-sm animate-fade-in">
+          <div className="p-5 flex flex-col gap-1">
+            {navItems.map((item, i) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
                 onClick={() => setMobileOpen(false)}
-                className="px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-white/5 rounded-xl transition-colors"
+                className="px-3 py-3 text-sm text-foreground/70 hover:text-foreground hover:bg-secondary rounded-sm transition-colors flex items-center gap-3"
               >
+                <span className="font-mono text-[10px] text-foreground/40">0{i + 1}</span>
                 {item}
               </a>
             ))}
@@ -110,9 +129,9 @@ const Navbar = () => {
               href="https://wa.me/8801823378888"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 text-center px-4 py-2.5 rounded-full bg-gradient-primary text-primary-foreground text-sm font-medium"
+              className="mt-3 text-center px-4 py-3 rounded-full bg-foreground text-background text-xs uppercase tracking-wider font-medium"
             >
-              Start a project
+              Let's Talk
             </a>
           </div>
         </div>
@@ -121,10 +140,10 @@ const Navbar = () => {
   );
 };
 
-/* ---------- Hero ---------- */
+/* ---------- Hero (Editorial — oversized headline, no profile photo) ---------- */
 const HeroSection = () => {
   const typedRole = useTypingAnimation(
-    ["Graphic Designer", "Brand Strategist", "Web Developer", "Entrepreneur"],
+    ["graphic designer", "brand strategist", "web developer", "entrepreneur"],
     100, 50, 2000,
   );
   const [scrollY, setScrollY] = useState(0);
@@ -144,163 +163,161 @@ const HeroSection = () => {
     };
   }, []);
 
-  const photoTranslate = Math.min(scrollY * 0.25, 120);
-  const haloTranslate = Math.min(scrollY * -0.15, 0);
-  const photoScale = Math.max(1 - scrollY * 0.0006, 0.9);
-  const photoOpacity = Math.max(1 - scrollY * 0.002, 0.4);
+  const parallax = Math.min(scrollY * 0.15, 80);
 
   return (
-    <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
-      {/* Aurora background blobs */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] rounded-full bg-primary/30 blur-[120px] animate-float" />
-        <div className="absolute bottom-1/4 -right-32 w-[500px] h-[500px] rounded-full bg-accent/25 blur-[120px] animate-float" style={{ animationDelay: "2s" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-secondary/20 blur-[100px] animate-float" style={{ animationDelay: "4s" }} />
-      </div>
+    <section className="relative min-h-screen flex flex-col justify-between pt-32 pb-16 overflow-hidden">
+      {/* Subtle paper background */}
+      <div className="absolute inset-0 -z-10 bg-paper" />
 
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col items-center text-center">
-          {/* Profile photo with glass ring */}
-          <div className="relative mb-10" style={{ willChange: "transform" }}>
-            <div
-              className="absolute -inset-6 rounded-full bg-gradient-aurora blur-2xl opacity-70"
-              style={{ transform: `translate3d(0, ${haloTranslate}px, 0) scale(${1 + scrollY * 0.0008})` }}
-            />
-            <Magnetic strength={0.15}>
-              <div
-                className="relative p-1 rounded-full bg-gradient-accent animate-aurora glow-primary"
-                style={{
-                  transform: `translate3d(0, ${photoTranslate}px, 0) scale(${photoScale})`,
-                  opacity: photoOpacity,
-                }}
-              >
-                <img
-                  src={profilePhoto}
-                  alt="MD Shahed - Web Developer and Entrepreneur from Bangladesh"
-                  width={160}
-                  height={160}
-                  fetchPriority="high"
-                  decoding="async"
-                  className="w-36 h-36 md:w-40 md:h-40 rounded-full object-cover border-4 border-background"
-                />
-                <div className="absolute -bottom-1 -right-1 w-10 h-10 rounded-full bg-background flex items-center justify-center">
-                  <div className="w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center">
-                    <Code className="w-4 h-4 text-primary-foreground" />
-                  </div>
-                </div>
-              </div>
-            </Magnetic>
+      <div className="container mx-auto px-6 lg:px-12 flex-1 flex flex-col justify-center">
+        {/* Top metadata */}
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-12 md:mb-20">
+          <div className="flex items-center gap-3">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inset-0 rounded-full bg-accent animate-ping opacity-60" />
+              <span className="relative rounded-full h-2 w-2 bg-accent" />
+            </span>
+            <span className="eyebrow">Available for select projects · 2025</span>
           </div>
+          <span className="eyebrow flex items-center gap-2">
+            <MapPin className="w-3 h-3" />
+            Bangladesh — UTC+6
+          </span>
+        </div>
 
-          {/* Status badges */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
-            <span className="flex items-center gap-2 text-xs text-foreground px-3.5 py-1.5 rounded-full glass">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inset-0 rounded-full bg-secondary animate-ping opacity-60" />
-                <span className="relative rounded-full h-2 w-2 bg-secondary" />
-              </span>
-              Available for work
+        {/* Massive editorial headline */}
+        <div style={{ transform: `translate3d(0, ${-parallax * 0.2}px, 0)` }}>
+          <h1 className="font-display leading-[0.85] tracking-tighter">
+            <span className="block text-[20vw] md:text-[16vw] lg:text-[14vw] xl:text-[13vw]">
+              MD <span className="text-italic-display text-accent-warm">Shahed</span>
             </span>
-            <span className="flex items-center gap-2 text-xs text-muted-foreground px-3.5 py-1.5 rounded-full glass">
-              <MapPin className="w-3 h-3" /> Bangladesh
-            </span>
-            <span className="flex items-center gap-2 text-xs text-muted-foreground px-3.5 py-1.5 rounded-full glass">
-              <Clock className="w-3 h-3" /> 7+ Years
-            </span>
-          </div>
-
-          {/* Name */}
-          <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter mb-5 leading-[1.05]">
-            MD <span className="text-gradient bg-gradient-aurora bg-clip-text">SHAHED</span>
           </h1>
 
-          {/* Typing role */}
-          <div className="font-mono text-secondary text-sm md:text-base mb-6 h-6 flex items-center gap-1">
-            <span className="text-muted-foreground">{"<"}</span>
-            <span className="text-foreground">{typedRole}</span>
-            <span className="animate-pulse text-secondary">|</span>
-            <span className="text-muted-foreground">{"/>"}</span>
+          <div className="mt-8 md:mt-12 grid md:grid-cols-12 gap-8 items-end">
+            <div className="md:col-span-7">
+              <p className="text-xl md:text-2xl lg:text-3xl text-foreground/80 leading-snug font-light">
+                A{" "}
+                <span className="font-mono text-base md:text-lg text-accent-warm">
+                  {typedRole}<span className="animate-pulse">_</span>
+                </span>
+                {" "}building powerful digital brands that turn{" "}
+                <span className="text-italic-display">ideas</span>{" "}
+                into profitable online businesses.
+              </p>
+            </div>
+
+            <div className="md:col-span-5 md:col-start-9 flex md:justify-end">
+              <div className="space-y-3 max-w-xs">
+                <Magnetic strength={0.3}>
+                  <RippleButton
+                    variant="primary"
+                    size="lg"
+                    className="w-full"
+                    onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+                  >
+                    View Selected Work <ArrowUpRight className="w-4 h-4" />
+                  </RippleButton>
+                </Magnetic>
+                <Magnetic strength={0.3}>
+                  <RippleButton
+                    variant="outline"
+                    size="lg"
+                    className="w-full"
+                    onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                  >
+                    Start a Project
+                  </RippleButton>
+                </Magnetic>
+              </div>
+            </div>
           </div>
-
-          {/* Tagline */}
-          <p className="text-muted-foreground text-base md:text-lg max-w-xl leading-relaxed mb-10">
-            I build powerful digital brands that turn ideas into{" "}
-            <span className="text-gradient font-medium">profitable online businesses</span>.
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-4 mb-16">
-            <Magnetic strength={0.3}>
-              <RippleButton variant="primary" size="lg" onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}>
-                <Sparkles className="w-4 h-4" /> View My Work
-              </RippleButton>
-            </Magnetic>
-            <Magnetic strength={0.3}>
-              <RippleButton variant="secondary" size="lg" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
-                Contact Me <ArrowUpRight className="w-4 h-4" />
-              </RippleButton>
-            </Magnetic>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full max-w-3xl">
-            {[
-              { value: "150+", label: "Projects Completed" },
-              { value: "7+", label: "Years Experience" },
-              { value: "50+", label: "Happy Clients" },
-              { value: "99%", label: "Client Satisfaction" },
-            ].map((stat) => (
-              <TiltCard key={stat.label} className="glass-card p-5 md:p-6">
-                <div className="font-heading text-3xl md:text-5xl font-semibold tracking-tight text-gradient">
-                  {stat.value}
-                </div>
-                <div className="text-xs text-muted-foreground mt-1.5">{stat.label}</div>
-              </TiltCard>
-            ))}
-          </div>
-
-          <a href="#about" className="mt-16 text-muted-foreground/40 animate-bounce" aria-label="Scroll to about">
-            <ArrowDown className="w-5 h-5" />
-          </a>
         </div>
       </div>
+
+      {/* Bottom strip — stats marquee */}
+      <div className="container mx-auto px-6 lg:px-12 mt-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 pt-10 border-t border-border">
+          {[
+            { value: "150+", label: "Projects Completed" },
+            { value: "07+", label: "Years Experience" },
+            { value: "50+", label: "Happy Clients" },
+            { value: "99%", label: "Client Satisfaction" },
+          ].map((stat) => (
+            <div key={stat.label}>
+              <div className="font-display text-5xl md:text-6xl tracking-tight leading-none">
+                {stat.value}
+              </div>
+              <div className="eyebrow mt-2">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <a
+        href="#about"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-foreground/40 animate-bounce"
+        aria-label="Scroll to about"
+      >
+        <ArrowDown className="w-5 h-5" />
+      </a>
     </section>
   );
 };
 
 /* ---------- About ---------- */
 const AboutSection = () => (
-  <section id="about" className="relative py-24 lg:py-32">
-    <div className="container mx-auto px-6">
-      <SectionHeading eyebrow="about me" title="About" accent="Me" />
-      <div className="grid lg:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
-        <TiltCard className="relative flex justify-center" max={6}>
-          <div className="absolute -inset-6 rounded-3xl bg-gradient-aurora blur-3xl opacity-30" />
-          <div className="relative p-1 rounded-3xl bg-gradient-accent">
-            <img
-              src={profilePhoto}
-              alt="MD Shahed - Portrait"
-              loading="lazy"
-              decoding="async"
-              width={400}
-              height={400}
-              className="w-72 h-72 md:w-80 md:h-80 object-cover rounded-3xl"
-            />
+  <section id="about" className="relative py-24 md:py-32 lg:py-40">
+    <div className="container mx-auto px-6 lg:px-12">
+      <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
+        {/* Left: image + meta */}
+        <div className="lg:col-span-5">
+          <div className="flex items-center gap-4 mb-6">
+            <span className="eyebrow">/01</span>
+            <span className="h-px w-12 bg-foreground/30" />
+            <span className="eyebrow">About</span>
           </div>
-        </TiltCard>
-        <div>
-          <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-8">
-            I am a results-driven Web Developer and Entrepreneur with over{" "}
-            <span className="text-foreground font-medium">7 years</span> of experience building
-            modern websites, scalable digital platforms, and strong online brands. I specialize in
-            creating high-performance websites that are visually strong and strategically built for{" "}
-            <span className="text-gradient font-medium">business growth</span>.
-          </p>
-          <div className="space-y-3">
-            {["7+ Years Building Digital Products", "International Client Base", "Startup to Enterprise Experience"].map((item) => (
-              <div key={item} className="flex items-center gap-3 text-sm glass rounded-full px-4 py-2.5">
-                <span className="w-2 h-2 rounded-full bg-gradient-accent" />
-                <span className="text-foreground">{item}</span>
+          <TiltCard max={4} glare={false}>
+            <div className="relative">
+              <img
+                src={profilePhoto}
+                alt="MD Shahed - Portrait"
+                loading="lazy"
+                decoding="async"
+                width={500}
+                height={600}
+                className="w-full aspect-[4/5] object-cover rounded-sm"
+              />
+              <div className="absolute -bottom-4 -right-4 bg-foreground text-background px-4 py-2 font-mono text-xs">
+                shahed.com.bd
+              </div>
+            </div>
+          </TiltCard>
+        </div>
+
+        {/* Right: editorial copy */}
+        <div className="lg:col-span-7 lg:pt-20">
+          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight mb-10">
+            Crafting <span className="text-italic-display text-accent-warm">digital experiences</span> that move people — and businesses — forward.
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8 text-foreground/75">
+            <p className="text-base leading-relaxed">
+              I'm a results-driven Web Developer and Entrepreneur with over <span className="text-foreground font-medium">7 years</span> of experience building modern websites, scalable platforms, and strong online brands.
+            </p>
+            <p className="text-base leading-relaxed">
+              I specialize in high-performance websites that are visually distinctive and strategically built for measurable business growth.
+            </p>
+          </div>
+
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-6 pt-10 border-t border-border">
+            {[
+              { k: "Years of craft", v: "7+" },
+              { k: "Clients served", v: "50+" },
+              { k: "Markets", v: "Global" },
+            ].map((s) => (
+              <div key={s.k}>
+                <div className="font-display text-4xl tracking-tight">{s.v}</div>
+                <div className="eyebrow mt-1">{s.k}</div>
               </div>
             ))}
           </div>
@@ -313,7 +330,7 @@ const AboutSection = () => (
 /* ---------- Skills ---------- */
 const skills = [
   { name: "Web Development", level: 95 },
-  { name: "UI/UX Design", level: 90 },
+  { name: "UI / UX Design", level: 90 },
   { name: "E-commerce Development", level: 88 },
   { name: "WordPress & CMS", level: 92 },
   { name: "Branding & Identity", level: 85 },
@@ -328,40 +345,50 @@ const techStack = [
 ];
 
 const SkillsSection = () => (
-  <section id="skills" className="relative py-24 lg:py-32">
-    <div className="container mx-auto px-6">
-      <SectionHeading eyebrow="skills" title="What I" accent="Do" />
-      <div className="max-w-3xl mx-auto mb-20 glass-card p-8 md:p-10">
-        <div className="grid gap-5">
-          {skills.map((skill) => (
-            <div key={skill.name} className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span className="text-foreground font-medium">{skill.name}</span>
-                <span className="text-muted-foreground font-mono text-xs">{skill.level}%</span>
-              </div>
-              <div className="h-1.5 bg-muted/50 rounded-full overflow-hidden">
-                <div
-                  className="h-full rounded-full bg-gradient-accent animate-aurora"
-                  style={{ width: `${skill.level}%`, backgroundSize: "200% 100%" }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+  <section id="skills" className="relative py-24 md:py-32 lg:py-40 bg-secondary/40">
+    <div className="container mx-auto px-6 lg:px-12">
+      <SectionHeader number="/02" eyebrow="Capabilities" title="Tools of the" italic="trade" />
 
-      <div className="text-center mb-8">
-        <p className="font-mono text-secondary text-xs tracking-widest mb-3">// tech stack</p>
-        <h3 className="font-heading text-2xl md:text-3xl font-semibold">Tools I Use Daily</h3>
-      </div>
-      <div className="flex flex-wrap justify-center gap-2.5 max-w-2xl mx-auto">
-        {techStack.map((tech) => (
-          <Magnetic key={tech} strength={0.2}>
-            <span className="px-4 py-2 rounded-full glass text-sm text-muted-foreground hover:text-foreground transition-colors cursor-default">
-              {tech}
-            </span>
-          </Magnetic>
-        ))}
+      <div className="grid lg:grid-cols-12 gap-12">
+        <div className="lg:col-span-7">
+          <div className="space-y-6">
+            {skills.map((skill, i) => (
+              <div key={skill.name} className="border-b border-border pb-5 last:border-0">
+                <div className="flex justify-between items-baseline mb-3">
+                  <div className="flex items-baseline gap-3">
+                    <span className="font-mono text-xs text-foreground/40">0{i + 1}</span>
+                    <span className="font-display text-xl md:text-2xl">{skill.name}</span>
+                  </div>
+                  <span className="font-mono text-xs text-foreground/60">{skill.level}%</span>
+                </div>
+                <div className="h-px bg-border overflow-hidden">
+                  <div
+                    className="h-full bg-foreground"
+                    style={{ width: `${skill.level}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="lg:col-span-5">
+          <div className="sticky top-32">
+            <div className="eyebrow mb-4">Tech stack</div>
+            <h3 className="font-display text-3xl md:text-4xl mb-8 leading-tight">
+              The everyday <span className="text-italic-display text-accent-warm">toolkit</span>.
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {techStack.map((tech) => (
+                <Magnetic key={tech} strength={0.2}>
+                  <span className="px-4 py-2 rounded-full border border-foreground/20 text-sm text-foreground/80 hover:border-foreground hover:text-foreground transition-colors cursor-default">
+                    {tech}
+                  </span>
+                </Magnetic>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -369,28 +396,32 @@ const SkillsSection = () => (
 
 /* ---------- Experience timeline ---------- */
 const timeline = [
-  { year: "2017", fn: "init()", title: "Started Web Development", desc: "Began my journey building websites and learning modern technologies." },
-  { year: "2019", fn: "launch()", title: "Freelance Career", desc: "Started taking international clients and building brands for startups." },
-  { year: "2021", fn: "scale()", title: "Founded IT Business", desc: "Launched an IT service company providing digital solutions to businesses." },
-  { year: "2023", fn: "expand()", title: "E-Commerce Expansion", desc: "Expanded into e-commerce development with WooCommerce and custom solutions." },
-  { year: "2024", fn: "milestone()", title: "150+ Projects Milestone", desc: "Crossed 150+ successfully delivered projects with clients worldwide." },
+  { year: "2017", title: "Started Web Development", desc: "Began my journey building websites and learning modern technologies." },
+  { year: "2019", title: "Freelance Career", desc: "Started taking international clients and building brands for startups." },
+  { year: "2021", title: "Founded IT Business", desc: "Launched an IT service company providing digital solutions to businesses." },
+  { year: "2023", title: "E-Commerce Expansion", desc: "Expanded into e-commerce development with WooCommerce and custom solutions." },
+  { year: "2024", title: "150+ Projects Milestone", desc: "Crossed 150+ successfully delivered projects with clients worldwide." },
 ];
 
 const ExperienceSection = () => (
-  <section className="relative py-24 lg:py-32">
-    <div className="container mx-auto px-6">
-      <SectionHeading eyebrow="experience" title="My" accent="Journey" />
-      <div className="max-w-2xl mx-auto">
+  <section className="relative py-24 md:py-32 lg:py-40">
+    <div className="container mx-auto px-6 lg:px-12">
+      <SectionHeader number="/03" eyebrow="Journey" title="A timeline of" italic="growth" />
+
+      <div className="max-w-4xl">
         {timeline.map((item, i) => (
-          <div key={i} className="relative pl-10 pb-10 last:pb-0 border-l border-border">
-            <div className="absolute left-0 top-0 -translate-x-1/2 w-4 h-4 rounded-full bg-gradient-accent glow-primary" />
-            <div className="glass-card p-6">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="font-mono text-gradient-primary text-sm font-semibold">{item.year}</span>
-                <span className="font-mono text-secondary text-xs">{item.fn}</span>
-              </div>
-              <h3 className="font-heading text-lg md:text-xl font-semibold text-foreground mb-1">{item.title}</h3>
-              <p className="text-sm text-muted-foreground">{item.desc}</p>
+          <div
+            key={i}
+            className="grid grid-cols-12 gap-6 py-8 border-t border-border last:border-b group hover:bg-secondary/40 transition-colors -mx-4 px-4 rounded-sm"
+          >
+            <div className="col-span-3 md:col-span-2">
+              <span className="font-display text-3xl md:text-4xl text-foreground/60 group-hover:text-accent-warm transition-colors">
+                {item.year}
+              </span>
+            </div>
+            <div className="col-span-9 md:col-span-10">
+              <h3 className="font-display text-2xl md:text-3xl mb-2 leading-tight">{item.title}</h3>
+              <p className="text-foreground/70 max-w-xl">{item.desc}</p>
             </div>
           </div>
         ))}
@@ -401,47 +432,74 @@ const ExperienceSection = () => (
 
 /* ---------- Projects ---------- */
 const projects = [
-  { title: "Digital Business Growth Platform", desc: "Full website design and development with branding strategy.", tags: ["HTML", "CSS", "JavaScript", "WordPress"], img: "https://shahed.com.bd/assets/project-1-CGFnPPTs.jpg" },
-  { title: "IT Business Venture", desc: "Entrepreneur-led IT service business providing digital solutions.", tags: ["Strategy", "Digital Services"], img: "https://shahed.com.bd/assets/project-2-DDFynyNU.jpg" },
-  { title: "E-Commerce Brand Development", desc: "Designed and developed a complete online store using WordPress and WooCommerce.", tags: ["WordPress", "WooCommerce"], img: "https://shahed.com.bd/assets/project-3-CiR2Pc9z.jpg" },
+  { title: "Digital Business Growth Platform", desc: "Full website design and development with branding strategy.", tags: ["Web", "Branding", "WordPress"], img: "https://shahed.com.bd/assets/project-1-CGFnPPTs.jpg", year: "2024" },
+  { title: "IT Business Venture", desc: "Entrepreneur-led IT service business providing digital solutions.", tags: ["Strategy", "Services"], img: "https://shahed.com.bd/assets/project-2-DDFynyNU.jpg", year: "2023" },
+  { title: "E-Commerce Brand Development", desc: "Designed and developed a complete online store using WordPress and WooCommerce.", tags: ["E-commerce", "WooCommerce"], img: "https://shahed.com.bd/assets/project-3-CiR2Pc9z.jpg", year: "2024" },
 ];
 
 const ProjectsSection = () => (
-  <section id="projects" className="relative py-24 lg:py-32">
-    <div className="container mx-auto px-6">
-      <SectionHeading eyebrow="projects" title="Featured" accent="Work" />
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+  <section id="projects" className="relative py-24 md:py-32 lg:py-40 bg-secondary/40">
+    <div className="container mx-auto px-6 lg:px-12">
+      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 md:mb-24">
+        <div>
+          <div className="flex items-center gap-4 mb-6">
+            <span className="eyebrow">/04</span>
+            <span className="h-px w-12 bg-foreground/30" />
+            <span className="eyebrow">Selected Work</span>
+          </div>
+          <h2 className="font-display text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight">
+            Recent <span className="text-italic-display text-accent-warm">projects</span>
+          </h2>
+        </div>
+        <Magnetic strength={0.25}>
+          <a href="#contact" className="link-underline text-sm uppercase tracking-wider font-medium flex items-center gap-2">
+            View All Work <ArrowUpRight className="w-4 h-4" />
+          </a>
+        </Magnetic>
+      </div>
+
+      <div className="space-y-12 md:space-y-20">
         {projects.map((project, i) => (
-          <TiltCard key={i} max={8}>
-            <article className="group glass-card overflow-hidden h-full">
-              <div className="aspect-video overflow-hidden relative">
+          <article
+            key={i}
+            className={`grid lg:grid-cols-12 gap-8 md:gap-12 items-center group ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}
+          >
+            <TiltCard className="lg:col-span-7" max={5} glare={false}>
+              <div className="overflow-hidden rounded-sm bg-muted">
                 <img
                   src={project.img}
                   alt={`${project.title} — project by MD Shahed`}
                   loading="lazy"
                   decoding="async"
-                  width={400}
-                  height={225}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  width={800}
+                  height={500}
+                  className="w-full aspect-[16/10] object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
-              <div className="p-6">
-                <p className="font-mono text-secondary text-xs mb-2">Project 0{i + 1}</p>
-                <h3 className="font-heading text-lg font-semibold text-foreground mb-2 group-hover:text-gradient transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4">{project.desc}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="text-xs px-2.5 py-1 rounded-full glass text-muted-foreground">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+            </TiltCard>
+
+            <div className="lg:col-span-5">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="font-mono text-xs text-foreground/50">PROJECT 0{i + 1}</span>
+                <span className="h-px w-8 bg-foreground/30" />
+                <span className="font-mono text-xs text-foreground/50">{project.year}</span>
               </div>
-            </article>
-          </TiltCard>
+              <h3 className="font-display text-3xl md:text-4xl lg:text-5xl leading-[0.95] mb-4">
+                {project.title}
+              </h3>
+              <p className="text-foreground/70 mb-6 leading-relaxed">{project.desc}</p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {project.tags.map((tag) => (
+                  <span key={tag} className="text-xs px-3 py-1 rounded-full border border-foreground/20 text-foreground/70">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <a href="#" className="link-underline text-sm uppercase tracking-wider font-medium inline-flex items-center gap-2">
+                Read Case Study <ArrowUpRight className="w-4 h-4" />
+              </a>
+            </div>
+          </article>
         ))}
       </div>
     </div>
@@ -450,29 +508,35 @@ const ProjectsSection = () => (
 
 /* ---------- Services ---------- */
 const servicesList = [
-  { icon: <Code className="w-6 h-6" />, title: "Professional Website Development", desc: "Custom-built, fast, SEO-optimized websites" },
-  { icon: <ShoppingCart className="w-6 h-6" />, title: "E-commerce Store Setup", desc: "Complete online store with payment integration" },
-  { icon: <Palette className="w-6 h-6" />, title: "UI/UX Design", desc: "Beautiful, user-centered interface design" },
-  { icon: <PenTool className="w-6 h-6" />, title: "Branding & Identity", desc: "Logo, color palette, visual brand systems" },
-  { icon: <BarChart3 className="w-6 h-6" />, title: "Website Strategy", desc: "Data-driven planning for digital growth" },
-  { icon: <Zap className="w-6 h-6" />, title: "Performance Optimization", desc: "Speed tuning for maximum conversions" },
+  { icon: <Code className="w-5 h-5" />, title: "Website Development", desc: "Custom-built, fast, SEO-optimized websites" },
+  { icon: <ShoppingCart className="w-5 h-5" />, title: "E-commerce Stores", desc: "Complete online stores with payment integration" },
+  { icon: <Palette className="w-5 h-5" />, title: "UI / UX Design", desc: "Beautiful, user-centered interface design" },
+  { icon: <PenTool className="w-5 h-5" />, title: "Branding & Identity", desc: "Logos, color systems, complete visual identity" },
+  { icon: <BarChart3 className="w-5 h-5" />, title: "Website Strategy", desc: "Data-driven planning for digital growth" },
+  { icon: <Zap className="w-5 h-5" />, title: "Performance Optimization", desc: "Speed tuning for maximum conversions" },
 ];
 
 const ServicesSection = () => (
-  <section id="services" className="relative py-24 lg:py-32">
-    <div className="container mx-auto px-6">
-      <SectionHeading eyebrow="services" title="What I" accent="Offer" />
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+  <section id="services" className="relative py-24 md:py-32 lg:py-40">
+    <div className="container mx-auto px-6 lg:px-12">
+      <SectionHeader number="/05" eyebrow="Services" title="What I" italic="offer" />
+
+      <div className="grid md:grid-cols-2 gap-px bg-border border border-border rounded-sm overflow-hidden">
         {servicesList.map((service, i) => (
-          <TiltCard key={i} max={10}>
-            <div className="group glass-card p-7 h-full">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-primary flex items-center justify-center text-primary-foreground mb-5 group-hover:scale-110 transition-transform glow-primary">
+          <div
+            key={i}
+            className="bg-background p-8 md:p-10 lg:p-12 group hover:bg-secondary/60 transition-colors relative"
+          >
+            <div className="flex items-start justify-between mb-8">
+              <div className="w-12 h-12 rounded-full border border-foreground/30 flex items-center justify-center group-hover:bg-foreground group-hover:text-background group-hover:border-foreground transition-all">
                 {service.icon}
               </div>
-              <h3 className="font-heading text-base md:text-lg font-semibold text-foreground mb-2">{service.title}</h3>
-              <p className="text-sm text-muted-foreground">{service.desc}</p>
+              <span className="font-mono text-xs text-foreground/40">0{i + 1}</span>
             </div>
-          </TiltCard>
+            <h3 className="font-display text-2xl md:text-3xl mb-3 leading-tight">{service.title}</h3>
+            <p className="text-foreground/70 leading-relaxed">{service.desc}</p>
+            <ArrowUpRight className="w-5 h-5 text-foreground/30 group-hover:text-accent-warm group-hover:translate-x-1 group-hover:-translate-y-1 transition-all absolute bottom-6 right-6" />
+          </div>
         ))}
       </div>
     </div>
@@ -492,59 +556,57 @@ const TestimonialsSection = () => {
   const next = useCallback(() => setCurrent((c) => (c === testimonials.length - 1 ? 0 : c + 1)), []);
 
   return (
-    <section className="relative py-24 lg:py-32">
-      <div className="container mx-auto px-6">
-        <SectionHeading eyebrow="testimonials" title="Client" accent="Reviews" />
-        <div className="max-w-2xl mx-auto">
-          <TiltCard max={4}>
-            <div className="glass-card p-8 md:p-12 text-center relative overflow-hidden">
-              <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-accent/15 blur-3xl" />
-              <div className="absolute -bottom-20 -left-20 w-60 h-60 rounded-full bg-primary/15 blur-3xl" />
-              <div className="relative">
-                <div className="flex justify-center gap-1 mb-6">
-                  {Array.from({ length: testimonials[current].rating }).map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-secondary text-secondary" />
-                  ))}
-                </div>
-                <p className="text-foreground text-base md:text-lg leading-relaxed mb-8 italic">
-                  "{testimonials[current].text}"
-                </p>
-                <p className="font-heading font-semibold text-foreground">{testimonials[current].name}</p>
-                <p className="text-sm text-muted-foreground">{testimonials[current].role}</p>
+    <section className="relative py-24 md:py-32 lg:py-40 bg-foreground text-background">
+      <div className="container mx-auto px-6 lg:px-12">
+        <div className="flex items-center gap-4 mb-12 md:mb-16">
+          <span className="eyebrow !text-background/60">/06</span>
+          <span className="h-px w-12 bg-background/30" />
+          <span className="eyebrow !text-background/60">Words from clients</span>
+        </div>
 
-                <div className="flex justify-center items-center gap-4 mt-8">
-                  <Magnetic strength={0.3}>
-                    <button
-                      onClick={prev}
-                      className="w-10 h-10 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-                      aria-label="Previous testimonial"
-                    >
-                      <ChevronLeft className="w-4 h-4" />
-                    </button>
-                  </Magnetic>
-                  <div className="flex items-center gap-2">
-                    {testimonials.map((_, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setCurrent(i)}
-                        className={`h-1.5 rounded-full transition-all ${i === current ? "w-8 bg-gradient-accent" : "w-1.5 bg-muted-foreground/30"}`}
-                        aria-label={`Go to testimonial ${i + 1}`}
-                      />
-                    ))}
-                  </div>
-                  <Magnetic strength={0.3}>
-                    <button
-                      onClick={next}
-                      className="w-10 h-10 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-                      aria-label="Next testimonial"
-                    >
-                      <ChevronRight className="w-4 h-4" />
-                    </button>
-                  </Magnetic>
-                </div>
-              </div>
+        <div className="max-w-4xl">
+          <div className="flex gap-1 mb-8">
+            {Array.from({ length: testimonials[current].rating }).map((_, i) => (
+              <Star key={i} className="w-5 h-5 fill-accent text-accent" />
+            ))}
+          </div>
+
+          <blockquote className="font-display text-3xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight mb-12">
+            <span className="text-italic-display text-accent">"</span>
+            {testimonials[current].text}
+            <span className="text-italic-display text-accent">"</span>
+          </blockquote>
+
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 pt-8 border-t border-background/20">
+            <div>
+              <p className="font-display text-2xl mb-1">{testimonials[current].name}</p>
+              <p className="text-sm text-background/60">{testimonials[current].role}</p>
             </div>
-          </TiltCard>
+
+            <div className="flex items-center gap-4">
+              <Magnetic strength={0.3}>
+                <button
+                  onClick={prev}
+                  className="w-12 h-12 rounded-full border border-background/30 flex items-center justify-center text-background/70 hover:bg-background hover:text-foreground hover:border-background transition-colors"
+                  aria-label="Previous testimonial"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+              </Magnetic>
+              <span className="font-mono text-xs text-background/60">
+                {String(current + 1).padStart(2, "0")} / {String(testimonials.length).padStart(2, "0")}
+              </span>
+              <Magnetic strength={0.3}>
+                <button
+                  onClick={next}
+                  className="w-12 h-12 rounded-full border border-background/30 flex items-center justify-center text-background/70 hover:bg-background hover:text-foreground hover:border-background transition-colors"
+                  aria-label="Next testimonial"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </Magnetic>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -555,47 +617,45 @@ const TestimonialsSection = () => {
 const blogPosts = [
   { title: "How to Build a High-Converting Business Website", category: "Web Development", date: "Jan 15, 2024", readTime: "5 min read", desc: "Learn the essential elements every business website needs to convert visitors into paying customers.", img: "https://shahed.com.bd/assets/project-1-CGFnPPTs.jpg" },
   { title: "Why Branding is the Foundation of Every Successful Business", category: "Branding", date: "Feb 20, 2024", readTime: "4 min read", desc: "Discover why investing in your brand identity is the most important business decision you can make.", img: "https://shahed.com.bd/assets/project-2-DDFynyNU.jpg" },
-  { title: "E-Commerce Trends You Can't Ignore in 2024", category: "E-Commerce", date: "Mar 10, 2024", readTime: "6 min read", desc: "Stay ahead of the competition with these emerging e-commerce trends that are shaping online retail.", img: "https://shahed.com.bd/assets/project-3-CiR2Pc9z.jpg" },
+  { title: "E-Commerce Trends You Can't Ignore in 2024", category: "E-Commerce", date: "Mar 10, 2024", readTime: "6 min read", desc: "Stay ahead of the competition with these emerging e-commerce trends shaping online retail.", img: "https://shahed.com.bd/assets/project-3-CiR2Pc9z.jpg" },
 ];
 
 const BlogSection = () => (
-  <section id="blog" className="relative py-24 lg:py-32">
-    <div className="container mx-auto px-6">
-      <SectionHeading eyebrow="blog" title="Latest" accent="Articles" />
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+  <section id="blog" className="relative py-24 md:py-32 lg:py-40">
+    <div className="container mx-auto px-6 lg:px-12">
+      <SectionHeader number="/07" eyebrow="Journal" title="Latest" italic="writing" />
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
         {blogPosts.map((post, i) => (
-          <TiltCard key={i} max={8}>
-            <article className="group glass-card overflow-hidden h-full">
-              <div className="aspect-video overflow-hidden">
+          <article key={i} className="group cursor-pointer">
+            <TiltCard max={4} glare={false}>
+              <div className="overflow-hidden rounded-sm mb-6 bg-muted">
                 <img
                   src={post.img}
                   alt={`${post.title} — MD Shahed blog article`}
                   loading="lazy"
                   decoding="async"
-                  width={400}
-                  height={225}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  width={500}
+                  height={350}
+                  className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
-              <div className="p-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-xs px-2.5 py-1 rounded-full bg-gradient-primary text-primary-foreground font-medium">
-                    {post.category}
-                  </span>
-                  <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <BookOpen className="w-3 h-3" /> {post.readTime}
-                  </span>
-                </div>
-                <h3 className="font-heading text-base md:text-lg font-semibold text-foreground mb-2 group-hover:text-gradient transition-colors">
-                  {post.title}
-                </h3>
-                <p className="text-sm text-muted-foreground mb-3">{post.desc}</p>
-                <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                  <Calendar className="w-3 h-3" /> {post.date}
-                </div>
-              </div>
-            </article>
-          </TiltCard>
+            </TiltCard>
+            <div className="flex items-center gap-3 mb-3 text-xs">
+              <span className="font-mono text-foreground/50">{post.category}</span>
+              <span className="h-px w-6 bg-foreground/30" />
+              <span className="flex items-center gap-1 text-foreground/50">
+                <Calendar className="w-3 h-3" /> {post.date}
+              </span>
+              <span className="text-foreground/50 flex items-center gap-1">
+                <BookOpen className="w-3 h-3" /> {post.readTime}
+              </span>
+            </div>
+            <h3 className="font-display text-2xl md:text-3xl leading-tight mb-3 group-hover:text-accent-warm transition-colors">
+              {post.title}
+            </h3>
+            <p className="text-sm text-foreground/70 leading-relaxed">{post.desc}</p>
+          </article>
         ))}
       </div>
     </div>
@@ -615,19 +675,25 @@ const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="relative py-24 lg:py-32">
-      <div className="container mx-auto px-6">
-        <SectionHeading eyebrow="faq" title="Frequently Asked" accent="Questions" />
-        <div className="max-w-2xl mx-auto space-y-3">
+    <section className="relative py-24 md:py-32 lg:py-40 bg-secondary/40">
+      <div className="container mx-auto px-6 lg:px-12">
+        <SectionHeader number="/08" eyebrow="Questions" title="Frequently" italic="asked" />
+
+        <div className="max-w-3xl">
           {faqItems.map((item, i) => (
-            <div key={i} className="glass-card overflow-hidden transition-all duration-300">
+            <div key={i} className="border-t border-foreground/15 last:border-b">
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full flex items-center justify-between p-5 text-left"
+                className="w-full flex items-center justify-between gap-6 py-6 text-left group"
               >
-                <span className="font-heading text-sm md:text-base font-medium text-foreground pr-4">{item.q}</span>
+                <span className="flex items-baseline gap-4">
+                  <span className="font-mono text-xs text-foreground/40">0{i + 1}</span>
+                  <span className="font-display text-xl md:text-2xl group-hover:text-accent-warm transition-colors">
+                    {item.q}
+                  </span>
+                </span>
                 <span
-                  className={`flex-shrink-0 w-7 h-7 rounded-full bg-gradient-primary flex items-center justify-center text-primary-foreground text-sm transition-transform duration-300 ${openIndex === i ? "rotate-45" : ""}`}
+                  className={`flex-shrink-0 w-9 h-9 rounded-full border border-foreground/30 flex items-center justify-center text-foreground transition-all duration-300 ${openIndex === i ? "rotate-45 bg-foreground text-background" : ""}`}
                 >
                   +
                 </span>
@@ -636,7 +702,7 @@ const FAQSection = () => {
                 className={`grid transition-all duration-300 ease-out ${openIndex === i ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
               >
                 <div className="overflow-hidden">
-                  <p className="text-sm text-muted-foreground leading-relaxed px-5 pb-5">{item.a}</p>
+                  <p className="text-foreground/70 leading-relaxed pb-6 pl-10 max-w-2xl">{item.a}</p>
                 </div>
               </div>
             </div>
@@ -652,77 +718,85 @@ const ContactSection = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
   return (
-    <section id="contact" className="relative py-24 lg:py-32">
-      <div className="container mx-auto px-6">
-        <SectionHeading eyebrow="get in touch" title="Let's Build" accent="Together" />
-        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {/* Form */}
-          <div className="glass-card p-8 md:p-10">
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
+    <section id="contact" className="relative py-24 md:py-32 lg:py-40">
+      <div className="container mx-auto px-6 lg:px-12">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <div className="flex items-center gap-4 mb-6">
+              <span className="eyebrow">/09</span>
+              <span className="h-px w-12 bg-foreground/30" />
+              <span className="eyebrow">Get in touch</span>
+            </div>
+            <h2 className="font-display text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight mb-8">
+              Let's build something <span className="text-italic-display text-accent-warm">remarkable</span>.
+            </h2>
+            <p className="text-foreground/70 leading-relaxed mb-12 max-w-md">
+              Have a project in mind? I'd love to hear about it. Drop a message or reach out directly.
+            </p>
+
+            <div className="space-y-1">
+              {[
+                { icon: <Mail className="w-4 h-4" />, label: "Email", value: "ceo@shahed.com.bd", href: "mailto:ceo@shahed.com.bd" },
+                { icon: <Linkedin className="w-4 h-4" />, label: "LinkedIn", value: "shahed-io", href: "https://linkedin.com/in/shahed-io" },
+                { icon: <Facebook className="w-4 h-4" />, label: "Facebook", value: "shahed.io", href: "https://facebook.com/shahed.io" },
+                { icon: <MessageCircle className="w-4 h-4" />, label: "WhatsApp", value: "+880 1823 378888", href: "https://wa.me/8801823378888" },
+              ].map((c) => (
+                <a
+                  key={c.label}
+                  href={c.href}
+                  target={c.href.startsWith("http") ? "_blank" : undefined}
+                  rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="group flex items-center gap-4 py-4 border-t border-border last:border-b hover:pl-3 transition-all"
+                >
+                  <span className="text-foreground/60 group-hover:text-accent-warm transition-colors">
+                    {c.icon}
+                  </span>
+                  <span className="eyebrow flex-shrink-0 w-20">{c.label}</span>
+                  <span className="text-sm flex-1">{c.value}</span>
+                  <ArrowUpRight className="w-4 h-4 text-foreground/40 group-hover:text-accent-warm group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div className="lg:col-span-7">
+            <form onSubmit={(e) => e.preventDefault()} className="space-y-8">
               <div>
-                <label className="text-xs text-muted-foreground mb-2 block uppercase tracking-wider">Name</label>
+                <label className="eyebrow block mb-3">/ Your name</label>
                 <input
                   type="text"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  placeholder="Your Name"
-                  className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
+                  placeholder="John Doe"
+                  className="w-full px-0 py-3 bg-transparent border-0 border-b border-foreground/30 text-foreground text-lg placeholder:text-foreground/30 focus:outline-none focus:border-foreground transition-colors"
                 />
               </div>
               <div>
-                <label className="text-xs text-muted-foreground mb-2 block uppercase tracking-wider">Email</label>
+                <label className="eyebrow block mb-3">/ Your email</label>
                 <input
                   type="email"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  placeholder="your@email.com"
-                  className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
+                  placeholder="hello@yourdomain.com"
+                  className="w-full px-0 py-3 bg-transparent border-0 border-b border-foreground/30 text-foreground text-lg placeholder:text-foreground/30 focus:outline-none focus:border-foreground transition-colors"
                 />
               </div>
               <div>
-                <label className="text-xs text-muted-foreground mb-2 block uppercase tracking-wider">Message</label>
+                <label className="eyebrow block mb-3">/ Project details</label>
                 <textarea
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  placeholder="Tell me about your project..."
+                  placeholder="Tell me about your project, timeline, and goals..."
                   rows={5}
-                  className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors resize-none"
+                  className="w-full px-0 py-3 bg-transparent border-0 border-b border-foreground/30 text-foreground text-lg placeholder:text-foreground/30 focus:outline-none focus:border-foreground transition-colors resize-none"
                 />
               </div>
               <Magnetic strength={0.2}>
-                <RippleButton variant="accent" size="lg" className="w-full">
+                <RippleButton variant="primary" size="lg">
                   <Send className="w-4 h-4" /> Send Message
                 </RippleButton>
               </Magnetic>
             </form>
-          </div>
-
-          {/* Contact info */}
-          <div className="space-y-4">
-            {[
-              { icon: <Mail className="w-5 h-5" />, label: "Email", value: "ceo@shahed.com.bd", href: "mailto:ceo@shahed.com.bd", color: "primary" },
-              { icon: <Linkedin className="w-5 h-5" />, label: "LinkedIn", value: "shahed-io", href: "https://linkedin.com/in/shahed-io", color: "secondary" },
-              { icon: <Facebook className="w-5 h-5" />, label: "Facebook", value: "shahed.io", href: "https://facebook.com/shahed.io", color: "primary" },
-              { icon: <MessageCircle className="w-5 h-5" />, label: "WhatsApp", value: "+880 1823 378888", href: "https://wa.me/8801823378888", color: "accent" },
-            ].map((c) => (
-              <TiltCard key={c.label} max={6}>
-                <a
-                  href={c.href}
-                  target={c.href.startsWith("http") ? "_blank" : undefined}
-                  rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="group flex items-center gap-4 px-5 py-4 glass-card hover:bg-white/[0.04] transition-colors"
-                >
-                  <div className={`w-11 h-11 rounded-xl bg-gradient-${c.color === "accent" ? "accent" : "primary"} flex items-center justify-center text-primary-foreground glow-primary`}>
-                    {c.icon}
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-xs text-muted-foreground uppercase tracking-wider">{c.label}</p>
-                    <p className="text-sm text-foreground font-medium">{c.value}</p>
-                  </div>
-                  <ExternalLink className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                </a>
-              </TiltCard>
-            ))}
           </div>
         </div>
       </div>
@@ -735,29 +809,27 @@ const NewsletterSection = () => {
   const [email, setEmail] = useState("");
 
   return (
-    <section className="relative py-16">
-      <div className="container mx-auto px-6">
-        <div className="max-w-2xl mx-auto glass-card p-8 md:p-12 text-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-aurora opacity-10 animate-aurora" />
-          <div className="relative">
-            <p className="font-mono text-secondary text-xs tracking-widest mb-3">// newsletter</p>
-            <h3 className="font-heading text-2xl md:text-3xl font-semibold mb-3">
-              Stay in the <span className="text-gradient">loop</span>
+    <section className="relative py-16 md:py-20 bg-foreground text-background">
+      <div className="container mx-auto px-6 lg:px-12">
+        <div className="grid md:grid-cols-12 gap-8 items-center">
+          <div className="md:col-span-7">
+            <div className="eyebrow !text-background/60 mb-3">/ Newsletter</div>
+            <h3 className="font-display text-3xl md:text-4xl lg:text-5xl leading-tight">
+              Stay in the <span className="text-italic-display text-accent">loop</span>.
             </h3>
-            <p className="text-sm text-muted-foreground mb-6 max-w-md mx-auto">
-              Get the latest tips on web development, branding, and digital growth.
-            </p>
-            <form onSubmit={(e) => e.preventDefault()} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+          </div>
+          <div className="md:col-span-5">
+            <form onSubmit={(e) => e.preventDefault()} className="flex gap-2">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-full bg-muted/50 border border-border text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
+                placeholder="your@email.com"
+                className="flex-1 px-0 py-3 bg-transparent border-0 border-b border-background/40 text-background text-base placeholder:text-background/40 focus:outline-none focus:border-background transition-colors"
               />
               <Magnetic strength={0.2}>
-                <RippleButton variant="primary" size="md" className="whitespace-nowrap">
-                  Subscribe <ArrowUpRight className="w-4 h-4" />
+                <RippleButton variant="accent" size="md" className="whitespace-nowrap">
+                  Subscribe
                 </RippleButton>
               </Magnetic>
             </form>
@@ -770,40 +842,46 @@ const NewsletterSection = () => {
 
 /* ---------- Footer ---------- */
 const Footer = () => (
-  <footer className="py-12 border-t border-border/50 relative">
-    <div className="container mx-auto px-6">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-        <a href="#" className="font-heading font-bold text-xl tracking-tight">
-          SHAHED<span className="text-gradient">.</span>
-        </a>
+  <footer className="relative pt-16 pb-8">
+    <div className="container mx-auto px-6 lg:px-12">
+      {/* Massive footer mark */}
+      <div className="border-b border-border pb-12 mb-8">
+        <h2 className="font-display text-[20vw] md:text-[16vw] leading-[0.85] tracking-tighter">
+          MD <span className="text-italic-display text-accent-warm">Shahed</span>
+        </h2>
+      </div>
+
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="flex items-center gap-4 text-xs text-foreground/60">
+          <span>© {new Date().getFullYear()} MD Shahed</span>
+          <span className="h-px w-6 bg-foreground/20" />
+          <span>Crafted in Bangladesh</span>
+        </div>
+
         <div className="flex items-center gap-3">
           {[
-            { icon: <Mail className="w-4 h-4" />, href: "mailto:ceo@shahed.com.bd" },
-            { icon: <Linkedin className="w-4 h-4" />, href: "https://linkedin.com/in/shahed-io" },
-            { icon: <Facebook className="w-4 h-4" />, href: "https://facebook.com/shahed.io" },
+            { icon: <Mail className="w-4 h-4" />, href: "mailto:ceo@shahed.com.bd", label: "Email" },
+            { icon: <Linkedin className="w-4 h-4" />, href: "https://linkedin.com/in/shahed-io", label: "LinkedIn" },
+            { icon: <Facebook className="w-4 h-4" />, href: "https://facebook.com/shahed.io", label: "Facebook" },
           ].map((link, i) => (
             <Magnetic key={i} strength={0.3}>
               <a
                 href={link.href}
                 target={link.href.startsWith("http") ? "_blank" : undefined}
                 rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="w-9 h-9 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                className="w-10 h-10 rounded-full border border-foreground/20 flex items-center justify-center text-foreground/60 hover:bg-foreground hover:text-background hover:border-foreground transition-all"
+                aria-label={link.label}
               >
                 {link.icon}
               </a>
             </Magnetic>
           ))}
         </div>
-        <div className="flex items-center gap-4 text-xs text-muted-foreground">
-          <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>
-          <a href="#" className="hover:text-foreground transition-colors">Terms & Conditions</a>
+
+        <div className="flex items-center gap-6 text-xs text-foreground/60">
+          <a href="#" className="link-underline hover:text-foreground transition-colors">Privacy</a>
+          <a href="#" className="link-underline hover:text-foreground transition-colors">Terms</a>
         </div>
-      </div>
-      <div className="text-center mt-8">
-        <p className="text-xs text-muted-foreground">
-          © {new Date().getFullYear()} MD Shahed. Crafted with{" "}
-          <span className="text-gradient font-medium">passion</span> in Bangladesh.
-        </p>
       </div>
     </div>
   </footer>
@@ -826,17 +904,17 @@ const FloatingButtons = () => {
           href="https://wa.me/8801823378888"
           target="_blank"
           rel="noopener noreferrer"
-          className="w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center shadow-elevated hover:scale-110 transition-transform"
+          className="w-13 h-13 px-4 py-3 rounded-full bg-foreground text-background flex items-center gap-2 shadow-lg hover:bg-accent transition-colors text-xs uppercase tracking-wider font-medium"
           aria-label="Chat on WhatsApp"
         >
-          <MessageCircle className="w-6 h-6 text-white" />
+          <MessageCircle className="w-4 h-4" /> Chat
         </a>
       </Magnetic>
       {showTop && (
         <Magnetic strength={0.3} className="fixed bottom-6 left-6 z-50">
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center text-primary-foreground shadow-elevated animate-fade-in"
+            className="w-10 h-10 rounded-full bg-foreground text-background flex items-center justify-center shadow-lg animate-fade-in hover:bg-accent transition-colors"
             aria-label="Back to top"
           >
             <ArrowUp className="w-4 h-4" />
@@ -861,7 +939,7 @@ const Index = () => (
     <Reveal><BlogSection /></Reveal>
     <Reveal><FAQSection /></Reveal>
     <Reveal><ContactSection /></Reveal>
-    <Reveal><NewsletterSection /></Reveal>
+    <NewsletterSection />
     <Footer />
     <FloatingButtons />
   </main>
