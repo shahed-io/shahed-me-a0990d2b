@@ -14,7 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif'],
+        display: ['Instrument Serif', 'Times New Roman', 'Georgia', 'serif'],
+        heading: ['Instrument Serif', 'Times New Roman', 'Georgia', 'serif'],
         body: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
