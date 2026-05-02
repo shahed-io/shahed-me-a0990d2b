@@ -179,10 +179,13 @@ export const SupportWidget = ({
         {/* Pulse rings — only when closed. Same accent gradient for unified color */}
         {!open && (
           <>
-            <span className="absolute inset-0 rounded-full bg-gradient-accent opacity-40 animate-ping" />
             <span
-              className="absolute inset-0 rounded-full bg-gradient-accent opacity-25 animate-ping"
-              style={{ animationDelay: "0.6s" }}
+              className={`absolute inset-0 rounded-full ${accentClass} opacity-40 animate-ping`}
+              style={accentStyle}
+            />
+            <span
+              className={`absolute inset-0 rounded-full ${accentClass} opacity-25 animate-ping`}
+              style={{ animationDelay: "0.6s", ...accentStyle }}
             />
           </>
         )}
@@ -191,7 +194,8 @@ export const SupportWidget = ({
           <button
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close support" : "Open support"}
-            className="relative w-16 h-16 rounded-full bg-gradient-accent flex items-center justify-center shadow-elevated glow-accent hover:scale-110 active:scale-95 transition-transform duration-300 group ripple-container overflow-hidden"
+            style={accentStyle}
+            className={`relative w-16 h-16 rounded-full ${accentClass} ${glowClass} flex items-center justify-center shadow-elevated hover:scale-110 active:scale-95 transition-transform duration-300 group ripple-container overflow-hidden`}
           >
             {/* Icon swap */}
             <span className="relative z-10 transition-all duration-300">
