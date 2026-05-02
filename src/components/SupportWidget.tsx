@@ -339,7 +339,7 @@ export const SupportWidget = ({
               <div className="flex items-center justify-center gap-1.5 pt-3">
                 <span className="h-px w-6 bg-white/10" />
                 <p className="text-[10px] text-muted-foreground/60 tracking-wide">
-                  Powered by Lovable AI
+                  Powered by Shahed AI
                 </p>
                 <span className="h-px w-6 bg-white/10" />
               </div>
