@@ -7,6 +7,7 @@ import { PageTransition } from "@/components/ui/page-transition";
 import { SupportWidget } from "@/components/SupportWidget";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import Auth from "./pages/Auth.tsx";
 
 const queryClient = new QueryClient();
 
@@ -16,6 +17,8 @@ const AnimatedRoutes = () => {
     <PageTransition>
       <Routes location={location}>
         <Route path="/" element={<Index />} />
+        <Route path="/login" element={<Auth />} />
+        <Route path="/signup" element={<Auth />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
