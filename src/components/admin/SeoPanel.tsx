@@ -61,10 +61,10 @@ export const SeoPanel = () => {
     setSaving(true);
     const userRes = await supabase.auth.getUser();
     const updated_by = userRes.data.user?.id ?? null;
-    const payload = { data: settings, updated_by };
+    const dataJson = settings as unknown as Record<string, unknown>;
     const { error } = rowId
-      ? await supabase.from("site_settings").update(payload).eq("id", rowId)
-      : await supabase.from("site_settings").insert({ singleton: true, ...payload });
+      ? await supabase.from("site_settings").update({ data: dataJson as never, updated_by }).eq("id", rowId)
+      : await supabase.from("site_settings").insert([{ data: dataJson as never, updated_by } as never]);
     setSaving(false);
     if (error) {
       toast({ title: "Save failed", description: error.message, variant: "destructive" });
