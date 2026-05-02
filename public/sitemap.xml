@@ -56,6 +56,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://shahed.com.bd/md-shahed</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://shahed.com.bd/shahed-business</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://shahed.com.bd/login</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>yearly</changefreq>
