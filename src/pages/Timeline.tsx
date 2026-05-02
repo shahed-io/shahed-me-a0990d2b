@@ -65,9 +65,30 @@ const Timeline = () => {
   const [posting, setPosting] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    document.title = "Timeline — SHAHED";
-  }, []);
+  useEffect(() => { /* title handled by SEO component */ }, []);
+
+  const latest = posts[0];
+  const ogImage = latest?.image_urls?.[0] ?? DEFAULT_OG;
+  const ogDescription = latest
+    ? `${latest.content.slice(0, 155)}${latest.content.length > 155 ? "…" : ""}`
+    : "Follow MD Shahed's lifestyle journey — moments, updates and stories from a Web Developer & Entrepreneur in Bangladesh.";
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "MD Shahed — Timeline",
+    url: `${SITE_URL}/timeline`,
+    description: ogDescription,
+    author: { "@type": "Person", name: "MD Shahed", url: SITE_URL },
+    blogPost: posts.slice(0, 10).map((p) => ({
+      "@type": "BlogPosting",
+      headline: p.content.slice(0, 110),
+      datePublished: p.created_at,
+      image: p.image_urls?.[0] ?? DEFAULT_OG,
+      author: { "@type": "Person", name: "MD Shahed" },
+    })),
+  };
+
 
   const loadAll = async () => {
     const { data: postsData } = await supabase
