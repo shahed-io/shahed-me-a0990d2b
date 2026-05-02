@@ -83,8 +83,8 @@ const Navbar = () => {
           </div>
           <div className="flex items-center gap-3">
             <Magnetic strength={0.25} className="hidden md:inline-block">
-              <RippleButton variant="primary" size="sm" asChild={false} onClick={() => window.open("https://wa.me/8801823378888", "_blank")}>
-                <Sparkles className="w-3.5 h-3.5" /> Start a project
+              <RippleButton variant="primary" size="sm" asChild={false} onClick={() => (window.location.href = "/login")}>
+                <Sparkles className="w-3.5 h-3.5" /> Login
               </RippleButton>
             </Magnetic>
             <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden text-foreground p-1.5" aria-label="Toggle menu">
@@ -108,12 +108,10 @@ const Navbar = () => {
               </a>
             ))}
             <a
-              href="https://wa.me/8801823378888"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/login"
               className="mt-2 text-center px-4 py-2.5 rounded-full bg-gradient-primary text-primary-foreground text-sm font-medium"
             >
-              Start a project
+              Login
             </a>
           </div>
         </div>
