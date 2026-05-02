@@ -245,10 +245,10 @@ const HeroSection = () => {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full max-w-3xl">
             {[
-              { value: "150+", label: "Projects Completed" },
+              { value: "38+", label: "Projects Completed" },
               { value: "7+", label: "Years Experience" },
-              { value: "50+", label: "Happy Clients" },
-              { value: "99%", label: "Client Satisfaction" },
+              { value: "30+", label: "Happy Clients" },
+              { value: "100%", label: "Client Satisfaction" },
             ].map((stat) => (
               <TiltCard key={stat.label} className="glass-card p-5 md:p-6">
                 <div className="font-heading text-3xl md:text-5xl font-semibold tracking-tight text-gradient">
