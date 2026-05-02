@@ -11,7 +11,7 @@ import { Magnetic } from "@/components/ui/magnetic";
 import { TiltCard } from "@/components/ui/tilt-card";
 
 
-const profilePhoto = "https://shahed.com.bd/assets/profile-photo-CtiUlvZF.jpg";
+import profilePhoto from "@/assets/hero-portrait.jpg";
 
 /* ---------- Typing animation ---------- */
 const useTypingAnimation = (words: string[], typingSpeed = 100, deletingSpeed = 50, pauseTime = 2000) => {
@@ -154,9 +154,9 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden">
       {/* Aurora background blobs */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] rounded-full bg-primary/30 blur-[120px] animate-float" />
-        <div className="absolute bottom-1/4 -right-32 w-[500px] h-[500px] rounded-full bg-accent/25 blur-[120px] animate-float" style={{ animationDelay: "2s" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-secondary/20 blur-[100px] animate-float" style={{ animationDelay: "4s" }} />
+        <div className="absolute top-1/4 -left-32 w-[420px] h-[420px] rounded-full bg-primary/25 blur-[80px] animate-float" />
+        <div className="absolute bottom-1/4 -right-32 w-[420px] h-[420px] rounded-full bg-accent/20 blur-[80px] animate-float" style={{ animationDelay: "2s" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] rounded-full bg-secondary/15 blur-[70px] animate-float" style={{ animationDelay: "4s" }} />
       </div>
 
       <div className="container mx-auto px-6">
