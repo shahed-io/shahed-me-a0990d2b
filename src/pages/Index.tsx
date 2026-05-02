@@ -59,7 +59,7 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const { user, profile, signOut } = useAuth();
-  const navItems = ["About", "Skills", "Projects", "Services", "Blog", "Contact"];
+  const navItems = ["About", "Skills", "Projects", "Services", "Timeline", "Blog", "Contact"];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
