@@ -854,7 +854,6 @@ const Index = () => (
     <Reveal><NewsletterSection /></Reveal>
     <Footer />
     <FloatingButtons />
-    <SupportWidget />
   </main>
 );
 
