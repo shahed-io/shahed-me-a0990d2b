@@ -73,6 +73,12 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
       },
+      backgroundImage: {
+        "gradient-support": "var(--gradient-support)",
+      },
+      boxShadow: {
+        support: "var(--glow-support)",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
