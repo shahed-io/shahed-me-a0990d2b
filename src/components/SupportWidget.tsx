@@ -207,8 +207,11 @@ export const SupportWidget = ({
             </span>
             {/* Sparkle badge */}
             {!open && (
-              <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-secondary flex items-center justify-center animate-bounce shadow-lg z-20">
-                <Sparkles className="w-2.5 h-2.5 text-background" />
+              <span
+                className={`absolute -top-1 -right-1 w-5 h-5 rounded-full ${accentClass} flex items-center justify-center animate-bounce shadow-lg z-20`}
+                style={accentStyle}
+              >
+                <Sparkles className="w-2.5 h-2.5 text-white" />
               </span>
             )}
           </button>
