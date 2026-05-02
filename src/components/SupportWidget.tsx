@@ -158,12 +158,12 @@ export const SupportWidget = () => {
     <>
       {/* Floating animated trigger button */}
       <div className="fixed bottom-6 right-6 z-50">
-        {/* Pulse rings — only when closed */}
+        {/* Pulse rings — only when closed. Same accent gradient for unified color */}
         {!open && (
           <>
             <span className="absolute inset-0 rounded-full bg-gradient-accent opacity-40 animate-ping" />
             <span
-              className="absolute inset-0 rounded-full bg-gradient-primary opacity-30 animate-ping"
+              className="absolute inset-0 rounded-full bg-gradient-accent opacity-25 animate-ping"
               style={{ animationDelay: "0.6s" }}
             />
           </>
@@ -173,13 +173,8 @@ export const SupportWidget = () => {
           <button
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close support" : "Open support"}
-            className="relative w-16 h-16 rounded-full bg-gradient-accent flex items-center justify-center shadow-elevated glow-primary hover:scale-110 active:scale-95 transition-transform duration-300 group ripple-container overflow-hidden"
+            className="relative w-16 h-16 rounded-full bg-gradient-accent flex items-center justify-center shadow-elevated glow-accent hover:scale-110 active:scale-95 transition-transform duration-300 group ripple-container overflow-hidden"
           >
-            {/* Animated gradient sheen */}
-            <span
-              className="absolute inset-0 rounded-full bg-gradient-aurora animate-aurora opacity-80"
-              style={{ backgroundSize: "200% 200%" }}
-            />
             {/* Icon swap */}
             <span className="relative z-10 transition-all duration-300">
               {open ? (
