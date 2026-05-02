@@ -55,28 +55,88 @@
     {
       "@context": "https://schema.org",
       "@type": "Person",
+      "@id": "https://shahed.com.bd/#person",
       "name": "MD Shahed",
-      "alternateName": "Shahed",
+      "alternateName": ["Shahed", "MD SHAHED", "Md Shahed"],
+      "givenName": "Shahed",
       "jobTitle": "Web Developer & Entrepreneur",
-      "description": "Results-driven Web Developer and Entrepreneur with 7+ years of experience building modern websites, scalable digital platforms, and strong online brands.",
+      "description": "MD Shahed is a results-driven Web Developer and Entrepreneur from Bangladesh with 7+ years of experience building modern websites, scalable digital platforms, e-commerce stores, and strong online brands for international clients.",
       "url": "https://shahed.com.bd",
-      "image": "https://shahed.com.bd/assets/profile-photo-CtiUlvZF.jpg",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://shahed.com.bd/assets/profile-photo-CtiUlvZF.jpg",
+        "width": 800,
+        "height": 800
+      },
       "email": "ceo@shahed.com.bd",
       "telephone": "+8801823378888",
+      "gender": "Male",
+      "nationality": "Bangladeshi",
       "address": {
         "@type": "PostalAddress",
-        "addressCountry": "BD"
+        "addressCountry": "BD",
+        "addressRegion": "Bangladesh"
       },
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Shahed.io"
-      },
+      "birthPlace": { "@type": "Place", "name": "Bangladesh" },
+      "worksFor": { "@id": "https://shahed.com.bd/#organization" },
+      "knowsLanguage": ["en", "bn"],
       "sameAs": [
+        "https://shahed.com.bd",
+        "https://shahed-me.lovable.app",
         "https://facebook.com/shahed.io",
         "https://linkedin.com/in/shahed-io",
         "https://wa.me/8801823378888"
       ],
-      "knowsAbout": ["Web Development", "UI/UX Design", "E-commerce", "Branding", "WordPress", "React", "JavaScript", "Graphic Design", "Brand Strategy"]
+      "knowsAbout": [
+        "Web Development", "UI/UX Design", "E-commerce Development",
+        "Branding", "WordPress", "WooCommerce", "React", "TypeScript",
+        "JavaScript", "Tailwind CSS", "Graphic Design", "Brand Strategy",
+        "SEO", "Conversion Optimization", "Business Strategy"
+      ],
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Web Developer & Entrepreneur",
+        "occupationLocation": { "@type": "Country", "name": "Bangladesh" },
+        "skills": "Web Development, UI/UX Design, E-commerce, Branding, SEO"
+      }
+    }
+    </script>
+
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://shahed.com.bd/#organization",
+      "name": "Shahed.io",
+      "alternateName": "MD Shahed Studio",
+      "url": "https://shahed.com.bd",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://shahed.com.bd/assets/profile-photo-CtiUlvZF.jpg"
+      },
+      "image": "https://shahed.com.bd/assets/profile-photo-CtiUlvZF.jpg",
+      "description": "Web development and digital branding studio led by MD Shahed — building modern websites, e-commerce platforms, and digital brands for clients worldwide.",
+      "founder": { "@id": "https://shahed.com.bd/#person" },
+      "foundingDate": "2021",
+      "email": "ceo@shahed.com.bd",
+      "telephone": "+8801823378888",
+      "areaServed": "Worldwide",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "BD"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+8801823378888",
+        "email": "ceo@shahed.com.bd",
+        "contactType": "customer service",
+        "availableLanguage": ["English", "Bengali"]
+      },
+      "sameAs": [
+        "https://facebook.com/shahed.io",
+        "https://linkedin.com/in/shahed-io"
+      ]
     }
     </script>
 
