@@ -15,7 +15,25 @@ const INITIAL_MESSAGE: Msg = {
     "👋 Hi! I'm **Shahed AI** — ask me anything about services, pricing, timelines or projects.\n\nHow can I help you today?",
 };
 
-export const SupportWidget = () => {
+export interface SupportWidgetProps {
+  /**
+   * Tailwind class for the button background.
+   * Default: "bg-gradient-support" (controlled by --support-from / --support-to in index.css).
+   * Examples: "bg-gradient-accent", "bg-gradient-primary", "bg-[#FF5733]",
+   * or "bg-gradient-to-br from-emerald-500 to-cyan-500".
+   */
+  accentClass?: string;
+  /** Tailwind class for the surrounding glow. Default: "shadow-support". */
+  glowClass?: string;
+  /** Inline style override — useful for fully dynamic brand colors. */
+  accentStyle?: React.CSSProperties;
+}
+
+export const SupportWidget = ({
+  accentClass = "bg-gradient-support",
+  glowClass = "shadow-support",
+  accentStyle,
+}: SupportWidgetProps = {}) => {
   const [open, setOpen] = useState(false);
   const [view, setView] = useState<"menu" | "chat">("menu");
   const [messages, setMessages] = useState<Msg[]>([INITIAL_MESSAGE]);
