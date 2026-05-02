@@ -8,6 +8,7 @@ import { SupportWidget } from "@/components/SupportWidget";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import Auth from "./pages/Auth.tsx";
+import Timeline from "./pages/Timeline.tsx";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const AnimatedRoutes = () => {
         <Route path="/" element={<Index />} />
         <Route path="/login" element={<Auth />} />
         <Route path="/signup" element={<Auth />} />
+        <Route path="/timeline" element={<Timeline />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>

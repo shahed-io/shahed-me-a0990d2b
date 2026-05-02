@@ -59,7 +59,7 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const { user, profile, signOut } = useAuth();
-  const navItems = ["About", "Skills", "Projects", "Services", "Blog", "Contact"];
+  const navItems = ["About", "Skills", "Projects", "Services", "Timeline", "Blog", "Contact"];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -89,7 +89,7 @@ const Navbar = () => {
             {navItems.map((item) => (
               <a
                 key={item}
-                href={`#${item.toLowerCase()}`}
+                href={item === "Timeline" ? "/timeline" : `#${item.toLowerCase()}`}
                 className="px-4 py-1.5 text-sm text-muted-foreground hover:text-foreground rounded-full hover:bg-white/5 transition-colors"
               >
                 {item}
@@ -155,7 +155,7 @@ const Navbar = () => {
             {navItems.map((item) => (
               <a
                 key={item}
-                href={`#${item.toLowerCase()}`}
+                href={item === "Timeline" ? "/timeline" : `#${item.toLowerCase()}`}
                 onClick={() => setMobileOpen(false)}
                 className="px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-white/5 rounded-xl transition-colors"
               >
