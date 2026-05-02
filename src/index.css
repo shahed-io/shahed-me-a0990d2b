@@ -68,8 +68,8 @@
      * Change these two variables to rebrand the
      * floating support widget in one place.
      * ============================================ */
-    --support-from: 330 90% 65%;            /* gradient start (HSL) */
-    --support-to: 265 90% 65%;              /* gradient end (HSL) */
+   --support-from: 330 90% 65%;            /* gradient start (HSL) - pink */
+   --support-to: 330 90% 60%;              /* gradient end (HSL) - pink */
     --gradient-support: linear-gradient(135deg, hsl(var(--support-from)) 0%, hsl(var(--support-to)) 100%);
     --glow-support: 0 0 60px -10px hsl(var(--support-from) / 0.6);
 
