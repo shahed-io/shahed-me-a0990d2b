@@ -259,7 +259,7 @@ export const SupportWidget = () => {
                 rel="noopener noreferrer"
                 className="w-full group glass-card p-4 flex items-center gap-4 hover:bg-white/[0.04] transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
-                <div className="w-12 h-12 rounded-2xl bg-gradient-primary flex items-center justify-center flex-shrink-0 glow-primary group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-2xl bg-[#25D366] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-lg">
                   <MessageCircle className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex-1">
