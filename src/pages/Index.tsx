@@ -11,7 +11,7 @@ import { Magnetic } from "@/components/ui/magnetic";
 import { TiltCard } from "@/components/ui/tilt-card";
 
 
-const profilePhoto = "https://shahed.com.bd/assets/profile-photo-CtiUlvZF.jpg";
+import profilePhoto from "@/assets/hero-portrait.jpg";
 
 /* ---------- Typing animation ---------- */
 const useTypingAnimation = (words: string[], typingSpeed = 100, deletingSpeed = 50, pauseTime = 2000) => {
