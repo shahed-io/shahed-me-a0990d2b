@@ -210,8 +210,8 @@ const HeroSection = () => {
           </div>
 
           {/* Name */}
-          <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter mb-5 leading-[1.05]">
-            MD <span className="text-gradient bg-gradient-aurora bg-clip-text">SHAHED</span>
+          <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter mb-5 leading-[1.05] text-foreground">
+            MD <span className="text-gradient">SHAHED</span>
           </h1>
 
           {/* Typing role */}
