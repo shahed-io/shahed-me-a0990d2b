@@ -63,6 +63,16 @@
       radial-gradient(at 0% 80%, hsl(195 95% 55% / 0.3) 0px, transparent 50%),
       radial-gradient(at 80% 80%, hsl(265 90% 70% / 0.25) 0px, transparent 50%);
 
+    /* ============================================
+     * SUPPORT BUTTON BRAND COLOR
+     * Change these two variables to rebrand the
+     * floating support widget in one place.
+     * ============================================ */
+    --support-from: 330 90% 65%;            /* gradient start (HSL) */
+    --support-to: 265 90% 65%;              /* gradient end (HSL) */
+    --gradient-support: linear-gradient(135deg, hsl(var(--support-from)) 0%, hsl(var(--support-to)) 100%);
+    --glow-support: 0 0 60px -10px hsl(var(--support-from) / 0.6);
+
     /* Glass surfaces */
     --glass-bg: hsl(240 28% 12% / 0.5);
     --glass-bg-strong: hsl(240 28% 14% / 0.75);
