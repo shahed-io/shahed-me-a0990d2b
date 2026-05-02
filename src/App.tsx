@@ -30,6 +30,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AnimatedRoutes />
+        <SupportWidget />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
