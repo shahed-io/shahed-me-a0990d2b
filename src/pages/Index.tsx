@@ -481,7 +481,7 @@ const ServicesSection = () => (
 
 /* ---------- Testimonials ---------- */
 const testimonials = [
-  { name: "Rahim Uddin", role: "Startup Founder", text: "Shahed transformed our online presence completely. His attention to detail and understanding of branding made our website stand out from competitors. Highly recommended!", rating: 5 },
+  { name: "Rahim Uddin", role: "Startup Founder", text: "Shahed transformed our online presence completely. His attention to detail and understanding of business strategy made our website a real growth engine.", rating: 5 },
   { name: "Sarah Ahmed", role: "Business Owner", text: "Working with Shahed was an excellent experience. He delivered a stunning e-commerce website that increased our sales by 40% in just 3 months.", rating: 5 },
   { name: "Kamal Hossain", role: "Marketing Director", text: "Professional, creative, and always on time. Shahed built our company website with incredible performance and SEO optimization. Best developer I've worked with.", rating: 5 },
 ];
