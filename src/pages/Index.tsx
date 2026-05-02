@@ -373,7 +373,7 @@ const timeline = [
   { year: "2019", fn: "launch()", title: "Freelance Career", desc: "Started taking international clients and building brands for startups." },
   { year: "2021", fn: "scale()", title: "Founded IT Business", desc: "Launched an IT service company providing digital solutions to businesses." },
   { year: "2023", fn: "expand()", title: "E-Commerce Expansion", desc: "Expanded into e-commerce development with WooCommerce and custom solutions." },
-  { year: "2024", fn: "milestone()", title: "150+ Projects Milestone", desc: "Crossed 150+ successfully delivered projects with clients worldwide." },
+  { year: "2024", fn: "milestone()", title: "100+ Projects Milestone", desc: "Crossed 100+ successfully delivered projects with clients worldwide." },
 ];
 
 const ExperienceSection = () => (
