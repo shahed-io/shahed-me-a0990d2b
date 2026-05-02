@@ -221,30 +221,53 @@ export const SupportWidget = ({
       {/* Support panel */}
       {open && (
         <div
-          className="fixed bottom-28 right-6 z-50 w-[calc(100vw-3rem)] sm:w-[400px] max-h-[600px] glass-strong rounded-3xl overflow-hidden flex flex-col animate-fade-up shadow-elevated"
-          style={{ animationDuration: "0.35s" }}
+          className="fixed bottom-28 right-6 z-50 w-[calc(100vw-3rem)] sm:w-[400px] max-h-[640px] glass-strong rounded-[28px] overflow-hidden flex flex-col animate-fade-up shadow-elevated border border-white/10"
+          style={{ animationDuration: "0.4s" }}
         >
           {/* Header */}
-          <div className="relative px-5 py-4 border-b border-border/50 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-aurora opacity-20 animate-aurora" style={{ backgroundSize: "200% 200%" }} />
+          <div className="relative px-5 pt-5 pb-4 overflow-hidden">
+            {/* Pink-only ambient glow */}
+            <div
+              className="absolute -top-20 -left-10 w-56 h-56 rounded-full opacity-40 blur-3xl pointer-events-none"
+              style={{ background: "radial-gradient(circle, hsl(330 90% 65% / 0.55), transparent 70%)" }}
+            />
+            <div
+              className="absolute -top-16 right-0 w-48 h-48 rounded-full opacity-30 blur-3xl pointer-events-none"
+              style={{ background: "radial-gradient(circle, hsl(320 90% 60% / 0.5), transparent 70%)" }}
+            />
+
             <div className="relative flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center glow-primary">
-                <Bot className="w-5 h-5 text-primary-foreground" />
+              {/* Avatar with gradient ring */}
+              <div className="relative flex-shrink-0">
+                <div
+                  className="absolute inset-0 rounded-full blur-md opacity-70"
+                  style={accentStyle ?? { background: "var(--gradient-support)" }}
+                />
+                <div className="relative w-11 h-11 rounded-full p-[2px]" style={accentStyle ?? { background: "var(--gradient-support)" }}>
+                  <div className="w-full h-full rounded-full bg-background/80 backdrop-blur-xl flex items-center justify-center">
+                    <Bot className="w-5 h-5 text-white" />
+                  </div>
+                </div>
+                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-background" />
               </div>
-              <div className="flex-1">
-                <h3 className="font-heading font-semibold text-foreground text-sm">Shahed Support</h3>
-                <p className="text-xs text-muted-foreground flex items-center gap-1.5">
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inset-0 rounded-full bg-secondary animate-ping opacity-60" />
-                    <span className="relative rounded-full h-2 w-2 bg-secondary" />
+
+              <div className="flex-1 min-w-0">
+                <h3 className="font-heading font-semibold text-foreground text-[15px] leading-tight tracking-tight">
+                  Shahed Support
+                </h3>
+                <p className="text-[11px] text-muted-foreground flex items-center gap-1.5 mt-0.5">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-60" />
+                    <span className="relative rounded-full h-1.5 w-1.5 bg-emerald-400" />
                   </span>
-                  Online · Replies instantly
+                  Online · Avg reply in ~1 min
                 </p>
               </div>
+
               {view === "chat" && (
                 <button
                   onClick={() => setView("menu")}
-                  className="text-xs text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-full hover:bg-white/5"
+                  className="text-[11px] text-muted-foreground hover:text-foreground transition-colors px-2.5 py-1 rounded-full hover:bg-white/5 border border-white/5"
                 >
                   ← Back
                 </button>
@@ -252,46 +275,74 @@ export const SupportWidget = ({
             </div>
           </div>
 
+          {/* Subtle divider */}
+          <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
           {/* Body */}
           {view === "menu" ? (
-            <div className="p-5 space-y-3">
-              <p className="text-sm text-muted-foreground mb-4">
-                Choose how you'd like to connect:
-              </p>
+            <div className="p-5 space-y-2.5">
+              <div className="mb-2">
+                <h4 className="text-[13px] font-semibold text-foreground tracking-tight">
+                  How can we help?
+                </h4>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  Pick the channel that suits you best.
+                </p>
+              </div>
 
               <button
                 onClick={() => setView("chat")}
-                className="w-full group glass-card p-4 flex items-center gap-4 hover:bg-white/[0.04] transition-all hover:scale-[1.02] active:scale-[0.98] text-left"
+                className="w-full group relative overflow-hidden rounded-2xl p-[1px] transition-all hover:scale-[1.015] active:scale-[0.99] text-left"
+                style={accentStyle ?? { background: "linear-gradient(135deg, hsl(330 90% 65% / 0.6), hsl(330 90% 60% / 0.15))" }}
               >
-                <div className="w-12 h-12 rounded-2xl bg-gradient-accent flex items-center justify-center flex-shrink-0 glow-accent group-hover:scale-110 transition-transform">
-                  <Sparkles className="w-5 h-5 text-white" />
+                <div className="relative rounded-2xl bg-background/70 backdrop-blur-xl p-3.5 flex items-center gap-3.5">
+                  <div
+                    className="relative w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-lg"
+                    style={accentStyle ?? { background: "var(--gradient-support)" }}
+                  >
+                    <Sparkles className="w-[18px] h-[18px] text-white" />
+                    <span className="absolute inset-0 rounded-xl ring-1 ring-white/20" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <p className="font-heading font-semibold text-foreground text-[13.5px]">Chat with AI</p>
+                      <span className="text-[9px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-full text-white" style={accentStyle ?? { background: "var(--gradient-support)" }}>
+                        Fast
+                      </span>
+                    </div>
+                    <p className="text-[11.5px] text-muted-foreground mt-0.5">Instant answers, 24/7</p>
+                  </div>
+                  <span className="text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all text-lg">→</span>
                 </div>
-                <div className="flex-1">
-                  <p className="font-heading font-semibold text-foreground text-sm">Chat with AI</p>
-                  <p className="text-xs text-muted-foreground">Instant answers, 24/7</p>
-                </div>
-                <span className="text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all">→</span>
               </button>
 
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full group glass-card p-4 flex items-center gap-4 hover:bg-white/[0.04] transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="w-full group relative overflow-hidden rounded-2xl p-[1px] transition-all hover:scale-[1.015] active:scale-[0.99] block"
+                style={{ background: "linear-gradient(135deg, hsl(142 70% 45% / 0.6), hsl(142 70% 40% / 0.15))" }}
               >
-                <div className="w-12 h-12 rounded-2xl bg-[#25D366] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-lg">
-                  <MessageCircle className="w-5 h-5 text-white" />
+                <div className="relative rounded-2xl bg-background/70 backdrop-blur-xl p-3.5 flex items-center gap-3.5">
+                  <div className="relative w-11 h-11 rounded-xl bg-[#25D366] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-lg">
+                    <MessageCircle className="w-[18px] h-[18px] text-white" />
+                    <span className="absolute inset-0 rounded-xl ring-1 ring-white/20" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-heading font-semibold text-foreground text-[13.5px]">WhatsApp Shahed</p>
+                    <p className="text-[11.5px] text-muted-foreground mt-0.5">+880 1823 378888 · Personal reply</p>
+                  </div>
+                  <span className="text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all text-lg">→</span>
                 </div>
-                <div className="flex-1">
-                  <p className="font-heading font-semibold text-foreground text-sm">WhatsApp Shahed</p>
-                  <p className="text-xs text-muted-foreground">+880 1823 378888</p>
-                </div>
-                <span className="text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all">→</span>
               </a>
 
-              <p className="text-[10px] text-muted-foreground/60 text-center pt-3">
-                Powered by Lovable AI
-              </p>
+              <div className="flex items-center justify-center gap-1.5 pt-3">
+                <span className="h-px w-6 bg-white/10" />
+                <p className="text-[10px] text-muted-foreground/60 tracking-wide">
+                  Powered by Lovable AI
+                </p>
+                <span className="h-px w-6 bg-white/10" />
+              </div>
             </div>
           ) : (
             <>
@@ -304,14 +355,11 @@ export const SupportWidget = ({
                     style={{ animationDuration: "0.3s" }}
                   >
                     <div
-                      className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 ${
-                        msg.role === "user"
-                          ? "bg-gradient-primary"
-                          : "bg-gradient-accent"
-                      }`}
+                      className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 shadow-md"
+                      style={accentStyle ?? { background: "var(--gradient-support)" }}
                     >
                       {msg.role === "user" ? (
-                        <User className="w-3.5 h-3.5 text-primary-foreground" />
+                        <User className="w-3.5 h-3.5 text-white" />
                       ) : (
                         <Bot className="w-3.5 h-3.5 text-white" />
                       )}
@@ -319,9 +367,10 @@ export const SupportWidget = ({
                     <div
                       className={`max-w-[80%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
                         msg.role === "user"
-                          ? "bg-gradient-primary text-primary-foreground rounded-tr-sm"
+                          ? "text-white rounded-tr-sm shadow-md"
                           : "glass text-foreground rounded-tl-sm"
                       }`}
+                      style={msg.role === "user" ? (accentStyle ?? { background: "var(--gradient-support)" }) : undefined}
                     >
                       <div className="prose prose-sm prose-invert max-w-none prose-p:my-1 prose-ul:my-1.5 prose-li:my-0.5 prose-strong:text-foreground prose-a:text-secondary">
                         <ReactMarkdown>{msg.content}</ReactMarkdown>
@@ -331,7 +380,10 @@ export const SupportWidget = ({
                 ))}
                 {loading && messages[messages.length - 1]?.role === "user" && (
                   <div className="flex gap-2.5 animate-fade-in">
-                    <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 bg-gradient-accent">
+                    <div
+                      className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 shadow-md"
+                      style={accentStyle ?? { background: "var(--gradient-support)" }}
+                    >
                       <Bot className="w-3.5 h-3.5 text-white" />
                     </div>
                     <div className="glass rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-1.5">
@@ -344,8 +396,8 @@ export const SupportWidget = ({
               </div>
 
               {/* Input */}
-              <div className="p-3 border-t border-border/50">
-                <div className="flex items-center gap-2 glass rounded-full pl-4 pr-1 py-1">
+              <div className="p-3 border-t border-white/5">
+                <div className="flex items-center gap-2 glass rounded-full pl-4 pr-1 py-1 focus-within:ring-2 focus-within:ring-white/10 transition-all">
                   <input
                     ref={inputRef}
                     type="text"
@@ -360,7 +412,8 @@ export const SupportWidget = ({
                     onClick={sendMessage}
                     disabled={!input.trim() || loading}
                     aria-label="Send message"
-                    className="w-9 h-9 rounded-full bg-gradient-accent flex items-center justify-center text-white disabled:opacity-40 disabled:cursor-not-allowed hover:scale-110 active:scale-95 transition-transform glow-accent"
+                    style={accentStyle ?? { background: "var(--gradient-support)" }}
+                    className="w-9 h-9 rounded-full flex items-center justify-center text-white disabled:opacity-40 disabled:cursor-not-allowed hover:scale-110 active:scale-95 transition-transform shadow-lg"
                   >
                     {loading ? (
                       <Loader2 className="w-4 h-4 animate-spin" />
