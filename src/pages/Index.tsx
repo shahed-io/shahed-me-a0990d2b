@@ -1,14 +1,15 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import {
   Mail, MapPin, Clock, ArrowDown, ArrowUp, ExternalLink, Facebook, Linkedin,
   MessageCircle, Code, Palette, ShoppingCart, PenTool, BarChart3, Zap,
   Menu, X, ChevronLeft, ChevronRight, Sparkles, Send, Star, Calendar, BookOpen,
-  ArrowUpRight,
+  ArrowUpRight, LogOut,
 } from "lucide-react";
 import { Reveal } from "@/hooks/use-scroll-reveal";
 import { RippleButton } from "@/components/ui/ripple-button";
 import { Magnetic } from "@/components/ui/magnetic";
 import { TiltCard } from "@/components/ui/tilt-card";
+import { useAuth } from "@/hooks/use-auth";
 
 
 const profilePhoto = "https://shahed.com.bd/assets/profile-photo-CtiUlvZF.jpg";
@@ -55,6 +56,9 @@ const SectionHeading = ({ eyebrow, title, accent }: { eyebrow: string; title: st
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const { user, profile, signOut } = useAuth();
   const navItems = ["About", "Skills", "Projects", "Services", "Blog", "Contact"];
 
   useEffect(() => {
@@ -62,6 +66,17 @@ const Navbar = () => {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) setMenuOpen(false);
+    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, []);
+
+  const initials = (profile?.display_name || user?.email || "U")
+    .split(" ").map((s) => s[0]).join("").slice(0, 2).toUpperCase();
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-3" : "py-5"}`}>
@@ -82,11 +97,51 @@ const Navbar = () => {
             ))}
           </div>
           <div className="flex items-center gap-3">
-            <Magnetic strength={0.25} className="hidden md:inline-block">
-              <RippleButton variant="primary" size="sm" asChild={false} onClick={() => (window.location.href = "/login")}>
-                <Sparkles className="w-3.5 h-3.5" /> Login
-              </RippleButton>
-            </Magnetic>
+            {user ? (
+              <div className="relative hidden md:block" ref={menuRef}>
+                <button
+                  onClick={() => setMenuOpen((v) => !v)}
+                  className="flex items-center gap-2.5 glass rounded-full pl-1 pr-3 py-1 hover:bg-white/5 transition-colors"
+                >
+                  {profile?.avatar_url ? (
+                    <img
+                      src={profile.avatar_url}
+                      alt={profile.display_name ?? "Profile"}
+                      className="w-7 h-7 rounded-full object-cover"
+                    />
+                  ) : (
+                    <span className="w-7 h-7 rounded-full bg-gradient-primary flex items-center justify-center text-[11px] font-semibold text-primary-foreground">
+                      {initials}
+                    </span>
+                  )}
+                  <span className="text-sm text-foreground max-w-[120px] truncate">
+                    {profile?.display_name ?? user.email}
+                  </span>
+                </button>
+                {menuOpen && (
+                  <div className="absolute right-0 mt-2 w-60 glass-strong rounded-2xl p-2 animate-fade-in">
+                    <div className="px-3 py-2.5 border-b border-border/50">
+                      <p className="text-sm font-medium text-foreground truncate">
+                        {profile?.display_name ?? "User"}
+                      </p>
+                      <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+                    </div>
+                    <button
+                      onClick={() => signOut()}
+                      className="w-full mt-1 flex items-center gap-2 px-3 py-2 text-sm text-foreground hover:bg-white/5 rounded-xl transition-colors"
+                    >
+                      <LogOut className="w-4 h-4" /> Sign out
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Magnetic strength={0.25} className="hidden md:inline-block">
+                <RippleButton variant="primary" size="sm" asChild={false} onClick={() => (window.location.href = "/login")}>
+                  <Sparkles className="w-3.5 h-3.5" /> Login
+                </RippleButton>
+              </Magnetic>
+            )}
             <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden text-foreground p-1.5" aria-label="Toggle menu">
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -107,12 +162,36 @@ const Navbar = () => {
                 {item}
               </a>
             ))}
-            <a
-              href="/login"
-              className="mt-2 text-center px-4 py-2.5 rounded-full bg-gradient-primary text-primary-foreground text-sm font-medium"
-            >
-              Login
-            </a>
+            {user ? (
+              <>
+                <div className="mt-2 flex items-center gap-3 px-4 py-2.5 glass rounded-xl">
+                  {profile?.avatar_url ? (
+                    <img src={profile.avatar_url} alt="" className="w-9 h-9 rounded-full object-cover" />
+                  ) : (
+                    <span className="w-9 h-9 rounded-full bg-gradient-primary flex items-center justify-center text-xs font-semibold text-primary-foreground">
+                      {initials}
+                    </span>
+                  )}
+                  <div className="min-w-0">
+                    <p className="text-sm text-foreground truncate">{profile?.display_name ?? "User"}</p>
+                    <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => { setMobileOpen(false); signOut(); }}
+                  className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-full glass text-sm font-medium text-foreground"
+                >
+                  <LogOut className="w-4 h-4" /> Sign out
+                </button>
+              </>
+            ) : (
+              <a
+                href="/login"
+                className="mt-2 text-center px-4 py-2.5 rounded-full bg-gradient-primary text-primary-foreground text-sm font-medium"
+              >
+                Login
+              </a>
+            )}
           </div>
         </div>
       )}
