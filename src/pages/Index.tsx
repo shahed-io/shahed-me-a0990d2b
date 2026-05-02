@@ -155,7 +155,7 @@ const Navbar = () => {
             {navItems.map((item) => (
               <a
                 key={item}
-                href={`#${item.toLowerCase()}`}
+                href={item === "Timeline" ? "/timeline" : `#${item.toLowerCase()}`}
                 onClick={() => setMobileOpen(false)}
                 className="px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-white/5 rounded-xl transition-colors"
               >
