@@ -9,6 +9,7 @@ import { Reveal } from "@/hooks/use-scroll-reveal";
 import { RippleButton } from "@/components/ui/ripple-button";
 import { Magnetic } from "@/components/ui/magnetic";
 import { TiltCard } from "@/components/ui/tilt-card";
+import { SupportWidget } from "@/components/SupportWidget";
 
 const profilePhoto = "https://shahed.com.bd/assets/profile-photo-CtiUlvZF.jpg";
 
@@ -853,6 +854,7 @@ const Index = () => (
     <Reveal><NewsletterSection /></Reveal>
     <Footer />
     <FloatingButtons />
+    <SupportWidget />
   </main>
 );
 
