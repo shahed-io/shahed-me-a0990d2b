@@ -15,7 +15,25 @@ const INITIAL_MESSAGE: Msg = {
     "👋 Hi! I'm **Shahed AI** — ask me anything about services, pricing, timelines or projects.\n\nHow can I help you today?",
 };
 
-export const SupportWidget = () => {
+export interface SupportWidgetProps {
+  /**
+   * Tailwind class for the button background.
+   * Default: "bg-gradient-support" (controlled by --support-from / --support-to in index.css).
+   * Examples: "bg-gradient-accent", "bg-gradient-primary", "bg-[#FF5733]",
+   * or "bg-gradient-to-br from-emerald-500 to-cyan-500".
+   */
+  accentClass?: string;
+  /** Tailwind class for the surrounding glow. Default: "shadow-support". */
+  glowClass?: string;
+  /** Inline style override — useful for fully dynamic brand colors. */
+  accentStyle?: React.CSSProperties;
+}
+
+export const SupportWidget = ({
+  accentClass = "bg-gradient-support",
+  glowClass = "shadow-support",
+  accentStyle,
+}: SupportWidgetProps = {}) => {
   const [open, setOpen] = useState(false);
   const [view, setView] = useState<"menu" | "chat">("menu");
   const [messages, setMessages] = useState<Msg[]>([INITIAL_MESSAGE]);
@@ -161,10 +179,13 @@ export const SupportWidget = () => {
         {/* Pulse rings — only when closed. Same accent gradient for unified color */}
         {!open && (
           <>
-            <span className="absolute inset-0 rounded-full bg-gradient-accent opacity-40 animate-ping" />
             <span
-              className="absolute inset-0 rounded-full bg-gradient-accent opacity-25 animate-ping"
-              style={{ animationDelay: "0.6s" }}
+              className={`absolute inset-0 rounded-full ${accentClass} opacity-40 animate-ping`}
+              style={accentStyle}
+            />
+            <span
+              className={`absolute inset-0 rounded-full ${accentClass} opacity-25 animate-ping`}
+              style={{ animationDelay: "0.6s", ...accentStyle }}
             />
           </>
         )}
@@ -173,7 +194,8 @@ export const SupportWidget = () => {
           <button
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close support" : "Open support"}
-            className="relative w-16 h-16 rounded-full bg-gradient-accent flex items-center justify-center shadow-elevated glow-accent hover:scale-110 active:scale-95 transition-transform duration-300 group ripple-container overflow-hidden"
+            style={accentStyle}
+            className={`relative w-16 h-16 rounded-full ${accentClass} ${glowClass} flex items-center justify-center shadow-elevated hover:scale-110 active:scale-95 transition-transform duration-300 group ripple-container overflow-hidden`}
           >
             {/* Icon swap */}
             <span className="relative z-10 transition-all duration-300">

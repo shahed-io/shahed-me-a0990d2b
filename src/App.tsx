@@ -30,6 +30,13 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AnimatedRoutes />
+        {/*
+          Brand the support button:
+          1) Easiest — edit --support-from / --support-to in src/index.css
+          2) Or override per-instance:
+             <SupportWidget accentClass="bg-gradient-to-br from-emerald-500 to-cyan-500" />
+             <SupportWidget accentStyle={{ background: "linear-gradient(135deg,#FF5733,#900C3F)" }} />
+        */}
         <SupportWidget />
       </BrowserRouter>
     </TooltipProvider>
