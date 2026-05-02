@@ -6,9 +6,11 @@ import { useIsAdmin } from "@/hooks/use-is-admin";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SEO } from "@/components/SEO";
+import { SeoPanel } from "@/components/admin/SeoPanel";
 import {
-  LayoutDashboard, FileText, MessageCircle, Heart, Users, LogOut, Trash2, ExternalLink,
+  LayoutDashboard, FileText, MessageCircle, Heart, Users, LogOut, Trash2, ExternalLink, Search,
 } from "lucide-react";
 
 interface Stats {
@@ -132,71 +134,84 @@ const Ceo = () => {
           স্বাগতম, <span className="font-medium text-foreground">{user.email}</span>
         </p>
 
-        {/* Stats */}
-        <section className="mb-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            { label: "Posts", value: stats.posts, icon: FileText },
-            { label: "Comments", value: stats.comments, icon: MessageCircle },
-            { label: "Likes", value: stats.likes, icon: Heart },
-            { label: "Users", value: stats.users, icon: Users },
-          ].map((s) => (
-            <Card key={s.label} className="p-5">
-              <div className="mb-2 flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">{s.label}</span>
-                <s.icon className="h-4 w-4 text-primary" />
+        <Tabs defaultValue="overview" className="w-full">
+          <TabsList className="mb-6">
+            <TabsTrigger value="overview"><LayoutDashboard className="mr-2 h-4 w-4" />Overview</TabsTrigger>
+            <TabsTrigger value="seo"><Search className="mr-2 h-4 w-4" />SEO & Ranking</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="overview">
+            {/* Stats */}
+            <section className="mb-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { label: "Posts", value: stats.posts, icon: FileText },
+                { label: "Comments", value: stats.comments, icon: MessageCircle },
+                { label: "Likes", value: stats.likes, icon: Heart },
+                { label: "Users", value: stats.users, icon: Users },
+              ].map((s) => (
+                <Card key={s.label} className="p-5">
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">{s.label}</span>
+                    <s.icon className="h-4 w-4 text-primary" />
+                  </div>
+                  <div className="text-3xl font-bold">{loading ? "…" : s.value}</div>
+                </Card>
+              ))}
+            </section>
+
+            {/* Posts */}
+            <section className="mb-10">
+              <div className="mb-3 flex items-center justify-between">
+                <h2 className="text-xl font-semibold">Recent Posts</h2>
+                <Button asChild size="sm"><Link to="/timeline">+ New post</Link></Button>
               </div>
-              <div className="text-3xl font-bold">{loading ? "…" : s.value}</div>
-            </Card>
-          ))}
-        </section>
+              <div className="space-y-3">
+                {posts.length === 0 && <p className="text-sm text-muted-foreground">No posts yet.</p>}
+                {posts.map((p) => (
+                  <Card key={p.id} className="flex items-start gap-3 p-4">
+                    {p.image_urls?.[0] && (
+                      <img src={p.image_urls[0]} alt="" className="h-16 w-16 flex-shrink-0 rounded object-cover" />
+                    )}
+                    <div className="min-w-0 flex-1">
+                      <p className="line-clamp-2 text-sm">{p.content}</p>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {new Date(p.created_at).toLocaleString()}
+                      </p>
+                    </div>
+                    <Button size="icon" variant="ghost" onClick={() => deletePost(p.id)} aria-label="Delete post">
+                      <Trash2 className="h-4 w-4 text-destructive" />
+                    </Button>
+                  </Card>
+                ))}
+              </div>
+            </section>
 
-        {/* Posts */}
-        <section className="mb-10">
-          <div className="mb-3 flex items-center justify-between">
-            <h2 className="text-xl font-semibold">Recent Posts</h2>
-            <Button asChild size="sm"><Link to="/timeline">+ New post</Link></Button>
-          </div>
-          <div className="space-y-3">
-            {posts.length === 0 && <p className="text-sm text-muted-foreground">No posts yet.</p>}
-            {posts.map((p) => (
-              <Card key={p.id} className="flex items-start gap-3 p-4">
-                {p.image_urls?.[0] && (
-                  <img src={p.image_urls[0]} alt="" className="h-16 w-16 flex-shrink-0 rounded object-cover" />
-                )}
-                <div className="min-w-0 flex-1">
-                  <p className="line-clamp-2 text-sm">{p.content}</p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    {new Date(p.created_at).toLocaleString()}
-                  </p>
-                </div>
-                <Button size="icon" variant="ghost" onClick={() => deletePost(p.id)} aria-label="Delete post">
-                  <Trash2 className="h-4 w-4 text-destructive" />
-                </Button>
-              </Card>
-            ))}
-          </div>
-        </section>
+            {/* Comments */}
+            <section>
+              <h2 className="mb-3 text-xl font-semibold">Recent Comments</h2>
+              <div className="space-y-2">
+                {comments.length === 0 && <p className="text-sm text-muted-foreground">No comments yet.</p>}
+                {comments.map((c) => (
+                  <Card key={c.id} className="flex items-start justify-between gap-3 p-3">
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm">{c.content}</p>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        on post {c.post_id.slice(0, 8)}… · {new Date(c.created_at).toLocaleString()}
+                      </p>
+                    </div>
+                    <Button size="icon" variant="ghost" onClick={() => deleteComment(c.id)} aria-label="Delete comment">
+                      <Trash2 className="h-4 w-4 text-destructive" />
+                    </Button>
+                  </Card>
+                ))}
+              </div>
+            </section>
+          </TabsContent>
 
-        {/* Comments */}
-        <section>
-          <h2 className="mb-3 text-xl font-semibold">Recent Comments</h2>
-          <div className="space-y-2">
-            {comments.length === 0 && <p className="text-sm text-muted-foreground">No comments yet.</p>}
-            {comments.map((c) => (
-              <Card key={c.id} className="flex items-start justify-between gap-3 p-3">
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm">{c.content}</p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    on post {c.post_id.slice(0, 8)}… · {new Date(c.created_at).toLocaleString()}
-                  </p>
-                </div>
-                <Button size="icon" variant="ghost" onClick={() => deleteComment(c.id)} aria-label="Delete comment">
-                  <Trash2 className="h-4 w-4 text-destructive" />
-                </Button>
-              </Card>
-            ))}
-          </div>
-        </section>
+          <TabsContent value="seo">
+            <SeoPanel />
+          </TabsContent>
+        </Tabs>
       </div>
     </main>
   );
