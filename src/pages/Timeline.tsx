@@ -9,6 +9,10 @@ import { useAuth } from "@/hooks/use-auth";
 import { useIsAdmin, getVisitorId } from "@/hooks/use-is-admin";
 import { useToast } from "@/hooks/use-toast";
 import { RippleButton } from "@/components/ui/ripple-button";
+import { SEO } from "@/components/SEO";
+
+const SITE_URL = "https://shahed.com.bd";
+const DEFAULT_OG = "https://shahed.com.bd/assets/profile-photo-CtiUlvZF.jpg";
 
 interface Post {
   id: string;
