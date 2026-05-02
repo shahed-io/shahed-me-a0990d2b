@@ -245,10 +245,10 @@ const HeroSection = () => {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 w-full max-w-3xl">
             {[
-              { value: "150+", label: "Projects Completed" },
+              { value: "38+", label: "Projects Completed" },
               { value: "7+", label: "Years Experience" },
-              { value: "50+", label: "Happy Clients" },
-              { value: "99%", label: "Client Satisfaction" },
+              { value: "30+", label: "Happy Clients" },
+              { value: "100%", label: "Client Satisfaction" },
             ].map((stat) => (
               <TiltCard key={stat.label} className="glass-card p-5 md:p-6">
                 <div className="font-heading text-3xl md:text-5xl font-semibold tracking-tight text-gradient">
@@ -373,7 +373,7 @@ const timeline = [
   { year: "2019", fn: "launch()", title: "Freelance Career", desc: "Started taking international clients and building brands for startups." },
   { year: "2021", fn: "scale()", title: "Founded IT Business", desc: "Launched an IT service company providing digital solutions to businesses." },
   { year: "2023", fn: "expand()", title: "E-Commerce Expansion", desc: "Expanded into e-commerce development with WooCommerce and custom solutions." },
-  { year: "2024", fn: "milestone()", title: "150+ Projects Milestone", desc: "Crossed 150+ successfully delivered projects with clients worldwide." },
+  { year: "2024", fn: "milestone()", title: "100+ Projects Milestone", desc: "Crossed 100+ successfully delivered projects with clients worldwide." },
 ];
 
 const ExperienceSection = () => (
@@ -481,7 +481,7 @@ const ServicesSection = () => (
 
 /* ---------- Testimonials ---------- */
 const testimonials = [
-  { name: "Rahim Uddin", role: "Startup Founder", text: "Shahed transformed our online presence completely. His attention to detail and understanding of branding made our website stand out from competitors. Highly recommended!", rating: 5 },
+  { name: "Rahim Uddin", role: "Startup Founder", text: "Shahed transformed our online presence completely. His attention to detail and understanding of business strategy made our website a real growth engine.", rating: 5 },
   { name: "Sarah Ahmed", role: "Business Owner", text: "Working with Shahed was an excellent experience. He delivered a stunning e-commerce website that increased our sales by 40% in just 3 months.", rating: 5 },
   { name: "Kamal Hossain", role: "Marketing Director", text: "Professional, creative, and always on time. Shahed built our company website with incredible performance and SEO optimization. Best developer I've worked with.", rating: 5 },
 ];
@@ -553,9 +553,9 @@ const TestimonialsSection = () => {
 
 /* ---------- Blog ---------- */
 const blogPosts = [
-  { title: "How to Build a High-Converting Business Website", category: "Web Development", date: "Jan 15, 2024", readTime: "5 min read", desc: "Learn the essential elements every business website needs to convert visitors into paying customers.", img: "https://shahed.com.bd/assets/project-1-CGFnPPTs.jpg" },
-  { title: "Why Branding is the Foundation of Every Successful Business", category: "Branding", date: "Feb 20, 2024", readTime: "4 min read", desc: "Discover why investing in your brand identity is the most important business decision you can make.", img: "https://shahed.com.bd/assets/project-2-DDFynyNU.jpg" },
-  { title: "E-Commerce Trends You Can't Ignore in 2024", category: "E-Commerce", date: "Mar 10, 2024", readTime: "6 min read", desc: "Stay ahead of the competition with these emerging e-commerce trends that are shaping online retail.", img: "https://shahed.com.bd/assets/project-3-CiR2Pc9z.jpg" },
+  { title: "How to Build a High-Converting Business Website in 2024", category: "Web Development", date: "Dec 15, 2024", readTime: "5 min read", desc: "Learn the key principles of building websites that actually drive revenue and business growth.", img: "https://shahed.com.bd/assets/project-1-CGFnPPTs.jpg" },
+  { title: "Why Branding is the Foundation of Every Online Business", category: "Branding", date: "Nov 28, 2024", readTime: "4 min read", desc: "Strong visual identity can make or break your digital presence. Here's how to get it right.", img: "https://shahed.com.bd/assets/project-2-DDFynyNU.jpg" },
+  { title: "E-Commerce Trends Every Entrepreneur Should Know", category: "E-Commerce", date: "Oct 10, 2024", readTime: "6 min read", desc: "Stay ahead of the competition with these latest trends in online store development.", img: "https://shahed.com.bd/assets/project-3-CiR2Pc9z.jpg" },
 ];
 
 const BlogSection = () => (
