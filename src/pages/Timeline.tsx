@@ -9,6 +9,10 @@ import { useAuth } from "@/hooks/use-auth";
 import { useIsAdmin, getVisitorId } from "@/hooks/use-is-admin";
 import { useToast } from "@/hooks/use-toast";
 import { RippleButton } from "@/components/ui/ripple-button";
+import { SEO } from "@/components/SEO";
+
+const SITE_URL = "https://shahed.com.bd";
+const DEFAULT_OG = "https://shahed.com.bd/assets/profile-photo-CtiUlvZF.jpg";
 
 interface Post {
   id: string;
@@ -61,9 +65,30 @@ const Timeline = () => {
   const [posting, setPosting] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    document.title = "Timeline — SHAHED";
-  }, []);
+  useEffect(() => { /* title handled by SEO component */ }, []);
+
+  const latest = posts[0];
+  const ogImage = latest?.image_urls?.[0] ?? DEFAULT_OG;
+  const ogDescription = latest
+    ? `${latest.content.slice(0, 155)}${latest.content.length > 155 ? "…" : ""}`
+    : "Follow MD Shahed's lifestyle journey — moments, updates and stories from a Web Developer & Entrepreneur in Bangladesh.";
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "MD Shahed — Timeline",
+    url: `${SITE_URL}/timeline`,
+    description: ogDescription,
+    author: { "@type": "Person", name: "MD Shahed", url: SITE_URL },
+    blogPost: posts.slice(0, 10).map((p) => ({
+      "@type": "BlogPosting",
+      headline: p.content.slice(0, 110),
+      datePublished: p.created_at,
+      image: p.image_urls?.[0] ?? DEFAULT_OG,
+      author: { "@type": "Person", name: "MD Shahed" },
+    })),
+  };
+
 
   const loadAll = async () => {
     const { data: postsData } = await supabase
@@ -209,7 +234,16 @@ const Timeline = () => {
   };
 
   return (
-    <main className="min-h-screen pt-24 pb-20 px-4 relative overflow-hidden">
+    <>
+      <SEO
+        title="Timeline — MD Shahed | Lifestyle, Updates & Stories"
+        description={ogDescription}
+        canonical={`${SITE_URL}/timeline`}
+        image={ogImage}
+        type="website"
+        jsonLd={jsonLd}
+      />
+      <main className="min-h-screen pt-24 pb-20 px-4 relative overflow-hidden">
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-0 -left-32 w-[500px] h-[500px] rounded-full bg-primary/20 blur-[120px] animate-float" />
         <div className="absolute bottom-0 -right-32 w-[500px] h-[500px] rounded-full bg-accent/20 blur-[120px] animate-float" style={{ animationDelay: "2s" }} />
@@ -395,7 +429,8 @@ const Timeline = () => {
           ))}
         </div>
       </div>
-    </main>
+      </main>
+    </>
   );
 };
 
