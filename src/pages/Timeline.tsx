@@ -234,7 +234,16 @@ const Timeline = () => {
   };
 
   return (
-    <main className="min-h-screen pt-24 pb-20 px-4 relative overflow-hidden">
+    <>
+      <SEO
+        title="Timeline — MD Shahed | Lifestyle, Updates & Stories"
+        description={ogDescription}
+        canonical={`${SITE_URL}/timeline`}
+        image={ogImage}
+        type="website"
+        jsonLd={jsonLd}
+      />
+      <main className="min-h-screen pt-24 pb-20 px-4 relative overflow-hidden">
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-0 -left-32 w-[500px] h-[500px] rounded-full bg-primary/20 blur-[120px] animate-float" />
         <div className="absolute bottom-0 -right-32 w-[500px] h-[500px] rounded-full bg-accent/20 blur-[120px] animate-float" style={{ animationDelay: "2s" }} />
