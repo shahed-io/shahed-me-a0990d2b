@@ -12,6 +12,9 @@ import Timeline from "./pages/Timeline.tsx";
 import MdShahed from "./pages/MdShahed.tsx";
 import ShahedBusiness from "./pages/ShahedBusiness.tsx";
 import Ceo from "./pages/Ceo.tsx";
+import MdShahedWebDeveloper from "./pages/MdShahedWebDeveloper.tsx";
+import BangladeshWebDevelopment from "./pages/BangladeshWebDevelopment.tsx";
+import DigitalConsulting from "./pages/DigitalConsulting.tsx";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +30,9 @@ const AnimatedRoutes = () => {
         <Route path="/md-shahed" element={<MdShahed />} />
         <Route path="/shahed-business" element={<ShahedBusiness />} />
         <Route path="/ceo" element={<Ceo />} />
+        <Route path="/md-shahed-web-developer" element={<MdShahedWebDeveloper />} />
+        <Route path="/bangladesh-web-development" element={<BangladeshWebDevelopment />} />
+        <Route path="/digital-consulting" element={<DigitalConsulting />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
