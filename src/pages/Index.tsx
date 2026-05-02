@@ -89,7 +89,7 @@ const Navbar = () => {
             {navItems.map((item) => (
               <a
                 key={item}
-                href={`#${item.toLowerCase()}`}
+                href={item === "Timeline" ? "/timeline" : `#${item.toLowerCase()}`}
                 className="px-4 py-1.5 text-sm text-muted-foreground hover:text-foreground rounded-full hover:bg-white/5 transition-colors"
               >
                 {item}
