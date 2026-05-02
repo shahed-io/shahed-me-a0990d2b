@@ -355,14 +355,11 @@ export const SupportWidget = ({
                     style={{ animationDuration: "0.3s" }}
                   >
                     <div
-                      className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 ${
-                        msg.role === "user"
-                          ? "bg-gradient-primary"
-                          : "bg-gradient-accent"
-                      }`}
+                      className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 shadow-md"
+                      style={accentStyle ?? { background: "var(--gradient-support)" }}
                     >
                       {msg.role === "user" ? (
-                        <User className="w-3.5 h-3.5 text-primary-foreground" />
+                        <User className="w-3.5 h-3.5 text-white" />
                       ) : (
                         <Bot className="w-3.5 h-3.5 text-white" />
                       )}
@@ -370,9 +367,10 @@ export const SupportWidget = ({
                     <div
                       className={`max-w-[80%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
                         msg.role === "user"
-                          ? "bg-gradient-primary text-primary-foreground rounded-tr-sm"
+                          ? "text-white rounded-tr-sm shadow-md"
                           : "glass text-foreground rounded-tl-sm"
                       }`}
+                      style={msg.role === "user" ? (accentStyle ?? { background: "var(--gradient-support)" }) : undefined}
                     >
                       <div className="prose prose-sm prose-invert max-w-none prose-p:my-1 prose-ul:my-1.5 prose-li:my-0.5 prose-strong:text-foreground prose-a:text-secondary">
                         <ReactMarkdown>{msg.content}</ReactMarkdown>
@@ -382,7 +380,10 @@ export const SupportWidget = ({
                 ))}
                 {loading && messages[messages.length - 1]?.role === "user" && (
                   <div className="flex gap-2.5 animate-fade-in">
-                    <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 bg-gradient-accent">
+                    <div
+                      className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 shadow-md"
+                      style={accentStyle ?? { background: "var(--gradient-support)" }}
+                    >
                       <Bot className="w-3.5 h-3.5 text-white" />
                     </div>
                     <div className="glass rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-1.5">
@@ -395,8 +396,8 @@ export const SupportWidget = ({
               </div>
 
               {/* Input */}
-              <div className="p-3 border-t border-border/50">
-                <div className="flex items-center gap-2 glass rounded-full pl-4 pr-1 py-1">
+              <div className="p-3 border-t border-white/5">
+                <div className="flex items-center gap-2 glass rounded-full pl-4 pr-1 py-1 focus-within:ring-2 focus-within:ring-white/10 transition-all">
                   <input
                     ref={inputRef}
                     type="text"
@@ -411,7 +412,8 @@ export const SupportWidget = ({
                     onClick={sendMessage}
                     disabled={!input.trim() || loading}
                     aria-label="Send message"
-                    className="w-9 h-9 rounded-full bg-gradient-accent flex items-center justify-center text-white disabled:opacity-40 disabled:cursor-not-allowed hover:scale-110 active:scale-95 transition-transform glow-accent"
+                    style={accentStyle ?? { background: "var(--gradient-support)" }}
+                    className="w-9 h-9 rounded-full flex items-center justify-center text-white disabled:opacity-40 disabled:cursor-not-allowed hover:scale-110 active:scale-95 transition-transform shadow-lg"
                   >
                     {loading ? (
                       <Loader2 className="w-4 h-4 animate-spin" />
