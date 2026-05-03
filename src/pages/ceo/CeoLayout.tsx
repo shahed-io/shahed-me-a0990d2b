@@ -67,6 +67,7 @@ const CeoLayout = () => {
           </main>
         </div>
       </div>
+      <GlobalSearch open={searchOpen} onOpenChange={setSearchOpen} />
     </SidebarProvider>
   );
 };
