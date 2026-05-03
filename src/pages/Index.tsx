@@ -4,12 +4,15 @@ import {
   MessageCircle, Code, Palette, ShoppingCart, PenTool, BarChart3, Zap,
   Menu, X, ChevronLeft, ChevronRight, Sparkles, Send, Star, Calendar, BookOpen,
   ArrowUpRight, LogOut, Phone, Package, Info, FileText, Instagram,
+  LayoutDashboard, User as UserIcon, Settings, Copy, Check, Shield,
 } from "lucide-react";
 import { Reveal } from "@/hooks/use-scroll-reveal";
 import { RippleButton } from "@/components/ui/ripple-button";
 import { Magnetic } from "@/components/ui/magnetic";
 import { TiltCard } from "@/components/ui/tilt-card";
 import { useAuth } from "@/hooks/use-auth";
+import { useIsAdmin } from "@/hooks/use-is-admin";
+import { toast } from "@/hooks/use-toast";
 import profilePhoto from "@/assets/profile-portrait.jpg";
 import aboutPhoto from "@/assets/about-portrait.jpg";
 import projectGrowth from "@/assets/project-growth-platform.jpg";
