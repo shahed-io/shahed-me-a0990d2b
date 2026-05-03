@@ -425,7 +425,7 @@ const SkillsSection = () => (
                 <span className="text-foreground font-medium">{skill.name}</span>
                 <span className="text-muted-foreground font-mono text-xs">{skill.level}%</span>
               </div>
-              <div className="h-1.5 bg-muted/50 rounded-full overflow-hidden">
+              <div className="h-1.5 bg-white/5 backdrop-blur-md rounded-full overflow-hidden">
                 <div
                   className="h-full rounded-full bg-gradient-accent animate-aurora"
                   style={{ width: `${skill.level}%`, backgroundSize: "200% 100%" }}
@@ -754,7 +754,7 @@ const ContactSection = () => {
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   placeholder="Your Name"
-                  className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
+                  className="w-full px-4 py-3 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
                 />
               </div>
               <div>
@@ -764,7 +764,7 @@ const ContactSection = () => {
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   placeholder="your@email.com"
-                  className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
+                  className="w-full px-4 py-3 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
                 />
               </div>
               <div>
@@ -774,7 +774,7 @@ const ContactSection = () => {
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   placeholder="Tell me about your project..."
                   rows={5}
-                  className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors resize-none"
+                  className="w-full px-4 py-3 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors resize-none"
                 />
               </div>
               <Magnetic strength={0.2}>
@@ -842,7 +842,7 @@ const NewsletterSection = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-full bg-muted/50 border border-border text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
+                className="flex-1 px-4 py-3 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
               />
               <Magnetic strength={0.2}>
                 <RippleButton variant="primary" size="md" className="whitespace-nowrap">
