@@ -280,7 +280,7 @@ const Timeline = () => {
               <div className="flex gap-2 flex-wrap mt-3">
                 {newImages.map((f, i) => (
                   <div key={i} className="relative">
-                    <img src={URL.createObjectURL(f)} alt="" className="w-20 h-20 rounded-lg object-cover" />
+                    <SmartImage src={URL.createObjectURL(f)} alt={`Upload preview ${i + 1}`} className="w-20 h-20 rounded-lg object-cover" fallbackMessage="Preview unavailable" />
                     <button
                       onClick={() => setNewImages((arr) => arr.filter((_, idx) => idx !== i))}
                       className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-background border border-border flex items-center justify-center"
