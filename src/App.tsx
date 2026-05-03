@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { PageTransition } from "@/components/ui/page-transition";
 import { SiteSettingsLoader } from "@/components/SiteSettingsLoader";
+import { PageSeoLoader } from "@/components/PageSeoLoader";
 import { SupportWidget } from "@/components/SupportWidget";
 import Index from "./pages/Index.tsx";
 
@@ -149,6 +150,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <SiteSettingsLoader />
+        <PageSeoLoader />
         <AnimatedRoutes />
         <SupportWidget />
       </BrowserRouter>
