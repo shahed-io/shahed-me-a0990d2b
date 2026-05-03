@@ -158,27 +158,35 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
               <div className="relative hidden md:block" ref={menuRef}>
                 <button
                   onClick={() => setMenuOpen((v) => !v)}
-                  className="flex items-center gap-2.5 glass rounded-full pl-1 pr-3 py-1 hover:bg-white/5 transition-colors"
+                  className="group relative flex items-center gap-2.5 rounded-full pl-1 pr-3 py-1 border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] hover:border-primary/40 hover:shadow-[0_6px_24px_-8px_hsl(var(--primary)/0.55)] transition-all duration-300 overflow-hidden"
                   aria-haspopup="menu"
                   aria-expanded={menuOpen}
                 >
-                  {profile?.avatar_url ? (
-                    <SmartImage
-                      src={profile.avatar_url}
-                      alt={profile.display_name ?? "Profile"}
-                      className="w-7 h-7 rounded-full object-cover"
-                      fallbackMessage=""
-                    />
-                  ) : (
-                    <span className="w-7 h-7 rounded-full bg-gradient-primary flex items-center justify-center text-[11px] font-semibold text-primary-foreground">
-                      {initials}
-                    </span>
-                  )}
-                  <span className="text-sm text-foreground max-w-[120px] truncate">
+                  <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                  <span aria-hidden className="pointer-events-none absolute -inset-10 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary)/0.18),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                  <span className="relative">
+                    {profile?.avatar_url ? (
+                      <SmartImage
+                        src={profile.avatar_url}
+                        alt={profile.display_name ?? "Profile"}
+                        className="w-7 h-7 rounded-full object-cover ring-2 ring-white/15 group-hover:ring-primary/40 transition-all"
+                        fallbackMessage=""
+                      />
+                    ) : (
+                      <span className="w-7 h-7 rounded-full bg-gradient-primary flex items-center justify-center text-[11px] font-semibold text-primary-foreground ring-2 ring-white/15 group-hover:ring-primary/40 transition-all">
+                        {initials}
+                      </span>
+                    )}
+                    {isAdmin && (
+                      <span aria-hidden className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-background shadow-[0_0_8px_hsl(142_76%_56%/0.85)]" />
+                    )}
+                  </span>
+                  <span className="relative text-sm font-medium text-foreground max-w-[120px] truncate">
                     {profile?.display_name ?? user.email}
                   </span>
                   {isAdmin && (
-                    <span className="hidden lg:inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-gradient-primary/20 border border-primary/30 text-[9px] font-semibold uppercase tracking-wider text-primary">
+                    <span className="relative hidden lg:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gradient-to-r from-primary/25 via-accent/20 to-primary/25 border border-primary/40 text-[9px] font-bold uppercase tracking-[0.12em] text-primary shadow-[0_0_12px_-2px_hsl(var(--primary)/0.5)]">
                       <Shield className="w-2.5 h-2.5" /> Admin
                     </span>
                   )}
