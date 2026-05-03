@@ -5,7 +5,7 @@ import {
   MessageCircle, Code, Palette, ShoppingCart, PenTool, BarChart3, Zap,
   Menu, X, ChevronLeft, ChevronRight, Sparkles, Send, Star, Calendar, BookOpen,
   ArrowUpRight, LogOut, Phone, Package, Info, FileText, Instagram,
-  LayoutDashboard, User as UserIcon, Settings, Copy, Check, Shield,
+  LayoutDashboard, User as UserIcon, Settings, Copy, Check, Shield, Search,
 } from "lucide-react";
 import { Reveal } from "@/hooks/use-scroll-reveal";
 import { RippleButton } from "@/components/ui/ripple-button";
@@ -14,6 +14,7 @@ import { TiltCard } from "@/components/ui/tilt-card";
 import { useAuth } from "@/hooks/use-auth";
 import { useIsAdmin } from "@/hooks/use-is-admin";
 import { toast } from "@/hooks/use-toast";
+import { GlobalSearch, useGlobalSearch } from "@/components/GlobalSearch";
 import profilePhoto from "@/assets/profile-portrait.jpg";
 import aboutPhoto from "@/assets/about-portrait.jpg";
 import projectGrowth from "@/assets/project-growth-platform.jpg";
@@ -63,7 +64,7 @@ const SectionHeading = ({ eyebrow, title, accent }: { eyebrow: string; title: st
 );
 
 /* ---------- Navbar ---------- */
-const Navbar = () => {
+const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -134,7 +135,24 @@ const Navbar = () => {
               </a>
             ))}
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onOpenSearch}
+              className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-muted-foreground hover:text-foreground hover:bg-white/10 transition-colors"
+              aria-label="Search"
+              title="Search (⌘K)"
+            >
+              <Search className="w-3.5 h-3.5" />
+              <span className="hidden lg:inline">Search</span>
+              <kbd className="hidden lg:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-[9px] font-mono">⌘K</kbd>
+            </button>
+            <button
+              onClick={onOpenSearch}
+              className="sm:hidden p-2 rounded-full glass text-muted-foreground hover:text-foreground"
+              aria-label="Search"
+            >
+              <Search className="w-4 h-4" />
+            </button>
             {user ? (
               <div className="relative hidden md:block" ref={menuRef}>
                 <button
@@ -306,7 +324,7 @@ const Navbar = () => {
 };
 
 /* ---------- Hero ---------- */
-const HeroSection = () => {
+const HeroSection = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
   const typedRole = useTypingAnimation(
     ["Graphic Designer", "Brand Strategist", "Web Developer", "Entrepreneur"],
     100, 50, 2000,
@@ -412,6 +430,37 @@ const HeroSection = () => {
             I build powerful digital brands that turn ideas into{" "}
             <span className="text-gradient font-medium">profitable online businesses</span>.
           </p>
+
+          {/* Google-style Search bar */}
+          <button
+            onClick={onOpenSearch}
+            className="group relative w-full max-w-2xl mb-6 flex items-center gap-3 px-5 py-4 rounded-full glass-strong border border-white/10 hover:border-primary/40 hover:bg-white/[0.07] transition-all duration-300 shadow-[0_8px_32px_-12px_hsl(var(--primary)/0.25)] hover:shadow-[0_12px_40px_-12px_hsl(var(--primary)/0.5)]"
+            aria-label="Open search"
+          >
+            <Search className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+            <span className="flex-1 text-left text-sm md:text-base text-muted-foreground truncate">
+              Search projects, services, blog, contact…
+            </span>
+            <span className="hidden sm:flex items-center gap-1 text-[10px] text-muted-foreground">
+              <kbd className="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 font-mono">⌘</kbd>
+              <kbd className="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 font-mono">K</kbd>
+            </span>
+            <span className="absolute inset-0 rounded-full bg-gradient-aurora opacity-0 group-hover:opacity-20 -z-10 blur-xl transition-opacity" />
+          </button>
+
+          {/* Quick search chips */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-10 max-w-2xl">
+            {["Projects", "Services", "Blog", "Contact", "Timeline"].map((chip) => (
+              <button
+                key={chip}
+                onClick={onOpenSearch}
+                className="px-3 py-1 rounded-full glass text-xs text-muted-foreground hover:text-foreground hover:bg-white/10 transition-colors"
+              >
+                {chip}
+              </button>
+            ))}
+          </div>
+
 
           {/* CTAs */}
           <div className="flex flex-wrap items-center justify-center gap-4 mb-16">
@@ -1136,23 +1185,27 @@ const FloatingButtons = () => {
 };
 
 /* ---------- Page ---------- */
-const Index = () => (
-  <main className="relative">
-    <Navbar />
-    <HeroSection />
-    <Reveal><AboutSection /></Reveal>
-    <Reveal><SkillsSection /></Reveal>
-    <Reveal><ExperienceSection /></Reveal>
-    <Reveal><ProjectsSection /></Reveal>
-    <Reveal><ServicesSection /></Reveal>
-    <Reveal><TestimonialsSection /></Reveal>
-    <Reveal><BlogSection /></Reveal>
-    <Reveal><FAQSection /></Reveal>
-    <Reveal><ContactSection /></Reveal>
-    <Reveal><NewsletterSection /></Reveal>
-    <Footer />
-    <FloatingButtons />
-  </main>
-);
+const Index = () => {
+  const { open, setOpen } = useGlobalSearch();
+  return (
+    <main className="relative">
+      <Navbar onOpenSearch={() => setOpen(true)} />
+      <HeroSection onOpenSearch={() => setOpen(true)} />
+      <Reveal><AboutSection /></Reveal>
+      <Reveal><SkillsSection /></Reveal>
+      <Reveal><ExperienceSection /></Reveal>
+      <Reveal><ProjectsSection /></Reveal>
+      <Reveal><ServicesSection /></Reveal>
+      <Reveal><TestimonialsSection /></Reveal>
+      <Reveal><BlogSection /></Reveal>
+      <Reveal><FAQSection /></Reveal>
+      <Reveal><ContactSection /></Reveal>
+      <Reveal><NewsletterSection /></Reveal>
+      <Footer />
+      <FloatingButtons />
+      <GlobalSearch open={open} onOpenChange={setOpen} />
+    </main>
+  );
+};
 
 export default Index;
