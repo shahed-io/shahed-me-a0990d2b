@@ -72,7 +72,7 @@ export const SmartImage = ({
   return (
     <img
       {...rest}
-      src={currentSrc}
+      src={withCacheBust(currentSrc)}
       alt={alt}
       className={className}
       onError={(e) => {
