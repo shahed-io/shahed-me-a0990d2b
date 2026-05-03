@@ -360,9 +360,8 @@ const AboutSection = () => (
     <div className="container mx-auto px-6">
       <SectionHeading eyebrow="about me" title="About" accent="Me" />
       <div className="grid lg:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
-        <TiltCard className="relative flex justify-center" max={6}>
-          <div className="absolute -inset-6 rounded-3xl bg-gradient-aurora blur-3xl opacity-30" />
-          <div className="relative p-1 rounded-3xl bg-gradient-accent">
+        <div className="relative flex justify-center">
+          <div className="relative p-1 rounded-3xl bg-gradient-accent transition-transform duration-500 ease-out hover:scale-[1.02]">
             <SmartImage
               src={aboutPhoto}
               alt="MD Shahed - Portrait"
@@ -370,11 +369,11 @@ const AboutSection = () => (
               decoding="async"
               width={400}
               height={400}
-              className="w-72 h-72 md:w-80 md:h-80 object-cover rounded-3xl"
+              className="w-72 h-72 md:w-80 md:h-80 object-cover rounded-3xl select-none"
               fallbackMessage="Portrait লোড হয়নি"
             />
           </div>
-        </TiltCard>
+        </div>
         <div>
           <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-8">
             I am a results-driven Web Developer and Entrepreneur with over{" "}
