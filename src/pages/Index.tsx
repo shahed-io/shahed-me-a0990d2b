@@ -858,45 +858,111 @@ const NewsletterSection = () => {
 };
 
 /* ---------- Footer ---------- */
-const Footer = () => (
-  <footer className="py-12 border-t border-border/50 relative">
-    <div className="container mx-auto px-6">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-        <a href="#" className="font-heading font-bold text-xl tracking-tight">
-          SHAHED<span className="text-gradient">.</span>
-        </a>
-        <div className="flex items-center gap-3">
-          {[
-            { icon: <Mail className="w-4 h-4" />, href: "mailto:ceo@shahed.com.bd" },
-            { icon: <Linkedin className="w-4 h-4" />, href: "https://linkedin.com/in/shahed-io" },
-            { icon: <Facebook className="w-4 h-4" />, href: "https://facebook.com/shahed.io" },
-          ].map((link, i) => (
-            <Magnetic key={i} strength={0.3}>
-              <a
-                href={link.href}
-                target={link.href.startsWith("http") ? "_blank" : undefined}
-                rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="w-9 h-9 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {link.icon}
-              </a>
-            </Magnetic>
+const Footer = () => {
+  const footerMenus = [
+    {
+      title: "Explore",
+      links: [
+        { label: "Home", href: "/" },
+        { label: "About", href: "#about" },
+        { label: "Skills", href: "#skills" },
+        { label: "Projects", href: "#projects" },
+        { label: "Blog", href: "#blog" },
+        { label: "Contact", href: "#contact" },
+      ],
+    },
+    {
+      title: "Services",
+      links: [
+        { label: "Web Development", href: "/bangladesh-web-development" },
+        { label: "Digital Consulting", href: "/digital-consulting" },
+        { label: "Business Growth", href: "/shahed-business" },
+        { label: "CEO Insights", href: "/ceo" },
+      ],
+    },
+    {
+      title: "Resources",
+      links: [
+        { label: "Timeline", href: "/timeline" },
+        { label: "MD Shahed", href: "/md-shahed" },
+        { label: "Web Developer", href: "/md-shahed-web-developer" },
+        { label: "Sign In", href: "/login" },
+      ],
+    },
+  ];
+
+  const socials = [
+    { icon: <Mail className="w-4 h-4" />, href: "mailto:ceo@shahed.com.bd", label: "Email" },
+    { icon: <Linkedin className="w-4 h-4" />, href: "https://linkedin.com/in/shahed-io", label: "LinkedIn" },
+    { icon: <Facebook className="w-4 h-4" />, href: "https://facebook.com/shahed.io", label: "Facebook" },
+  ];
+
+  return (
+    <footer className="pt-16 pb-8 border-t border-border/50 relative">
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 mb-12">
+          {/* Brand */}
+          <div className="col-span-2 lg:col-span-2 space-y-4">
+            <a href="/" className="font-heading font-bold text-2xl tracking-tight inline-block">
+              SHAHED<span className="text-gradient">.</span>
+            </a>
+            <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
+              Building digital experiences that drive growth, brand value, and meaningful impact from Bangladesh to the world.
+            </p>
+            <div className="flex items-center gap-3 pt-2">
+              {socials.map((link, i) => (
+                <Magnetic key={i} strength={0.3}>
+                  <a
+                    href={link.href}
+                    aria-label={link.label}
+                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                    rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="w-9 h-9 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {link.icon}
+                  </a>
+                </Magnetic>
+              ))}
+            </div>
+          </div>
+
+          {/* Menu columns */}
+          {footerMenus.map((menu) => (
+            <nav key={menu.title} aria-label={menu.title} className="space-y-4">
+              <h3 className="font-heading font-semibold text-sm uppercase tracking-wider text-foreground">
+                {menu.title}
+              </h3>
+              <ul className="space-y-2.5">
+                {menu.links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           ))}
         </div>
-        <div className="flex items-center gap-4 text-xs text-muted-foreground">
-          <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>
-          <a href="#" className="hover:text-foreground transition-colors">Terms & Conditions</a>
+
+        <div className="pt-6 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-muted-foreground">
+            © {new Date().getFullYear()} MD Shahed. Crafted with{" "}
+            <span className="text-gradient font-medium">passion</span> in Bangladesh.
+          </p>
+          <div className="flex items-center gap-5 text-xs text-muted-foreground">
+            <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-foreground transition-colors">Terms & Conditions</a>
+            <a href="#" className="hover:text-foreground transition-colors">Sitemap</a>
+          </div>
         </div>
       </div>
-      <div className="text-center mt-8">
-        <p className="text-xs text-muted-foreground">
-          © {new Date().getFullYear()} MD Shahed. Crafted with{" "}
-          <span className="text-gradient font-medium">passion</span> in Bangladesh.
-        </p>
-      </div>
-    </div>
-  </footer>
-);
+    </footer>
+  );
+};
 
 /* ---------- Floating buttons ---------- */
 const FloatingButtons = () => {
