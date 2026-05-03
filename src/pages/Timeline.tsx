@@ -381,7 +381,7 @@ const Timeline = () => {
                   {(comments[post.id] ?? []).map((c) => (
                     <div key={c.id} className="flex items-start gap-2.5">
                       {c.author_avatar ? (
-                        <img src={c.author_avatar} alt="" className="w-7 h-7 rounded-full object-cover" />
+                        <SmartImage src={c.author_avatar} alt={`${c.author_name ?? "User"} avatar`} className="w-7 h-7 rounded-full object-cover" fallbackMessage="" />
                       ) : (
                         <span className="w-7 h-7 rounded-full bg-gradient-primary flex items-center justify-center text-[10px] font-semibold text-primary-foreground">
                           {(c.author_name ?? "U").slice(0, 1).toUpperCase()}
