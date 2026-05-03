@@ -1,22 +1,17 @@
 import { useEffect, useState } from "react";
-import { LayoutDashboard, RefreshCw, TrendingUp, TrendingDown, DollarSign, Package, ShoppingCart, Clock, CreditCard, CheckCircle2, XCircle, Users } from "lucide-react";
+import { LayoutDashboard, RefreshCw, BookOpen, Heart, MessageSquare, LifeBuoy, Eye, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { PageHeader } from "@/components/ceo/PageHeader";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface Stats {
-  todaySales: number;
-  monthRevenue: number;
-  yearRevenue: number;
-  totalRevenue: number;
-  totalOrders: number;
-  pending: number;
-  paymentPending: number;
-  delivered: number;
-  cancelled: number;
-  customers: number;
+  posts: number;
+  likes: number;
+  comments: number;
+  openTickets: number;
+  totalTickets: number;
 }
 
 const tones = {
@@ -24,11 +19,10 @@ const tones = {
   secondary: { grad: "linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary) / 0.7))", tint: "hsl(var(--secondary) / 0.08)" },
   accent: { grad: "linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent) / 0.7))", tint: "hsl(var(--accent) / 0.08)" },
   aurora: { grad: "var(--gradient-aurora)", tint: "hsl(var(--primary) / 0.06)" },
-  destructive: { grad: "linear-gradient(135deg, hsl(var(--destructive)), hsl(var(--destructive) / 0.7))", tint: "hsl(var(--destructive) / 0.08)" },
 } as const;
 type ToneKey = keyof typeof tones;
 
-function StatCard({ label, value, icon: Icon, tone = "primary", trend }: { label: string; value: any; icon: any; tone?: ToneKey; trend?: number }) {
+function StatCard({ label, value, icon: Icon, tone = "primary", hint }: { label: string; value: any; icon: any; tone?: ToneKey; hint?: string }) {
   const t = tones[tone];
   return (
     <Card className="relative overflow-hidden border-border/50 p-5" style={{ backgroundColor: t.tint }}>
@@ -36,147 +30,115 @@ function StatCard({ label, value, icon: Icon, tone = "primary", trend }: { label
         <div className="flex h-11 w-11 items-center justify-center rounded-xl text-primary-foreground shadow-md" style={{ backgroundImage: t.grad }}>
           <Icon className="h-5 w-5" />
         </div>
-        {trend !== undefined && (
-          <span className={`flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${trend >= 0 ? "bg-secondary/20 text-secondary" : "bg-destructive/20 text-destructive"}`}>
-            {trend >= 0 ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
-            {Math.abs(trend).toFixed(1)}%
-          </span>
-        )}
       </div>
       <div className="mt-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{label}</div>
       <div className="mt-1 text-2xl font-bold">{value}</div>
+      {hint && <div className="mt-1 text-xs text-muted-foreground">{hint}</div>}
     </Card>
   );
 }
 
 const Dashboard = () => {
   const [stats, setStats] = useState<Stats | null>(null);
-  const [bestSelling, setBestSelling] = useState<{ name: string; sold: number }[]>([]);
-  const [time, setTime] = useState(new Date());
+  const [recentPosts, setRecentPosts] = useState<any[]>([]);
+  const [recentTickets, setRecentTickets] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   const load = async () => {
     setLoading(true);
-    const today = new Date(); today.setHours(0, 0, 0, 0);
-    const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
-    const yearStart = new Date(today.getFullYear(), 0, 1);
-
-    const [ordersRes, customersRes, productsRes] = await Promise.all([
-      supabase.from("orders").select("total, status, payment_status, created_at"),
-      supabase.from("customers").select("id", { count: "exact", head: true }),
-      supabase.from("products").select("name").limit(6),
+    const [postsCount, likesCount, commentsCount, ticketsAll, openTickets, posts, tickets] = await Promise.all([
+      supabase.from("posts").select("id", { count: "exact", head: true }),
+      supabase.from("post_likes").select("id", { count: "exact", head: true }),
+      supabase.from("post_comments").select("id", { count: "exact", head: true }),
+      supabase.from("support_tickets").select("id", { count: "exact", head: true }),
+      supabase.from("support_tickets").select("id", { count: "exact", head: true }).eq("status", "open"),
+      supabase.from("posts").select("id, content, created_at").order("created_at", { ascending: false }).limit(5),
+      supabase.from("support_tickets").select("id, subject, name, status, created_at").order("created_at", { ascending: false }).limit(5),
     ]);
 
-    const orders = (ordersRes.data ?? []) as any[];
-    const sum = (arr: any[]) => arr.reduce((s, o) => s + Number(o.total ?? 0), 0);
-    const today0 = orders.filter(o => new Date(o.created_at) >= today);
-    const month = orders.filter(o => new Date(o.created_at) >= monthStart);
-    const year = orders.filter(o => new Date(o.created_at) >= yearStart);
-
     setStats({
-      todaySales: sum(today0),
-      monthRevenue: sum(month),
-      yearRevenue: sum(year),
-      totalRevenue: sum(orders),
-      totalOrders: orders.length,
-      pending: orders.filter(o => o.status === "pending").length,
-      paymentPending: orders.filter(o => o.payment_status === "unpaid" && o.status !== "cancelled").length,
-      delivered: orders.filter(o => o.status === "delivered").length,
-      cancelled: orders.filter(o => o.status === "cancelled").length,
-      customers: customersRes.count ?? 0,
+      posts: postsCount.count ?? 0,
+      likes: likesCount.count ?? 0,
+      comments: commentsCount.count ?? 0,
+      openTickets: openTickets.count ?? 0,
+      totalTickets: ticketsAll.count ?? 0,
     });
-    setBestSelling((productsRes.data ?? []).map((p: any) => ({ name: p.name, sold: 0 })));
+    setRecentPosts(posts.data ?? []);
+    setRecentTickets(tickets.data ?? []);
     setLoading(false);
   };
 
   useEffect(() => { load(); }, []);
-  useEffect(() => { const t = setInterval(() => setTime(new Date()), 1000); return () => clearInterval(t); }, []);
-
-  const fmt = (n: number) => `৳${n.toLocaleString("en-IN", { maximumFractionDigits: 2 })}`;
 
   return (
     <>
       <PageHeader
         title="Dashboard"
-        subtitle="Overview • Manage and configure dashboard"
+        subtitle="Overview • আপনার সাইটের real-time snapshot"
         breadcrumb={["Overview", "Dashboard"]}
         icon={LayoutDashboard}
       />
 
-      <div className="mb-4 flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">
-          Real-time business snapshot · <span className="font-medium text-foreground">{time.toLocaleTimeString()}</span>
-        </p>
+      <div className="mb-4 flex items-center justify-end">
         <Button variant="outline" size="sm" onClick={load} disabled={loading}>
           <RefreshCw className={`mr-2 h-4 w-4 ${loading ? "animate-spin" : ""}`} /> Refresh
         </Button>
       </div>
 
-      <div className="mb-3 border-l-4 border-primary pl-3 text-sm font-semibold text-foreground/80">রেভিনিউ ওভারভিউ</div>
+      <div className="mb-3 border-l-4 border-primary pl-3 text-sm font-semibold text-foreground/80">কনটেন্ট ও এনগেজমেন্ট</div>
       <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Today's Sales" value={fmt(stats?.todaySales ?? 0)} icon={TrendingUp} tone="primary" />
-        <StatCard label="This Month Revenue" value={fmt(stats?.monthRevenue ?? 0)} icon={DollarSign} tone="secondary" trend={-96.3} />
-        <StatCard label="This Year Revenue" value={fmt(stats?.yearRevenue ?? 0)} icon={TrendingUp} tone="aurora" />
-        <StatCard label="Total Revenue (All)" value={fmt(stats?.totalRevenue ?? 0)} icon={DollarSign} tone="accent" />
+        <StatCard label="Blog Posts" value={stats?.posts ?? 0} icon={BookOpen} tone="primary" />
+        <StatCard label="Total Likes" value={stats?.likes ?? 0} icon={Heart} tone="accent" />
+        <StatCard label="Comments" value={stats?.comments ?? 0} icon={MessageSquare} tone="secondary" />
+        <StatCard label="Open Tickets" value={stats?.openTickets ?? 0} icon={LifeBuoy} tone="aurora" hint={`${stats?.totalTickets ?? 0} total`} />
       </div>
 
-      <div className="mb-3 border-l-4 border-primary pl-3 text-sm font-semibold text-foreground/80">অর্ডার স্ট্যাটাস</div>
-      <div className="mb-8 grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
-        <StatCard label="Total Orders" value={stats?.totalOrders ?? 0} icon={ShoppingCart} tone="primary" trend={103.6} />
-        <StatCard label="Pending" value={stats?.pending ?? 0} icon={Clock} tone="aurora" />
-        <StatCard label="Payment Pending" value={stats?.paymentPending ?? 0} icon={CreditCard} tone="accent" />
-        <StatCard label="Delivered" value={stats?.delivered ?? 0} icon={CheckCircle2} tone="secondary" />
-        <StatCard label="Cancelled" value={stats?.cancelled ?? 0} icon={XCircle} tone="destructive" />
-        <StatCard label="Customers" value={stats?.customers ?? 0} icon={Users} tone="secondary" />
-      </div>
-
-      <div className="grid gap-4 lg:grid-cols-3">
-        <Card className="p-5 lg:col-span-2">
+      <div className="grid gap-4 lg:grid-cols-2">
+        <Card className="p-5">
           <div className="mb-4 flex items-center justify-between">
-            <div>
-              <h3 className="text-base font-semibold">Sales Overview</h3>
-              <p className="text-xs text-destructive">↘ 96.3% revenue growth vs last month</p>
-            </div>
-            <Tabs defaultValue="daily">
-              <TabsList className="h-8">
-                <TabsTrigger value="daily" className="h-6 text-xs">Daily</TabsTrigger>
-                <TabsTrigger value="weekly" className="h-6 text-xs">Weekly</TabsTrigger>
-                <TabsTrigger value="monthly" className="h-6 text-xs">Monthly</TabsTrigger>
-              </TabsList>
-            </Tabs>
+            <h3 className="text-base font-semibold">Recent Posts</h3>
+            <Button asChild size="sm" variant="ghost"><Link to="/ceo/blog"><Eye className="mr-1 h-3 w-3" /> View all</Link></Button>
           </div>
-          <div className="relative h-56 w-full overflow-hidden rounded-lg bg-gradient-to-b from-muted/30 to-transparent">
-            <svg viewBox="0 0 600 200" className="h-full w-full" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.4" />
-                  <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
-                </linearGradient>
-              </defs>
-              <path d="M0,180 C80,100 130,40 200,90 C260,130 320,170 400,80 C470,20 530,90 600,40 L600,200 L0,200 Z" fill="url(#g1)" />
-              <path d="M0,180 C80,100 130,40 200,90 C260,130 320,170 400,80 C470,20 530,90 600,40" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" />
-            </svg>
+          <div className="space-y-2">
+            {recentPosts.length === 0 && <p className="text-sm text-muted-foreground">এখনো কোনো পোস্ট নেই।</p>}
+            {recentPosts.map((p) => (
+              <div key={p.id} className="rounded-lg p-2 hover:bg-muted/50">
+                <p className="line-clamp-2 text-sm">{p.content}</p>
+                <p className="mt-1 text-xs text-muted-foreground">{new Date(p.created_at).toLocaleString()}</p>
+              </div>
+            ))}
           </div>
         </Card>
 
         <Card className="p-5">
-          <div className="mb-4 border-l-4 border-primary pl-3">
-            <h3 className="text-base font-semibold">Best Selling Products</h3>
+          <div className="mb-4 flex items-center justify-between">
+            <h3 className="text-base font-semibold">Recent Support Tickets</h3>
+            <Button asChild size="sm" variant="ghost"><Link to="/ceo/tickets"><Eye className="mr-1 h-3 w-3" /> View all</Link></Button>
           </div>
           <div className="space-y-2">
-            {bestSelling.length === 0 && <p className="text-sm text-muted-foreground">No products yet.</p>}
-            {bestSelling.map((p, i) => (
-              <div key={i} className="flex items-center justify-between rounded-lg p-2 hover:bg-muted/50">
-                <div className="flex items-center gap-3 min-w-0">
-                  <span className="text-sm font-semibold text-muted-foreground">#{i + 1}</span>
-                  <span className="truncate text-sm">{p.name}</span>
+            {recentTickets.length === 0 && <p className="text-sm text-muted-foreground">কোনো টিকেট নেই।</p>}
+            {recentTickets.map((t) => (
+              <div key={t.id} className="flex items-center justify-between rounded-lg p-2 hover:bg-muted/50">
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-medium">{t.subject}</p>
+                  <p className="text-xs text-muted-foreground">{t.name ?? "Anonymous"} · {new Date(t.created_at).toLocaleDateString()}</p>
                 </div>
-                <span className="text-sm font-semibold text-muted-foreground">{p.sold}</span>
+                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium ${t.status === "open" ? "bg-accent/15 text-accent" : "bg-muted text-muted-foreground"}`}>{t.status}</span>
               </div>
             ))}
           </div>
         </Card>
       </div>
+
+      <Card className="mt-4 p-5" style={{ backgroundImage: "var(--gradient-aurora)" }}>
+        <div className="flex items-center gap-3 text-primary-foreground">
+          <Sparkles className="h-5 w-5" />
+          <div>
+            <p className="font-semibold">Tip</p>
+            <p className="text-sm opacity-90">নতুন blog post লেখার সময় SEO Title আর Meta Description add করতে ভুলবেন না — এটা Google ranking-এ সরাসরি সাহায্য করে।</p>
+          </div>
+        </div>
+      </Card>
     </>
   );
 };
