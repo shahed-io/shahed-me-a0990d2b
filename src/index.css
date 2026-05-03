@@ -16,10 +16,10 @@
     --background: 240 30% 5%;            /* near-black with violet tint */
     --foreground: 0 0% 98%;
 
-    --card: 240 28% 8%;                  /* slightly raised dark */
+    --card: 265 35% 12%;                 /* used with /opacity in components */
     --card-foreground: 0 0% 98%;
 
-    --popover: 240 28% 9%;
+    --popover: 265 35% 10%;
     --popover-foreground: 0 0% 98%;
 
     /* Primary: Electric violet */
@@ -31,8 +31,8 @@
     --secondary-foreground: 240 30% 5%;
 
     /* Muted */
-    --muted: 240 20% 14%;
-    --muted-foreground: 240 8% 70%;
+    --muted: 265 30% 18%;
+    --muted-foreground: 240 8% 78%;
 
     /* Accent: Hot pink */
     --accent: 330 90% 65%;               /* #EC4899-ish */
@@ -42,8 +42,8 @@
     --destructive-foreground: 0 0% 100%;
 
     /* Glass borders */
-    --border: 240 20% 18%;
-    --input: 240 20% 14%;
+    --border: 265 30% 25%;
+    --input: 265 30% 18%;
     --ring: 265 90% 65%;
 
     --radius: 1rem;
