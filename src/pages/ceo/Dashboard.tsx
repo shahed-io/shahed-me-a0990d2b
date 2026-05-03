@@ -102,7 +102,7 @@ const Dashboard = () => {
           <div className="space-y-2">
             {recentPosts.length === 0 && <p className="text-sm text-muted-foreground">এখনো কোনো পোস্ট নেই।</p>}
             {recentPosts.map((p) => (
-              <div key={p.id} className="rounded-lg p-2 hover:bg-muted/50">
+              <div key={p.id} className="rounded-lg p-2 hover:bg-white/10">
                 <p className="line-clamp-2 text-sm">{p.content}</p>
                 <p className="mt-1 text-xs text-muted-foreground">{new Date(p.created_at).toLocaleString()}</p>
               </div>
@@ -118,12 +118,12 @@ const Dashboard = () => {
           <div className="space-y-2">
             {recentTickets.length === 0 && <p className="text-sm text-muted-foreground">কোনো টিকেট নেই।</p>}
             {recentTickets.map((t) => (
-              <div key={t.id} className="flex items-center justify-between rounded-lg p-2 hover:bg-muted/50">
+              <div key={t.id} className="flex items-center justify-between rounded-lg p-2 hover:bg-white/10">
                 <div className="min-w-0">
                   <p className="truncate text-sm font-medium">{t.subject}</p>
                   <p className="text-xs text-muted-foreground">{t.name ?? "Anonymous"} · {new Date(t.created_at).toLocaleDateString()}</p>
                 </div>
-                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium ${t.status === "open" ? "bg-accent/15 text-accent" : "bg-muted text-muted-foreground"}`}>{t.status}</span>
+                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium ${t.status === "open" ? "bg-accent/15 text-accent" : "bg-white/10 text-muted-foreground"}`}>{t.status}</span>
               </div>
             ))}
           </div>
