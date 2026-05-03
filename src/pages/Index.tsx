@@ -635,9 +635,9 @@ const TestimonialsSection = () => {
 
 /* ---------- Blog ---------- */
 const blogPosts = [
-  { title: "How to Build a High-Converting Business Website in 2024", category: "Web Development", date: "Dec 15, 2024", readTime: "5 min read", desc: "Learn the key principles of building websites that actually drive revenue and business growth.", img: "https://shahed.com.bd/assets/project-1-CGFnPPTs.jpg" },
-  { title: "Why Branding is the Foundation of Every Online Business", category: "Branding", date: "Nov 28, 2024", readTime: "4 min read", desc: "Strong visual identity can make or break your digital presence. Here's how to get it right.", img: "https://shahed.com.bd/assets/project-2-DDFynyNU.jpg" },
-  { title: "E-Commerce Trends Every Entrepreneur Should Know", category: "E-Commerce", date: "Oct 10, 2024", readTime: "6 min read", desc: "Stay ahead of the competition with these latest trends in online store development.", img: "https://shahed.com.bd/assets/project-3-CiR2Pc9z.jpg" },
+  { title: "How to Build a High-Converting Business Website in 2024", category: "Web Development", date: "Dec 15, 2024", readTime: "5 min read", desc: "Learn the key principles of building websites that actually drive revenue and business growth.", img: "/og-image.jpg" },
+  { title: "Why Branding is the Foundation of Every Online Business", category: "Branding", date: "Nov 28, 2024", readTime: "4 min read", desc: "Strong visual identity can make or break your digital presence. Here's how to get it right.", img: "/og-image.jpg" },
+  { title: "E-Commerce Trends Every Entrepreneur Should Know", category: "E-Commerce", date: "Oct 10, 2024", readTime: "6 min read", desc: "Stay ahead of the competition with these latest trends in online store development.", img: "/og-image.jpg" },
 ];
 
 const BlogSection = () => (
