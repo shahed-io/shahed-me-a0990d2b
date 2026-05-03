@@ -910,16 +910,16 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="pt-16 pb-8 relative">
-      <div className="container mx-auto px-6 space-y-8">
+    <footer className="pt-12 pb-8 relative">
+      <div className="container mx-auto px-4 sm:px-6 space-y-6 sm:space-y-8">
         {/* Brand / contact card */}
-        <div className="glass-card rounded-3xl p-8 md:p-10 text-center">
+        <div className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 text-center overflow-hidden">
           <a href="/" className="inline-flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-primary flex items-center justify-center text-primary-foreground font-bold text-xl shadow-lg">
+            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-primary flex items-center justify-center text-primary-foreground font-bold text-lg sm:text-xl shadow-lg shrink-0">
               S
             </div>
             <div className="text-left leading-tight">
-              <div className="font-heading font-bold text-2xl">
+              <div className="font-heading font-bold text-xl sm:text-2xl">
                 <span className="text-gradient-primary">Shahed</span>
               </div>
               <div className="text-[10px] tracking-[0.2em] text-muted-foreground">SHAHED.COM.BD</div>
@@ -930,53 +930,52 @@ const Footer = () => {
             and meaningful impact from Bangladesh to the world.
           </p>
 
-          <div className="mt-6 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
             {contacts.map((c, i) => (
               <a
                 key={i}
                 href={c.href}
-                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm bg-gradient-to-br ${c.tint} border border-white/10 backdrop-blur-md hover:border-white/20 transition-colors`}
+                className={`inline-flex items-center gap-2 rounded-full px-3 sm:px-4 py-2 text-xs sm:text-sm bg-gradient-to-br ${c.tint} border border-white/10 backdrop-blur-md hover:border-white/20 transition-colors max-w-full`}
               >
-                <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/10">
+                <span className="flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white/10 shrink-0">
                   {c.icon}
                 </span>
-                <span className="text-foreground/90">{c.label}</span>
+                <span className="text-foreground/90 truncate">{c.label}</span>
               </a>
             ))}
           </div>
 
-          <div className="mt-6 flex items-center justify-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
             {socials.map((s, i) => (
-              <Magnetic key={i} strength={0.3}>
-                <a
-                  href={s.href}
-                  aria-label={s.label}
-                  target={s.href.startsWith("http") ? "_blank" : undefined}
-                  rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="w-10 h-10 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-foreground hover:scale-110 transition-all"
-                >
-                  {s.icon}
-                </a>
-              </Magnetic>
+              <a
+                key={i}
+                href={s.href}
+                aria-label={s.label}
+                target={s.href.startsWith("http") ? "_blank" : undefined}
+                rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="w-10 h-10 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-foreground hover:scale-110 transition-all shrink-0"
+              >
+                {s.icon}
+              </a>
             ))}
           </div>
         </div>
 
         {/* Menu cards */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
           {footerMenus.map((menu) => {
             const Icon = menu.icon;
             return (
               <nav
                 key={menu.title}
                 aria-label={menu.title}
-                className="glass-card rounded-3xl p-7 transition-transform duration-300 hover:-translate-y-1"
+                className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-7 transition-transform duration-300 hover:-translate-y-1 sm:[&:last-child]:col-span-2 md:[&:last-child]:col-span-1"
               >
-                <div className="flex items-center gap-3 mb-5 pb-4 border-b border-white/5">
-                  <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center text-primary border border-white/10">
+                <div className="flex items-center gap-3 mb-4 sm:mb-5 pb-3 sm:pb-4 border-b border-white/5">
+                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center text-primary border border-white/10 shrink-0">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <h3 className="font-heading font-bold text-base uppercase tracking-[0.18em] text-foreground">
+                  <h3 className="font-heading font-bold text-sm sm:text-base uppercase tracking-[0.18em] text-foreground">
                     {menu.title}
                   </h3>
                 </div>
@@ -987,7 +986,7 @@ const Footer = () => {
                         href={link.href}
                         target={link.href.startsWith("http") ? "_blank" : undefined}
                         rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="group inline-flex items-center gap-2.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        className="group inline-flex items-center gap-2.5 text-sm text-muted-foreground hover:text-foreground transition-colors break-words"
                       >
                         <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-primary to-accent shrink-0 group-hover:scale-150 transition-transform" />
                         <span>{link.label}</span>
