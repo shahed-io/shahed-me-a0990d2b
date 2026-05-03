@@ -1110,40 +1110,56 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Menu cards */}
+        {/* Menu cards — Glassmorphism */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-          {footerMenus.map((menu) => {
+          {footerMenus.map((menu, idx) => {
             const Icon = menu.icon;
             return (
-              <nav
-                key={menu.title}
-                aria-label={menu.title}
-                className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-7 transition-transform duration-300 hover:-translate-y-1 sm:[&:last-child]:col-span-2 md:[&:last-child]:col-span-1"
-              >
-                <div className="flex items-center gap-3 mb-4 sm:mb-5 pb-3 sm:pb-4 border-b border-white/5">
-                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center text-primary border border-white/10 shrink-0">
-                    <Icon className="w-5 h-5" />
+              <Reveal key={menu.title} delay={idx * 120} className="sm:[&:last-child]:col-span-2 md:[&:last-child]:col-span-1">
+                <nav
+                  aria-label={menu.title}
+                  className="group/card relative h-full overflow-hidden rounded-2xl sm:rounded-3xl p-5 sm:p-7 border border-white/10 bg-white/[0.04] backdrop-blur-2xl shadow-[0_8px_32px_-12px_rgba(0,0,0,0.5)] transition-all duration-500 hover:-translate-y-1.5 hover:border-white/20 hover:shadow-[0_20px_60px_-20px_hsl(var(--primary)/0.45)]"
+                >
+                  <span aria-hidden className="pointer-events-none absolute -top-24 -left-24 w-56 h-56 rounded-full bg-gradient-to-br from-primary/30 to-transparent blur-3xl opacity-50 group-hover/card:opacity-80 transition-opacity" />
+                  <span aria-hidden className="pointer-events-none absolute -bottom-24 -right-24 w-56 h-56 rounded-full bg-gradient-to-br from-accent/25 to-transparent blur-3xl opacity-40 group-hover/card:opacity-70 transition-opacity" />
+                  <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+
+                  <div className="relative flex items-center gap-3 mb-4 sm:mb-5 pb-3 sm:pb-4 border-b border-white/10">
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-primary/30 to-accent/20 flex items-center justify-center text-primary border border-white/15 shrink-0 shadow-inner group-hover/card:scale-110 group-hover/card:rotate-3 transition-transform duration-500">
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <h3 className="font-heading font-bold text-sm sm:text-base uppercase tracking-[0.18em] text-foreground">
+                      {menu.title}
+                    </h3>
                   </div>
-                  <h3 className="font-heading font-bold text-sm sm:text-base uppercase tracking-[0.18em] text-foreground">
-                    {menu.title}
-                  </h3>
-                </div>
-                <ul className="space-y-3">
-                  {menu.links.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        target={link.href.startsWith("http") ? "_blank" : undefined}
-                        rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="group inline-flex items-center gap-2.5 text-sm text-muted-foreground hover:text-foreground transition-colors break-words"
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-primary to-accent shrink-0 group-hover:scale-150 transition-transform" />
-                        <span>{link.label}</span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
+                  <ul className="relative space-y-2">
+                    {menu.links.map((link) => (
+                      <li key={link.label}>
+                        <a
+                          href={link.href}
+                          target={link.href.startsWith("http") ? "_blank" : undefined}
+                          rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                          onClick={(e) => {
+                            const el = e.currentTarget;
+                            const r = el.getBoundingClientRect();
+                            const ripple = document.createElement("span");
+                            ripple.className = "footer-ripple";
+                            ripple.style.left = `${e.clientX - r.left}px`;
+                            ripple.style.top = `${e.clientY - r.top}px`;
+                            el.appendChild(ripple);
+                            setTimeout(() => ripple.remove(), 650);
+                          }}
+                          className="footer-link group relative inline-flex w-full items-center gap-2.5 overflow-hidden rounded-full px-2 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors break-words"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-primary to-accent shrink-0 group-hover:scale-150 transition-transform" />
+                          <span className="relative z-10">{link.label}</span>
+                          <ArrowUpRight className="ml-auto w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover:opacity-60 group-hover:translate-x-0 transition-all" />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              </Reveal>
             );
           })}
         </div>
