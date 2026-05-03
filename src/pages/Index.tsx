@@ -3,7 +3,7 @@ import {
   Mail, MapPin, Clock, ArrowDown, ArrowUp, ExternalLink, Facebook, Linkedin,
   MessageCircle, Code, Palette, ShoppingCart, PenTool, BarChart3, Zap,
   Menu, X, ChevronLeft, ChevronRight, Sparkles, Send, Star, Calendar, BookOpen,
-  ArrowUpRight, LogOut,
+  ArrowUpRight, LogOut, Phone, Package, Info, FileText, Instagram,
 } from "lucide-react";
 import { Reveal } from "@/hooks/use-scroll-reveal";
 import { RippleButton } from "@/components/ui/ripple-button";
