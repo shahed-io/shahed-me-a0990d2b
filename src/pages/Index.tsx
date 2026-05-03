@@ -12,6 +12,7 @@ import { TiltCard } from "@/components/ui/tilt-card";
 import { useAuth } from "@/hooks/use-auth";
 import profilePhoto from "@/assets/profile-portrait.jpg";
 import aboutPhoto from "@/assets/about-portrait.jpg";
+import { SmartImage } from "@/components/ui/smart-image";
 
 /* ---------- Typing animation ---------- */
 const useTypingAnimation = (words: string[], typingSpeed = 100, deletingSpeed = 50, pauseTime = 2000) => {
@@ -251,7 +252,7 @@ const HeroSection = () => {
                   opacity: photoOpacity,
                 }}
               >
-                <img
+                <SmartImage
                   src={profilePhoto}
                   alt="MD Shahed - Web Developer and Entrepreneur from Bangladesh"
                   width={160}
@@ -259,6 +260,7 @@ const HeroSection = () => {
                   fetchPriority="high"
                   decoding="async"
                   className="w-36 h-36 md:w-40 md:h-40 rounded-full object-cover border-4 border-background"
+                  fallbackMessage="ছবি লোড হয়নি"
                 />
                 <div className="absolute -bottom-1 -right-1 w-10 h-10 rounded-full bg-background flex items-center justify-center">
                   <div className="w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center">
@@ -354,7 +356,7 @@ const AboutSection = () => (
         <TiltCard className="relative flex justify-center" max={6}>
           <div className="absolute -inset-6 rounded-3xl bg-gradient-aurora blur-3xl opacity-30" />
           <div className="relative p-1 rounded-3xl bg-gradient-accent">
-            <img
+            <SmartImage
               src={aboutPhoto}
               alt="MD Shahed - Portrait"
               loading="lazy"
@@ -362,6 +364,7 @@ const AboutSection = () => (
               width={400}
               height={400}
               className="w-72 h-72 md:w-80 md:h-80 object-cover rounded-3xl"
+              fallbackMessage="Portrait লোড হয়নি"
             />
           </div>
         </TiltCard>

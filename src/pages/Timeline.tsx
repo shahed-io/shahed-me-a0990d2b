@@ -10,6 +10,7 @@ import { useIsAdmin, getVisitorId } from "@/hooks/use-is-admin";
 import { useToast } from "@/hooks/use-toast";
 import { RippleButton } from "@/components/ui/ripple-button";
 import { SEO } from "@/components/SEO";
+import { SmartImage } from "@/components/ui/smart-image";
 
 const SITE_URL = "https://shahed.com.bd";
 const DEFAULT_OG = "https://shahed.com.bd/assets/profile-photo-CtiUlvZF.jpg";
@@ -315,10 +316,12 @@ const Timeline = () => {
           {posts.map((post) => (
             <article key={post.id} className="glass-card p-5">
               <div className="flex items-start gap-3 mb-3">
-                <img
-                  src={profile?.avatar_url ?? "https://shahed.com.bd/assets/profile-photo-CtiUlvZF.jpg"}
-                  alt=""
+                <SmartImage
+                  src={profile?.avatar_url ?? DEFAULT_OG}
+                  fallbackSrc={DEFAULT_OG}
+                  alt="MD Shahed avatar"
                   className="w-10 h-10 rounded-full object-cover"
+                  fallbackMessage="N/A"
                 />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-foreground">MD Shahed</p>
@@ -340,12 +343,13 @@ const Timeline = () => {
               {post.image_urls.length > 0 && (
                 <div className={`grid gap-2 mb-3 ${post.image_urls.length === 1 ? "grid-cols-1" : "grid-cols-2"}`}>
                   {post.image_urls.map((url, i) => (
-                    <img
+                    <SmartImage
                       key={i}
                       src={url}
-                      alt=""
+                      alt="Post image"
                       loading="lazy"
                       className="w-full rounded-xl object-cover max-h-96"
+                      fallbackMessage="ছবি আনতে পারিনি"
                     />
                   ))}
                 </div>
@@ -377,7 +381,7 @@ const Timeline = () => {
                   {(comments[post.id] ?? []).map((c) => (
                     <div key={c.id} className="flex items-start gap-2.5">
                       {c.author_avatar ? (
-                        <img src={c.author_avatar} alt="" className="w-7 h-7 rounded-full object-cover" />
+                        <SmartImage src={c.author_avatar} alt={`${c.author_name ?? "User"} avatar`} className="w-7 h-7 rounded-full object-cover" fallbackMessage="" />
                       ) : (
                         <span className="w-7 h-7 rounded-full bg-gradient-primary flex items-center justify-center text-[10px] font-semibold text-primary-foreground">
                           {(c.author_name ?? "U").slice(0, 1).toUpperCase()}

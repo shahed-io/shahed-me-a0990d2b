@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SEO } from "@/components/SEO";
 import { SeoPanel } from "@/components/admin/SeoPanel";
+import { SmartImage } from "@/components/ui/smart-image";
 import {
   LayoutDashboard, FileText, MessageCircle, Heart, Users, LogOut, Trash2, ExternalLink, Search,
 } from "lucide-react";
@@ -170,7 +171,7 @@ const Ceo = () => {
                 {posts.map((p) => (
                   <Card key={p.id} className="flex items-start gap-3 p-4">
                     {p.image_urls?.[0] && (
-                      <img src={p.image_urls[0]} alt="" className="h-16 w-16 flex-shrink-0 rounded object-cover" />
+                      <SmartImage src={p.image_urls[0]} alt="Post thumbnail" className="h-16 w-16 flex-shrink-0 rounded object-cover" fallbackMessage="N/A" />
                     )}
                     <div className="min-w-0 flex-1">
                       <p className="line-clamp-2 text-sm">{p.content}</p>
