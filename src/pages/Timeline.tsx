@@ -343,12 +343,13 @@ const Timeline = () => {
               {post.image_urls.length > 0 && (
                 <div className={`grid gap-2 mb-3 ${post.image_urls.length === 1 ? "grid-cols-1" : "grid-cols-2"}`}>
                   {post.image_urls.map((url, i) => (
-                    <img
+                    <SmartImage
                       key={i}
                       src={url}
-                      alt=""
+                      alt="Post image"
                       loading="lazy"
                       className="w-full rounded-xl object-cover max-h-96"
+                      fallbackMessage="ছবি আনতে পারিনি"
                     />
                   ))}
                 </div>
