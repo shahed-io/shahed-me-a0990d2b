@@ -114,20 +114,20 @@ const Dashboard = () => {
 
       <div className="mb-3 border-l-4 border-primary pl-3 text-sm font-semibold text-foreground/80">রেভিনিউ ওভারভিউ</div>
       <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Today's Sales" value={fmt(stats?.todaySales ?? 0)} icon={TrendingUp} color="purple" bgTint="bg-gradient-to-br from-purple-50/50 to-transparent dark:from-purple-950/20" />
-        <StatCard label="This Month Revenue" value={fmt(stats?.monthRevenue ?? 0)} icon={DollarSign} color="blue" trend={-96.3} bgTint="bg-gradient-to-br from-blue-50/50 to-transparent dark:from-blue-950/20" />
-        <StatCard label="This Year Revenue" value={fmt(stats?.yearRevenue ?? 0)} icon={TrendingUp} color="green" bgTint="bg-gradient-to-br from-emerald-50/50 to-transparent dark:from-emerald-950/20" />
-        <StatCard label="Total Revenue (All)" value={fmt(stats?.totalRevenue ?? 0)} icon={DollarSign} color="orange" bgTint="bg-gradient-to-br from-orange-50/50 to-transparent dark:from-orange-950/20" />
+        <StatCard label="Today's Sales" value={fmt(stats?.todaySales ?? 0)} icon={TrendingUp} tone="primary" />
+        <StatCard label="This Month Revenue" value={fmt(stats?.monthRevenue ?? 0)} icon={DollarSign} tone="secondary" trend={-96.3} />
+        <StatCard label="This Year Revenue" value={fmt(stats?.yearRevenue ?? 0)} icon={TrendingUp} tone="aurora" />
+        <StatCard label="Total Revenue (All)" value={fmt(stats?.totalRevenue ?? 0)} icon={DollarSign} tone="accent" />
       </div>
 
       <div className="mb-3 border-l-4 border-primary pl-3 text-sm font-semibold text-foreground/80">অর্ডার স্ট্যাটাস</div>
       <div className="mb-8 grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
-        <StatCard label="Total Orders" value={stats?.totalOrders ?? 0} icon={ShoppingCart} color="purple" trend={103.6} bgTint="bg-gradient-to-br from-purple-50/50 to-transparent dark:from-purple-950/20" />
-        <StatCard label="Pending" value={stats?.pending ?? 0} icon={Clock} color="orange" bgTint="bg-gradient-to-br from-amber-50/50 to-transparent dark:from-amber-950/20" />
-        <StatCard label="Payment Pending" value={stats?.paymentPending ?? 0} icon={CreditCard} color="pink" bgTint="bg-gradient-to-br from-rose-50/50 to-transparent dark:from-rose-950/20" />
-        <StatCard label="Delivered" value={stats?.delivered ?? 0} icon={CheckCircle2} color="green" bgTint="bg-gradient-to-br from-emerald-50/50 to-transparent dark:from-emerald-950/20" />
-        <StatCard label="Cancelled" value={stats?.cancelled ?? 0} icon={XCircle} color="red" bgTint="bg-gradient-to-br from-red-50/50 to-transparent dark:from-red-950/20" />
-        <StatCard label="Customers" value={stats?.customers ?? 0} icon={Users} color="blue" bgTint="bg-gradient-to-br from-cyan-50/50 to-transparent dark:from-cyan-950/20" />
+        <StatCard label="Total Orders" value={stats?.totalOrders ?? 0} icon={ShoppingCart} tone="primary" trend={103.6} />
+        <StatCard label="Pending" value={stats?.pending ?? 0} icon={Clock} tone="aurora" />
+        <StatCard label="Payment Pending" value={stats?.paymentPending ?? 0} icon={CreditCard} tone="accent" />
+        <StatCard label="Delivered" value={stats?.delivered ?? 0} icon={CheckCircle2} tone="secondary" />
+        <StatCard label="Cancelled" value={stats?.cancelled ?? 0} icon={XCircle} tone="destructive" />
+        <StatCard label="Customers" value={stats?.customers ?? 0} icon={Users} tone="secondary" />
       </div>
 
       <div className="grid gap-4 lg:grid-cols-3">
@@ -135,7 +135,7 @@ const Dashboard = () => {
           <div className="mb-4 flex items-center justify-between">
             <div>
               <h3 className="text-base font-semibold">Sales Overview</h3>
-              <p className="text-xs text-rose-500">↘ 96.3% revenue growth vs last month</p>
+              <p className="text-xs text-destructive">↘ 96.3% revenue growth vs last month</p>
             </div>
             <Tabs defaultValue="daily">
               <TabsList className="h-8">
