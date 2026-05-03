@@ -12,6 +12,7 @@ import { TiltCard } from "@/components/ui/tilt-card";
 import { useAuth } from "@/hooks/use-auth";
 import profilePhoto from "@/assets/profile-portrait.jpg";
 import aboutPhoto from "@/assets/about-portrait.jpg";
+import { SmartImage } from "@/components/ui/smart-image";
 
 /* ---------- Typing animation ---------- */
 const useTypingAnimation = (words: string[], typingSpeed = 100, deletingSpeed = 50, pauseTime = 2000) => {
