@@ -33,15 +33,30 @@ export function CeoSidebar() {
 
   return (
     <Sidebar collapsible="icon" className="border-r border-border/40 [&>div]:!bg-transparent bg-transparent backdrop-blur-xl">
-      <SidebarHeader className="border-b px-3 py-3">
-        <NavLink to="/ceo" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/70 text-primary-foreground font-bold">
-            S
+      <SidebarHeader className="border-b border-white/10 px-3 py-3">
+        <NavLink
+          to="/ceo"
+          className="group relative flex items-center gap-2.5 rounded-2xl p-1.5 overflow-hidden border border-white/10 bg-gradient-to-br from-white/[0.07] via-white/[0.03] to-transparent backdrop-blur-xl shadow-[0_4px_24px_-8px_hsl(var(--primary)/0.4)] transition-all duration-300 hover:border-primary/40 hover:shadow-[0_8px_32px_-8px_hsl(var(--primary)/0.6)]"
+        >
+          <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+          <span aria-hidden className="pointer-events-none absolute -inset-8 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary)/0.25),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity" />
+
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-accent to-primary text-primary-foreground font-bold shadow-[inset_0_1px_0_hsl(0_0%_100%/0.25),0_6px_20px_-6px_hsl(var(--primary)/0.7)] ring-1 ring-white/20 group-hover:scale-105 group-hover:rotate-3 transition-transform duration-300">
+            <span className="text-base tracking-tight">S</span>
+            <span aria-hidden className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-background shadow-[0_0_10px_hsl(142_76%_56%/0.8)] animate-pulse" />
           </div>
+
           {!collapsed && (
-            <div className="leading-tight">
-              <div className="text-sm font-bold">Shahed Admin</div>
-              <div className="text-[10px] text-muted-foreground">SHAHED.COM.BD</div>
+            <div className="relative leading-tight min-w-0 flex-1">
+              <div className="flex items-center gap-1.5">
+                <span className="text-sm font-bold text-foreground truncate">Shahed Admin</span>
+                <span className="px-1.5 py-0.5 rounded-md text-[8px] font-bold uppercase tracking-wider bg-gradient-to-r from-primary/30 to-accent/30 text-primary border border-primary/30">
+                  Pro
+                </span>
+              </div>
+              <div className="text-[10px] font-medium text-muted-foreground/80 tracking-wider truncate">
+                SHAHED.COM.BD
+              </div>
             </div>
           )}
         </NavLink>
