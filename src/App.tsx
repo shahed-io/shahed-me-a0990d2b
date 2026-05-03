@@ -86,7 +86,6 @@ const App = () => (
         <SiteSettingsLoader />
         <PageSeoLoader />
         <AnimatedRoutes />
-        <SupportWidget />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
