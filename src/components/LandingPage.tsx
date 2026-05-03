@@ -115,7 +115,7 @@ export const LandingPage = ({
   }
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-screen text-foreground" style={{ backgroundImage: "var(--gradient-mesh)" }}>
       <SEO
         title={title}
         description={description}
