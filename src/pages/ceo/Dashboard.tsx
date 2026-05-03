@@ -130,12 +130,15 @@ const Dashboard = () => {
         </Card>
       </div>
 
-      <Card className="mt-4 p-5" style={{ backgroundImage: "var(--gradient-aurora)" }}>
-        <div className="flex items-center gap-3 text-primary-foreground">
-          <Sparkles className="h-5 w-5" />
+      <Card className="relative mt-4 overflow-hidden p-5">
+        <div className="pointer-events-none absolute inset-0 opacity-25" style={{ backgroundImage: "var(--gradient-aurora)" }} aria-hidden />
+        <div className="relative flex items-center gap-3 text-foreground">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-primary-foreground shadow-md" style={{ backgroundImage: "var(--gradient-primary)" }}>
+            <Sparkles className="h-5 w-5" />
+          </div>
           <div>
             <p className="font-semibold">Tip</p>
-            <p className="text-sm opacity-90">নতুন blog post লেখার সময় SEO Title আর Meta Description add করতে ভুলবেন না — এটা Google ranking-এ সরাসরি সাহায্য করে।</p>
+            <p className="text-sm text-muted-foreground">নতুন blog post লেখার সময় SEO Title আর Meta Description add করতে ভুলবেন না — এটা Google ranking-এ সরাসরি সাহায্য করে।</p>
           </div>
         </div>
       </Card>
