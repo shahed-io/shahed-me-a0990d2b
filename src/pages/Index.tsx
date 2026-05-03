@@ -192,9 +192,14 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
                   </span>
 
                   {isAdmin && (
-                    <span className="relative hidden lg:inline-flex items-center gap-1 h-6 px-2 rounded-full bg-gradient-to-r from-primary via-accent to-primary text-[9px] font-bold uppercase tracking-[0.14em] text-primary-foreground shadow-[inset_0_1px_0_hsl(0_0%_100%/0.3),0_4px_14px_-4px_hsl(var(--primary)/0.7)] ring-1 ring-white/20">
+                    <Link
+                      to="/ceo"
+                      onClick={(e) => e.stopPropagation()}
+                      title="Go to Admin Panel"
+                      className="relative hidden lg:inline-flex items-center gap-1 h-6 px-2 rounded-full bg-gradient-to-r from-primary via-accent to-primary text-[9px] font-bold uppercase tracking-[0.14em] text-primary-foreground shadow-[inset_0_1px_0_hsl(0_0%_100%/0.3),0_4px_14px_-4px_hsl(var(--primary)/0.7)] ring-1 ring-white/20 hover:scale-105 hover:shadow-[inset_0_1px_0_hsl(0_0%_100%/0.4),0_6px_20px_-4px_hsl(var(--primary)/0.9)] transition-transform"
+                    >
                       <Shield className="w-2.5 h-2.5" /> Admin
-                    </span>
+                    </Link>
                   )}
                   <ChevronDown className="relative w-3.5 h-3.5 mr-1 text-muted-foreground group-hover:text-foreground transition-all duration-300 group-data-[state=open]:rotate-180" />
                 </button>
