@@ -861,6 +861,7 @@ const Footer = () => {
   const footerMenus = [
     {
       title: "Explore",
+      icon: Package,
       links: [
         { label: "Home", href: "/" },
         { label: "About", href: "#about" },
@@ -872,6 +873,7 @@ const Footer = () => {
     },
     {
       title: "Services",
+      icon: Info,
       links: [
         { label: "Web Development", href: "/bangladesh-web-development" },
         { label: "Digital Consulting", href: "/digital-consulting" },
@@ -881,6 +883,7 @@ const Footer = () => {
     },
     {
       title: "Resources",
+      icon: FileText,
       links: [
         { label: "Timeline", href: "/timeline" },
         { label: "MD Shahed", href: "/md-shahed" },
@@ -890,64 +893,111 @@ const Footer = () => {
     },
   ];
 
+  const contacts = [
+    { icon: <Phone className="w-4 h-4" />, label: "+880 1XXX-XXXXXX", href: "tel:+8801000000000", tint: "from-primary/20 to-primary/5 text-primary" },
+    { icon: <Mail className="w-4 h-4" />, label: "ceo@shahed.com.bd", href: "mailto:ceo@shahed.com.bd", tint: "from-secondary/20 to-secondary/5 text-secondary" },
+    { icon: <MapPin className="w-4 h-4" />, label: "Dhaka, Bangladesh", href: "#", tint: "from-accent/20 to-accent/5 text-accent" },
+  ];
+
   const socials = [
-    { icon: <Mail className="w-4 h-4" />, href: "mailto:ceo@shahed.com.bd", label: "Email" },
-    { icon: <Linkedin className="w-4 h-4" />, href: "https://linkedin.com/in/shahed-io", label: "LinkedIn" },
     { icon: <Facebook className="w-4 h-4" />, href: "https://facebook.com/shahed.io", label: "Facebook" },
+    { icon: <MessageCircle className="w-4 h-4" />, href: "#", label: "Chat" },
+    { icon: <Instagram className="w-4 h-4" />, href: "#", label: "Instagram" },
+    { icon: <Send className="w-4 h-4" />, href: "mailto:ceo@shahed.com.bd", label: "Email" },
+    { icon: <Linkedin className="w-4 h-4" />, href: "https://linkedin.com/in/shahed-io", label: "LinkedIn" },
   ];
 
   return (
-    <footer className="pt-16 pb-8 border-t border-border/50 relative">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 mb-12">
-          {/* Brand */}
-          <div className="col-span-2 lg:col-span-2 space-y-4">
-            <a href="/" className="font-heading font-bold text-2xl tracking-tight inline-block">
-              SHAHED<span className="text-gradient">.</span>
-            </a>
-            <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
-              Building digital experiences that drive growth, brand value, and meaningful impact from Bangladesh to the world.
-            </p>
-            <div className="flex items-center gap-3 pt-2">
-              {socials.map((link, i) => (
-                <Magnetic key={i} strength={0.3}>
-                  <a
-                    href={link.href}
-                    aria-label={link.label}
-                    target={link.href.startsWith("http") ? "_blank" : undefined}
-                    rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="w-9 h-9 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.icon}
-                  </a>
-                </Magnetic>
-              ))}
+    <footer className="pt-16 pb-8 relative">
+      <div className="container mx-auto px-6 space-y-8">
+        {/* Brand / contact card */}
+        <div className="glass-card rounded-3xl p-8 md:p-10 text-center">
+          <a href="/" className="inline-flex items-center gap-3 mb-4">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-primary flex items-center justify-center text-primary-foreground font-bold text-xl shadow-lg">
+              S
             </div>
+            <div className="text-left leading-tight">
+              <div className="font-heading font-bold text-2xl">
+                <span className="text-gradient-primary">Shahed</span>
+              </div>
+              <div className="text-[10px] tracking-[0.2em] text-muted-foreground">SHAHED.COM.BD</div>
+            </div>
+          </a>
+          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Building <span className="text-gradient font-medium">digital experiences</span> that drive growth, brand value,
+            and meaningful impact from Bangladesh to the world.
+          </p>
+
+          <div className="mt-6 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3">
+            {contacts.map((c, i) => (
+              <a
+                key={i}
+                href={c.href}
+                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm bg-gradient-to-br ${c.tint} border border-white/10 backdrop-blur-md hover:border-white/20 transition-colors`}
+              >
+                <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/10">
+                  {c.icon}
+                </span>
+                <span className="text-foreground/90">{c.label}</span>
+              </a>
+            ))}
           </div>
 
-          {/* Menu columns */}
-          {footerMenus.map((menu) => (
-            <nav key={menu.title} aria-label={menu.title} className="space-y-4">
-              <h3 className="font-heading font-semibold text-sm uppercase tracking-wider text-foreground">
-                {menu.title}
-              </h3>
-              <ul className="space-y-2.5">
-                {menu.links.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          ))}
+          <div className="mt-6 flex items-center justify-center gap-3">
+            {socials.map((s, i) => (
+              <Magnetic key={i} strength={0.3}>
+                <a
+                  href={s.href}
+                  aria-label={s.label}
+                  target={s.href.startsWith("http") ? "_blank" : undefined}
+                  rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="w-10 h-10 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-foreground hover:scale-110 transition-all"
+                >
+                  {s.icon}
+                </a>
+              </Magnetic>
+            ))}
+          </div>
         </div>
 
-        <div className="pt-6 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
+        {/* Menu cards */}
+        <div className="grid md:grid-cols-3 gap-6">
+          {footerMenus.map((menu) => {
+            const Icon = menu.icon;
+            return (
+              <nav
+                key={menu.title}
+                aria-label={menu.title}
+                className="glass-card rounded-3xl p-7 transition-transform duration-300 hover:-translate-y-1"
+              >
+                <div className="flex items-center gap-3 mb-5 pb-4 border-b border-white/5">
+                  <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center text-primary border border-white/10">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-heading font-bold text-base uppercase tracking-[0.18em] text-foreground">
+                    {menu.title}
+                  </h3>
+                </div>
+                <ul className="space-y-3">
+                  {menu.links.map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        className="group inline-flex items-center gap-2.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-primary to-accent shrink-0 group-hover:scale-150 transition-transform" />
+                        <span>{link.label}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            );
+          })}
+        </div>
+
+        {/* Bottom bar */}
+        <div className="pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} MD Shahed. Crafted with{" "}
             <span className="text-gradient font-medium">passion</span> in Bangladesh.
