@@ -252,7 +252,7 @@ const HeroSection = () => {
                   opacity: photoOpacity,
                 }}
               >
-                <img
+                <SmartImage
                   src={profilePhoto}
                   alt="MD Shahed - Web Developer and Entrepreneur from Bangladesh"
                   width={160}
@@ -260,6 +260,7 @@ const HeroSection = () => {
                   fetchPriority="high"
                   decoding="async"
                   className="w-36 h-36 md:w-40 md:h-40 rounded-full object-cover border-4 border-background"
+                  fallbackMessage="ছবি লোড হয়নি"
                 />
                 <div className="absolute -bottom-1 -right-1 w-10 h-10 rounded-full bg-background flex items-center justify-center">
                   <div className="w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center">
