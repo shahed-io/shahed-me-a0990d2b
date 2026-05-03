@@ -4,7 +4,7 @@ import {
   Image as ImageIcon, Flame, Star, Megaphone, BellRing, FileText, Palette, Ticket, Gift,
   Share2, Handshake, Rocket, Facebook, Target, BarChart3, Pin, BookOpen, HelpCircle,
   Search as SearchIcon, ShieldCheck, LineChart, Plug, Sparkles, Bot, UserCog, Lock, Database, Settings,
-  Home,
+  Home, Globe,
 } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
@@ -56,6 +56,7 @@ const groups: Group[] = [
     { title: "Help Center", url: "/ceo/help-center", icon: HelpCircle },
     { title: "Media Library", url: "/ceo/media", icon: ImageIcon },
     { title: "SEO Manager", url: "/ceo/seo", icon: SearchIcon },
+    { title: "Page SEO Overrides", url: "/ceo/page-seo", icon: Globe },
     { title: "Site Verification", url: "/ceo/verification", icon: ShieldCheck },
   ]},
   { label: "Reports", items: [

@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 
-interface Product { id: string; name: string; category: string | null; price: number; stock: number; status: string; image_url: string | null; description: string | null; }
+interface Product { id: string; name: string; category: string | null; price: number; stock: number; status: string; image_url: string | null; description: string | null; seo_title: string | null; seo_description: string | null; og_image: string | null; }
 
 const Products = () => {
   const [rows, setRows] = useState<Product[]>([]);
@@ -26,7 +26,7 @@ const Products = () => {
 
   const save = async () => {
     if (!editing?.name) return toast({ title: "Name required", variant: "destructive" });
-    const payload = { name: editing.name, category: editing.category ?? null, price: Number(editing.price ?? 0), stock: Number(editing.stock ?? 0), status: editing.status ?? "active", image_url: editing.image_url ?? null, description: editing.description ?? null };
+    const payload = { name: editing.name, category: editing.category ?? null, price: Number(editing.price ?? 0), stock: Number(editing.stock ?? 0), status: editing.status ?? "active", image_url: editing.image_url ?? null, description: editing.description ?? null, seo_title: editing.seo_title || null, seo_description: editing.seo_description || null, og_image: editing.og_image || null };
     const { error } = editing.id
       ? await supabase.from("products").update(payload).eq("id", editing.id)
       : await supabase.from("products").insert(payload);
@@ -59,6 +59,14 @@ const Products = () => {
               </div>
               <div><Label>Image URL</Label><Input value={editing?.image_url ?? ""} onChange={e => setEditing({ ...editing, image_url: e.target.value })} /></div>
               <div><Label>Description</Label><Textarea value={editing?.description ?? ""} onChange={e => setEditing({ ...editing, description: e.target.value })} /></div>
+              <div className="mt-2 rounded-md border bg-muted/30 p-3">
+                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">SEO Overrides (optional)</p>
+                <div className="grid gap-3">
+                  <div><Label>SEO Title</Label><Input maxLength={70} value={editing?.seo_title ?? ""} onChange={e => setEditing({ ...editing, seo_title: e.target.value })} /></div>
+                  <div><Label>Meta Description</Label><Textarea rows={2} maxLength={200} value={editing?.seo_description ?? ""} onChange={e => setEditing({ ...editing, seo_description: e.target.value })} /></div>
+                  <div><Label>OG Image URL</Label><Input value={editing?.og_image ?? ""} onChange={e => setEditing({ ...editing, og_image: e.target.value })} /></div>
+                </div>
+              </div>
             </div>
             <DialogFooter><Button onClick={save}>Save</Button></DialogFooter>
           </DialogContent>
