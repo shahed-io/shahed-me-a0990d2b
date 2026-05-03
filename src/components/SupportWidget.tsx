@@ -406,7 +406,7 @@ export const SupportWidget = ({
                     onKeyDown={handleKey}
                     placeholder="Type your message..."
                     disabled={loading}
-                    className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none py-2 disabled:opacity-50"
+                    className="flex-1 min-w-0 bg-transparent border-0 outline-none ring-0 appearance-none rounded-full text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-0 focus:border-0 py-2 disabled:opacity-50"
                   />
                   <button
                     onClick={sendMessage}

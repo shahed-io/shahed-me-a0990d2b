@@ -162,6 +162,38 @@
   ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, hsl(var(--primary) / 0.8), hsl(var(--accent) / 0.8));
   }
+
+  /* Inputs inside rounded "pill" containers should NOT render their own
+     box/border/background — the parent provides the round shape. This prevents
+     the "double search box" look. */
+  .glass input,
+  .glass-strong input,
+  .glass textarea,
+  .glass-strong textarea,
+  [data-pill-input] input,
+  [data-pill-input] textarea {
+    background-color: transparent !important;
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 9999px;
+  }
+  .glass input:focus,
+  .glass-strong input:focus,
+  [data-pill-input] input:focus {
+    box-shadow: none !important;
+    outline: 0 !important;
+  }
+  /* Remove iOS/Chrome autofill background */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color: hsl(var(--foreground));
+    -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+    transition: background-color 9999s ease-in-out 0s;
+  }
 }
 
 @layer utilities {
