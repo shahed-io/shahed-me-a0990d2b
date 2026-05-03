@@ -6,6 +6,7 @@ import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 import { ArrowRight, CheckCircle2, MapPin } from "lucide-react";
+import heroPortrait from "@/assets/hero-portrait.jpg";
 
 export interface FAQ {
   q: string;
@@ -30,7 +31,7 @@ export interface LandingPageProps {
 }
 
 const SITE = "https://shahed.com.bd";
-const DEFAULT_IMG = `${SITE}/assets/profile-photo-CtiUlvZF.jpg`;
+const DEFAULT_IMG = heroPortrait;
 
 export const LandingPage = ({
   slug,
