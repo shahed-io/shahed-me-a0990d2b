@@ -12,6 +12,12 @@ import { TiltCard } from "@/components/ui/tilt-card";
 import { useAuth } from "@/hooks/use-auth";
 import profilePhoto from "@/assets/profile-portrait.jpg";
 import aboutPhoto from "@/assets/about-portrait.jpg";
+import projectGrowth from "@/assets/project-growth-platform.jpg";
+import projectIt from "@/assets/project-it-venture.jpg";
+import projectEcom from "@/assets/project-ecommerce-brand.jpg";
+import blogWebDev from "@/assets/blog-web-development.jpg";
+import blogBranding from "@/assets/blog-branding.jpg";
+import blogEcom from "@/assets/blog-ecommerce.jpg";
 import { SmartImage } from "@/components/ui/smart-image";
 
 /* ---------- Typing animation ---------- */
@@ -482,9 +488,9 @@ const ExperienceSection = () => (
 
 /* ---------- Projects ---------- */
 const projects = [
-  { title: "Digital Business Growth Platform", desc: "Full website design and development with branding strategy.", tags: ["HTML", "CSS", "JavaScript", "WordPress"], img: "/og-image.jpg" },
-  { title: "IT Business Venture", desc: "Entrepreneur-led IT service business providing digital solutions.", tags: ["Strategy", "Digital Services"], img: "/og-image.jpg" },
-  { title: "E-Commerce Brand Development", desc: "Designed and developed a complete online store using WordPress and WooCommerce.", tags: ["WordPress", "WooCommerce"], img: "/og-image.jpg" },
+  { title: "Digital Business Growth Platform", desc: "Full website design and development with branding strategy.", tags: ["HTML", "CSS", "JavaScript", "WordPress"], img: projectGrowth },
+  { title: "IT Business Venture", desc: "Entrepreneur-led IT service business providing digital solutions.", tags: ["Strategy", "Digital Services"], img: projectIt },
+  { title: "E-Commerce Brand Development", desc: "Designed and developed a complete online store using WordPress and WooCommerce.", tags: ["WordPress", "WooCommerce"], img: projectEcom },
 ];
 
 const ProjectsSection = () => (
@@ -635,9 +641,9 @@ const TestimonialsSection = () => {
 
 /* ---------- Blog ---------- */
 const blogPosts = [
-  { title: "How to Build a High-Converting Business Website in 2024", category: "Web Development", date: "Dec 15, 2024", readTime: "5 min read", desc: "Learn the key principles of building websites that actually drive revenue and business growth.", img: "/og-image.jpg" },
-  { title: "Why Branding is the Foundation of Every Online Business", category: "Branding", date: "Nov 28, 2024", readTime: "4 min read", desc: "Strong visual identity can make or break your digital presence. Here's how to get it right.", img: "/og-image.jpg" },
-  { title: "E-Commerce Trends Every Entrepreneur Should Know", category: "E-Commerce", date: "Oct 10, 2024", readTime: "6 min read", desc: "Stay ahead of the competition with these latest trends in online store development.", img: "/og-image.jpg" },
+  { title: "How to Build a High-Converting Business Website in 2024", category: "Web Development", date: "Dec 15, 2024", readTime: "5 min read", desc: "Learn the key principles of building websites that actually drive revenue and business growth.", img: blogWebDev },
+  { title: "Why Branding is the Foundation of Every Online Business", category: "Branding", date: "Nov 28, 2024", readTime: "4 min read", desc: "Strong visual identity can make or break your digital presence. Here's how to get it right.", img: blogBranding },
+  { title: "E-Commerce Trends Every Entrepreneur Should Know", category: "E-Commerce", date: "Oct 10, 2024", readTime: "6 min read", desc: "Stay ahead of the competition with these latest trends in online store development.", img: blogEcom },
 ];
 
 const BlogSection = () => (
