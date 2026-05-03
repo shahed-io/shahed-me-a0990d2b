@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import {
-  Mail, MapPin, Clock, ArrowDown, ArrowUp, ExternalLink, Facebook, Linkedin,
+  Mail, MapPin, Clock, ArrowDown, ArrowUp, ExternalLink, Facebook, Linkedin, Github,
   MessageCircle, Code, Palette, ShoppingCart, PenTool, BarChart3, Zap,
   Menu, X, ChevronLeft, ChevronRight, Sparkles, Send, Star, Calendar, BookOpen,
   ArrowUpRight, LogOut, Phone, Package, Info, FileText, Instagram,
