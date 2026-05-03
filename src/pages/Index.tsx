@@ -1137,23 +1137,27 @@ const FloatingButtons = () => {
 };
 
 /* ---------- Page ---------- */
-const Index = () => (
-  <main className="relative">
-    <Navbar />
-    <HeroSection />
-    <Reveal><AboutSection /></Reveal>
-    <Reveal><SkillsSection /></Reveal>
-    <Reveal><ExperienceSection /></Reveal>
-    <Reveal><ProjectsSection /></Reveal>
-    <Reveal><ServicesSection /></Reveal>
-    <Reveal><TestimonialsSection /></Reveal>
-    <Reveal><BlogSection /></Reveal>
-    <Reveal><FAQSection /></Reveal>
-    <Reveal><ContactSection /></Reveal>
-    <Reveal><NewsletterSection /></Reveal>
-    <Footer />
-    <FloatingButtons />
-  </main>
-);
+const Index = () => {
+  const { open, setOpen } = useGlobalSearch();
+  return (
+    <main className="relative">
+      <Navbar onOpenSearch={() => setOpen(true)} />
+      <HeroSection onOpenSearch={() => setOpen(true)} />
+      <Reveal><AboutSection /></Reveal>
+      <Reveal><SkillsSection /></Reveal>
+      <Reveal><ExperienceSection /></Reveal>
+      <Reveal><ProjectsSection /></Reveal>
+      <Reveal><ServicesSection /></Reveal>
+      <Reveal><TestimonialsSection /></Reveal>
+      <Reveal><BlogSection /></Reveal>
+      <Reveal><FAQSection /></Reveal>
+      <Reveal><ContactSection /></Reveal>
+      <Reveal><NewsletterSection /></Reveal>
+      <Footer />
+      <FloatingButtons />
+      <GlobalSearch open={open} onOpenChange={setOpen} />
+    </main>
+  );
+};
 
 export default Index;
