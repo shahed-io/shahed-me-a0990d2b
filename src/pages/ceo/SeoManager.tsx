@@ -41,7 +41,7 @@ function Section({ icon: Icon, title, subtitle, badge, children, defaultOpen = f
     <Card className="overflow-hidden border-border/60">
       <button
         onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between gap-3 p-4 text-left transition hover:bg-muted/30"
+        className="flex w-full items-center justify-between gap-3 p-4 text-left transition hover:bg-white/5 backdrop-blur-md"
       >
         <div className="flex items-center gap-3">
           <Icon className="h-5 w-5 text-primary" />
@@ -175,7 +175,7 @@ const SeoManager = () => {
               { num: "Measurement ID কপি করুন", desc: "Admin → Data Streams → আপনার স্ট্রিম → G-XXXXXXX", link: "https://analytics.google.com" },
               { num: "নিচে পেস্ট করুন", desc: "ID পেস্ট করে \"সব সেভ করুন\" চাপুন — ব্যাস!" },
             ].map((step, i) => (
-              <div key={i} className="rounded-xl border border-border/50 bg-muted/20 p-4">
+              <div key={i} className="rounded-xl border border-border/50 bg-white/5 backdrop-blur-md p-4">
                 <div className="mb-1 font-semibold">{step.num}</div>
                 <div className="text-xs text-muted-foreground">{step.desc}</div>
                 {step.link && (
@@ -253,7 +253,7 @@ const SeoManager = () => {
                 { k: "gsc", label: "Search Console", id: s.gsc_token },
                 { k: "bing", label: "Bing Webmaster", id: s.bing_token },
               ].map(item => (
-                <div key={item.k} className="flex items-center justify-between rounded-lg border border-border/50 bg-muted/20 p-3 text-sm">
+                <div key={item.k} className="flex items-center justify-between rounded-lg border border-border/50 bg-white/5 backdrop-blur-md p-3 text-sm">
                   <div>
                     <div className="font-medium">{item.label}</div>
                     <div className="text-xs text-muted-foreground truncate max-w-[180px]">{item.id || "Not set"}</div>
@@ -268,14 +268,14 @@ const SeoManager = () => {
         {/* Sitemap & Robots */}
         <Section icon={Map} title="🗺️ Sitemap ও Robots.txt" subtitle="সার্চ ইঞ্জিন আপনার সাইট কিভাবে ক্রল করবে" badge={<StatusBadge ok label="✓ অটো" />}>
           <div className="grid gap-3 md:grid-cols-2">
-            <a href={`${SITE}/sitemap.xml`} target="_blank" rel="noreferrer" className="flex items-center justify-between rounded-lg border border-border/50 bg-muted/20 p-4 hover:bg-muted/40">
+            <a href={`${SITE}/sitemap.xml`} target="_blank" rel="noreferrer" className="flex items-center justify-between rounded-lg border border-border/50 bg-white/5 backdrop-blur-md p-4 hover:bg-white/10">
               <div>
                 <div className="font-semibold">sitemap.xml</div>
                 <div className="text-xs text-muted-foreground">সব পেজের তালিকা</div>
               </div>
               <ExternalLink className="h-4 w-4 text-muted-foreground" />
             </a>
-            <a href={`${SITE}/robots.txt`} target="_blank" rel="noreferrer" className="flex items-center justify-between rounded-lg border border-border/50 bg-muted/20 p-4 hover:bg-muted/40">
+            <a href={`${SITE}/robots.txt`} target="_blank" rel="noreferrer" className="flex items-center justify-between rounded-lg border border-border/50 bg-white/5 backdrop-blur-md p-4 hover:bg-white/10">
               <div>
                 <div className="font-semibold">robots.txt</div>
                 <div className="text-xs text-muted-foreground">ক্রলিং নির্দেশনা</div>

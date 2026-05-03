@@ -207,7 +207,7 @@ export const SeoPanel = () => {
         </h2>
         <Card className="grid gap-2 p-4 sm:grid-cols-2">
           {PAGES.map((p) => (
-            <div key={p.path} className="rounded border border-border bg-muted/20 p-3">
+            <div key={p.path} className="rounded border border-border bg-white/5 backdrop-blur-md p-3">
               <p className="mb-2 text-sm font-medium">{p.label} <span className="text-muted-foreground">{p.path}</span></p>
               <div className="flex flex-wrap gap-2 text-xs">
                 <a target="_blank" rel="noreferrer" className="text-primary hover:underline"
@@ -243,7 +243,7 @@ export const SeoPanel = () => {
             { label: "PageSpeed Insights", href: "https://pagespeed.web.dev/" },
           ].map((l) => (
             <a key={l.href} href={l.href} target="_blank" rel="noreferrer"
-               className="flex items-center justify-between rounded-lg border border-border bg-muted/20 p-4 text-sm hover:bg-muted/40">
+               className="flex items-center justify-between rounded-lg border border-border bg-white/5 backdrop-blur-md p-4 text-sm hover:bg-white/10">
               {l.label} <ExternalLink className="h-4 w-4 text-muted-foreground" />
             </a>
           ))}

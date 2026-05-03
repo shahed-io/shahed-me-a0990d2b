@@ -66,7 +66,7 @@ const Blog = () => {
               <DialogHeader><DialogTitle>{editing?.id ? "Edit" : "New"} Post</DialogTitle></DialogHeader>
               <div className="grid gap-3">
                 <div><Label>Content</Label><Textarea rows={6} value={editing?.content ?? ""} onChange={e => setEditing({ ...editing, content: e.target.value })} /></div>
-                <div className="rounded-md border bg-muted/30 p-3">
+                <div className="rounded-md border bg-white/5 backdrop-blur-md p-3">
                   <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">SEO Overrides (optional)</p>
                   <div className="grid gap-3">
                     <div><Label>SEO Title</Label><Input maxLength={70} value={editing?.seo_title ?? ""} onChange={e => setEditing({ ...editing, seo_title: e.target.value })} /></div>
