@@ -277,6 +277,18 @@
   .animate-aurora { animation: aurora 14s linear infinite; background-size: 200% 200%; }
   .animate-shimmer { animation: shimmer 2.5s linear infinite; }
   .animate-page-in { animation: page-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+  .shimmer-soft {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer-soft::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, hsl(var(--foreground) / 0.14), transparent);
+    animation: shimmer-pass 1.35s ease-in-out infinite;
+  }
 
   @keyframes fade-in {
     from { opacity: 0; }
@@ -298,6 +310,9 @@
   @keyframes shimmer {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
+  }
+  @keyframes shimmer-pass {
+    100% { transform: translateX(100%); }
   }
   /* Use opacity only — transform/filter on the wrapper would break
      position: fixed for children like the Navbar during/after animation. */
@@ -345,6 +360,7 @@
     .animate-aurora,
     .animate-shimmer,
     .animate-page-in,
+    .shimmer-soft::after,
     .ripple-wave,
     .tilt-card,
     .magnetic {
