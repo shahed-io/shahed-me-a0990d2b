@@ -12,6 +12,7 @@ const CeoLayout = () => {
   const { user, loading: authLoading, signOut } = useAuth();
   const { isAdmin, loading: roleLoading } = useIsAdmin();
   const navigate = useNavigate();
+  const { open: searchOpen, setOpen: setSearchOpen } = useGlobalSearch();
 
   // No loading screen — if we don't yet know the user, redirect to login only after auth resolves.
   if (!authLoading && !user) return <Navigate to="/login" replace />;
