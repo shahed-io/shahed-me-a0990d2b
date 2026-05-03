@@ -985,6 +985,8 @@ const Footer = () => {
                     <li key={link.label}>
                       <a
                         href={link.href}
+                        target={link.href.startsWith("http") ? "_blank" : undefined}
+                        rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                         className="group inline-flex items-center gap-2.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
                       >
                         <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-primary to-accent shrink-0 group-hover:scale-150 transition-transform" />
