@@ -243,10 +243,17 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
                 )}
               </div>
             ) : (
-              <Magnetic strength={0.25} className="hidden md:inline-block">
-                <RippleButton variant="primary" size="sm" asChild={false} onClick={() => (window.location.href = "/login")}>
-                  <Sparkles className="w-3.5 h-3.5" /> Login
-                </RippleButton>
+              <Magnetic strength={0.3} className="hidden md:inline-block">
+                <button
+                  onClick={() => (window.location.href = "/login")}
+                  className="group relative inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold text-primary-foreground overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_-6px_hsl(var(--primary)/0.7)] active:scale-[0.97]"
+                >
+                  <span aria-hidden className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] animate-[gradient-x_3s_linear_infinite]" />
+                  <span aria-hidden className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-white/20 via-white/0 to-white/20 transition-opacity" />
+                  <span aria-hidden className="absolute -inset-px rounded-full ring-1 ring-inset ring-white/20" />
+                  <Sparkles className="relative z-10 w-3.5 h-3.5 group-hover:rotate-12 transition-transform" />
+                  <span className="relative z-10">Login</span>
+                </button>
               </Magnetic>
             )}
             <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden text-foreground p-1.5" aria-label="Toggle menu">
