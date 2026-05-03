@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import {
-  Mail, MapPin, Clock, ArrowDown, ArrowUp, ExternalLink, Facebook, Linkedin,
+  Mail, MapPin, Clock, ArrowDown, ArrowUp, ExternalLink, Facebook, Linkedin, Github,
   MessageCircle, Code, Palette, ShoppingCart, PenTool, BarChart3, Zap,
   Menu, X, ChevronLeft, ChevronRight, Sparkles, Send, Star, Calendar, BookOpen,
   ArrowUpRight, LogOut, Phone, Package, Info, FileText, Instagram,
@@ -786,9 +786,10 @@ const ContactSection = () => {
           </div>
 
           {/* Contact info */}
-          <div className="grid grid-rows-4 gap-4 h-full">
+          <div className="grid grid-rows-5 gap-4 h-full">
             {[
               { icon: <Mail className="w-5 h-5" />, label: "Email", value: "ceo@shahed.com.bd", href: "mailto:ceo@shahed.com.bd", color: "primary" },
+              { icon: <Github className="w-5 h-5" />, label: "GitHub", value: "shahed-io", href: "https://github.com/shahed-io", color: "primary" },
               { icon: <Linkedin className="w-5 h-5" />, label: "LinkedIn", value: "shahed-io", href: "https://linkedin.com/in/shahed-io", color: "secondary" },
               { icon: <Facebook className="w-5 h-5" />, label: "Facebook", value: "shahed.io", href: "https://facebook.com/shahed.io", color: "primary" },
               { icon: <MessageCircle className="w-5 h-5" />, label: "WhatsApp", value: "+880 1823 378888", href: "https://wa.me/8801823378888", color: "accent" },
@@ -888,6 +889,7 @@ const Footer = () => {
         { label: "Timeline", href: "/timeline" },
         { label: "MD Shahed", href: "/md-shahed" },
         { label: "Web Developer", href: "/md-shahed-web-developer" },
+        { label: "GitHub", href: "https://github.com/shahed-io" },
         { label: "Sign In", href: "/login" },
       ],
     },
@@ -901,10 +903,10 @@ const Footer = () => {
 
   const socials = [
     { icon: <Facebook className="w-4 h-4" />, href: "https://facebook.com/shahed.io", label: "Facebook" },
-    { icon: <MessageCircle className="w-4 h-4" />, href: "#", label: "Chat" },
+    { icon: <Github className="w-4 h-4" />, href: "https://github.com/shahed-io", label: "GitHub" },
+    { icon: <Linkedin className="w-4 h-4" />, href: "https://linkedin.com/in/shahed-io", label: "LinkedIn" },
     { icon: <Instagram className="w-4 h-4" />, href: "#", label: "Instagram" },
     { icon: <Send className="w-4 h-4" />, href: "mailto:ceo@shahed.com.bd", label: "Email" },
-    { icon: <Linkedin className="w-4 h-4" />, href: "https://linkedin.com/in/shahed-io", label: "LinkedIn" },
   ];
 
   return (
@@ -983,6 +985,8 @@ const Footer = () => {
                     <li key={link.label}>
                       <a
                         href={link.href}
+                        target={link.href.startsWith("http") ? "_blank" : undefined}
+                        rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                         className="group inline-flex items-center gap-2.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
                       >
                         <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-br from-primary to-accent shrink-0 group-hover:scale-150 transition-transform" />
