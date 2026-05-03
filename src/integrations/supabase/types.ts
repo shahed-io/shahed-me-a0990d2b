@@ -136,6 +136,39 @@ export type Database = {
           },
         ]
       }
+      page_seo: {
+        Row: {
+          canonical: string | null
+          created_at: string
+          description: string | null
+          id: string
+          og_image: string | null
+          path: string
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          canonical?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          og_image?: string | null
+          path: string
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          canonical?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          og_image?: string | null
+          path?: string
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       post_comments: {
         Row: {
           content: string
@@ -207,6 +240,9 @@ export type Database = {
           created_at: string
           id: string
           image_urls: string[]
+          og_image: string | null
+          seo_description: string | null
+          seo_title: string | null
           updated_at: string
         }
         Insert: {
@@ -215,6 +251,9 @@ export type Database = {
           created_at?: string
           id?: string
           image_urls?: string[]
+          og_image?: string | null
+          seo_description?: string | null
+          seo_title?: string | null
           updated_at?: string
         }
         Update: {
@@ -223,6 +262,9 @@ export type Database = {
           created_at?: string
           id?: string
           image_urls?: string[]
+          og_image?: string | null
+          seo_description?: string | null
+          seo_title?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -235,7 +277,10 @@ export type Database = {
           id: string
           image_url: string | null
           name: string
+          og_image: string | null
           price: number
+          seo_description: string | null
+          seo_title: string | null
           slug: string | null
           status: string
           stock: number
@@ -248,7 +293,10 @@ export type Database = {
           id?: string
           image_url?: string | null
           name: string
+          og_image?: string | null
           price?: number
+          seo_description?: string | null
+          seo_title?: string | null
           slug?: string | null
           status?: string
           stock?: number
@@ -261,7 +309,10 @@ export type Database = {
           id?: string
           image_url?: string | null
           name?: string
+          og_image?: string | null
           price?: number
+          seo_description?: string | null
+          seo_title?: string | null
           slug?: string | null
           status?: string
           stock?: number
