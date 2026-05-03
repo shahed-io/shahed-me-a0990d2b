@@ -356,7 +356,7 @@ const AboutSection = () => (
         <TiltCard className="relative flex justify-center" max={6}>
           <div className="absolute -inset-6 rounded-3xl bg-gradient-aurora blur-3xl opacity-30" />
           <div className="relative p-1 rounded-3xl bg-gradient-accent">
-            <img
+            <SmartImage
               src={aboutPhoto}
               alt="MD Shahed - Portrait"
               loading="lazy"
@@ -364,6 +364,7 @@ const AboutSection = () => (
               width={400}
               height={400}
               className="w-72 h-72 md:w-80 md:h-80 object-cover rounded-3xl"
+              fallbackMessage="Portrait লোড হয়নি"
             />
           </div>
         </TiltCard>
