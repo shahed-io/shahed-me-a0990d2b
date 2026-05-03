@@ -8,7 +8,7 @@ import { PageTransition } from "@/components/ui/page-transition";
 import { SiteSettingsLoader } from "@/components/SiteSettingsLoader";
 import { PageSeoLoader } from "@/components/PageSeoLoader";
 import { SupportWidget } from "@/components/SupportWidget";
-import { SplashScreen } from "@/components/SplashScreen";
+// Splash handled by inline loader in index.html for instant paint
 import Index from "./pages/Index.tsx";
 
 // Lazy-load secondary routes to keep the initial bundle small.
@@ -107,7 +107,7 @@ const AnimatedRoutes = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <SplashScreen />
+      
       <Toaster />
       <Sonner />
       <BrowserRouter>
