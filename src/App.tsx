@@ -54,14 +54,14 @@ const RouteFallback = () => (
       </div>
 
       <div className="space-y-5">
-        <div className="h-16 w-full max-w-2xl rounded-pill bg-glass-strong shimmer-soft" />
+        <div className="h-16 w-full max-w-2xl rounded-pill glass-strong shimmer-soft" />
         <div className="h-4 w-full max-w-xl rounded-pill bg-muted/60 shimmer-soft" />
         <div className="h-4 w-4/5 max-w-lg rounded-pill bg-muted/40 shimmer-soft" />
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
         {[0, 1, 2].map((item) => (
-          <div key={item} className="h-28 rounded-lg bg-glass border border-border/50 shimmer-soft" />
+          <div key={item} className="h-28 rounded-lg glass shimmer-soft" />
         ))}
       </div>
 
