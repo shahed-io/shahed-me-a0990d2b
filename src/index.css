@@ -16,10 +16,10 @@
     --background: 240 30% 5%;            /* near-black with violet tint */
     --foreground: 0 0% 98%;
 
-    --card: 265 35% 12% / 0.55;          /* translucent — lets mesh show through */
+    --card: 265 35% 12%;                 /* used with /opacity in components */
     --card-foreground: 0 0% 98%;
 
-    --popover: 265 35% 10% / 0.85;
+    --popover: 265 35% 10%;
     --popover-foreground: 0 0% 98%;
 
     /* Primary: Electric violet */
@@ -31,7 +31,7 @@
     --secondary-foreground: 240 30% 5%;
 
     /* Muted */
-    --muted: 265 30% 18% / 0.5;
+    --muted: 265 30% 18%;
     --muted-foreground: 240 8% 78%;
 
     /* Accent: Hot pink */
@@ -42,8 +42,8 @@
     --destructive-foreground: 0 0% 100%;
 
     /* Glass borders */
-    --border: 0 0% 100% / 0.1;
-    --input: 265 30% 18% / 0.4;
+    --border: 265 30% 25%;
+    --input: 265 30% 18%;
     --ring: 265 90% 65%;
 
     --radius: 1rem;
