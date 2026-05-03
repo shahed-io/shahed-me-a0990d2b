@@ -13,11 +13,10 @@ const CeoLayout = () => {
   const { isAdmin, loading: roleLoading } = useIsAdmin();
   const navigate = useNavigate();
 
-  if (authLoading || roleLoading) {
-    return <div className="flex min-h-screen items-center justify-center text-muted-foreground">Loading…</div>;
-  }
-  if (!user) return <Navigate to="/login" replace />;
-  if (!isAdmin) {
+  // No loading screen — if we don't yet know the user, redirect to login only after auth resolves.
+  if (!authLoading && !user) return <Navigate to="/login" replace />;
+  // Show denied screen only once role check completed and confirmed not admin.
+  if (!authLoading && !roleLoading && user && !isAdmin) {
     return (
       <main className="flex min-h-screen flex-col items-center justify-center gap-4 p-6 text-center">
         <SEO title="Access Denied" description="Admin only" />
