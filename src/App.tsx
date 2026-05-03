@@ -42,28 +42,30 @@ const RouteFallback = () => (
   <div
     role="status"
     aria-label="Loading page"
-    className="min-h-screen flex flex-col items-center justify-center bg-background relative overflow-hidden"
+    className="min-h-screen bg-background text-foreground relative overflow-hidden px-6"
     style={{ backgroundImage: "var(--gradient-mesh)" }}
   >
-    <div className="absolute inset-0 pointer-events-none">
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[420px] h-[420px] rounded-full bg-primary/20 blur-[120px] animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-[320px] h-[320px] rounded-full bg-accent/15 blur-[100px] animate-pulse" style={{ animationDelay: "0.8s" }} />
-    </div>
-    <div className="relative flex flex-col items-center gap-5">
-      <div className="relative">
-        <div
-          className="absolute -inset-2 rounded-full opacity-80"
-          style={{
-            background: "conic-gradient(from 0deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--secondary)), hsl(var(--primary)))",
-            animation: "spin 1.4s linear infinite",
-            filter: "blur(2px)",
-          }}
-        />
-        <div className="relative w-12 h-12 rounded-full bg-background flex items-center justify-center border border-white/10">
-          <span className="font-heading font-bold text-lg text-foreground">S</span>
+    <div className="mx-auto flex min-h-screen w-full max-w-5xl flex-col justify-center gap-8">
+      <div className="flex items-center justify-between gap-4">
+        <div className="font-heading text-2xl font-bold tracking-normal text-gradient-primary">SHAHED.</div>
+        <div className="h-2 w-24 overflow-hidden rounded-pill bg-muted/50">
+          <div className="h-full w-1/2 rounded-pill bg-gradient-primary animate-[pulse_1.2s_ease-in-out_infinite]" />
         </div>
       </div>
-      <p className="text-xs font-mono text-muted-foreground tracking-wider">Loading…</p>
+
+      <div className="space-y-5">
+        <div className="h-16 w-full max-w-2xl rounded-pill glass-strong shimmer-soft" />
+        <div className="h-4 w-full max-w-xl rounded-pill bg-muted/60 shimmer-soft" />
+        <div className="h-4 w-4/5 max-w-lg rounded-pill bg-muted/40 shimmer-soft" />
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-3">
+        {[0, 1, 2].map((item) => (
+          <div key={item} className="h-28 rounded-lg glass shimmer-soft" />
+        ))}
+      </div>
+
+      <p className="text-sm text-muted-foreground">Preparing your experience…</p>
     </div>
   </div>
 );
@@ -96,10 +98,10 @@ const AnimatedRoutes = () => {
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
+          {/* Hide the public chat widget inside the admin panel and while routes are loading */}
+          {!isAdminRoute && <SupportWidget />}
         </Suspense>
       </PageTransition>
-      {/* Hide the public chat widget inside the admin panel */}
-      {!isAdminRoute && <SupportWidget />}
     </>
   );
 };
