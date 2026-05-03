@@ -47,6 +47,7 @@ const OtherPixels = ph("OtherPixels");
 const HelpCenter = ph("HelpCenter");
 const MediaLibrary = ph("MediaLibrary");
 const SeoManager = lazy(() => import("./pages/ceo/SeoManager.tsx"));
+const PageSeo = lazy(() => import("./pages/ceo/PageSeo.tsx"));
 const Verification = ph("Verification");
 const Analytics = ph("Analytics");
 const Integrations = ph("Integrations");
@@ -119,6 +120,7 @@ const AnimatedRoutes = () => {
             <Route path="help-center" element={<HelpCenter />} />
             <Route path="media" element={<MediaLibrary />} />
             <Route path="seo" element={<SeoManager />} />
+            <Route path="page-seo" element={<PageSeo />} />
             <Route path="verification" element={<Verification />} />
             <Route path="analytics" element={<Analytics />} />
             <Route path="integrations" element={<Integrations />} />
