@@ -10,7 +10,10 @@ interface Props {
 
 export function PageHeader({ title, subtitle, breadcrumb, icon: Icon, actions }: Props) {
   return (
-    <div className="mb-6 rounded-2xl border bg-gradient-to-r from-primary/5 via-background to-purple-500/5 p-5 shadow-sm">
+    <div
+      className="mb-6 rounded-2xl border border-border/50 p-5 shadow-sm backdrop-blur-sm"
+      style={{ backgroundImage: "var(--gradient-aurora)", backgroundColor: "hsl(var(--card) / 0.6)" }}
+    >
       {breadcrumb && (
         <div className="mb-2 flex items-center gap-2 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
           {breadcrumb.map((b, i) => (
@@ -23,11 +26,19 @@ export function PageHeader({ title, subtitle, breadcrumb, icon: Icon, actions }:
       )}
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-purple-500 text-white shadow-md">
+          <div
+            className="flex h-12 w-12 items-center justify-center rounded-xl text-primary-foreground shadow-lg"
+            style={{ backgroundImage: "var(--gradient-primary)" }}
+          >
             <Icon className="h-6 w-6" />
           </div>
           <div>
-            <h1 className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-2xl font-bold text-transparent">{title}</h1>
+            <h1
+              className="bg-clip-text text-2xl font-bold text-transparent"
+              style={{ backgroundImage: "var(--gradient-primary)" }}
+            >
+              {title}
+            </h1>
             {subtitle && <p className="text-sm text-muted-foreground">{subtitle}</p>}
           </div>
         </div>

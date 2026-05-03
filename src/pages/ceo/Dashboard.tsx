@@ -19,24 +19,25 @@ interface Stats {
   customers: number;
 }
 
-const colorMap = {
-  purple: "from-purple-500 to-purple-600",
-  blue: "from-blue-400 to-cyan-500",
-  green: "from-emerald-500 to-green-600",
-  orange: "from-orange-400 to-amber-500",
-  pink: "from-pink-500 to-rose-500",
-  red: "from-red-500 to-rose-600",
+const tones = {
+  primary: { grad: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.7))", tint: "hsl(var(--primary) / 0.08)" },
+  secondary: { grad: "linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary) / 0.7))", tint: "hsl(var(--secondary) / 0.08)" },
+  accent: { grad: "linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent) / 0.7))", tint: "hsl(var(--accent) / 0.08)" },
+  aurora: { grad: "var(--gradient-aurora)", tint: "hsl(var(--primary) / 0.06)" },
+  destructive: { grad: "linear-gradient(135deg, hsl(var(--destructive)), hsl(var(--destructive) / 0.7))", tint: "hsl(var(--destructive) / 0.08)" },
 } as const;
+type ToneKey = keyof typeof tones;
 
-function StatCard({ label, value, icon: Icon, color, trend, bgTint }: any) {
+function StatCard({ label, value, icon: Icon, tone = "primary", trend }: { label: string; value: any; icon: any; tone?: ToneKey; trend?: number }) {
+  const t = tones[tone];
   return (
-    <Card className={`relative overflow-hidden p-5 ${bgTint}`}>
+    <Card className="relative overflow-hidden border-border/50 p-5" style={{ backgroundColor: t.tint }}>
       <div className="flex items-start justify-between">
-        <div className={`flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${colorMap[color as keyof typeof colorMap]} text-white shadow-md`}>
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl text-primary-foreground shadow-md" style={{ backgroundImage: t.grad }}>
           <Icon className="h-5 w-5" />
         </div>
         {trend !== undefined && (
-          <span className={`flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${trend >= 0 ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400" : "bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-400"}`}>
+          <span className={`flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${trend >= 0 ? "bg-secondary/20 text-secondary" : "bg-destructive/20 text-destructive"}`}>
             {trend >= 0 ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
             {Math.abs(trend).toFixed(1)}%
           </span>
@@ -113,20 +114,20 @@ const Dashboard = () => {
 
       <div className="mb-3 border-l-4 border-primary pl-3 text-sm font-semibold text-foreground/80">রেভিনিউ ওভারভিউ</div>
       <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Today's Sales" value={fmt(stats?.todaySales ?? 0)} icon={TrendingUp} color="purple" bgTint="bg-gradient-to-br from-purple-50/50 to-transparent dark:from-purple-950/20" />
-        <StatCard label="This Month Revenue" value={fmt(stats?.monthRevenue ?? 0)} icon={DollarSign} color="blue" trend={-96.3} bgTint="bg-gradient-to-br from-blue-50/50 to-transparent dark:from-blue-950/20" />
-        <StatCard label="This Year Revenue" value={fmt(stats?.yearRevenue ?? 0)} icon={TrendingUp} color="green" bgTint="bg-gradient-to-br from-emerald-50/50 to-transparent dark:from-emerald-950/20" />
-        <StatCard label="Total Revenue (All)" value={fmt(stats?.totalRevenue ?? 0)} icon={DollarSign} color="orange" bgTint="bg-gradient-to-br from-orange-50/50 to-transparent dark:from-orange-950/20" />
+        <StatCard label="Today's Sales" value={fmt(stats?.todaySales ?? 0)} icon={TrendingUp} tone="primary" />
+        <StatCard label="This Month Revenue" value={fmt(stats?.monthRevenue ?? 0)} icon={DollarSign} tone="secondary" trend={-96.3} />
+        <StatCard label="This Year Revenue" value={fmt(stats?.yearRevenue ?? 0)} icon={TrendingUp} tone="aurora" />
+        <StatCard label="Total Revenue (All)" value={fmt(stats?.totalRevenue ?? 0)} icon={DollarSign} tone="accent" />
       </div>
 
       <div className="mb-3 border-l-4 border-primary pl-3 text-sm font-semibold text-foreground/80">অর্ডার স্ট্যাটাস</div>
       <div className="mb-8 grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
-        <StatCard label="Total Orders" value={stats?.totalOrders ?? 0} icon={ShoppingCart} color="purple" trend={103.6} bgTint="bg-gradient-to-br from-purple-50/50 to-transparent dark:from-purple-950/20" />
-        <StatCard label="Pending" value={stats?.pending ?? 0} icon={Clock} color="orange" bgTint="bg-gradient-to-br from-amber-50/50 to-transparent dark:from-amber-950/20" />
-        <StatCard label="Payment Pending" value={stats?.paymentPending ?? 0} icon={CreditCard} color="pink" bgTint="bg-gradient-to-br from-rose-50/50 to-transparent dark:from-rose-950/20" />
-        <StatCard label="Delivered" value={stats?.delivered ?? 0} icon={CheckCircle2} color="green" bgTint="bg-gradient-to-br from-emerald-50/50 to-transparent dark:from-emerald-950/20" />
-        <StatCard label="Cancelled" value={stats?.cancelled ?? 0} icon={XCircle} color="red" bgTint="bg-gradient-to-br from-red-50/50 to-transparent dark:from-red-950/20" />
-        <StatCard label="Customers" value={stats?.customers ?? 0} icon={Users} color="blue" bgTint="bg-gradient-to-br from-cyan-50/50 to-transparent dark:from-cyan-950/20" />
+        <StatCard label="Total Orders" value={stats?.totalOrders ?? 0} icon={ShoppingCart} tone="primary" trend={103.6} />
+        <StatCard label="Pending" value={stats?.pending ?? 0} icon={Clock} tone="aurora" />
+        <StatCard label="Payment Pending" value={stats?.paymentPending ?? 0} icon={CreditCard} tone="accent" />
+        <StatCard label="Delivered" value={stats?.delivered ?? 0} icon={CheckCircle2} tone="secondary" />
+        <StatCard label="Cancelled" value={stats?.cancelled ?? 0} icon={XCircle} tone="destructive" />
+        <StatCard label="Customers" value={stats?.customers ?? 0} icon={Users} tone="secondary" />
       </div>
 
       <div className="grid gap-4 lg:grid-cols-3">
@@ -134,7 +135,7 @@ const Dashboard = () => {
           <div className="mb-4 flex items-center justify-between">
             <div>
               <h3 className="text-base font-semibold">Sales Overview</h3>
-              <p className="text-xs text-rose-500">↘ 96.3% revenue growth vs last month</p>
+              <p className="text-xs text-destructive">↘ 96.3% revenue growth vs last month</p>
             </div>
             <Tabs defaultValue="daily">
               <TabsList className="h-8">
