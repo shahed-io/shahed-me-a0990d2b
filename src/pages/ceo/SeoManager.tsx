@@ -239,9 +239,30 @@ const SeoManager = () => {
           </div>
         </Section>
 
-        {/* Product SEO */}
-        <Section icon={ShoppingBag} title="🛍️ প্রোডাক্ট SEO" subtitle="প্রতিটি প্রোডাক্টের টাইটেল ও ডেসক্রিপশন" badge={<StatusBadge ok label={`${productCount ?? 0}/${productCount ?? 0}`} />}>
-          <p className="text-sm text-muted-foreground">প্রতিটি প্রোডাক্টের জন্য SEO title, description ও OG image স্বয়ংক্রিয়ভাবে generate হচ্ছে। Products পেজ থেকে আলাদাভাবে edit করতে পারবেন।</p>
+        {/* Live verification */}
+        <Section icon={CheckCircle2} title="🔍 Live Verification" subtitle="পাবলিশ-করা সাইটে ট্যাগগুলো আসলেই কাজ করছে কিনা চেক করুন" badge={<StatusBadge ok={!!liveStatus && Object.values(liveStatus).some(Boolean)} label={liveStatus ? "চেক করা হয়েছে" : "চেক করুন"} />}>
+          <p className="mb-3 text-sm text-muted-foreground">এই বাটনটি <code className="rounded bg-muted px-1">{SITE}</code> এ live request পাঠিয়ে আপনার ট্যাগগুলো খুঁজে দেখবে।</p>
+          <Button onClick={verifyLive} disabled={verifying} variant="outline" size="sm">
+            <Sparkles className="mr-1 h-3 w-3" /> {verifying ? "Checking…" : "Verify Now"}
+          </Button>
+          {liveStatus && (
+            <div className="mt-4 grid gap-2 sm:grid-cols-2">
+              {[
+                { k: "ga4", label: "Google Analytics", id: s.ga4_id },
+                { k: "gtm", label: "Google Tag Manager", id: s.gtm_id },
+                { k: "gsc", label: "Search Console", id: s.gsc_token },
+                { k: "bing", label: "Bing Webmaster", id: s.bing_token },
+              ].map(item => (
+                <div key={item.k} className="flex items-center justify-between rounded-lg border border-border/50 bg-muted/20 p-3 text-sm">
+                  <div>
+                    <div className="font-medium">{item.label}</div>
+                    <div className="text-xs text-muted-foreground truncate max-w-[180px]">{item.id || "Not set"}</div>
+                  </div>
+                  {item.id ? <StatusBadge ok={(liveStatus as any)[item.k]} label={(liveStatus as any)[item.k] ? "✓ Live" : "Not found"} /> : <span className="text-xs text-muted-foreground">—</span>}
+                </div>
+              ))}
+            </div>
+          )}
         </Section>
 
         {/* Sitemap & Robots */}
