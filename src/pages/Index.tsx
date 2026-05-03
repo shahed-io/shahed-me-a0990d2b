@@ -120,18 +120,30 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-3" : "py-5"}`}>
       <div className="container mx-auto px-6">
-        <div className={`flex items-center justify-between rounded-full px-5 py-2.5 transition-all duration-300 ${scrolled ? "glass-strong" : "glass"}`}>
-          <a href="#" className="font-heading font-bold text-lg tracking-tight">
+        <div
+          className={`relative flex items-center justify-between rounded-full px-5 py-2.5 overflow-hidden border border-white/10 backdrop-blur-2xl transition-all duration-500 ${
+            scrolled
+              ? "bg-background/40 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.5),inset_0_1px_0_hsl(0_0%_100%/0.08)]"
+              : "bg-white/[0.04] shadow-[0_4px_24px_-8px_rgba(0,0,0,0.4)]"
+          }`}
+        >
+          {/* Glass highlights */}
+          <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+          <span aria-hidden className="pointer-events-none absolute inset-x-12 -bottom-px h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-60" />
+          <span aria-hidden className="pointer-events-none absolute -top-24 -left-12 w-72 h-40 rounded-full bg-gradient-to-br from-primary/20 to-transparent blur-3xl opacity-60" />
+          <span aria-hidden className="pointer-events-none absolute -bottom-24 -right-12 w-72 h-40 rounded-full bg-gradient-to-br from-accent/20 to-transparent blur-3xl opacity-50" />
+
+          <a href="#" className="relative font-heading font-bold text-lg tracking-tight">
             SHAHED<span className="text-gradient">.</span>
           </a>
-          <div className="hidden md:flex items-center gap-1">
+          <div className="relative hidden md:flex items-center gap-0.5 p-1 rounded-full bg-white/[0.03] border border-white/5">
             {navItems.map((item) => (
               <a
                 key={item}
                 href={item === "Timeline" ? "/timeline" : `#${item.toLowerCase()}`}
-                className="px-4 py-1.5 text-sm text-muted-foreground hover:text-foreground rounded-full hover:bg-white/5 transition-colors"
+                className="relative px-3.5 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground rounded-full transition-colors before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-b before:from-white/10 before:to-white/0 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:border before:border-white/10"
               >
-                {item}
+                <span className="relative">{item}</span>
               </a>
             ))}
           </div>
