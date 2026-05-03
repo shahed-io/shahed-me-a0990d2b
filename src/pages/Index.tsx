@@ -915,16 +915,8 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 space-y-6 sm:space-y-8">
         {/* Brand / contact card */}
         <div className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 text-center overflow-hidden">
-          <a href="/" className="inline-flex items-center gap-3 mb-4">
-            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-primary flex items-center justify-center text-primary-foreground font-bold text-lg sm:text-xl shadow-lg shrink-0">
-              S
-            </div>
-            <div className="text-left leading-tight">
-              <div className="font-heading font-bold text-xl sm:text-2xl">
-                <span className="text-gradient-primary">Shahed</span>
-              </div>
-              <div className="text-[10px] tracking-[0.2em] text-muted-foreground">SHAHED.COM.BD</div>
-            </div>
+          <a href="/" className="inline-block mb-4 font-heading font-bold text-3xl sm:text-4xl tracking-tight">
+            SHAHED<span className="text-gradient">.</span>
           </a>
           <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Building <span className="text-gradient font-medium">digital experiences</span> that drive growth, brand value,
