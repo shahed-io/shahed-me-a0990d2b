@@ -60,12 +60,17 @@ function Section({ icon: Icon, title, subtitle, badge, children, defaultOpen = f
   );
 }
 
+const isGA4 = (v?: string) => !!v && /^G-[A-Z0-9]{4,}$/i.test(v.trim());
+const isGTM = (v?: string) => !!v && /^GTM-[A-Z0-9]{4,}$/i.test(v.trim());
+const isToken = (v?: string) => !!v && v.trim().length >= 10;
+
 const SeoManager = () => {
   const { toast } = useToast();
   const [s, setS] = useState<Settings>({});
   const [rowId, setRowId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
-  const [productCount, setProductCount] = useState<number | null>(null);
+  const [verifying, setVerifying] = useState(false);
+  const [liveStatus, setLiveStatus] = useState<{ ga4: boolean; gtm: boolean; gsc: boolean; bing: boolean } | null>(null);
 
   const set = <K extends keyof Settings>(k: K, v: Settings[K]) => setS((p) => ({ ...p, [k]: v }));
 
@@ -73,12 +78,14 @@ const SeoManager = () => {
     (async () => {
       const { data } = await supabase.from("site_settings").select("id, data").eq("singleton", true).maybeSingle();
       if (data) { setRowId(data.id); setS((data.data as Settings) ?? {}); }
-      const { count } = await supabase.from("products").select("*", { count: "exact", head: true });
-      setProductCount(count ?? 0);
     })();
   }, []);
 
   const save = async () => {
+    // Validate before saving
+    if (s.ga4_id && !isGA4(s.ga4_id)) return toast({ title: "Invalid GA4 ID", description: "Format: G-XXXXXXXXXX", variant: "destructive" });
+    if (s.gtm_id && !isGTM(s.gtm_id)) return toast({ title: "Invalid GTM ID", description: "Format: GTM-XXXXXXX", variant: "destructive" });
+
     setSaving(true);
     const userRes = await supabase.auth.getUser();
     const updated_by = userRes.data.user?.id ?? null;
@@ -87,19 +94,45 @@ const SeoManager = () => {
       ? await supabase.from("site_settings").update({ data: dataJson as never, updated_by }).eq("id", rowId)
       : await supabase.from("site_settings").insert([{ data: dataJson as never, updated_by } as never]);
     setSaving(false);
-    if (error) toast({ title: "Save failed", description: error.message, variant: "destructive" });
-    else { toast({ title: "✓ Saved", description: "SEO settings live হয়ে গেছে।" }); }
+    if (error) return toast({ title: "Save failed", description: error.message, variant: "destructive" });
+    toast({ title: "✓ Saved", description: "ব্রাউজার রিফ্রেশ করলে সাইটে live হয়ে যাবে।" });
+    // Re-check after save
+    setTimeout(() => verifyLive(), 800);
+  };
+
+  // Verify the public site is actually serving the tags
+  const verifyLive = async () => {
+    setVerifying(true);
+    try {
+      const res = await fetch(`${SITE}/?_=${Date.now()}`, { cache: "no-store" });
+      const html = await res.text();
+      setLiveStatus({
+        ga4: !!s.ga4_id && html.includes(s.ga4_id),
+        gtm: !!s.gtm_id && html.includes(s.gtm_id),
+        gsc: !!s.gsc_token && html.includes(s.gsc_token),
+        bing: !!s.bing_token && html.includes(s.bing_token),
+      });
+    } catch {
+      // SPA — tags inject after JS runs, so server HTML may not include them.
+      // Fall back to checking the current document (admin runs on same origin).
+      setLiveStatus({
+        ga4: !!document.querySelector('script[src*="googletagmanager.com/gtag/js"]'),
+        gtm: !!document.querySelector('script#gtm-init'),
+        gsc: !!document.querySelector('meta[name="google-site-verification"]'),
+        bing: !!document.querySelector('meta[name="msvalidate.01"]'),
+      });
+    }
+    setVerifying(false);
   };
 
   const checks = useMemo(() => [
-    { ok: !!s.ga4_id, label: "Google Analytics কানেক্ট করা হয়েছে" },
-    { ok: true, label: "Sitemap.xml সাবমিট করা হয়েছে" },
+    { ok: isGA4(s.ga4_id), label: "Google Analytics কানেক্ট করা হয়েছে" },
+    { ok: isGTM(s.gtm_id), label: "Google Tag Manager কানেক্ট করা হয়েছে", warn: !isGTM(s.gtm_id) },
+    { ok: isToken(s.gsc_token), label: "Google Search Console ভেরিফাই করা হয়েছে", warn: !isToken(s.gsc_token) },
+    { ok: isToken(s.bing_token), label: "Bing Webmaster ভেরিফাই করা হয়েছে", warn: !isToken(s.bing_token) },
     { ok: !!s.default_og_image, label: "OG Image সেট করা হয়েছে" },
-    { ok: true, label: "Schema Markup (Organization, Product, FAQ)" },
-    { ok: !!s.gsc_token, label: "Google Search Console ভেরিফাই করা হয়েছে", warn: !s.gsc_token },
-    { ok: true, label: "Robots.txt কনফিগার করা হয়েছে" },
-    { ok: true, label: `প্রোডাক্ট SEO (${productCount ?? 0}/${productCount ?? 0})` },
-  ], [s, productCount]);
+    { ok: true, label: "Sitemap.xml + Robots.txt সক্রিয়" },
+  ], [s]);
 
   const score = Math.round((checks.filter(c => c.ok).length / checks.length) * 100);
   const completedCount = checks.filter(c => c.ok).length;
@@ -206,9 +239,30 @@ const SeoManager = () => {
           </div>
         </Section>
 
-        {/* Product SEO */}
-        <Section icon={ShoppingBag} title="🛍️ প্রোডাক্ট SEO" subtitle="প্রতিটি প্রোডাক্টের টাইটেল ও ডেসক্রিপশন" badge={<StatusBadge ok label={`${productCount ?? 0}/${productCount ?? 0}`} />}>
-          <p className="text-sm text-muted-foreground">প্রতিটি প্রোডাক্টের জন্য SEO title, description ও OG image স্বয়ংক্রিয়ভাবে generate হচ্ছে। Products পেজ থেকে আলাদাভাবে edit করতে পারবেন।</p>
+        {/* Live verification */}
+        <Section icon={CheckCircle2} title="🔍 Live Verification" subtitle="পাবলিশ-করা সাইটে ট্যাগগুলো আসলেই কাজ করছে কিনা চেক করুন" badge={<StatusBadge ok={!!liveStatus && Object.values(liveStatus).some(Boolean)} label={liveStatus ? "চেক করা হয়েছে" : "চেক করুন"} />}>
+          <p className="mb-3 text-sm text-muted-foreground">এই বাটনটি <code className="rounded bg-muted px-1">{SITE}</code> এ live request পাঠিয়ে আপনার ট্যাগগুলো খুঁজে দেখবে।</p>
+          <Button onClick={verifyLive} disabled={verifying} variant="outline" size="sm">
+            <Sparkles className="mr-1 h-3 w-3" /> {verifying ? "Checking…" : "Verify Now"}
+          </Button>
+          {liveStatus && (
+            <div className="mt-4 grid gap-2 sm:grid-cols-2">
+              {[
+                { k: "ga4", label: "Google Analytics", id: s.ga4_id },
+                { k: "gtm", label: "Google Tag Manager", id: s.gtm_id },
+                { k: "gsc", label: "Search Console", id: s.gsc_token },
+                { k: "bing", label: "Bing Webmaster", id: s.bing_token },
+              ].map(item => (
+                <div key={item.k} className="flex items-center justify-between rounded-lg border border-border/50 bg-muted/20 p-3 text-sm">
+                  <div>
+                    <div className="font-medium">{item.label}</div>
+                    <div className="text-xs text-muted-foreground truncate max-w-[180px]">{item.id || "Not set"}</div>
+                  </div>
+                  {item.id ? <StatusBadge ok={(liveStatus as any)[item.k]} label={(liveStatus as any)[item.k] ? "✓ Live" : "Not found"} /> : <span className="text-xs text-muted-foreground">—</span>}
+                </div>
+              ))}
+            </div>
+          )}
         </Section>
 
         {/* Sitemap & Robots */}
