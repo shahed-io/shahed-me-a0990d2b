@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { Link } from "react-router-dom";
 import {
   Mail, MapPin, Clock, ArrowDown, ArrowUp, ExternalLink, Facebook, Linkedin, Github,
   MessageCircle, Code, Palette, ShoppingCart, PenTool, BarChart3, Zap,
