@@ -889,6 +889,7 @@ const Footer = () => {
         { label: "Timeline", href: "/timeline" },
         { label: "MD Shahed", href: "/md-shahed" },
         { label: "Web Developer", href: "/md-shahed-web-developer" },
+        { label: "GitHub", href: "https://github.com/shahed-io" },
         { label: "Sign In", href: "/login" },
       ],
     },
