@@ -903,9 +903,10 @@ const Footer = () => {
 
   const socials = [
     { icon: <Facebook className="w-4 h-4" />, href: "https://facebook.com/shahed.io", label: "Facebook" },
-    { icon: <Github className="w-4 h-4" />, href: "https://github.com/shahed-io", label: "GitHub" },
+    { icon: <Instagram className="w-4 h-4" />, href: "https://instagram.com/shahed.io", label: "Instagram" },
     { icon: <Linkedin className="w-4 h-4" />, href: "https://linkedin.com/in/shahed-io", label: "LinkedIn" },
-    { icon: <Instagram className="w-4 h-4" />, href: "#", label: "Instagram" },
+    { icon: <Github className="w-4 h-4" />, href: "https://github.com/shahed-io", label: "GitHub" },
+    { icon: <MessageCircle className="w-4 h-4" />, href: "https://wa.me/8801823378888", label: "WhatsApp" },
     { icon: <Send className="w-4 h-4" />, href: "mailto:ceo@shahed.com.bd", label: "Email" },
   ];
 
