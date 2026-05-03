@@ -14,6 +14,7 @@ import { TiltCard } from "@/components/ui/tilt-card";
 import { useAuth } from "@/hooks/use-auth";
 import { useIsAdmin } from "@/hooks/use-is-admin";
 import { toast } from "@/hooks/use-toast";
+import { GlobalSearch, useGlobalSearch } from "@/components/GlobalSearch";
 import profilePhoto from "@/assets/profile-portrait.jpg";
 import aboutPhoto from "@/assets/about-portrait.jpg";
 import projectGrowth from "@/assets/project-growth-platform.jpg";
