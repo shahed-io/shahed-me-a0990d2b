@@ -316,10 +316,12 @@ const Timeline = () => {
           {posts.map((post) => (
             <article key={post.id} className="glass-card p-5">
               <div className="flex items-start gap-3 mb-3">
-                <img
-                  src={profile?.avatar_url ?? "https://shahed.com.bd/assets/profile-photo-CtiUlvZF.jpg"}
-                  alt=""
+                <SmartImage
+                  src={profile?.avatar_url ?? DEFAULT_OG}
+                  fallbackSrc={DEFAULT_OG}
+                  alt="MD Shahed avatar"
                   className="w-10 h-10 rounded-full object-cover"
+                  fallbackMessage="N/A"
                 />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-foreground">MD Shahed</p>
