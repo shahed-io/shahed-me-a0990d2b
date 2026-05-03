@@ -13,7 +13,7 @@ import { SEO } from "@/components/SEO";
 import { SmartImage } from "@/components/ui/smart-image";
 
 const SITE_URL = "https://shahed.com.bd";
-const DEFAULT_OG = "https://shahed.com.bd/assets/profile-photo-CtiUlvZF.jpg";
+const DEFAULT_OG = "https://shahed.com.bd/og-image.jpg";
 
 interface Post {
   id: string;
