@@ -276,7 +276,53 @@
       ]
     }
     </script>
-    
+
+    <!-- WebSite Schema with Sitelinks Search Box -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://shahed.com.bd/#website",
+      "url": "https://shahed.com.bd/",
+      "name": "MD Shahed",
+      "description": "Official website of MD Shahed — Web Developer & Entrepreneur from Bangladesh.",
+      "inLanguage": ["en", "bn"],
+      "publisher": { "@id": "https://shahed.com.bd/#person" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": { "@type": "EntryPoint", "urlTemplate": "https://shahed.com.bd/?q={search_term_string}" },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- Speakable Schema (voice search) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "url": "https://shahed.com.bd/",
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["h1", "h2", "[data-speakable]"] }
+    }
+    </script>
+
+    <!-- SiteNavigationElement Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Main Navigation",
+      "itemListElement": [
+        { "@type": "SiteNavigationElement", "position": 1, "name": "About", "url": "https://shahed.com.bd/#about" },
+        { "@type": "SiteNavigationElement", "position": 2, "name": "Skills", "url": "https://shahed.com.bd/#skills" },
+        { "@type": "SiteNavigationElement", "position": 3, "name": "Projects", "url": "https://shahed.com.bd/#projects" },
+        { "@type": "SiteNavigationElement", "position": 4, "name": "Services", "url": "https://shahed.com.bd/#services" },
+        { "@type": "SiteNavigationElement", "position": 5, "name": "Timeline", "url": "https://shahed.com.bd/timeline" },
+        { "@type": "SiteNavigationElement", "position": 6, "name": "Blog", "url": "https://shahed.com.bd/#blog" },
+        { "@type": "SiteNavigationElement", "position": 7, "name": "Contact", "url": "https://shahed.com.bd/#contact" }
+      ]
+    }
+    </script>
   
   
   
