@@ -98,10 +98,10 @@ const AnimatedRoutes = () => {
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
+          {/* Hide the public chat widget inside the admin panel and while routes are loading */}
+          {!isAdminRoute && <SupportWidget />}
         </Suspense>
       </PageTransition>
-      {/* Hide the public chat widget inside the admin panel */}
-      {!isAdminRoute && <SupportWidget />}
     </>
   );
 };
