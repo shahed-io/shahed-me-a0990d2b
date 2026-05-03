@@ -233,15 +233,17 @@ const Dashboard = () => {
             <Link
               key={s.label}
               to={s.to}
-              className="group flex flex-col items-center gap-2 rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-white/10"
+              className="group flex h-28 flex-col items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 p-3 transition-[border-color,background-color,box-shadow] duration-200 hover:border-primary/40 hover:bg-white/[0.08] hover:shadow-[0_8px_24px_-12px_hsl(var(--primary)/0.5)]"
             >
               <span
-                className="flex h-10 w-10 items-center justify-center rounded-xl text-primary-foreground shadow-md"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-primary-foreground shadow-md transition-transform duration-200 group-hover:scale-105"
                 style={{ backgroundImage: t.grad }}
               >
                 <s.icon className="h-5 w-5" />
               </span>
-              <span className="text-center text-xs font-medium text-foreground/90">{s.label}</span>
+              <span className="line-clamp-2 text-center text-xs font-medium leading-tight text-foreground/90">
+                {s.label}
+              </span>
             </Link>
           );
         })}
