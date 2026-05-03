@@ -16,8 +16,18 @@
     <meta name="googlebot" content="index, follow" />
     <link rel="canonical" href="https://shahed.com.bd/" />
 
-    <!-- Google Search Console verification (replace content with your token from GSC → HTML tag method) -->
+    <!-- Google Search Console verification (set your token from GSC → HTML tag method via /ceo/seo) -->
+    <!-- This static placeholder is replaced at runtime by SiteSettingsLoader; set a real one in admin once verified. -->
     <meta name="google-site-verification" content="REPLACE_WITH_YOUR_GSC_TOKEN" />
+
+    <!-- Google Analytics 4 (gtag.js) — also injected at runtime; this static copy ensures Googlebot/Test detects it -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0PRTLECPJB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-0PRTLECPJB');
+    </script>
 
     <!-- Geo tags -->
     <meta name="geo.region" content="BD" />
