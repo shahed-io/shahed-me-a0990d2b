@@ -153,7 +153,7 @@ const SeoManager = () => {
           </div>
           <div className="text-3xl font-extrabold text-primary">{score}%</div>
         </div>
-        <div className="mb-4 h-1.5 w-full overflow-hidden rounded-full bg-muted">
+        <div className="mb-4 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
           <div className="h-full rounded-full transition-all" style={{ width: `${score}%`, backgroundImage: "var(--gradient-primary)" }} />
         </div>
         <div className="grid gap-2.5 sm:grid-cols-2">
@@ -241,7 +241,7 @@ const SeoManager = () => {
 
         {/* Live verification */}
         <Section icon={CheckCircle2} title="🔍 Live Verification" subtitle="পাবলিশ-করা সাইটে ট্যাগগুলো আসলেই কাজ করছে কিনা চেক করুন" badge={<StatusBadge ok={!!liveStatus && Object.values(liveStatus).some(Boolean)} label={liveStatus ? "চেক করা হয়েছে" : "চেক করুন"} />}>
-          <p className="mb-3 text-sm text-muted-foreground">এই বাটনটি <code className="rounded bg-muted px-1">{SITE}</code> এ live request পাঠিয়ে আপনার ট্যাগগুলো খুঁজে দেখবে।</p>
+          <p className="mb-3 text-sm text-muted-foreground">এই বাটনটি <code className="rounded bg-white/10 px-1">{SITE}</code> এ live request পাঠিয়ে আপনার ট্যাগগুলো খুঁজে দেখবে।</p>
           <Button onClick={verifyLive} disabled={verifying} variant="outline" size="sm">
             <Sparkles className="mr-1 h-3 w-3" /> {verifying ? "Checking…" : "Verify Now"}
           </Button>

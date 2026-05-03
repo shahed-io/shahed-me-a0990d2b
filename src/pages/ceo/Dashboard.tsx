@@ -123,7 +123,7 @@ const Dashboard = () => {
                   <p className="truncate text-sm font-medium">{t.subject}</p>
                   <p className="text-xs text-muted-foreground">{t.name ?? "Anonymous"} · {new Date(t.created_at).toLocaleDateString()}</p>
                 </div>
-                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium ${t.status === "open" ? "bg-accent/15 text-accent" : "bg-muted text-muted-foreground"}`}>{t.status}</span>
+                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-medium ${t.status === "open" ? "bg-accent/15 text-accent" : "bg-white/10 text-muted-foreground"}`}>{t.status}</span>
               </div>
             ))}
           </div>

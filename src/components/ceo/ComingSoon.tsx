@@ -9,7 +9,7 @@ export function ComingSoon({ title, group, icon, description }: Props) {
     <>
       <PageHeader title={title} subtitle={description ?? `Manage and configure ${title.toLowerCase()}`} breadcrumb={[group, title]} icon={icon} />
       <Card className="flex flex-col items-center justify-center gap-3 p-12 text-center">
-        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-muted">
+        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/10">
           <Construction className="h-8 w-8 text-muted-foreground" />
         </div>
         <h3 className="text-lg font-semibold">শীঘ্রই আসছে</h3>

@@ -102,7 +102,7 @@ const PageSeo = () => {
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
-                  <code className="rounded bg-muted px-2 py-0.5 text-xs">{r.path}</code>
+                  <code className="rounded bg-white/10 px-2 py-0.5 text-xs">{r.path}</code>
                   {r.og_image && <span className="rounded-full bg-accent/15 px-2 py-0.5 text-[10px] text-accent">OG set</span>}
                 </div>
                 <p className="mt-2 font-semibold line-clamp-1">{r.title || <span className="text-muted-foreground italic">No title</span>}</p>
