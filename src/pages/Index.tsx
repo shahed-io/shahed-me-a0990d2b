@@ -1,15 +1,19 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { Link } from "react-router-dom";
 import {
   Mail, MapPin, Clock, ArrowDown, ArrowUp, ExternalLink, Facebook, Linkedin, Github,
   MessageCircle, Code, Palette, ShoppingCart, PenTool, BarChart3, Zap,
   Menu, X, ChevronLeft, ChevronRight, Sparkles, Send, Star, Calendar, BookOpen,
   ArrowUpRight, LogOut, Phone, Package, Info, FileText, Instagram,
+  LayoutDashboard, User as UserIcon, Settings, Copy, Check, Shield,
 } from "lucide-react";
 import { Reveal } from "@/hooks/use-scroll-reveal";
 import { RippleButton } from "@/components/ui/ripple-button";
 import { Magnetic } from "@/components/ui/magnetic";
 import { TiltCard } from "@/components/ui/tilt-card";
 import { useAuth } from "@/hooks/use-auth";
+import { useIsAdmin } from "@/hooks/use-is-admin";
+import { toast } from "@/hooks/use-toast";
 import profilePhoto from "@/assets/profile-portrait.jpg";
 import aboutPhoto from "@/assets/about-portrait.jpg";
 import projectGrowth from "@/assets/project-growth-platform.jpg";
@@ -63,8 +67,10 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const { user, profile, signOut } = useAuth();
+  const { isAdmin } = useIsAdmin();
   const navItems = ["About", "Skills", "Projects", "Services", "Timeline", "Blog", "Contact"];
 
   useEffect(() => {
@@ -81,8 +87,34 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", onClick);
   }, []);
 
+  // Close menu on Escape
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setMenuOpen(false); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, []);
+
   const initials = (profile?.display_name || user?.email || "U")
     .split(" ").map((s) => s[0]).join("").slice(0, 2).toUpperCase();
+
+  const copyEmail = async () => {
+    if (!user?.email) return;
+    try {
+      await navigator.clipboard.writeText(user.email);
+      setCopied(true);
+      toast({ title: "Email copied", description: user.email });
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      toast({ title: "Copy failed", variant: "destructive" });
+    }
+  };
+
+  const menuLinks: { icon: JSX.Element; label: string; href: string; show: boolean; accent?: boolean }[] = [
+    { icon: <LayoutDashboard className="w-4 h-4" />, label: "Admin Panel", href: "/ceo", show: isAdmin, accent: true },
+    { icon: <UserIcon className="w-4 h-4" />, label: "My Profile", href: "/md-shahed", show: true },
+    { icon: <Calendar className="w-4 h-4" />, label: "Timeline", href: "/timeline", show: true },
+    { icon: <Settings className="w-4 h-4" />, label: "Settings", href: "/ceo/settings", show: isAdmin },
+  ];
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-3" : "py-5"}`}>
@@ -108,6 +140,8 @@ const Navbar = () => {
                 <button
                   onClick={() => setMenuOpen((v) => !v)}
                   className="flex items-center gap-2.5 glass rounded-full pl-1 pr-3 py-1 hover:bg-white/5 transition-colors"
+                  aria-haspopup="menu"
+                  aria-expanded={menuOpen}
                 >
                   {profile?.avatar_url ? (
                     <SmartImage
@@ -124,21 +158,68 @@ const Navbar = () => {
                   <span className="text-sm text-foreground max-w-[120px] truncate">
                     {profile?.display_name ?? user.email}
                   </span>
+                  {isAdmin && (
+                    <span className="hidden lg:inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-gradient-primary/20 border border-primary/30 text-[9px] font-semibold uppercase tracking-wider text-primary">
+                      <Shield className="w-2.5 h-2.5" /> Admin
+                    </span>
+                  )}
                 </button>
                 {menuOpen && (
-                  <div className="absolute right-0 mt-2 w-60 glass-strong rounded-2xl p-2 animate-fade-in">
-                    <div className="px-3 py-2.5 border-b border-border/50">
-                      <p className="text-sm font-medium text-foreground truncate">
-                        {profile?.display_name ?? "User"}
-                      </p>
-                      <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+                  <div className="absolute right-0 mt-2 w-72 glass-strong rounded-2xl p-2 animate-fade-in shadow-2xl">
+                    {/* Profile header */}
+                    <div className="px-3 py-3 border-b border-border/50 flex items-center gap-3">
+                      {profile?.avatar_url ? (
+                        <SmartImage src={profile.avatar_url} alt={profile.display_name ?? "Profile"} className="w-11 h-11 rounded-full object-cover ring-2 ring-primary/30" fallbackMessage="" />
+                      ) : (
+                        <span className="w-11 h-11 rounded-full bg-gradient-primary flex items-center justify-center text-sm font-semibold text-primary-foreground">
+                          {initials}
+                        </span>
+                      )}
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-semibold text-foreground truncate flex items-center gap-1.5">
+                          {profile?.display_name ?? "User"}
+                          {isAdmin && <Shield className="w-3 h-3 text-primary" />}
+                        </p>
+                        <button
+                          onClick={copyEmail}
+                          className="group inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground truncate max-w-full"
+                          title="Copy email"
+                        >
+                          <span className="truncate">{user.email}</span>
+                          {copied ? <Check className="w-3 h-3 text-green-400 shrink-0" /> : <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 shrink-0" />}
+                        </button>
+                      </div>
                     </div>
-                    <button
-                      onClick={() => signOut()}
-                      className="w-full mt-1 flex items-center gap-2 px-3 py-2 text-sm text-foreground hover:bg-white/5 rounded-xl transition-colors"
-                    >
-                      <LogOut className="w-4 h-4" /> Sign out
-                    </button>
+
+                    {/* Quick links */}
+                    <div className="py-1">
+                      {menuLinks.filter(l => l.show).map((l) => (
+                        <Link
+                          key={l.label}
+                          to={l.href}
+                          onClick={() => setMenuOpen(false)}
+                          className={`flex items-center gap-2.5 px-3 py-2 text-sm rounded-xl transition-colors ${
+                            l.accent
+                              ? "text-foreground bg-gradient-to-r from-primary/15 via-accent/10 to-transparent border border-white/10 hover:from-primary/25"
+                              : "text-foreground/90 hover:bg-white/5"
+                          }`}
+                        >
+                          <span className={l.accent ? "text-primary" : "text-muted-foreground"}>{l.icon}</span>
+                          <span className="flex-1">{l.label}</span>
+                          <ArrowUpRight className="w-3.5 h-3.5 opacity-40" />
+                        </Link>
+                      ))}
+                    </div>
+
+                    {/* Footer actions */}
+                    <div className="border-t border-border/50 mt-1 pt-1">
+                      <button
+                        onClick={() => { setMenuOpen(false); signOut(); }}
+                        className="w-full flex items-center gap-2.5 px-3 py-2 text-sm text-foreground hover:bg-destructive/10 hover:text-destructive rounded-xl transition-colors"
+                      >
+                        <LogOut className="w-4 h-4" /> Sign out
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>
@@ -179,14 +260,32 @@ const Navbar = () => {
                       {initials}
                     </span>
                   )}
-                  <div className="min-w-0">
-                    <p className="text-sm text-foreground truncate">{profile?.display_name ?? "User"}</p>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm text-foreground truncate flex items-center gap-1.5">
+                      {profile?.display_name ?? "User"}
+                      {isAdmin && <Shield className="w-3 h-3 text-primary" />}
+                    </p>
                     <p className="text-xs text-muted-foreground truncate">{user.email}</p>
                   </div>
                 </div>
+                {menuLinks.filter(l => l.show).map((l) => (
+                  <Link
+                    key={l.label}
+                    to={l.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={`flex items-center gap-2.5 px-4 py-2.5 text-sm rounded-xl ${
+                      l.accent
+                        ? "text-foreground bg-gradient-to-r from-primary/20 via-accent/10 to-transparent border border-white/10"
+                        : "text-foreground/90 hover:bg-white/5"
+                    }`}
+                  >
+                    <span className={l.accent ? "text-primary" : "text-muted-foreground"}>{l.icon}</span>
+                    {l.label}
+                  </Link>
+                ))}
                 <button
                   onClick={() => { setMobileOpen(false); signOut(); }}
-                  className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-full glass text-sm font-medium text-foreground"
+                  className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-full glass text-sm font-medium text-foreground hover:text-destructive"
                 >
                   <LogOut className="w-4 h-4" /> Sign out
                 </button>
