@@ -738,9 +738,9 @@ const ContactSection = () => {
     <section id="contact" className="relative py-24 lg:py-32">
       <div className="container mx-auto px-6">
         <SectionHeading eyebrow="get in touch" title="Let's Build" accent="Together" />
-        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
           {/* Form */}
-          <div className="glass-card p-8 md:p-10">
+          <div className="glass-card p-8 md:p-10 h-full flex flex-col">
             <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
               <div>
                 <label className="text-xs text-muted-foreground mb-2 block uppercase tracking-wider">Name</label>
@@ -781,21 +781,21 @@ const ContactSection = () => {
           </div>
 
           {/* Contact info */}
-          <div className="space-y-4">
+          <div className="grid grid-rows-4 gap-4 h-full">
             {[
               { icon: <Mail className="w-5 h-5" />, label: "Email", value: "ceo@shahed.com.bd", href: "mailto:ceo@shahed.com.bd", color: "primary" },
               { icon: <Linkedin className="w-5 h-5" />, label: "LinkedIn", value: "shahed-io", href: "https://linkedin.com/in/shahed-io", color: "secondary" },
               { icon: <Facebook className="w-5 h-5" />, label: "Facebook", value: "shahed.io", href: "https://facebook.com/shahed.io", color: "primary" },
               { icon: <MessageCircle className="w-5 h-5" />, label: "WhatsApp", value: "+880 1823 378888", href: "https://wa.me/8801823378888", color: "accent" },
             ].map((c) => (
-              <TiltCard key={c.label} max={6}>
+              <TiltCard key={c.label} max={6} className="h-full">
                 <a
                   href={c.href}
                   target={c.href.startsWith("http") ? "_blank" : undefined}
                   rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="group flex items-center gap-4 px-5 py-4 glass-card hover:bg-white/[0.04] transition-colors"
+                  className="group flex items-center gap-4 px-5 h-full glass-card hover:bg-white/[0.04] transition-colors"
                 >
-                  <div className={`w-11 h-11 rounded-xl bg-gradient-${c.color === "accent" ? "accent" : "primary"} flex items-center justify-center text-primary-foreground glow-primary`}>
+                  <div className={`w-11 h-11 rounded-xl bg-gradient-${c.color === "accent" ? "accent" : "primary"} flex items-center justify-center text-primary-foreground glow-primary shrink-0`}>
                     {c.icon}
                   </div>
                   <div className="flex-1">
