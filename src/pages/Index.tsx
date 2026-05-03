@@ -786,9 +786,10 @@ const ContactSection = () => {
           </div>
 
           {/* Contact info */}
-          <div className="grid grid-rows-4 gap-4 h-full">
+          <div className="grid grid-rows-5 gap-4 h-full">
             {[
               { icon: <Mail className="w-5 h-5" />, label: "Email", value: "ceo@shahed.com.bd", href: "mailto:ceo@shahed.com.bd", color: "primary" },
+              { icon: <Github className="w-5 h-5" />, label: "GitHub", value: "shahed-io", href: "https://github.com/shahed-io", color: "primary" },
               { icon: <Linkedin className="w-5 h-5" />, label: "LinkedIn", value: "shahed-io", href: "https://linkedin.com/in/shahed-io", color: "secondary" },
               { icon: <Facebook className="w-5 h-5" />, label: "Facebook", value: "shahed.io", href: "https://facebook.com/shahed.io", color: "primary" },
               { icon: <MessageCircle className="w-5 h-5" />, label: "WhatsApp", value: "+880 1823 378888", href: "https://wa.me/8801823378888", color: "accent" },
