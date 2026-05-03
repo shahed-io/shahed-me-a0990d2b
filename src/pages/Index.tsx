@@ -496,7 +496,7 @@ const ProjectsSection = () => (
           <TiltCard key={i} max={8}>
             <article className="group glass-card overflow-hidden h-full">
               <div className="aspect-video overflow-hidden relative">
-                <img
+                <SmartImage
                   src={project.img}
                   alt={`${project.title} — project by MD Shahed`}
                   loading="lazy"
@@ -504,6 +504,7 @@ const ProjectsSection = () => (
                   width={400}
                   height={225}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  fallbackMessage="Project preview unavailable"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
