@@ -235,7 +235,7 @@ export const LandingPage = ({
             {keywords.map((k) => (
               <span
                 key={k}
-                className="rounded-full bg-background px-3 py-1 text-xs text-muted-foreground"
+                className="rounded-full bg-white/5 backdrop-blur-md border border-white/10 px-3 py-1 text-xs text-muted-foreground"
               >
                 {k}
               </span>
