@@ -33,19 +33,14 @@ const CeoLayout = () => {
       <div className="flex min-h-screen w-full bg-background text-foreground" style={{ backgroundImage: "var(--gradient-mesh)" }}>
         <CeoSidebar />
         <div className="flex-1 flex flex-col min-w-0">
-          <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border bg-background/60 px-3 backdrop-blur-xl">
+          <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border bg-background/70 px-3 backdrop-blur-xl">
             <SidebarTrigger />
             <div className="hidden md:flex relative max-w-sm flex-1">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input placeholder="Search anything…" className="pl-9 h-9 rounded-full bg-muted/40 border-border/50" />
             </div>
-            <SidebarTrigger />
-            <div className="hidden md:flex relative max-w-sm flex-1">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <Input placeholder="Search anything…" className="pl-9 h-9 rounded-full bg-muted/50 border-muted" />
-            </div>
             <div className="ml-auto flex items-center gap-2">
-              <Button variant="ghost" size="icon" className="rounded-full"><Bell className="h-4 w-4" /></Button>
+              <Button variant="ghost" size="icon" className="rounded-full" aria-label="Notifications"><Bell className="h-4 w-4" /></Button>
               <Button asChild variant="outline" size="sm" className="rounded-full">
                 <Link to="/"><ExternalLink className="mr-1 h-4 w-4" /> View Site</Link>
               </Button>
