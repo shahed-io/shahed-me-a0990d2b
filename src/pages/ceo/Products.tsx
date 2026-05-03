@@ -74,7 +74,7 @@ const Products = () => {
             <div className="p-4">
               <div className="mb-1 flex items-start justify-between gap-2">
                 <h3 className="line-clamp-1 font-semibold">{p.name}</h3>
-                <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${p.status === "active" ? "bg-emerald-100 text-emerald-700" : "bg-muted"}`}>{p.status}</span>
+                <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${p.status === "active" ? "bg-primary/15 text-primary" : "bg-muted text-muted-foreground"}`}>{p.status}</span>
               </div>
               <p className="text-xs text-muted-foreground">{p.category ?? "Uncategorized"}</p>
               <div className="mt-2 flex items-center justify-between">
