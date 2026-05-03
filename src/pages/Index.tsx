@@ -104,10 +104,11 @@ const Navbar = () => {
                   className="flex items-center gap-2.5 glass rounded-full pl-1 pr-3 py-1 hover:bg-white/5 transition-colors"
                 >
                   {profile?.avatar_url ? (
-                    <img
+                    <SmartImage
                       src={profile.avatar_url}
                       alt={profile.display_name ?? "Profile"}
                       className="w-7 h-7 rounded-full object-cover"
+                      fallbackMessage=""
                     />
                   ) : (
                     <span className="w-7 h-7 rounded-full bg-gradient-primary flex items-center justify-center text-[11px] font-semibold text-primary-foreground">
@@ -166,7 +167,7 @@ const Navbar = () => {
               <>
                 <div className="mt-2 flex items-center gap-3 px-4 py-2.5 glass rounded-xl">
                   {profile?.avatar_url ? (
-                    <img src={profile.avatar_url} alt="" className="w-9 h-9 rounded-full object-cover" />
+                    <SmartImage src={profile.avatar_url} alt={profile.display_name ?? "Profile"} className="w-9 h-9 rounded-full object-cover" fallbackMessage="" />
                   ) : (
                     <span className="w-9 h-9 rounded-full bg-gradient-primary flex items-center justify-center text-xs font-semibold text-primary-foreground">
                       {initials}
@@ -481,9 +482,9 @@ const ExperienceSection = () => (
 
 /* ---------- Projects ---------- */
 const projects = [
-  { title: "Digital Business Growth Platform", desc: "Full website design and development with branding strategy.", tags: ["HTML", "CSS", "JavaScript", "WordPress"], img: "https://shahed.com.bd/assets/project-1-CGFnPPTs.jpg" },
-  { title: "IT Business Venture", desc: "Entrepreneur-led IT service business providing digital solutions.", tags: ["Strategy", "Digital Services"], img: "https://shahed.com.bd/assets/project-2-DDFynyNU.jpg" },
-  { title: "E-Commerce Brand Development", desc: "Designed and developed a complete online store using WordPress and WooCommerce.", tags: ["WordPress", "WooCommerce"], img: "https://shahed.com.bd/assets/project-3-CiR2Pc9z.jpg" },
+  { title: "Digital Business Growth Platform", desc: "Full website design and development with branding strategy.", tags: ["HTML", "CSS", "JavaScript", "WordPress"], img: "/og-image.jpg" },
+  { title: "IT Business Venture", desc: "Entrepreneur-led IT service business providing digital solutions.", tags: ["Strategy", "Digital Services"], img: "/og-image.jpg" },
+  { title: "E-Commerce Brand Development", desc: "Designed and developed a complete online store using WordPress and WooCommerce.", tags: ["WordPress", "WooCommerce"], img: "/og-image.jpg" },
 ];
 
 const ProjectsSection = () => (
@@ -495,7 +496,7 @@ const ProjectsSection = () => (
           <TiltCard key={i} max={8}>
             <article className="group glass-card overflow-hidden h-full">
               <div className="aspect-video overflow-hidden relative">
-                <img
+                <SmartImage
                   src={project.img}
                   alt={`${project.title} — project by MD Shahed`}
                   loading="lazy"
@@ -503,6 +504,7 @@ const ProjectsSection = () => (
                   width={400}
                   height={225}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  fallbackMessage="Project preview unavailable"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
@@ -633,9 +635,9 @@ const TestimonialsSection = () => {
 
 /* ---------- Blog ---------- */
 const blogPosts = [
-  { title: "How to Build a High-Converting Business Website in 2024", category: "Web Development", date: "Dec 15, 2024", readTime: "5 min read", desc: "Learn the key principles of building websites that actually drive revenue and business growth.", img: "https://shahed.com.bd/assets/project-1-CGFnPPTs.jpg" },
-  { title: "Why Branding is the Foundation of Every Online Business", category: "Branding", date: "Nov 28, 2024", readTime: "4 min read", desc: "Strong visual identity can make or break your digital presence. Here's how to get it right.", img: "https://shahed.com.bd/assets/project-2-DDFynyNU.jpg" },
-  { title: "E-Commerce Trends Every Entrepreneur Should Know", category: "E-Commerce", date: "Oct 10, 2024", readTime: "6 min read", desc: "Stay ahead of the competition with these latest trends in online store development.", img: "https://shahed.com.bd/assets/project-3-CiR2Pc9z.jpg" },
+  { title: "How to Build a High-Converting Business Website in 2024", category: "Web Development", date: "Dec 15, 2024", readTime: "5 min read", desc: "Learn the key principles of building websites that actually drive revenue and business growth.", img: "/og-image.jpg" },
+  { title: "Why Branding is the Foundation of Every Online Business", category: "Branding", date: "Nov 28, 2024", readTime: "4 min read", desc: "Strong visual identity can make or break your digital presence. Here's how to get it right.", img: "/og-image.jpg" },
+  { title: "E-Commerce Trends Every Entrepreneur Should Know", category: "E-Commerce", date: "Oct 10, 2024", readTime: "6 min read", desc: "Stay ahead of the competition with these latest trends in online store development.", img: "/og-image.jpg" },
 ];
 
 const BlogSection = () => (
@@ -647,7 +649,7 @@ const BlogSection = () => (
           <TiltCard key={i} max={8}>
             <article className="group glass-card overflow-hidden h-full">
               <div className="aspect-video overflow-hidden">
-                <img
+                <SmartImage
                   src={post.img}
                   alt={`${post.title} — MD Shahed blog article`}
                   loading="lazy"
@@ -655,6 +657,7 @@ const BlogSection = () => (
                   width={400}
                   height={225}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  fallbackMessage="Cover image unavailable"
                 />
               </div>
               <div className="p-6">
