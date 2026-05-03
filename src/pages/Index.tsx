@@ -482,9 +482,9 @@ const ExperienceSection = () => (
 
 /* ---------- Projects ---------- */
 const projects = [
-  { title: "Digital Business Growth Platform", desc: "Full website design and development with branding strategy.", tags: ["HTML", "CSS", "JavaScript", "WordPress"], img: "https://shahed.com.bd/assets/project-1-CGFnPPTs.jpg" },
-  { title: "IT Business Venture", desc: "Entrepreneur-led IT service business providing digital solutions.", tags: ["Strategy", "Digital Services"], img: "https://shahed.com.bd/assets/project-2-DDFynyNU.jpg" },
-  { title: "E-Commerce Brand Development", desc: "Designed and developed a complete online store using WordPress and WooCommerce.", tags: ["WordPress", "WooCommerce"], img: "https://shahed.com.bd/assets/project-3-CiR2Pc9z.jpg" },
+  { title: "Digital Business Growth Platform", desc: "Full website design and development with branding strategy.", tags: ["HTML", "CSS", "JavaScript", "WordPress"], img: "/og-image.jpg" },
+  { title: "IT Business Venture", desc: "Entrepreneur-led IT service business providing digital solutions.", tags: ["Strategy", "Digital Services"], img: "/og-image.jpg" },
+  { title: "E-Commerce Brand Development", desc: "Designed and developed a complete online store using WordPress and WooCommerce.", tags: ["WordPress", "WooCommerce"], img: "/og-image.jpg" },
 ];
 
 const ProjectsSection = () => (
