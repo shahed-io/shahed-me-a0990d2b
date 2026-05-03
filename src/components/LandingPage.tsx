@@ -6,6 +6,7 @@ import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 import { ArrowRight, CheckCircle2, MapPin } from "lucide-react";
+import { SmartImage } from "@/components/ui/smart-image";
 import heroPortrait from "@/assets/hero-portrait.jpg";
 
 export interface FAQ {
