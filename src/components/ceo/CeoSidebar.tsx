@@ -1,10 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import {
-  LayoutDashboard, ShoppingCart, Package, Tags, Users, Wallet, LifeBuoy, MessageSquare, Mail,
-  Image as ImageIcon, Flame, Star, Megaphone, BellRing, FileText, Palette, Ticket, Gift,
-  Share2, Handshake, Rocket, Facebook, Target, BarChart3, Pin, BookOpen, HelpCircle,
-  Search as SearchIcon, ShieldCheck, LineChart, Plug, Sparkles, Bot, UserCog, Lock, Database, Settings,
-  Home, Globe,
+  LayoutDashboard, BookOpen, Search as SearchIcon, Globe, LifeBuoy, Settings, Home,
 } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
@@ -16,64 +12,16 @@ type Group = { label: string; items: Item[] };
 
 const groups: Group[] = [
   { label: "Overview", items: [{ title: "Dashboard", url: "/ceo", icon: LayoutDashboard }] },
-  { label: "Sales", items: [
-    { title: "Orders", url: "/ceo/orders", icon: ShoppingCart },
-  ]},
-  { label: "Catalog", items: [
-    { title: "Products", url: "/ceo/products", icon: Package },
-    { title: "Categories", url: "/ceo/categories", icon: Tags },
-  ]},
-  { label: "Customers", items: [
-    { title: "All Customers", url: "/ceo/customers", icon: Users },
-    { title: "Wallet", url: "/ceo/wallet", icon: Wallet },
-    { title: "Support Tickets", url: "/ceo/tickets", icon: LifeBuoy },
-    { title: "Live Chat", url: "/ceo/live-chat", icon: MessageSquare },
-    { title: "Newsletter", url: "/ceo/newsletter", icon: Mail },
-  ]},
-  { label: "Storefront", items: [
-    { title: "Hero Banner", url: "/ceo/hero-banner", icon: ImageIcon },
-    { title: "Flash Sale", url: "/ceo/flash-sale", icon: Flame },
-    { title: "Testimonials", url: "/ceo/testimonials", icon: Star },
-    { title: "Announcement Bar", url: "/ceo/announcement", icon: Megaphone },
-    { title: "Popup Banner", url: "/ceo/popup", icon: BellRing },
-    { title: "Pages", url: "/ceo/pages", icon: FileText },
-    { title: "Footer Settings", url: "/ceo/footer", icon: Pin },
-    { title: "Themes", url: "/ceo/themes", icon: Palette },
-  ]},
-  { label: "Marketing", items: [
-    { title: "Coupons", url: "/ceo/coupons", icon: Ticket },
-    { title: "Welcome Discount", url: "/ceo/welcome-discount", icon: Gift },
-    { title: "Referrals", url: "/ceo/referrals", icon: Share2 },
-    { title: "Affiliates", url: "/ceo/affiliates", icon: Handshake },
-    { title: "Marketing Hub", url: "/ceo/marketing-hub", icon: Rocket },
-    { title: "Facebook Pixel", url: "/ceo/fb-pixel", icon: Facebook },
-    { title: "FB Custom Audiences", url: "/ceo/fb-audiences", icon: Target },
-    { title: "Google Ads", url: "/ceo/google-ads", icon: BarChart3 },
-    { title: "Other Pixels", url: "/ceo/other-pixels", icon: Megaphone },
-  ]},
   { label: "Content & SEO", items: [
     { title: "Blog", url: "/ceo/blog", icon: BookOpen },
-    { title: "Help Center", url: "/ceo/help-center", icon: HelpCircle },
-    { title: "Media Library", url: "/ceo/media", icon: ImageIcon },
     { title: "SEO Manager", url: "/ceo/seo", icon: SearchIcon },
     { title: "Page SEO Overrides", url: "/ceo/page-seo", icon: Globe },
-    { title: "Site Verification", url: "/ceo/verification", icon: ShieldCheck },
   ]},
-  { label: "Reports", items: [
-    { title: "Analytics & Reports", url: "/ceo/analytics", icon: LineChart },
-  ]},
-  { label: "Integrations", items: [
-    { title: "Integrations", url: "/ceo/integrations", icon: Plug },
-  ]},
-  { label: "AI Tools", items: [
-    { title: "AI Assistant", url: "/ceo/ai-assistant", icon: Sparkles },
-    { title: "AI API Config", url: "/ceo/ai-config", icon: Bot },
+  { label: "Inbox", items: [
+    { title: "Support Tickets", url: "/ceo/tickets", icon: LifeBuoy },
   ]},
   { label: "System", items: [
-    { title: "Staff Management", url: "/ceo/staff", icon: UserCog },
-    { title: "Admin Roles", url: "/ceo/roles", icon: Lock },
-    { title: "Backup", url: "/ceo/backup", icon: Database },
-    { title: "General Settings", url: "/ceo/settings", icon: Settings },
+    { title: "Settings", url: "/ceo/settings", icon: Settings },
   ]},
 ];
 
