@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { PageTransition } from "@/components/ui/page-transition";
 import { SiteSettingsLoader } from "@/components/SiteSettingsLoader";
+import { SupportWidget } from "@/components/SupportWidget";
 import Index from "./pages/Index.tsx";
 
 // Lazy-load secondary routes to keep the initial bundle small.
@@ -18,11 +19,6 @@ const Ceo = lazy(() => import("./pages/Ceo.tsx"));
 const MdShahedWebDeveloper = lazy(() => import("./pages/MdShahedWebDeveloper.tsx"));
 const BangladeshWebDevelopment = lazy(() => import("./pages/BangladeshWebDevelopment.tsx"));
 const DigitalConsulting = lazy(() => import("./pages/DigitalConsulting.tsx"));
-
-// Defer the support widget so it doesn't block first paint.
-const SupportWidget = lazy(() =>
-  import("@/components/SupportWidget").then((m) => ({ default: m.SupportWidget }))
-);
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -72,9 +68,7 @@ const App = () => (
       <BrowserRouter>
         <SiteSettingsLoader />
         <AnimatedRoutes />
-        <Suspense fallback={null}>
-          <SupportWidget />
-        </Suspense>
+        <SupportWidget />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
