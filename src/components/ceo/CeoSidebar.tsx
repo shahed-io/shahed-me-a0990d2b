@@ -53,16 +53,28 @@ export function CeoSidebar() {
             {!collapsed && <SidebarGroupLabel className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/70">{g.label}</SidebarGroupLabel>}
             <SidebarGroupContent>
               <SidebarMenu>
-                {g.items.map((item) => (
-                  <SidebarMenuItem key={item.url}>
-                    <SidebarMenuButton asChild isActive={isActive(item.url)} tooltip={item.title}>
-                      <NavLink to={item.url} end={item.url === "/ceo"} className="flex items-center gap-2">
-                        <item.icon className="h-4 w-4 shrink-0" />
-                        {!collapsed && <span className="text-sm">{item.title}</span>}
-                      </NavLink>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
+                {g.items.map((item) => {
+                  const active = isActive(item.url);
+                  return (
+                    <SidebarMenuItem key={item.url}>
+                      <SidebarMenuButton
+                        asChild
+                        isActive={active}
+                        tooltip={item.title}
+                        className={
+                          active
+                            ? "!bg-gradient-to-r !from-primary/25 !via-accent/15 !to-secondary/15 !text-foreground border border-white/15 backdrop-blur-md shadow-[0_0_20px_-6px_hsl(var(--primary)/0.5)]"
+                            : "!bg-transparent hover:!bg-white/5"
+                        }
+                      >
+                        <NavLink to={item.url} end={item.url === "/ceo"} className="flex items-center gap-2">
+                          <item.icon className="h-4 w-4 shrink-0" />
+                          {!collapsed && <span className="text-sm">{item.title}</span>}
+                        </NavLink>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
