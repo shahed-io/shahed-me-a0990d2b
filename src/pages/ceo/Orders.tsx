@@ -14,10 +14,10 @@ interface Order {
 }
 
 const statusVariants: Record<string, string> = {
-  pending: "bg-amber-100 text-amber-700",
-  processing: "bg-blue-100 text-blue-700",
-  delivered: "bg-emerald-100 text-emerald-700",
-  cancelled: "bg-rose-100 text-rose-700",
+  pending: "bg-accent/15 text-accent",
+  processing: "bg-secondary/15 text-secondary",
+  delivered: "bg-primary/15 text-primary",
+  cancelled: "bg-destructive/15 text-destructive",
 };
 
 const Orders = () => {
