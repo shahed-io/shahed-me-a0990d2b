@@ -87,7 +87,7 @@ const Ceo = () => {
 
   if (authLoading || roleLoading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-background text-muted-foreground">
+      <div className="flex min-h-screen items-center justify-center text-muted-foreground" style={{ backgroundImage: "var(--gradient-mesh)" }}>
         Loading…
       </div>
     );
@@ -97,7 +97,7 @@ const Ceo = () => {
 
   if (!isAdmin) {
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center gap-4 bg-background p-6 text-center">
+      <main className="flex min-h-screen flex-col items-center justify-center gap-4 p-6 text-center" style={{ backgroundImage: "var(--gradient-mesh)" }}>
         <SEO title="Access Denied" description="Admin only area" />
         <h1 className="text-3xl font-bold">🔒 Access Denied</h1>
         <p className="text-muted-foreground">এই panel শুধু admin-এর জন্য।</p>
@@ -107,7 +107,7 @@ const Ceo = () => {
   }
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-screen text-foreground" style={{ backgroundImage: "var(--gradient-mesh)" }}>
       <SEO title="CEO Panel — Admin" description="Admin dashboard" canonical="https://shahed.com.bd/ceo" />
 
       <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur">
