@@ -46,7 +46,7 @@ const GoogleAds = ph("GoogleAds");
 const OtherPixels = ph("OtherPixels");
 const HelpCenter = ph("HelpCenter");
 const MediaLibrary = ph("MediaLibrary");
-const SeoManager = ph("SeoManager");
+const SeoManager = lazy(() => import("./pages/ceo/SeoManager.tsx"));
 const Verification = ph("Verification");
 const Analytics = ph("Analytics");
 const Integrations = ph("Integrations");
