@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SEO } from "@/components/SEO";
 import { SeoPanel } from "@/components/admin/SeoPanel";
+import { SmartImage } from "@/components/ui/smart-image";
 import {
   LayoutDashboard, FileText, MessageCircle, Heart, Users, LogOut, Trash2, ExternalLink, Search,
 } from "lucide-react";
