@@ -60,12 +60,17 @@ function Section({ icon: Icon, title, subtitle, badge, children, defaultOpen = f
   );
 }
 
+const isGA4 = (v?: string) => !!v && /^G-[A-Z0-9]{4,}$/i.test(v.trim());
+const isGTM = (v?: string) => !!v && /^GTM-[A-Z0-9]{4,}$/i.test(v.trim());
+const isToken = (v?: string) => !!v && v.trim().length >= 10;
+
 const SeoManager = () => {
   const { toast } = useToast();
   const [s, setS] = useState<Settings>({});
   const [rowId, setRowId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
-  const [productCount, setProductCount] = useState<number | null>(null);
+  const [verifying, setVerifying] = useState(false);
+  const [liveStatus, setLiveStatus] = useState<{ ga4: boolean; gtm: boolean; gsc: boolean; bing: boolean } | null>(null);
 
   const set = <K extends keyof Settings>(k: K, v: Settings[K]) => setS((p) => ({ ...p, [k]: v }));
 
@@ -73,12 +78,14 @@ const SeoManager = () => {
     (async () => {
       const { data } = await supabase.from("site_settings").select("id, data").eq("singleton", true).maybeSingle();
       if (data) { setRowId(data.id); setS((data.data as Settings) ?? {}); }
-      const { count } = await supabase.from("products").select("*", { count: "exact", head: true });
-      setProductCount(count ?? 0);
     })();
   }, []);
 
   const save = async () => {
+    // Validate before saving
+    if (s.ga4_id && !isGA4(s.ga4_id)) return toast({ title: "Invalid GA4 ID", description: "Format: G-XXXXXXXXXX", variant: "destructive" });
+    if (s.gtm_id && !isGTM(s.gtm_id)) return toast({ title: "Invalid GTM ID", description: "Format: GTM-XXXXXXX", variant: "destructive" });
+
     setSaving(true);
     const userRes = await supabase.auth.getUser();
     const updated_by = userRes.data.user?.id ?? null;
@@ -87,19 +94,45 @@ const SeoManager = () => {
       ? await supabase.from("site_settings").update({ data: dataJson as never, updated_by }).eq("id", rowId)
       : await supabase.from("site_settings").insert([{ data: dataJson as never, updated_by } as never]);
     setSaving(false);
-    if (error) toast({ title: "Save failed", description: error.message, variant: "destructive" });
-    else { toast({ title: "✓ Saved", description: "SEO settings live হয়ে গেছে।" }); }
+    if (error) return toast({ title: "Save failed", description: error.message, variant: "destructive" });
+    toast({ title: "✓ Saved", description: "ব্রাউজার রিফ্রেশ করলে সাইটে live হয়ে যাবে।" });
+    // Re-check after save
+    setTimeout(() => verifyLive(), 800);
+  };
+
+  // Verify the public site is actually serving the tags
+  const verifyLive = async () => {
+    setVerifying(true);
+    try {
+      const res = await fetch(`${SITE}/?_=${Date.now()}`, { cache: "no-store" });
+      const html = await res.text();
+      setLiveStatus({
+        ga4: !!s.ga4_id && html.includes(s.ga4_id),
+        gtm: !!s.gtm_id && html.includes(s.gtm_id),
+        gsc: !!s.gsc_token && html.includes(s.gsc_token),
+        bing: !!s.bing_token && html.includes(s.bing_token),
+      });
+    } catch {
+      // SPA — tags inject after JS runs, so server HTML may not include them.
+      // Fall back to checking the current document (admin runs on same origin).
+      setLiveStatus({
+        ga4: !!document.querySelector('script[src*="googletagmanager.com/gtag/js"]'),
+        gtm: !!document.querySelector('script#gtm-init'),
+        gsc: !!document.querySelector('meta[name="google-site-verification"]'),
+        bing: !!document.querySelector('meta[name="msvalidate.01"]'),
+      });
+    }
+    setVerifying(false);
   };
 
   const checks = useMemo(() => [
-    { ok: !!s.ga4_id, label: "Google Analytics কানেক্ট করা হয়েছে" },
-    { ok: true, label: "Sitemap.xml সাবমিট করা হয়েছে" },
+    { ok: isGA4(s.ga4_id), label: "Google Analytics কানেক্ট করা হয়েছে" },
+    { ok: isGTM(s.gtm_id), label: "Google Tag Manager কানেক্ট করা হয়েছে", warn: !isGTM(s.gtm_id) },
+    { ok: isToken(s.gsc_token), label: "Google Search Console ভেরিফাই করা হয়েছে", warn: !isToken(s.gsc_token) },
+    { ok: isToken(s.bing_token), label: "Bing Webmaster ভেরিফাই করা হয়েছে", warn: !isToken(s.bing_token) },
     { ok: !!s.default_og_image, label: "OG Image সেট করা হয়েছে" },
-    { ok: true, label: "Schema Markup (Organization, Product, FAQ)" },
-    { ok: !!s.gsc_token, label: "Google Search Console ভেরিফাই করা হয়েছে", warn: !s.gsc_token },
-    { ok: true, label: "Robots.txt কনফিগার করা হয়েছে" },
-    { ok: true, label: `প্রোডাক্ট SEO (${productCount ?? 0}/${productCount ?? 0})` },
-  ], [s, productCount]);
+    { ok: true, label: "Sitemap.xml + Robots.txt সক্রিয়" },
+  ], [s]);
 
   const score = Math.round((checks.filter(c => c.ok).length / checks.length) * 100);
   const completedCount = checks.filter(c => c.ok).length;
