@@ -307,7 +307,7 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
 };
 
 /* ---------- Hero ---------- */
-const HeroSection = () => {
+const HeroSection = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
   const typedRole = useTypingAnimation(
     ["Graphic Designer", "Brand Strategist", "Web Developer", "Entrepreneur"],
     100, 50, 2000,
