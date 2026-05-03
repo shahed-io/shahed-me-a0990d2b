@@ -5,7 +5,7 @@ import {
   MessageCircle, Code, Palette, ShoppingCart, PenTool, BarChart3, Zap,
   Menu, X, ChevronLeft, ChevronRight, Sparkles, Send, Star, Calendar, BookOpen,
   ArrowUpRight, LogOut, Phone, Package, Info, FileText, Instagram,
-  LayoutDashboard, User as UserIcon, Settings, Copy, Check, Shield, Search,
+  LayoutDashboard, User as UserIcon, Settings, Copy, Check, Shield, Search, ChevronDown,
 } from "lucide-react";
 import { Reveal } from "@/hooks/use-scroll-reveal";
 import { RippleButton } from "@/components/ui/ripple-button";
@@ -159,18 +159,19 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
           <div className="flex items-center gap-2">
             <button
               onClick={onOpenSearch}
-              className="group hidden sm:flex relative items-center gap-2 pl-3 pr-1.5 py-1.5 rounded-full glass text-xs text-muted-foreground hover:text-foreground transition-all duration-300 overflow-hidden border border-white/10 hover:border-primary/40 hover:shadow-[0_0_24px_-6px_hsl(var(--primary)/0.55)]"
+              className="group hidden sm:flex relative items-center gap-2 h-9 pl-3 pr-1.5 rounded-full text-xs text-muted-foreground hover:text-foreground transition-all duration-300 overflow-hidden border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] hover:border-primary/40 hover:shadow-[0_8px_28px_-10px_hsl(var(--primary)/0.55)]"
               aria-label="Search"
               title="Search (⌘K)"
             >
-              <span aria-hidden className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-r from-primary/0 via-primary/15 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <Search className="w-3.5 h-3.5 relative z-10 group-hover:text-primary group-hover:scale-110 transition-transform" />
-              <span className="hidden lg:inline relative z-10">Search</span>
-              <kbd className="hidden lg:inline-flex relative z-10 items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-[9px] font-mono text-foreground/70 group-hover:bg-primary/20 group-hover:border-primary/40 transition-colors">⌘K</kbd>
+              <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+              <span aria-hidden className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-r from-primary/0 via-primary/10 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <Search className="w-3.5 h-3.5 relative z-10 group-hover:text-primary transition-colors" />
+              <span className="hidden lg:inline relative z-10 font-medium">Search</span>
+              <kbd className="hidden lg:inline-flex relative z-10 items-center justify-center h-5 min-w-[28px] px-1.5 rounded-md bg-white/10 border border-white/15 text-[9px] font-mono text-foreground/70 group-hover:bg-primary/15 group-hover:border-primary/40 transition-colors">⌘K</kbd>
             </button>
             <button
               onClick={onOpenSearch}
-              className="sm:hidden p-2 rounded-full glass text-muted-foreground hover:text-foreground"
+              className="sm:hidden h-9 w-9 flex items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-muted-foreground hover:text-foreground"
               aria-label="Search"
             >
               <Search className="w-4 h-4" />
@@ -179,38 +180,42 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
               <div className="relative hidden md:block" ref={menuRef}>
                 <button
                   onClick={() => setMenuOpen((v) => !v)}
-                  className="group relative flex items-center gap-2.5 rounded-full pl-1 pr-3 py-1 border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] hover:border-primary/40 hover:shadow-[0_6px_24px_-8px_hsl(var(--primary)/0.55)] transition-all duration-300 overflow-hidden"
+                  className="group relative flex items-center gap-2 h-9 rounded-full pl-1 pr-1 border border-white/10 bg-gradient-to-r from-white/[0.06] via-white/[0.04] to-white/[0.06] hover:from-primary/15 hover:via-white/[0.06] hover:to-accent/15 hover:border-primary/40 hover:shadow-[0_8px_28px_-10px_hsl(var(--primary)/0.6)] transition-all duration-300 overflow-hidden"
                   aria-haspopup="menu"
                   aria-expanded={menuOpen}
                 >
-                  <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-                  <span aria-hidden className="pointer-events-none absolute -inset-10 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary)/0.18),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+                  <span aria-hidden className="pointer-events-none absolute -inset-10 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary)/0.22),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                  <span className="relative">
+                  <span className="relative shrink-0">
                     {profile?.avatar_url ? (
                       <SmartImage
                         src={profile.avatar_url}
                         alt={profile.display_name ?? "Profile"}
-                        className="w-7 h-7 rounded-full object-cover ring-2 ring-white/15 group-hover:ring-primary/40 transition-all"
+                        className="w-7 h-7 rounded-full object-cover ring-2 ring-white/20 group-hover:ring-primary/50 transition-all"
                         fallbackMessage=""
                       />
                     ) : (
-                      <span className="w-7 h-7 rounded-full bg-gradient-primary flex items-center justify-center text-[11px] font-semibold text-primary-foreground ring-2 ring-white/15 group-hover:ring-primary/40 transition-all">
+                      <span className="w-7 h-7 rounded-full bg-gradient-to-br from-primary via-accent to-primary flex items-center justify-center text-[11px] font-bold text-primary-foreground ring-2 ring-white/20 group-hover:ring-primary/50 transition-all shadow-[inset_0_1px_0_hsl(0_0%_100%/0.3)]">
                         {initials}
                       </span>
                     )}
-                    {isAdmin && (
-                      <span aria-hidden className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-background shadow-[0_0_8px_hsl(142_76%_56%/0.85)]" />
-                    )}
+                    <span aria-hidden className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-background shadow-[0_0_8px_hsl(142_76%_56%/0.85)]" />
                   </span>
-                  <span className="relative text-sm font-medium text-foreground max-w-[120px] truncate">
-                    {profile?.display_name ?? user.email}
+
+                  <span className="relative flex flex-col items-start leading-tight pl-1 pr-1.5 min-w-0">
+                    <span className="text-[11px] text-muted-foreground/80 -mb-0.5 hidden xl:inline">Welcome</span>
+                    <span className="text-[13px] font-semibold text-foreground max-w-[110px] truncate">
+                      {profile?.display_name?.split(" ")[0] ?? user.email?.split("@")[0]}
+                    </span>
                   </span>
+
                   {isAdmin && (
-                    <span className="relative hidden lg:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gradient-to-r from-primary/25 via-accent/20 to-primary/25 border border-primary/40 text-[9px] font-bold uppercase tracking-[0.12em] text-primary shadow-[0_0_12px_-2px_hsl(var(--primary)/0.5)]">
+                    <span className="relative hidden lg:inline-flex items-center gap-1 h-6 px-2 rounded-full bg-gradient-to-r from-primary via-accent to-primary text-[9px] font-bold uppercase tracking-[0.14em] text-primary-foreground shadow-[inset_0_1px_0_hsl(0_0%_100%/0.3),0_4px_14px_-4px_hsl(var(--primary)/0.7)] ring-1 ring-white/20">
                       <Shield className="w-2.5 h-2.5" /> Admin
                     </span>
                   )}
+                  <ChevronDown className="relative w-3.5 h-3.5 mr-1 text-muted-foreground group-hover:text-foreground transition-all duration-300 group-data-[state=open]:rotate-180" />
                 </button>
                 {menuOpen && (
                   <div className="absolute right-0 mt-2 w-72 glass-strong rounded-2xl p-2 animate-fade-in shadow-2xl">
