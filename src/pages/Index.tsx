@@ -355,7 +355,7 @@ const AboutSection = () => (
           <div className="absolute -inset-6 rounded-3xl bg-gradient-aurora blur-3xl opacity-30" />
           <div className="relative p-1 rounded-3xl bg-gradient-accent">
             <img
-              src={profilePhoto}
+              src={aboutPhoto}
               alt="MD Shahed - Portrait"
               loading="lazy"
               decoding="async"
