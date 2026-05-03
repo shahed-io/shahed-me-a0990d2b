@@ -10,7 +10,8 @@ import { RippleButton } from "@/components/ui/ripple-button";
 import { Magnetic } from "@/components/ui/magnetic";
 import { TiltCard } from "@/components/ui/tilt-card";
 import { useAuth } from "@/hooks/use-auth";
-import profilePhoto from "@/assets/hero-portrait.jpg";
+import profilePhoto from "@/assets/profile-portrait.jpg";
+import aboutPhoto from "@/assets/about-portrait.jpg";
 
 /* ---------- Typing animation ---------- */
 const useTypingAnimation = (words: string[], typingSpeed = 100, deletingSpeed = 50, pauseTime = 2000) => {
@@ -354,7 +355,7 @@ const AboutSection = () => (
           <div className="absolute -inset-6 rounded-3xl bg-gradient-aurora blur-3xl opacity-30" />
           <div className="relative p-1 rounded-3xl bg-gradient-accent">
             <img
-              src={profilePhoto}
+              src={aboutPhoto}
               alt="MD Shahed - Portrait"
               loading="lazy"
               decoding="async"
