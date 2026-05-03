@@ -5,8 +5,8 @@ import { CeoSidebar } from "@/components/ceo/CeoSidebar";
 import { useAuth } from "@/hooks/use-auth";
 import { useIsAdmin } from "@/hooks/use-is-admin";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { SEO } from "@/components/SEO";
+import { GlobalSearch, useGlobalSearch } from "@/components/GlobalSearch";
 
 const CeoLayout = () => {
   const { user, loading: authLoading, signOut } = useAuth();
