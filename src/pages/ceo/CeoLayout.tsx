@@ -30,10 +30,10 @@ const CeoLayout = () => {
   return (
     <SidebarProvider>
       <SEO title="Admin Dashboard — Shahed" description="Admin control panel" canonical="https://shahed.com.bd/ceo" />
-      <div className="flex min-h-screen w-full bg-background text-foreground" style={{ backgroundImage: "var(--gradient-mesh)" }}>
+      <div className="flex min-h-screen w-full text-foreground" style={{ backgroundImage: "var(--gradient-mesh)" }}>
         <CeoSidebar />
         <div className="flex-1 flex flex-col min-w-0">
-          <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border bg-background/70 px-3 backdrop-blur-xl">
+          <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border/40 bg-transparent px-3 backdrop-blur-xl">
             <SidebarTrigger />
             <div className="hidden md:flex relative max-w-sm flex-1">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />

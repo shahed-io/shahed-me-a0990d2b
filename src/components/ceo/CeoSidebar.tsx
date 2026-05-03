@@ -32,7 +32,7 @@ export function CeoSidebar() {
   const isActive = (url: string) => (url === "/ceo" ? pathname === "/ceo" : pathname.startsWith(url));
 
   return (
-    <Sidebar collapsible="icon" className="border-r">
+    <Sidebar collapsible="icon" className="border-r border-border/40 [&>div]:!bg-transparent bg-transparent backdrop-blur-xl">
       <SidebarHeader className="border-b px-3 py-3">
         <NavLink to="/ceo" className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/70 text-primary-foreground font-bold">
