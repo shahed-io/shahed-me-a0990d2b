@@ -19,24 +19,25 @@ interface Stats {
   customers: number;
 }
 
-const colorMap = {
-  purple: "from-purple-500 to-purple-600",
-  blue: "from-blue-400 to-cyan-500",
-  green: "from-emerald-500 to-green-600",
-  orange: "from-orange-400 to-amber-500",
-  pink: "from-pink-500 to-rose-500",
-  red: "from-red-500 to-rose-600",
+const tones = {
+  primary: { grad: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.7))", tint: "hsl(var(--primary) / 0.08)" },
+  secondary: { grad: "linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary) / 0.7))", tint: "hsl(var(--secondary) / 0.08)" },
+  accent: { grad: "linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent) / 0.7))", tint: "hsl(var(--accent) / 0.08)" },
+  aurora: { grad: "var(--gradient-aurora)", tint: "hsl(var(--primary) / 0.06)" },
+  destructive: { grad: "linear-gradient(135deg, hsl(var(--destructive)), hsl(var(--destructive) / 0.7))", tint: "hsl(var(--destructive) / 0.08)" },
 } as const;
+type ToneKey = keyof typeof tones;
 
-function StatCard({ label, value, icon: Icon, color, trend, bgTint }: any) {
+function StatCard({ label, value, icon: Icon, tone = "primary", trend }: { label: string; value: any; icon: any; tone?: ToneKey; trend?: number }) {
+  const t = tones[tone];
   return (
-    <Card className={`relative overflow-hidden p-5 ${bgTint}`}>
+    <Card className="relative overflow-hidden border-border/50 p-5" style={{ backgroundColor: t.tint }}>
       <div className="flex items-start justify-between">
-        <div className={`flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${colorMap[color as keyof typeof colorMap]} text-white shadow-md`}>
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl text-primary-foreground shadow-md" style={{ backgroundImage: t.grad }}>
           <Icon className="h-5 w-5" />
         </div>
         {trend !== undefined && (
-          <span className={`flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${trend >= 0 ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400" : "bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-400"}`}>
+          <span className={`flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${trend >= 0 ? "bg-secondary/20 text-secondary" : "bg-destructive/20 text-destructive"}`}>
             {trend >= 0 ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
             {Math.abs(trend).toFixed(1)}%
           </span>
