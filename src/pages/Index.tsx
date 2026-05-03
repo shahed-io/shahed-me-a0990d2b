@@ -64,7 +64,7 @@ const SectionHeading = ({ eyebrow, title, accent }: { eyebrow: string; title: st
 );
 
 /* ---------- Navbar ---------- */
-const Navbar = () => {
+const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
