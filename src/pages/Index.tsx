@@ -135,7 +135,24 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
               </a>
             ))}
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onOpenSearch}
+              className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full glass text-xs text-muted-foreground hover:text-foreground hover:bg-white/10 transition-colors"
+              aria-label="Search"
+              title="Search (⌘K)"
+            >
+              <Search className="w-3.5 h-3.5" />
+              <span className="hidden lg:inline">Search</span>
+              <kbd className="hidden lg:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-[9px] font-mono">⌘K</kbd>
+            </button>
+            <button
+              onClick={onOpenSearch}
+              className="sm:hidden p-2 rounded-full glass text-muted-foreground hover:text-foreground"
+              aria-label="Search"
+            >
+              <Search className="w-4 h-4" />
+            </button>
             {user ? (
               <div className="relative hidden md:block" ref={menuRef}>
                 <button
