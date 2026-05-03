@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;420;450;500;550;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+/* Fonts are loaded from index.html <link> for parallel, non-render-blocking fetch. */
 
 @tailwind base;
 @tailwind components;
