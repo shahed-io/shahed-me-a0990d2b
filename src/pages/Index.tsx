@@ -118,31 +118,40 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-3" : "py-5"}`}>
-      <div className="container mx-auto px-6">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "py-2.5" : "py-4"}`}>
+      <div className="container mx-auto px-4 sm:px-6">
         <div
-          className={`relative flex items-center justify-between rounded-full px-5 py-2.5 overflow-hidden border border-white/10 backdrop-blur-2xl transition-all duration-500 ${
+          className={`relative flex items-center justify-between gap-3 rounded-[28px] pl-2 pr-2 py-2 overflow-hidden border transition-all duration-500 ${
             scrolled
-              ? "bg-background/40 shadow-[0_10px_40px_-12px_rgba(0,0,0,0.5),inset_0_1px_0_hsl(0_0%_100%/0.08)]"
-              : "bg-white/[0.04] shadow-[0_4px_24px_-8px_rgba(0,0,0,0.4)]"
+              ? "border-white/15 bg-background/55 backdrop-blur-2xl shadow-[0_20px_60px_-20px_rgba(0,0,0,0.6),inset_0_1px_0_hsl(0_0%_100%/0.1),inset_0_-1px_0_hsl(0_0%_100%/0.04)]"
+              : "border-white/10 bg-white/[0.05] backdrop-blur-xl shadow-[0_8px_32px_-12px_rgba(0,0,0,0.45)]"
           }`}
         >
-          {/* Glass highlights */}
-          <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-          <span aria-hidden className="pointer-events-none absolute inset-x-12 -bottom-px h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-60" />
-          <span aria-hidden className="pointer-events-none absolute -top-24 -left-12 w-72 h-40 rounded-full bg-gradient-to-br from-primary/20 to-transparent blur-3xl opacity-60" />
-          <span aria-hidden className="pointer-events-none absolute -bottom-24 -right-12 w-72 h-40 rounded-full bg-gradient-to-br from-accent/20 to-transparent blur-3xl opacity-50" />
+          {/* Refined glass highlights */}
+          <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[28px] bg-gradient-to-b from-white/[0.06] via-transparent to-transparent" />
+          <span aria-hidden className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+          <span aria-hidden className="pointer-events-none absolute -top-32 left-1/4 w-80 h-32 rounded-full bg-primary/15 blur-3xl opacity-70" />
+          <span aria-hidden className="pointer-events-none absolute -bottom-32 right-1/4 w-80 h-32 rounded-full bg-accent/15 blur-3xl opacity-60" />
 
-          <a href="#" className="relative font-heading font-bold text-lg tracking-tight">
-            SHAHED<span className="text-gradient">.</span>
+          {/* Logo */}
+          <a href="#" className="relative flex items-center gap-2 pl-2 pr-3 group">
+            <span className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-accent to-primary text-primary-foreground font-bold text-sm shadow-[inset_0_1px_0_hsl(0_0%_100%/0.3),0_4px_14px_-4px_hsl(var(--primary)/0.6)] ring-1 ring-white/15 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3">
+              S
+            </span>
+            <span className="font-heading font-bold text-base tracking-tight hidden sm:inline">
+              SHAHED<span className="text-gradient">.</span>
+            </span>
           </a>
-          <div className="relative hidden md:flex items-center gap-0.5 p-1 rounded-full bg-white/[0.03] border border-white/5">
+
+          {/* Nav pill track */}
+          <div className="relative hidden md:flex items-center gap-0.5 p-1 rounded-full bg-black/20 border border-white/[0.06] shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)]">
             {navItems.map((item) => (
               <a
                 key={item}
                 href={item === "Timeline" ? "/timeline" : `#${item.toLowerCase()}`}
-                className="relative px-3.5 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground rounded-full transition-colors before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-b before:from-white/10 before:to-white/0 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:border before:border-white/10"
+                className="group relative px-3.5 py-1.5 text-[12px] font-medium tracking-wide text-muted-foreground hover:text-foreground rounded-full transition-colors"
               >
+                <span aria-hidden className="absolute inset-0 rounded-full bg-gradient-to-b from-white/[0.12] to-white/[0.02] border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity shadow-[inset_0_1px_0_hsl(0_0%_100%/0.15)]" />
                 <span className="relative">{item}</span>
               </a>
             ))}
