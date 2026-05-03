@@ -441,7 +441,7 @@ const SkillsSection = () => (
         <p className="font-mono text-secondary text-xs tracking-widest mb-3">// tech stack</p>
         <h3 className="font-heading text-2xl md:text-3xl font-semibold">Tools I Use Daily</h3>
       </div>
-      <div className="flex flex-wrap justify-center gap-2.5 max-w-2xl mx-auto">
+      <div className="flex flex-wrap justify-center gap-x-3 gap-y-4 max-w-2xl mx-auto">
         {techStack.map((tech) => (
           <Magnetic key={tech} strength={0.2}>
             <span className="px-4 py-2 rounded-full glass text-sm text-muted-foreground hover:text-foreground transition-colors cursor-default">
