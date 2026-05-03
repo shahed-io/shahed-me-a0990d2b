@@ -39,7 +39,33 @@ const queryClient = new QueryClient({
 });
 
 const RouteFallback = () => (
-  <div className="min-h-screen bg-background" aria-hidden />
+  <div
+    role="status"
+    aria-label="Loading page"
+    className="min-h-screen flex flex-col items-center justify-center bg-background relative overflow-hidden"
+    style={{ backgroundImage: "var(--gradient-mesh)" }}
+  >
+    <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[420px] h-[420px] rounded-full bg-primary/20 blur-[120px] animate-pulse" />
+      <div className="absolute bottom-1/4 right-1/4 w-[320px] h-[320px] rounded-full bg-accent/15 blur-[100px] animate-pulse" style={{ animationDelay: "0.8s" }} />
+    </div>
+    <div className="relative flex flex-col items-center gap-5">
+      <div className="relative">
+        <div
+          className="absolute -inset-2 rounded-full opacity-80"
+          style={{
+            background: "conic-gradient(from 0deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--secondary)), hsl(var(--primary)))",
+            animation: "spin 1.4s linear infinite",
+            filter: "blur(2px)",
+          }}
+        />
+        <div className="relative w-12 h-12 rounded-full bg-background flex items-center justify-center border border-white/10">
+          <span className="font-heading font-bold text-lg text-foreground">S</span>
+        </div>
+      </div>
+      <p className="text-xs font-mono text-muted-foreground tracking-wider">Loading…</p>
+    </div>
+  </div>
 );
 
 const AnimatedRoutes = () => {
