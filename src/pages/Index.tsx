@@ -649,7 +649,7 @@ const BlogSection = () => (
           <TiltCard key={i} max={8}>
             <article className="group glass-card overflow-hidden h-full">
               <div className="aspect-video overflow-hidden">
-                <img
+                <SmartImage
                   src={post.img}
                   alt={`${post.title} — MD Shahed blog article`}
                   loading="lazy"
@@ -657,6 +657,7 @@ const BlogSection = () => (
                   width={400}
                   height={225}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  fallbackMessage="Cover image unavailable"
                 />
               </div>
               <div className="p-6">
