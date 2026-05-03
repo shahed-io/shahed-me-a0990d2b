@@ -104,10 +104,11 @@ const Navbar = () => {
                   className="flex items-center gap-2.5 glass rounded-full pl-1 pr-3 py-1 hover:bg-white/5 transition-colors"
                 >
                   {profile?.avatar_url ? (
-                    <img
+                    <SmartImage
                       src={profile.avatar_url}
                       alt={profile.display_name ?? "Profile"}
                       className="w-7 h-7 rounded-full object-cover"
+                      fallbackMessage=""
                     />
                   ) : (
                     <span className="w-7 h-7 rounded-full bg-gradient-primary flex items-center justify-center text-[11px] font-semibold text-primary-foreground">
