@@ -99,14 +99,14 @@
 
     --shadow-focus: 0 0 0 3px hsl(265 90% 65% / 0.4);
 
-    /* Sidebar */
-    --sidebar-background: 240 30% 5%;
+    /* Sidebar — transparent so the page mesh gradient shows through */
+    --sidebar-background: 265 40% 8%;
     --sidebar-foreground: 0 0% 98%;
     --sidebar-primary: 265 90% 65%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 20% 14%;
+    --sidebar-accent: 265 40% 18%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 240 20% 18%;
+    --sidebar-border: 0 0% 100% / 0.08;
     --sidebar-ring: 265 90% 65%;
   }
 }
