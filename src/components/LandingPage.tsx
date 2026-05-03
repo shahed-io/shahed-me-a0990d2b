@@ -156,11 +156,13 @@ export const LandingPage = ({
           </div>
 
           <div className="relative mx-auto w-full max-w-sm">
-            <img
+            <SmartImage
               src={image}
+              fallbackSrc={DEFAULT_IMG}
               alt={`${h1} — MD Shahed, Dhaka, Bangladesh`}
               loading="eager"
               className="aspect-square w-full rounded-2xl object-cover shadow-lg"
+              fallbackMessage="Portrait লোড করা যায়নি"
             />
           </div>
         </div>
