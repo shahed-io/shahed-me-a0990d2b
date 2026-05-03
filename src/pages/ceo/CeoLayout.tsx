@@ -36,10 +36,22 @@ const CeoLayout = () => {
         <div className="flex-1 flex flex-col min-w-0">
           <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border/40 bg-transparent px-3 backdrop-blur-xl">
             <SidebarTrigger />
-            <div className="hidden md:flex relative max-w-sm flex-1">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <Input placeholder="Search anything…" className="pl-9 h-9 rounded-full bg-white/5 border-white/10 backdrop-blur-md" />
-            </div>
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="hidden md:flex items-center gap-2 max-w-sm flex-1 h-9 px-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-left text-sm text-muted-foreground hover:bg-white/10 hover:border-white/20 transition-colors"
+              aria-label="Open search"
+            >
+              <Search className="h-4 w-4" />
+              <span className="flex-1 truncate">Search anything…</span>
+              <kbd className="hidden lg:inline-flex items-center px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-[9px] font-mono">⌘K</kbd>
+            </button>
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="md:hidden p-2 rounded-full bg-white/5 border border-white/10 text-muted-foreground"
+              aria-label="Open search"
+            >
+              <Search className="h-4 w-4" />
+            </button>
             <div className="ml-auto flex items-center gap-2">
               <Button variant="ghost" size="icon" className="rounded-full" aria-label="Notifications"><Bell className="h-4 w-4" /></Button>
               <Button asChild variant="outline" size="sm" className="rounded-full">
