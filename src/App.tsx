@@ -38,9 +38,7 @@ const queryClient = new QueryClient({
 });
 
 const RouteFallback = () => (
-  <div className="min-h-screen flex items-center justify-center text-muted-foreground text-sm">
-    লোড হচ্ছে…
-  </div>
+  <div className="min-h-screen bg-background" aria-hidden />
 );
 
 const AnimatedRoutes = () => {

@@ -7,18 +7,32 @@ export interface Profile {
   avatar_url: string | null;
 }
 
+// Read the session from localStorage synchronously so the UI can render
+// immediately on revisits instead of flashing a loading screen.
+const readInitialSession = (): Session | null => {
+  try {
+    const projectId = (import.meta as any).env?.VITE_SUPABASE_PROJECT_ID;
+    if (!projectId) return null;
+    const raw = localStorage.getItem(`sb-${projectId}-auth-token`);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (parsed?.access_token && parsed?.user) return parsed as Session;
+    return null;
+  } catch { return null; }
+};
+
 export const useAuth = () => {
-  const [session, setSession] = useState<Session | null>(null);
-  const [user, setUser] = useState<User | null>(null);
+  const initial = readInitialSession();
+  const [session, setSession] = useState<Session | null>(initial);
+  const [user, setUser] = useState<User | null>(initial?.user ?? null);
   const [profile, setProfile] = useState<Profile | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(!initial);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, newSession) => {
       setSession(newSession);
       setUser(newSession?.user ?? null);
       if (newSession?.user) {
-        // Defer profile fetch to avoid deadlock
         setTimeout(() => {
           supabase
             .from("profiles")
@@ -50,6 +64,7 @@ export const useAuth = () => {
   }, []);
 
   const signOut = async () => {
+    try { localStorage.removeItem("is_admin_cache_v1"); } catch {}
     await supabase.auth.signOut();
   };
 
