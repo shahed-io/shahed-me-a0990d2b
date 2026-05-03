@@ -43,32 +43,37 @@ const RouteFallback = () => (
 
 const AnimatedRoutes = () => {
   const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/ceo");
   return (
-    <PageTransition>
-      <Suspense fallback={<RouteFallback />}>
-        <Routes location={location}>
-          <Route path="/" element={<Index />} />
-          <Route path="/login" element={<Auth />} />
-          <Route path="/signup" element={<Auth />} />
-          <Route path="/timeline" element={<Timeline />} />
-          <Route path="/md-shahed" element={<MdShahed />} />
-          <Route path="/shahed-business" element={<ShahedBusiness />} />
-          <Route path="/ceo" element={<CeoLayout />}>
-            <Route index element={<CeoDashboard />} />
-            <Route path="blog" element={<CeoBlog />} />
-            <Route path="seo" element={<SeoManager />} />
-            <Route path="page-seo" element={<PageSeo />} />
-            <Route path="tickets" element={<CeoTickets />} />
-            <Route path="settings" element={<CeoSettings />} />
-          </Route>
-          <Route path="/md-shahed-web-developer" element={<MdShahedWebDeveloper />} />
-          <Route path="/bangladesh-web-development" element={<BangladeshWebDevelopment />} />
-          <Route path="/digital-consulting" element={<DigitalConsulting />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
-    </PageTransition>
+    <>
+      <PageTransition>
+        <Suspense fallback={<RouteFallback />}>
+          <Routes location={location}>
+            <Route path="/" element={<Index />} />
+            <Route path="/login" element={<Auth />} />
+            <Route path="/signup" element={<Auth />} />
+            <Route path="/timeline" element={<Timeline />} />
+            <Route path="/md-shahed" element={<MdShahed />} />
+            <Route path="/shahed-business" element={<ShahedBusiness />} />
+            <Route path="/ceo" element={<CeoLayout />}>
+              <Route index element={<CeoDashboard />} />
+              <Route path="blog" element={<CeoBlog />} />
+              <Route path="seo" element={<SeoManager />} />
+              <Route path="page-seo" element={<PageSeo />} />
+              <Route path="tickets" element={<CeoTickets />} />
+              <Route path="settings" element={<CeoSettings />} />
+            </Route>
+            <Route path="/md-shahed-web-developer" element={<MdShahedWebDeveloper />} />
+            <Route path="/bangladesh-web-development" element={<BangladeshWebDevelopment />} />
+            <Route path="/digital-consulting" element={<DigitalConsulting />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </PageTransition>
+      {/* Hide the public chat widget inside the admin panel */}
+      {!isAdminRoute && <SupportWidget />}
+    </>
   );
 };
 
