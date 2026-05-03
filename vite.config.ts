@@ -34,8 +34,16 @@ export default defineConfig(({ mode }) => ({
         entryFileNames: `assets/[name]-[hash].js`,
         chunkFileNames: `assets/[name]-[hash].js`,
         assetFileNames: `assets/[name]-[hash].[ext]`,
+        manualChunks: {
+          "react-vendor": ["react", "react-dom", "react-router-dom"],
+          "query": ["@tanstack/react-query"],
+          "supabase": ["@supabase/supabase-js"],
+          "icons": ["lucide-react"],
+        },
       },
     },
+    cssCodeSplit: true,
+    reportCompressedSize: false,
   },
 }));
 
