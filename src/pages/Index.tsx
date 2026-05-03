@@ -157,25 +157,6 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
             ))}
           </div>
           <div className="flex items-center gap-2">
-            <button
-              onClick={onOpenSearch}
-              className="group hidden sm:flex relative items-center gap-2 h-9 pl-3 pr-1.5 rounded-full text-xs text-muted-foreground hover:text-foreground transition-all duration-300 overflow-hidden border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] hover:border-primary/40 hover:shadow-[0_8px_28px_-10px_hsl(var(--primary)/0.55)]"
-              aria-label="Search"
-              title="Search (⌘K)"
-            >
-              <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-              <span aria-hidden className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-r from-primary/0 via-primary/10 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <Search className="w-3.5 h-3.5 relative z-10 group-hover:text-primary transition-colors" />
-              <span className="hidden lg:inline relative z-10 font-medium">Search</span>
-              <kbd className="hidden lg:inline-flex relative z-10 items-center justify-center h-5 min-w-[28px] px-1.5 rounded-md bg-white/10 border border-white/15 text-[9px] font-mono text-foreground/70 group-hover:bg-primary/15 group-hover:border-primary/40 transition-colors">⌘K</kbd>
-            </button>
-            <button
-              onClick={onOpenSearch}
-              className="sm:hidden h-9 w-9 flex items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-muted-foreground hover:text-foreground"
-              aria-label="Search"
-            >
-              <Search className="w-4 h-4" />
-            </button>
             {user ? (
               <div className="relative hidden md:block" ref={menuRef}>
                 <button
