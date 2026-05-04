@@ -507,9 +507,9 @@ const NavBtn = ({ active, label, Icon, onClick }: { active: boolean; label: stri
 );
 
 const CHIP_TONE: Record<string, string> = {
-  emerald: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+  emerald: "bg-secondary/15 text-secondary border-secondary/30",
   primary: "bg-primary/15 text-primary border-primary/30",
-  muted: "bg-white/[0.04] text-muted-foreground border-white/10",
+  muted: "bg-card/40 text-muted-foreground border-border/50",
 };
 const Chip = ({ tone = "muted", icon, children }: { tone?: keyof typeof CHIP_TONE; icon?: React.ReactNode; children: React.ReactNode }) => (
   <span className={`inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-full border ${CHIP_TONE[tone]}`}>
@@ -520,7 +520,7 @@ const Chip = ({ tone = "muted", icon, children }: { tone?: keyof typeof CHIP_TON
 const Field = ({ label, icon, children, action }: { label: string; icon: React.ReactNode; children: React.ReactNode; action?: React.ReactNode }) => (
   <div>
     <p className="text-[10px] font-semibold tracking-[0.18em] uppercase text-muted-foreground mb-1.5">{label}</p>
-    <div className="flex items-center gap-3 px-4 py-3 rounded-2xl border border-white/10 bg-white/[0.03] focus-within:border-primary/40 focus-within:bg-white/[0.05] transition-colors">
+    <div className="flex min-h-12 items-center gap-3 px-4 py-3 rounded-2xl border border-border/50 bg-card/35 focus-within:border-primary/40 focus-within:bg-card/50 transition-colors">
       <span className="text-muted-foreground shrink-0">{icon}</span>
       <div className="flex-1 min-w-0">{children}</div>
       {action && <div className="shrink-0">{action}</div>}
@@ -530,13 +530,13 @@ const Field = ({ label, icon, children, action }: { label: string; icon: React.R
 
 const STAT_TONE: Record<string, string> = {
   primary: "from-primary/20 to-primary/[0.04] text-primary",
-  emerald: "from-emerald-500/20 to-emerald-500/[0.04] text-emerald-300",
-  rose: "from-rose-500/20 to-rose-500/[0.04] text-rose-300",
-  default: "from-white/10 to-white/[0.02] text-foreground",
+  emerald: "from-secondary/20 to-secondary/[0.04] text-secondary",
+  rose: "from-accent/20 to-accent/[0.04] text-accent",
+  default: "from-card/70 to-card/25 text-foreground",
 };
 const SoftStat = ({ icon, label, value, tone = "default" }:
   { icon: React.ReactNode; label: string; value: React.ReactNode; tone?: keyof typeof STAT_TONE }) => (
-  <div className={`relative rounded-2xl px-4 py-3 border border-white/10 bg-gradient-to-br ${STAT_TONE[tone]} backdrop-blur-md`}>
+  <div className={`relative min-h-[66px] rounded-2xl px-4 py-3 border border-border/50 bg-gradient-to-br ${STAT_TONE[tone]}`}>
     <div className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.18em] uppercase text-muted-foreground/90">
       <span className="opacity-80">{icon}</span> {label}
     </div>
