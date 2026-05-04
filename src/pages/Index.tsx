@@ -5,7 +5,7 @@ import {
   MessageCircle, Code, Palette, ShoppingCart, PenTool, BarChart3, Zap,
   Menu, X, ChevronLeft, ChevronRight, Sparkles, Send, Star, Calendar, BookOpen,
   ArrowUpRight, LogOut, Phone, Package, Info, FileText, Instagram,
-  LayoutDashboard, User as UserIcon, Settings, Copy, Check, Shield, Search, ChevronDown,
+  LayoutDashboard, User as UserIcon, Settings, Copy, Check, Shield, Search, ChevronDown, LogIn,
 } from "lucide-react";
 import { Reveal } from "@/hooks/use-scroll-reveal";
 import { RippleButton } from "@/components/ui/ripple-button";
@@ -266,13 +266,20 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
               <Magnetic strength={0.3} className="hidden md:inline-block">
                 <button
                   onClick={() => (window.location.href = "/login")}
-                  className="group relative inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold text-primary-foreground overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_-6px_hsl(var(--primary)/0.7)] active:scale-[0.97]"
+                  className="group relative inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-semibold text-primary-foreground overflow-hidden transition-all duration-300 hover:shadow-[0_10px_40px_-8px_hsl(var(--primary)/0.8)] hover:-translate-y-0.5 active:scale-[0.97]"
                 >
-                  <span aria-hidden className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] animate-[gradient-x_3s_linear_infinite]" />
-                  <span aria-hidden className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-white/20 via-white/0 to-white/20 transition-opacity" />
-                  <span aria-hidden className="absolute -inset-px rounded-full ring-1 ring-inset ring-white/20" />
-                  <Sparkles className="relative z-10 w-3.5 h-3.5 group-hover:rotate-12 transition-transform" />
-                  <span className="relative z-10">Login</span>
+                  {/* Animated gradient base */}
+                  <span aria-hidden className="absolute inset-0 bg-[linear-gradient(115deg,hsl(var(--primary)),hsl(var(--accent)),hsl(var(--primary)))] bg-[length:200%_100%] animate-[gradient-x_3s_linear_infinite]" />
+                  {/* Glossy top highlight */}
+                  <span aria-hidden className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/25 to-transparent" />
+                  {/* Shine sweep on hover */}
+                  <span aria-hidden className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                  {/* Inner ring */}
+                  <span aria-hidden className="absolute inset-0 rounded-full ring-1 ring-inset ring-white/30" />
+                  {/* Outer soft glow */}
+                  <span aria-hidden className="absolute -inset-1 rounded-full bg-gradient-to-r from-primary/40 to-accent/40 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
+                  <LogIn className="relative z-10 w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+                  <span className="relative z-10 tracking-wide">Login</span>
                 </button>
               </Magnetic>
             )}
