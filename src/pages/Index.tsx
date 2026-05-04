@@ -158,42 +158,46 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
           </div>
           <div className="flex items-center gap-2">
             {user ? (
-              <div className="relative hidden md:block" ref={menuRef}>
-                <button
-                  onClick={() => setMenuOpen((v) => !v)}
-                  className="group relative flex items-center gap-2 h-9 px-1.5 rounded-full hover:bg-white/[0.06] transition-colors"
-                  aria-haspopup="menu"
-                  aria-expanded={menuOpen}
-                >
-                  <span className="relative shrink-0">
-                    {profile?.avatar_url ? (
-                      <SmartImage
-                        src={profile.avatar_url}
-                        alt={profile.display_name ?? "Profile"}
-                        className="w-7 h-7 rounded-full object-cover ring-1 ring-white/15 group-hover:ring-primary/40 transition-all"
-                        fallbackMessage=""
-                      />
-                    ) : (
-                      <span className="w-7 h-7 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-[11px] font-semibold text-primary-foreground ring-1 ring-white/15 group-hover:ring-primary/40 transition-all">
-                        {initials}
-                      </span>
-                    )}
-                    <span aria-hidden className="absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full bg-emerald-400 ring-2 ring-background" />
-                  </span>
-
-                  <span className="text-[13px] font-medium text-foreground/90 max-w-[110px] truncate">
-                    {profile?.display_name?.split(" ")[0] ?? user.email?.split("@")[0]}
-                  </span>
-
-                  {isAdmin && (
-                    <span
-                      title="Admin"
-                      className="hidden lg:inline-flex items-center justify-center h-5 w-5 rounded-full bg-primary/15 text-primary ring-1 ring-primary/30"
-                    >
-                      <Shield className="w-2.5 h-2.5" />
+              <Link
+                to="/dashboard"
+                className="group relative hidden md:inline-flex items-center gap-2 h-9 pl-1 pr-3 rounded-full overflow-hidden border border-white/10 bg-gradient-to-r from-primary/15 via-accent/10 to-primary/15 hover:from-primary/30 hover:via-accent/25 hover:to-primary/30 hover:border-primary/50 hover:shadow-[0_8px_28px_-10px_hsl(var(--primary)/0.7)] transition-all duration-300"
+                title="Open Dashboard"
+              >
+                <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+                <span className="relative shrink-0">
+                  {profile?.avatar_url ? (
+                    <SmartImage
+                      src={profile.avatar_url}
+                      alt={profile.display_name ?? "Profile"}
+                      className="w-7 h-7 rounded-full object-cover ring-1 ring-white/20 group-hover:ring-primary/60 transition-all"
+                      fallbackMessage=""
+                    />
+                  ) : (
+                    <span className="w-7 h-7 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-[11px] font-semibold text-primary-foreground ring-1 ring-white/20 group-hover:ring-primary/60 transition-all">
+                      {initials}
                     </span>
                   )}
-                  <ChevronDown className="w-3.5 h-3.5 text-muted-foreground/70 group-hover:text-foreground transition-transform duration-200 group-aria-expanded:rotate-180" />
+                  <span aria-hidden className="absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full bg-emerald-400 ring-2 ring-background" />
+                </span>
+
+                <span className="relative inline-flex items-center gap-1.5">
+                  <LayoutDashboard className="w-3.5 h-3.5 text-primary" />
+                  <span className="text-[13px] font-semibold text-foreground tracking-wide">Dashboard</span>
+                </span>
+
+                {isAdmin && (
+                  <span
+                    title="Admin"
+                    className="relative hidden lg:inline-flex items-center justify-center h-5 w-5 rounded-full bg-primary/20 text-primary ring-1 ring-primary/40"
+                  >
+                    <Shield className="w-2.5 h-2.5" />
+                  </span>
+                )}
+              </Link>
+              {false && (
+              <div className="relative hidden md:block" ref={menuRef}>
+                <button onClick={() => setMenuOpen((v) => !v)} aria-haspopup="menu" aria-expanded={menuOpen} className="hidden">
+                  <ChevronDown className="w-3.5 h-3.5" />
                 </button>
                 {menuOpen && (
                   <div className="absolute right-0 mt-2 w-72 glass-strong rounded-2xl p-2 animate-fade-in shadow-2xl">
