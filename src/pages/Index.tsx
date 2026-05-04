@@ -6,6 +6,7 @@ import {
   Menu, X, ChevronLeft, ChevronRight, Sparkles, Send, Star, Calendar, BookOpen,
   ArrowUpRight, LogOut, Phone, Package, Info, FileText, Instagram,
   LayoutDashboard, User as UserIcon, Settings, Copy, Check, Shield, Search, ChevronDown,
+  , LogIn,
 } from "lucide-react";
 import { Reveal } from "@/hooks/use-scroll-reveal";
 import { RippleButton } from "@/components/ui/ripple-button";
