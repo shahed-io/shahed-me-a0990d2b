@@ -222,7 +222,7 @@ const Dashboard = () => {
           {/* Content */}
           <section>
             <GlassCard className="p-5 sm:p-7 min-h-[520px]">
-              <header className="flex items-start justify-between gap-4 mb-6 pb-5 border-b border-white/10">
+              <header className="flex min-h-[68px] items-start justify-between gap-4 mb-6 pb-5 border-b border-border/50">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/30 to-accent/20 border border-white/10 flex items-center justify-center text-primary">
                     <current.icon className="w-5 h-5" />
@@ -237,16 +237,16 @@ const Dashboard = () => {
                   !editing ? (
                     <button
                       onClick={() => setEditing(true)}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-[0_6px_20px_-8px_hsl(var(--primary)/0.7)] hover:shadow-[0_8px_24px_-6px_hsl(var(--primary)/0.9)] transition-all"
+                      className="inline-flex h-9 items-center gap-1.5 px-3.5 rounded-full text-xs font-semibold bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-[0_6px_20px_-8px_hsl(var(--primary)/0.7)] hover:shadow-[0_8px_24px_-6px_hsl(var(--primary)/0.9)] transition-shadow"
                     >
                       <Pencil className="w-3.5 h-3.5" /> Edit
                     </button>
                   ) : (
                     <div className="flex gap-2">
-                      <button onClick={() => setEditing(false)} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-medium border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] transition-colors">
+                      <button onClick={() => setEditing(false)} className="inline-flex h-9 items-center gap-1.5 px-3 rounded-full text-xs font-medium border border-border/50 bg-card/35 hover:bg-card/50 transition-colors">
                         <X className="w-3.5 h-3.5" /> Cancel
                       </button>
-                      <button onClick={handleSave} disabled={saving} className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold bg-gradient-to-r from-primary to-accent text-primary-foreground disabled:opacity-60">
+                      <button onClick={handleSave} disabled={saving} className="inline-flex h-9 items-center gap-1.5 px-3.5 rounded-full text-xs font-semibold bg-gradient-to-r from-primary to-accent text-primary-foreground disabled:opacity-60">
                         <Save className="w-3.5 h-3.5" /> {saving ? "Saving…" : "Save"}
                       </button>
                     </div>
