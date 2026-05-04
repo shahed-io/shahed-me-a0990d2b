@@ -346,9 +346,13 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
             ) : (
               <a
                 href="/login"
-                className="mt-2 text-center px-4 py-2.5 rounded-full bg-gradient-primary text-primary-foreground text-sm font-medium"
+                className="group relative mt-2 inline-flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full text-sm font-semibold text-primary-foreground overflow-hidden transition-all duration-300 active:scale-[0.97] shadow-[0_8px_24px_-8px_hsl(var(--primary)/0.7)]"
               >
-                Login
+                <span aria-hidden className="absolute inset-0 bg-[linear-gradient(115deg,hsl(var(--primary)),hsl(var(--accent)),hsl(var(--primary)))] bg-[length:200%_100%] animate-[gradient-x_3s_linear_infinite]" />
+                <span aria-hidden className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/25 to-transparent" />
+                <span aria-hidden className="absolute inset-0 rounded-full ring-1 ring-inset ring-white/30" />
+                <LogIn className="relative z-10 w-4 h-4" />
+                <span className="relative z-10 tracking-wide">Login</span>
               </a>
             )}
           </div>
