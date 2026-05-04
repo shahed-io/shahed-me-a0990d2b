@@ -161,47 +161,39 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
               <div className="relative hidden md:block" ref={menuRef}>
                 <button
                   onClick={() => setMenuOpen((v) => !v)}
-                  className="group relative flex items-center gap-2 h-9 rounded-full pl-1 pr-1 border border-white/10 bg-gradient-to-r from-white/[0.06] via-white/[0.04] to-white/[0.06] hover:from-primary/15 hover:via-white/[0.06] hover:to-accent/15 hover:border-primary/40 hover:shadow-[0_8px_28px_-10px_hsl(var(--primary)/0.6)] transition-all duration-300 overflow-hidden"
+                  className="group relative flex items-center gap-2 h-9 px-1.5 rounded-full hover:bg-white/[0.06] transition-colors"
                   aria-haspopup="menu"
                   aria-expanded={menuOpen}
                 >
-                  <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-                  <span aria-hidden className="pointer-events-none absolute -inset-10 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary)/0.22),transparent_60%)] opacity-0 group-hover:opacity-100 transition-opacity" />
-
                   <span className="relative shrink-0">
                     {profile?.avatar_url ? (
                       <SmartImage
                         src={profile.avatar_url}
                         alt={profile.display_name ?? "Profile"}
-                        className="w-7 h-7 rounded-full object-cover ring-2 ring-white/20 group-hover:ring-primary/50 transition-all"
+                        className="w-7 h-7 rounded-full object-cover ring-1 ring-white/15 group-hover:ring-primary/40 transition-all"
                         fallbackMessage=""
                       />
                     ) : (
-                      <span className="w-7 h-7 rounded-full bg-gradient-to-br from-primary via-accent to-primary flex items-center justify-center text-[11px] font-bold text-primary-foreground ring-2 ring-white/20 group-hover:ring-primary/50 transition-all shadow-[inset_0_1px_0_hsl(0_0%_100%/0.3)]">
+                      <span className="w-7 h-7 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-[11px] font-semibold text-primary-foreground ring-1 ring-white/15 group-hover:ring-primary/40 transition-all">
                         {initials}
                       </span>
                     )}
-                    <span aria-hidden className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-background shadow-[0_0_8px_hsl(142_76%_56%/0.85)]" />
+                    <span aria-hidden className="absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full bg-emerald-400 ring-2 ring-background" />
                   </span>
 
-                  <span className="relative flex flex-col items-start leading-tight pl-1 pr-1.5 min-w-0">
-                    <span className="text-[11px] text-muted-foreground/80 -mb-0.5 hidden xl:inline">Welcome</span>
-                    <span className="text-[13px] font-semibold text-foreground max-w-[110px] truncate">
-                      {profile?.display_name?.split(" ")[0] ?? user.email?.split("@")[0]}
-                    </span>
+                  <span className="text-[13px] font-medium text-foreground/90 max-w-[110px] truncate">
+                    {profile?.display_name?.split(" ")[0] ?? user.email?.split("@")[0]}
                   </span>
 
                   {isAdmin && (
-                    <Link
-                      to="/ceo"
-                      onClick={(e) => e.stopPropagation()}
-                      title="Go to Admin Panel"
-                      className="relative hidden lg:inline-flex items-center gap-1 h-6 px-2 rounded-full bg-gradient-to-r from-primary via-accent to-primary text-[9px] font-bold uppercase tracking-[0.14em] text-primary-foreground shadow-[inset_0_1px_0_hsl(0_0%_100%/0.3),0_4px_14px_-4px_hsl(var(--primary)/0.7)] ring-1 ring-white/20 hover:scale-105 hover:shadow-[inset_0_1px_0_hsl(0_0%_100%/0.4),0_6px_20px_-4px_hsl(var(--primary)/0.9)] transition-transform"
+                    <span
+                      title="Admin"
+                      className="hidden lg:inline-flex items-center justify-center h-5 w-5 rounded-full bg-primary/15 text-primary ring-1 ring-primary/30"
                     >
-                      <Shield className="w-2.5 h-2.5" /> Admin
-                    </Link>
+                      <Shield className="w-2.5 h-2.5" />
+                    </span>
                   )}
-                  <ChevronDown className="relative w-3.5 h-3.5 mr-1 text-muted-foreground group-hover:text-foreground transition-all duration-300 group-data-[state=open]:rotate-180" />
+                  <ChevronDown className="w-3.5 h-3.5 text-muted-foreground/70 group-hover:text-foreground transition-transform duration-200 group-aria-expanded:rotate-180" />
                 </button>
                 {menuOpen && (
                   <div className="absolute right-0 mt-2 w-72 glass-strong rounded-2xl p-2 animate-fade-in shadow-2xl">
