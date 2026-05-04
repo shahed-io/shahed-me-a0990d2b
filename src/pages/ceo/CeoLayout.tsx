@@ -43,7 +43,7 @@ const CeoLayout = () => {
             >
               <Search className="h-4 w-4" />
               <span className="flex-1 truncate">Search anything…</span>
-              <kbd className="hidden lg:inline-flex items-center px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-[9px] font-mono">⌘K</kbd>
+              <kbd className="hidden lg:inline-flex items-center px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-[9px] font-mono">Ctrl+K</kbd>
             </button>
             <button
               onClick={() => setSearchOpen(true)}

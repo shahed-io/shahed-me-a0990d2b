@@ -413,7 +413,7 @@ const HeroSection = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
               Search projects, services, blog, contact…
             </span>
             <span className="hidden sm:flex items-center gap-1 text-[10px] text-muted-foreground">
-              <kbd className="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 font-mono">⌘</kbd>
+              <kbd className="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 font-mono">Ctrl</kbd>
               <kbd className="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 font-mono">K</kbd>
             </span>
             <span className="absolute inset-0 rounded-full bg-gradient-aurora opacity-0 group-hover:opacity-20 -z-10 blur-xl transition-opacity" />
