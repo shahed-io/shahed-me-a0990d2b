@@ -156,7 +156,7 @@ const Dashboard = () => {
                     {initials}
                   </div>
                 )}
-                <span className="absolute -bottom-1 -right-1 h-3.5 w-3.5 rounded-full bg-emerald-400 ring-[3px] ring-background" />
+                <span className="absolute -bottom-1 -right-1 h-3.5 w-3.5 rounded-full bg-secondary ring-[3px] ring-background" />
               </div>
 
               <div className="min-w-0 flex-1">
@@ -224,7 +224,7 @@ const Dashboard = () => {
             <GlassCard className="p-5 sm:p-7 min-h-[520px]">
               <header className="flex min-h-[68px] items-start justify-between gap-4 mb-6 pb-5 border-b border-border/50">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/30 to-accent/20 border border-white/10 flex items-center justify-center text-primary">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/30 to-accent/20 border border-border/50 flex items-center justify-center text-primary">
                     <current.icon className="w-5 h-5" />
                   </div>
                   <div>
