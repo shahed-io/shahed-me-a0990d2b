@@ -409,7 +409,7 @@ const ActivitySection = ({ commentCount, likeCount, recent }:
       ) : (
         <div className="space-y-2">
           {recent.map(c => (
-            <div key={c.id} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 hover:bg-white/[0.05] transition-colors">
+            <div key={c.id} className="rounded-2xl border border-border/50 bg-card/35 p-4 hover:bg-card/50 transition-colors">
               <p className="text-sm text-foreground/90 line-clamp-3">{c.content}</p>
               <p className="text-[10px] text-muted-foreground mt-1.5">{new Date(c.created_at).toLocaleString()}</p>
             </div>
@@ -462,9 +462,9 @@ const LanguageSection = ({ language, onChange }: { language: string; onChange: (
             className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl border transition-all ${
               active
                 ? "border-primary/40 bg-gradient-to-r from-primary/15 via-accent/10 to-transparent"
-                : "border-white/10 bg-white/[0.03] hover:bg-white/[0.06]"
+                : "border-border/50 bg-card/35 hover:bg-card/50"
             }`}>
-            <span className={`flex h-9 w-9 items-center justify-center rounded-xl ${active ? "bg-primary/25 text-primary ring-1 ring-primary/40" : "bg-white/[0.04] text-muted-foreground"}`}>
+            <span className={`flex h-9 w-9 items-center justify-center rounded-xl ${active ? "bg-primary/25 text-primary ring-1 ring-primary/40" : "bg-card/45 text-muted-foreground"}`}>
               <Languages className="w-4 h-4" />
             </span>
             <span className="flex-1 text-left">
@@ -546,7 +546,7 @@ const SoftStat = ({ icon, label, value, tone = "default" }:
 
 const ToggleRow = ({ title, desc, checked, onChange }:
   { title: string; desc: string; checked: boolean; onChange: (v: boolean) => void }) => (
-  <div className="flex items-start gap-4 px-4 py-3.5 rounded-2xl border border-white/10 bg-white/[0.03]">
+  <div className="flex min-h-[78px] items-start gap-4 px-4 py-3.5 rounded-2xl border border-border/50 bg-card/35">
     <div className="flex-1 min-w-0">
       <p className="text-sm font-semibold">{title}</p>
       <p className="text-xs text-muted-foreground mt-0.5">{desc}</p>
@@ -555,7 +555,7 @@ const ToggleRow = ({ title, desc, checked, onChange }:
       role="switch"
       aria-checked={checked}
       onClick={() => onChange(!checked)}
-      className={`relative h-6 w-11 rounded-full transition-colors ${checked ? "bg-gradient-to-r from-primary to-accent" : "bg-white/10"}`}
+      className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${checked ? "bg-gradient-to-r from-primary to-accent" : "bg-muted"}`}
     >
       <span className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-all ${checked ? "left-[22px]" : "left-0.5"}`} />
     </button>
@@ -563,7 +563,7 @@ const ToggleRow = ({ title, desc, checked, onChange }:
 );
 
 const EmptyHint = ({ text }: { text: string }) => (
-  <div className="rounded-2xl border border-dashed border-white/10 bg-white/[0.02] px-5 py-8 text-center">
+  <div className="min-h-[110px] rounded-2xl border border-dashed border-border/50 bg-card/25 px-5 py-8 text-center">
     <Sparkles className="w-5 h-5 text-primary/70 mx-auto mb-2" />
     <p className="text-xs text-muted-foreground">{text}</p>
   </div>
