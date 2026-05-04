@@ -230,7 +230,7 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
             onClick={() => setMobileOpen(false)}
           />
           {/* Drawer panel — Refined minimal design */}
-          <div className="md:hidden fixed inset-y-0 right-0 z-50 w-[86%] max-w-sm overflow-hidden animate-slide-in-right flex flex-col border-l border-white/10 bg-[hsl(var(--background))] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)]">
+          <div className="md:hidden fixed inset-y-0 right-0 z-50 w-[86%] max-w-sm overflow-hidden animate-fade-in flex flex-col border-l border-white/10 bg-[hsl(var(--background))] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)]">
             {/* Subtle ambient gradient */}
             <div aria-hidden className="absolute inset-0 pointer-events-none">
               <div className="absolute -top-40 -right-32 w-[360px] h-[360px] rounded-full bg-primary/15 blur-[100px]" />
