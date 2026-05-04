@@ -207,7 +207,9 @@ const Dashboard = () => {
                   >
                     <LayoutDashboard className="w-4 h-4" /> Admin Panel
                   </Link>
-                ) : null}
+                ) : (
+                  <div aria-hidden className="h-11" />
+                )}
                 </div>
                 <button
                   onClick={() => { signOut(); navigate("/"); }}
