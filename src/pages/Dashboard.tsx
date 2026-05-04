@@ -26,7 +26,7 @@ const NAV: NavItemDef[] = [
 const Dashboard = () => {
   const navigate = useNavigate();
   const { user, profile, loading, signOut } = useAuth();
-  const { isAdmin } = useIsAdmin();
+  const { isAdmin, loading: adminLoading } = useIsAdmin();
   const { toast } = useToast();
   const [params, setParams] = useSearchParams();
   const [section, setSection] = useState<SectionKey>(
@@ -128,10 +128,10 @@ const Dashboard = () => {
       <SEO title="Dashboard — SHAHED" description="Manage your profile, security and preferences." />
 
       {/* Ambient color grading */}
-      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute -top-32 left-[10%] w-[640px] h-[440px] rounded-full bg-primary/20 blur-[160px]" />
-        <div className="absolute top-[30%] right-[5%] w-[520px] h-[420px] rounded-full bg-accent/20 blur-[150px]" />
-        <div className="absolute bottom-0 left-[30%] w-[560px] h-[400px] rounded-full bg-fuchsia-500/15 blur-[160px]" />
+        <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+          <div className="absolute -top-32 left-[10%] w-[640px] h-[440px] rounded-full bg-primary/20 blur-[160px]" />
+          <div className="absolute top-[30%] right-[5%] w-[520px] h-[420px] rounded-full bg-accent/20 blur-[150px]" />
+          <div className="absolute bottom-0 left-[30%] w-[560px] h-[400px] rounded-full bg-accent/15 blur-[160px]" />
       </div>
 
       <div className="container mx-auto max-w-6xl">
@@ -156,7 +156,7 @@ const Dashboard = () => {
                     {initials}
                   </div>
                 )}
-                <span className="absolute -bottom-1 -right-1 h-3.5 w-3.5 rounded-full bg-emerald-400 ring-[3px] ring-background" />
+                <span className="absolute -bottom-1 -right-1 h-3.5 w-3.5 rounded-full bg-secondary ring-[3px] ring-background" />
               </div>
 
               <div className="min-w-0 flex-1">
@@ -196,18 +196,24 @@ const Dashboard = () => {
                 ))}
               </div>
 
-              <div className="mt-3 pt-3 border-t border-white/10 space-y-1.5">
-                {isAdmin && (
+              <div className="mt-3 pt-3 border-t border-border/50 space-y-1.5">
+                <div className="h-11">
+                {adminLoading ? (
+                  <div className="h-11 rounded-xl border border-border/50 bg-card/35" />
+                ) : isAdmin ? (
                   <Link
                     to="/ceo"
-                    className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-[0_8px_24px_-10px_hsl(var(--primary)/0.7)] hover:shadow-[0_10px_28px_-8px_hsl(var(--primary)/0.85)] transition-shadow"
+                    className="flex h-11 items-center gap-2.5 px-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-[0_8px_24px_-10px_hsl(var(--primary)/0.7)] hover:shadow-[0_10px_28px_-8px_hsl(var(--primary)/0.85)] transition-shadow"
                   >
                     <LayoutDashboard className="w-4 h-4" /> Admin Panel
                   </Link>
+                ) : (
+                  <div aria-hidden className="h-11" />
                 )}
+                </div>
                 <button
                   onClick={() => { signOut(); navigate("/"); }}
-                  className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm text-rose-200/90 bg-rose-500/10 border border-rose-500/25 hover:bg-rose-500/15 transition-colors"
+                  className="w-full h-11 flex items-center gap-2.5 px-3 rounded-xl text-sm text-destructive bg-destructive/10 border border-destructive/25 hover:bg-destructive/15 transition-colors"
                 >
                   <LogOut className="w-4 h-4" /> Logout
                 </button>
@@ -218,9 +224,9 @@ const Dashboard = () => {
           {/* Content */}
           <section>
             <GlassCard className="p-5 sm:p-7 min-h-[520px]">
-              <header className="flex items-start justify-between gap-4 mb-6 pb-5 border-b border-white/10">
+              <header className="flex min-h-[68px] items-start justify-between gap-4 mb-6 pb-5 border-b border-border/50">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/30 to-accent/20 border border-white/10 flex items-center justify-center text-primary">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/30 to-accent/20 border border-border/50 flex items-center justify-center text-primary">
                     <current.icon className="w-5 h-5" />
                   </div>
                   <div>
@@ -233,16 +239,16 @@ const Dashboard = () => {
                   !editing ? (
                     <button
                       onClick={() => setEditing(true)}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-[0_6px_20px_-8px_hsl(var(--primary)/0.7)] hover:shadow-[0_8px_24px_-6px_hsl(var(--primary)/0.9)] transition-all"
+                      className="inline-flex h-9 items-center gap-1.5 px-3.5 rounded-full text-xs font-semibold bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-[0_6px_20px_-8px_hsl(var(--primary)/0.7)] hover:shadow-[0_8px_24px_-6px_hsl(var(--primary)/0.9)] transition-shadow"
                     >
                       <Pencil className="w-3.5 h-3.5" /> Edit
                     </button>
                   ) : (
                     <div className="flex gap-2">
-                      <button onClick={() => setEditing(false)} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-medium border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] transition-colors">
+                      <button onClick={() => setEditing(false)} className="inline-flex h-9 items-center gap-1.5 px-3 rounded-full text-xs font-medium border border-border/50 bg-card/35 hover:bg-card/50 transition-colors">
                         <X className="w-3.5 h-3.5" /> Cancel
                       </button>
-                      <button onClick={handleSave} disabled={saving} className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold bg-gradient-to-r from-primary to-accent text-primary-foreground disabled:opacity-60">
+                      <button onClick={handleSave} disabled={saving} className="inline-flex h-9 items-center gap-1.5 px-3.5 rounded-full text-xs font-semibold bg-gradient-to-r from-primary to-accent text-primary-foreground disabled:opacity-60">
                         <Save className="w-3.5 h-3.5" /> {saving ? "Saving…" : "Save"}
                       </button>
                     </div>
@@ -405,7 +411,7 @@ const ActivitySection = ({ commentCount, likeCount, recent }:
       ) : (
         <div className="space-y-2">
           {recent.map(c => (
-            <div key={c.id} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 hover:bg-white/[0.05] transition-colors">
+            <div key={c.id} className="rounded-2xl border border-border/50 bg-card/35 p-4 hover:bg-card/50 transition-colors">
               <p className="text-sm text-foreground/90 line-clamp-3">{c.content}</p>
               <p className="text-[10px] text-muted-foreground mt-1.5">{new Date(c.created_at).toLocaleString()}</p>
             </div>
@@ -458,9 +464,9 @@ const LanguageSection = ({ language, onChange }: { language: string; onChange: (
             className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl border transition-all ${
               active
                 ? "border-primary/40 bg-gradient-to-r from-primary/15 via-accent/10 to-transparent"
-                : "border-white/10 bg-white/[0.03] hover:bg-white/[0.06]"
+                : "border-border/50 bg-card/35 hover:bg-card/50"
             }`}>
-            <span className={`flex h-9 w-9 items-center justify-center rounded-xl ${active ? "bg-primary/25 text-primary ring-1 ring-primary/40" : "bg-white/[0.04] text-muted-foreground"}`}>
+            <span className={`flex h-9 w-9 items-center justify-center rounded-xl ${active ? "bg-primary/25 text-primary ring-1 ring-primary/40" : "bg-card/45 text-muted-foreground"}`}>
               <Languages className="w-4 h-4" />
             </span>
             <span className="flex-1 text-left">
@@ -478,34 +484,34 @@ const LanguageSection = ({ language, onChange }: { language: string; onChange: (
 /* ============== Sub UI ============== */
 
 const GlassCard = ({ className = "", children }: { className?: string; children: React.ReactNode }) => (
-  <div className={`relative rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-xl shadow-[0_8px_32px_-12px_rgba(0,0,0,0.5)] overflow-hidden ${className}`}>
-    <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-    <span aria-hidden className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/5" />
+  <div className={`relative rounded-3xl border border-border/50 bg-card/45 shadow-[var(--shadow-glass)] overflow-hidden ${className}`}>
+    <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-foreground/20 to-transparent" />
+    <span aria-hidden className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-foreground/5" />
     <div className="relative">{children}</div>
   </div>
 );
 
 const NavBtn = ({ active, label, Icon, onClick }: { active: boolean; label: string; Icon: any; onClick: () => void }) => (
   <button onClick={onClick}
-    className={`group w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all duration-200 ${
+    className={`group w-full h-12 flex items-center gap-3 px-3 rounded-xl text-sm transition-colors duration-200 ${
       active
-        ? "bg-gradient-to-r from-primary/20 via-accent/10 to-transparent text-foreground border border-white/10 shadow-[inset_0_1px_0_hsl(0_0%_100%/0.06)]"
-        : "text-muted-foreground hover:text-foreground hover:bg-white/[0.04] border border-transparent"
+        ? "bg-gradient-to-r from-primary/20 via-accent/10 to-transparent text-foreground border border-border/50 shadow-[inset_0_1px_0_hsl(var(--foreground)/0.06)]"
+        : "text-muted-foreground hover:text-foreground hover:bg-card/40 border border-transparent"
     }`}>
     <span className={`flex h-7 w-7 items-center justify-center rounded-lg transition-colors ${
-      active ? "bg-primary/25 text-primary ring-1 ring-primary/40" : "bg-white/[0.04] text-muted-foreground group-hover:text-foreground"
+      active ? "bg-primary/25 text-primary ring-1 ring-primary/40" : "bg-card/45 text-muted-foreground group-hover:text-foreground"
     }`}>
       <Icon className="w-3.5 h-3.5" />
     </span>
     <span className="flex-1 text-left font-medium">{label}</span>
-    <ChevronRight className={`w-3.5 h-3.5 transition-all ${active ? "text-primary opacity-100 translate-x-0" : "opacity-0 -translate-x-1 group-hover:opacity-60 group-hover:translate-x-0"}`} />
+    <ChevronRight className={`w-3.5 h-3.5 transition-opacity ${active ? "text-primary opacity-100" : "opacity-0 group-hover:opacity-60"}`} />
   </button>
 );
 
 const CHIP_TONE: Record<string, string> = {
-  emerald: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+  emerald: "bg-secondary/15 text-secondary border-secondary/30",
   primary: "bg-primary/15 text-primary border-primary/30",
-  muted: "bg-white/[0.04] text-muted-foreground border-white/10",
+  muted: "bg-card/40 text-muted-foreground border-border/50",
 };
 const Chip = ({ tone = "muted", icon, children }: { tone?: keyof typeof CHIP_TONE; icon?: React.ReactNode; children: React.ReactNode }) => (
   <span className={`inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-full border ${CHIP_TONE[tone]}`}>
@@ -516,7 +522,7 @@ const Chip = ({ tone = "muted", icon, children }: { tone?: keyof typeof CHIP_TON
 const Field = ({ label, icon, children, action }: { label: string; icon: React.ReactNode; children: React.ReactNode; action?: React.ReactNode }) => (
   <div>
     <p className="text-[10px] font-semibold tracking-[0.18em] uppercase text-muted-foreground mb-1.5">{label}</p>
-    <div className="flex items-center gap-3 px-4 py-3 rounded-2xl border border-white/10 bg-white/[0.03] focus-within:border-primary/40 focus-within:bg-white/[0.05] transition-colors">
+    <div className="flex min-h-12 items-center gap-3 px-4 py-3 rounded-2xl border border-border/50 bg-card/35 focus-within:border-primary/40 focus-within:bg-card/50 transition-colors">
       <span className="text-muted-foreground shrink-0">{icon}</span>
       <div className="flex-1 min-w-0">{children}</div>
       {action && <div className="shrink-0">{action}</div>}
@@ -526,13 +532,13 @@ const Field = ({ label, icon, children, action }: { label: string; icon: React.R
 
 const STAT_TONE: Record<string, string> = {
   primary: "from-primary/20 to-primary/[0.04] text-primary",
-  emerald: "from-emerald-500/20 to-emerald-500/[0.04] text-emerald-300",
-  rose: "from-rose-500/20 to-rose-500/[0.04] text-rose-300",
-  default: "from-white/10 to-white/[0.02] text-foreground",
+  emerald: "from-secondary/20 to-secondary/[0.04] text-secondary",
+  rose: "from-accent/20 to-accent/[0.04] text-accent",
+  default: "from-card/70 to-card/25 text-foreground",
 };
 const SoftStat = ({ icon, label, value, tone = "default" }:
   { icon: React.ReactNode; label: string; value: React.ReactNode; tone?: keyof typeof STAT_TONE }) => (
-  <div className={`relative rounded-2xl px-4 py-3 border border-white/10 bg-gradient-to-br ${STAT_TONE[tone]} backdrop-blur-md`}>
+  <div className={`relative min-h-[66px] rounded-2xl px-4 py-3 border border-border/50 bg-gradient-to-br ${STAT_TONE[tone]}`}>
     <div className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.18em] uppercase text-muted-foreground/90">
       <span className="opacity-80">{icon}</span> {label}
     </div>
@@ -542,7 +548,7 @@ const SoftStat = ({ icon, label, value, tone = "default" }:
 
 const ToggleRow = ({ title, desc, checked, onChange }:
   { title: string; desc: string; checked: boolean; onChange: (v: boolean) => void }) => (
-  <div className="flex items-start gap-4 px-4 py-3.5 rounded-2xl border border-white/10 bg-white/[0.03]">
+  <div className="flex min-h-[78px] items-start gap-4 px-4 py-3.5 rounded-2xl border border-border/50 bg-card/35">
     <div className="flex-1 min-w-0">
       <p className="text-sm font-semibold">{title}</p>
       <p className="text-xs text-muted-foreground mt-0.5">{desc}</p>
@@ -551,7 +557,7 @@ const ToggleRow = ({ title, desc, checked, onChange }:
       role="switch"
       aria-checked={checked}
       onClick={() => onChange(!checked)}
-      className={`relative h-6 w-11 rounded-full transition-colors ${checked ? "bg-gradient-to-r from-primary to-accent" : "bg-white/10"}`}
+      className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${checked ? "bg-gradient-to-r from-primary to-accent" : "bg-muted"}`}
     >
       <span className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-all ${checked ? "left-[22px]" : "left-0.5"}`} />
     </button>
@@ -559,7 +565,7 @@ const ToggleRow = ({ title, desc, checked, onChange }:
 );
 
 const EmptyHint = ({ text }: { text: string }) => (
-  <div className="rounded-2xl border border-dashed border-white/10 bg-white/[0.02] px-5 py-8 text-center">
+  <div className="min-h-[110px] rounded-2xl border border-dashed border-border/50 bg-card/25 px-5 py-8 text-center">
     <Sparkles className="w-5 h-5 text-primary/70 mx-auto mb-2" />
     <p className="text-xs text-muted-foreground">{text}</p>
   </div>
