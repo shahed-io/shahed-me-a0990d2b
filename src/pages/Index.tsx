@@ -134,11 +134,11 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
           <span aria-hidden className="pointer-events-none absolute -bottom-32 right-1/4 w-80 h-32 rounded-full bg-accent/15 blur-3xl opacity-60" />
 
           {/* Logo */}
-          <a href="#" className="relative flex items-center gap-2 pl-2 pr-3 group">
-            <span className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-accent to-primary text-primary-foreground font-bold text-sm shadow-[inset_0_1px_0_hsl(0_0%_100%/0.3),0_4px_14px_-4px_hsl(var(--primary)/0.6)] ring-1 ring-white/15 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3">
+          <a href="#" className="relative flex items-center gap-2 pl-2 pr-3 group max-md:absolute max-md:left-1/2 max-md:-translate-x-1/2 max-md:pl-0 max-md:pr-0">
+            <span className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-accent to-primary text-primary-foreground font-bold text-sm shadow-[inset_0_1px_0_hsl(0_0%_100%/0.3),0_4px_14px_-4px_hsl(var(--primary)/0.6)] ring-1 ring-white/15 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3 max-md:hidden">
               S
             </span>
-            <span className="font-heading font-bold text-base tracking-tight hidden sm:inline">
+            <span className="font-heading font-bold text-base tracking-tight max-md:inline hidden sm:inline">
               SHAHED<span className="text-gradient">.</span>
             </span>
           </a>
