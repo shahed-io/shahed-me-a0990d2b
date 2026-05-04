@@ -18,7 +18,8 @@ type SectionKey =
   | "wallet" | "points" | "referral"
   | "language" | "install";
 
-const NAV_GROUPS = [
+type NavItemDef = { key: SectionKey; label: string; icon: typeof UserIcon };
+const NAV_GROUPS: { title: string; items: NavItemDef[] }[] = [
   {
     title: "Account",
     items: [
@@ -51,7 +52,7 @@ const NAV_GROUPS = [
       { key: "install", label: "Install App", icon: Download },
     ],
   },
-] as const;
+];
 
 const Dashboard = () => {
   const navigate = useNavigate();
