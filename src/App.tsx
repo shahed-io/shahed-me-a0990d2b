@@ -15,6 +15,7 @@ import Index from "./pages/Index.tsx";
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 const Auth = lazy(() => import("./pages/Auth.tsx"));
 const Timeline = lazy(() => import("./pages/Timeline.tsx"));
+const Dashboard = lazy(() => import("./pages/Dashboard.tsx"));
 const MdShahed = lazy(() => import("./pages/MdShahed.tsx"));
 const ShahedBusiness = lazy(() => import("./pages/ShahedBusiness.tsx"));
 const CeoLayout = lazy(() => import("./pages/ceo/CeoLayout.tsx"));
