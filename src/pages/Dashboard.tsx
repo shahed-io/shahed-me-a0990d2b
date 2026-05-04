@@ -482,27 +482,27 @@ const LanguageSection = ({ language, onChange }: { language: string; onChange: (
 /* ============== Sub UI ============== */
 
 const GlassCard = ({ className = "", children }: { className?: string; children: React.ReactNode }) => (
-  <div className={`relative rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-xl shadow-[0_8px_32px_-12px_rgba(0,0,0,0.5)] overflow-hidden ${className}`}>
-    <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-    <span aria-hidden className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/5" />
+  <div className={`relative rounded-3xl border border-border/50 bg-card/45 shadow-[var(--shadow-glass)] overflow-hidden ${className}`}>
+    <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-foreground/20 to-transparent" />
+    <span aria-hidden className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-foreground/5" />
     <div className="relative">{children}</div>
   </div>
 );
 
 const NavBtn = ({ active, label, Icon, onClick }: { active: boolean; label: string; Icon: any; onClick: () => void }) => (
   <button onClick={onClick}
-    className={`group w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all duration-200 ${
+    className={`group w-full h-12 flex items-center gap-3 px-3 rounded-xl text-sm transition-colors duration-200 ${
       active
-        ? "bg-gradient-to-r from-primary/20 via-accent/10 to-transparent text-foreground border border-white/10 shadow-[inset_0_1px_0_hsl(0_0%_100%/0.06)]"
-        : "text-muted-foreground hover:text-foreground hover:bg-white/[0.04] border border-transparent"
+        ? "bg-gradient-to-r from-primary/20 via-accent/10 to-transparent text-foreground border border-border/50 shadow-[inset_0_1px_0_hsl(var(--foreground)/0.06)]"
+        : "text-muted-foreground hover:text-foreground hover:bg-card/40 border border-transparent"
     }`}>
     <span className={`flex h-7 w-7 items-center justify-center rounded-lg transition-colors ${
-      active ? "bg-primary/25 text-primary ring-1 ring-primary/40" : "bg-white/[0.04] text-muted-foreground group-hover:text-foreground"
+      active ? "bg-primary/25 text-primary ring-1 ring-primary/40" : "bg-card/45 text-muted-foreground group-hover:text-foreground"
     }`}>
       <Icon className="w-3.5 h-3.5" />
     </span>
     <span className="flex-1 text-left font-medium">{label}</span>
-    <ChevronRight className={`w-3.5 h-3.5 transition-all ${active ? "text-primary opacity-100 translate-x-0" : "opacity-0 -translate-x-1 group-hover:opacity-60 group-hover:translate-x-0"}`} />
+    <ChevronRight className={`w-3.5 h-3.5 transition-opacity ${active ? "text-primary opacity-100" : "opacity-0 group-hover:opacity-60"}`} />
   </button>
 );
 
