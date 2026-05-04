@@ -26,7 +26,7 @@ const NAV: NavItemDef[] = [
 const Dashboard = () => {
   const navigate = useNavigate();
   const { user, profile, loading, signOut } = useAuth();
-  const { isAdmin } = useIsAdmin();
+  const { isAdmin, loading: adminLoading } = useIsAdmin();
   const { toast } = useToast();
   const [params, setParams] = useSearchParams();
   const [section, setSection] = useState<SectionKey>(
@@ -128,10 +128,10 @@ const Dashboard = () => {
       <SEO title="Dashboard — SHAHED" description="Manage your profile, security and preferences." />
 
       {/* Ambient color grading */}
-      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div className="absolute -top-32 left-[10%] w-[640px] h-[440px] rounded-full bg-primary/20 blur-[160px]" />
-        <div className="absolute top-[30%] right-[5%] w-[520px] h-[420px] rounded-full bg-accent/20 blur-[150px]" />
-        <div className="absolute bottom-0 left-[30%] w-[560px] h-[400px] rounded-full bg-fuchsia-500/15 blur-[160px]" />
+        <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+          <div className="absolute -top-32 left-[10%] w-[640px] h-[440px] rounded-full bg-primary/20 blur-[160px]" />
+          <div className="absolute top-[30%] right-[5%] w-[520px] h-[420px] rounded-full bg-accent/20 blur-[150px]" />
+          <div className="absolute bottom-0 left-[30%] w-[560px] h-[400px] rounded-full bg-accent/15 blur-[160px]" />
       </div>
 
       <div className="container mx-auto max-w-6xl">
@@ -196,18 +196,22 @@ const Dashboard = () => {
                 ))}
               </div>
 
-              <div className="mt-3 pt-3 border-t border-white/10 space-y-1.5">
-                {isAdmin && (
+              <div className="mt-3 pt-3 border-t border-border/50 space-y-1.5">
+                <div className="h-11">
+                {adminLoading ? (
+                  <div className="h-11 rounded-xl border border-border/50 bg-card/35" />
+                ) : isAdmin ? (
                   <Link
                     to="/ceo"
-                    className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-[0_8px_24px_-10px_hsl(var(--primary)/0.7)] hover:shadow-[0_10px_28px_-8px_hsl(var(--primary)/0.85)] transition-shadow"
+                    className="flex h-11 items-center gap-2.5 px-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-primary to-accent text-primary-foreground shadow-[0_8px_24px_-10px_hsl(var(--primary)/0.7)] hover:shadow-[0_10px_28px_-8px_hsl(var(--primary)/0.85)] transition-shadow"
                   >
                     <LayoutDashboard className="w-4 h-4" /> Admin Panel
                   </Link>
-                )}
+                ) : null}
+                </div>
                 <button
                   onClick={() => { signOut(); navigate("/"); }}
-                  className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm text-rose-200/90 bg-rose-500/10 border border-rose-500/25 hover:bg-rose-500/15 transition-colors"
+                  className="w-full h-11 flex items-center gap-2.5 px-3 rounded-xl text-sm text-destructive bg-destructive/10 border border-destructive/25 hover:bg-destructive/15 transition-colors"
                 >
                   <LogOut className="w-4 h-4" /> Logout
                 </button>
