@@ -112,6 +112,7 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
 
   const menuLinks: { icon: JSX.Element; label: string; href: string; show: boolean; accent?: boolean }[] = [
     { icon: <LayoutDashboard className="w-4 h-4" />, label: "Admin Panel", href: "/ceo", show: isAdmin, accent: true },
+    { icon: <LayoutDashboard className="w-4 h-4" />, label: "Dashboard", href: "/dashboard", show: true },
     { icon: <UserIcon className="w-4 h-4" />, label: "My Profile", href: "/md-shahed", show: true },
     { icon: <Calendar className="w-4 h-4" />, label: "Timeline", href: "/timeline", show: true },
     { icon: <Settings className="w-4 h-4" />, label: "Settings", href: "/ceo/settings", show: isAdmin },
