@@ -277,7 +277,7 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
                   <div className="relative flex items-center gap-4">
                     <div className="relative shrink-0">
                       {profile?.avatar_url ? (
-                        <SmartImage src={profile.avatar_url} alt={profile.display_name ?? "Profile"} className="w-16 h-16 rounded-2xl object-cover ring-2 ring-white/40 shadow-lg" fallbackMessage="" />
+                        <SmartImage src={profile.avatar_url} alt={`${profile.display_name ?? "User"} profile photo`} className="w-16 h-16 rounded-2xl object-cover ring-2 ring-white/40 shadow-lg" fallbackMessage="" />
                       ) : (
                         <span className="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur flex items-center justify-center text-lg font-bold text-white ring-2 ring-white/40 shadow-lg">
                           {initials}
