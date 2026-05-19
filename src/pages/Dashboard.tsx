@@ -562,6 +562,7 @@ const ToggleRow = ({ title, desc, checked, onChange }:
     <button
       role="switch"
       aria-checked={checked}
+      aria-label={`Toggle ${title}`}
       onClick={() => onChange(!checked)}
       className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${checked ? "bg-gradient-to-r from-primary to-accent" : "bg-muted"}`}
     >
