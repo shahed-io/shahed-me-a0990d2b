@@ -299,6 +299,7 @@ const ProfileSection = ({
     <Field label="Full Name" icon={<UserIcon className="w-4 h-4" />}>
       {editing ? (
         <input value={displayName} onChange={(e) => setDisplayName(e.target.value)} maxLength={80}
+          aria-label="Full name"
           className="w-full bg-transparent outline-none text-sm placeholder:text-muted-foreground/60" placeholder="Your name" />
       ) : (
         <span className="text-sm">{displayName || <em className="text-muted-foreground">Not set</em>}</span>
@@ -307,6 +308,7 @@ const ProfileSection = ({
     <Field label="Username" icon={<AtSign className="w-4 h-4" />}>
       {editing ? (
         <input value={username} onChange={(e) => setUsername(e.target.value.replace(/\s/g, ""))} maxLength={40}
+          aria-label="Username"
           className="w-full bg-transparent outline-none text-sm placeholder:text-muted-foreground/60" placeholder="username" />
       ) : (
         <span className="text-sm">{username ? `@${username}` : <em className="text-muted-foreground">Not set</em>}</span>
@@ -320,6 +322,7 @@ const ProfileSection = ({
     <Field label="Phone Number" icon={<Phone className="w-4 h-4" />}>
       {editing ? (
         <input value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={30}
+          aria-label="Phone number"
           className="w-full bg-transparent outline-none text-sm placeholder:text-muted-foreground/60" placeholder="01XXXXXXXXX" />
       ) : (
         <span className="text-sm">{phone || <em className="text-muted-foreground">Not set</em>}</span>
@@ -328,6 +331,7 @@ const ProfileSection = ({
     <Field label="Bio" icon={<Sparkles className="w-4 h-4" />}>
       {editing ? (
         <textarea value={bio} onChange={(e) => setBio(e.target.value)} maxLength={240} rows={3}
+          aria-label="Short bio"
           className="w-full bg-transparent outline-none text-sm resize-none placeholder:text-muted-foreground/60" placeholder="Short bio…" />
       ) : (
         <span className="text-sm">{bio || <em className="text-muted-foreground">Not set</em>}</span>
