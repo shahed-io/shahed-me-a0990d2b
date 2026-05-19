@@ -429,7 +429,7 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
 /* ---------- Hero ---------- */
 const HeroSection = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
   const typedRole = useTypingAnimation(
-    ["Graphic Designer", "Brand Strategist", "Web Developer", "Entrepreneur"],
+    ["Businessman", "Brand Strategist", "Web Developer", "Entrepreneur"],
     100, 50, 2000,
   );
   const [scrollY, setScrollY] = useState(0);
