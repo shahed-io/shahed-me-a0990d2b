@@ -626,12 +626,20 @@ const AboutSection = () => (
           </div>
         </div>
         <div>
+          <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6">
+            I'm <span className="text-foreground font-medium">Md Shahed</span>, a Bangladesh-based
+            entrepreneur, businessman, and web developer involved in multiple business ventures and
+            digital projects.
+          </p>
+          <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6">
+            I specialize in <span className="text-foreground font-medium">React.js</span>,{" "}
+            <span className="text-foreground font-medium">Next.js</span>, SEO optimization,
+            branding, and scalable web applications focused on business growth and modern digital
+            experiences.
+          </p>
           <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-8">
-            I am a results-driven Web Developer and Entrepreneur with over{" "}
-            <span className="text-foreground font-medium">7 years</span> of experience building
-            modern websites, scalable digital platforms, and strong online brands. I specialize in
-            creating high-performance websites that are visually strong and strategically built for{" "}
-            <span className="text-gradient font-medium">business growth</span>.
+            My goal is to combine technology, branding, and business strategy to build{" "}
+            <span className="text-gradient font-medium">impactful and performance-driven digital solutions</span>.
           </p>
           <div className="space-y-3">
             {["7+ Years Building Digital Products", "International Client Base", "Startup to Enterprise Experience"].map((item) => (
