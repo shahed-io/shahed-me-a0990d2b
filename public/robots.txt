@@ -6,6 +6,7 @@ Allow: /
 Disallow: /login
 Disallow: /signup
 Disallow: /auth
+Disallow: /dashboard
 Disallow: /ceo
 Disallow: /ceo/
 
@@ -14,6 +15,7 @@ Allow: /
 Disallow: /login
 Disallow: /signup
 Disallow: /auth
+Disallow: /dashboard
 Disallow: /ceo
 
 User-agent: Googlebot-Image
