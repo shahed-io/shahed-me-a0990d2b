@@ -413,6 +413,7 @@ const Timeline = () => {
                         onChange={(e) => setCommentDrafts((d) => ({ ...d, [post.id]: e.target.value }))}
                         onKeyDown={(e) => { if (e.key === "Enter") handleAddComment(post.id); }}
                         placeholder="Write a comment..."
+                        aria-label="Write a comment"
                         maxLength={2000}
                         className="flex-1 glass rounded-full px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
                       />
