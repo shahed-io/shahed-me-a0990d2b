@@ -284,6 +284,7 @@ const Timeline = () => {
                     <SmartImage src={URL.createObjectURL(f)} alt={`Upload preview ${i + 1}`} className="w-20 h-20 rounded-lg object-cover" fallbackMessage="Preview unavailable" />
                     <button
                       onClick={() => setNewImages((arr) => arr.filter((_, idx) => idx !== i))}
+                      aria-label={`Remove image ${i + 1}`}
                       className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-background border border-border flex items-center justify-center"
                     >
                       <X className="w-3 h-3" />
