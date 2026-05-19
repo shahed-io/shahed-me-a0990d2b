@@ -348,7 +348,7 @@ const Timeline = () => {
                     <SmartImage
                       key={i}
                       src={url}
-                      alt="Post image"
+                      alt={`Timeline post by MD Shahed — image ${i + 1}`}
                       loading="lazy"
                       className="w-full rounded-xl object-cover max-h-96"
                       fallbackMessage="ছবি আনতে পারিনি"
