@@ -379,10 +379,12 @@ const SecuritySection = ({ email }: { email: string }) => {
         </button>
       }>
         <input type={show ? "text" : "password"} value={pw} onChange={(e) => setPw(e.target.value)} placeholder="At least 8 characters"
+          aria-label="New password"
           className="w-full bg-transparent outline-none text-sm placeholder:text-muted-foreground/60" />
       </Field>
       <Field label="Confirm Password" icon={<Check className="w-4 h-4" />}>
         <input type={show ? "text" : "password"} value={pw2} onChange={(e) => setPw2(e.target.value)} placeholder="Repeat password"
+          aria-label="Confirm new password"
           className="w-full bg-transparent outline-none text-sm placeholder:text-muted-foreground/60" />
       </Field>
 
