@@ -6,6 +6,7 @@ Allow: /
 Disallow: /login
 Disallow: /signup
 Disallow: /auth
+Disallow: /dashboard
 Disallow: /ceo
 Disallow: /ceo/
 
