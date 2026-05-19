@@ -1010,6 +1010,7 @@ const ContactSection = () => {
                 <label className="text-xs text-muted-foreground mb-2 block uppercase tracking-wider">Name</label>
                 <input
                   type="text"
+                  aria-label="Your name"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   placeholder="Your Name"
@@ -1020,6 +1021,7 @@ const ContactSection = () => {
                 <label className="text-xs text-muted-foreground mb-2 block uppercase tracking-wider">Email</label>
                 <input
                   type="email"
+                  aria-label="Your email address"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   placeholder="your@email.com"
@@ -1029,6 +1031,7 @@ const ContactSection = () => {
               <div>
                 <label className="text-xs text-muted-foreground mb-2 block uppercase tracking-wider">Message</label>
                 <textarea
+                  aria-label="Your message"
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   placeholder="Tell me about your project..."
