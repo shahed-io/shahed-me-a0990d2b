@@ -272,6 +272,7 @@ const Timeline = () => {
               value={newContent}
               onChange={(e) => setNewContent(e.target.value)}
               placeholder="What's on your mind?"
+              aria-label="Post content"
               rows={3}
               maxLength={5000}
               className="w-full bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
