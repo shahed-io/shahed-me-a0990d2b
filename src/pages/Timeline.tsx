@@ -272,6 +272,7 @@ const Timeline = () => {
               value={newContent}
               onChange={(e) => setNewContent(e.target.value)}
               placeholder="What's on your mind?"
+              aria-label="Post content"
               rows={3}
               maxLength={5000}
               className="w-full bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none resize-none"
@@ -283,6 +284,7 @@ const Timeline = () => {
                     <SmartImage src={URL.createObjectURL(f)} alt={`Upload preview ${i + 1}`} className="w-20 h-20 rounded-lg object-cover" fallbackMessage="Preview unavailable" />
                     <button
                       onClick={() => setNewImages((arr) => arr.filter((_, idx) => idx !== i))}
+                      aria-label={`Remove image ${i + 1}`}
                       className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-background border border-border flex items-center justify-center"
                     >
                       <X className="w-3 h-3" />
@@ -346,7 +348,7 @@ const Timeline = () => {
                     <SmartImage
                       key={i}
                       src={url}
-                      alt="Post image"
+                      alt={`Timeline post by MD Shahed — image ${i + 1}`}
                       loading="lazy"
                       className="w-full rounded-xl object-cover max-h-96"
                       fallbackMessage="ছবি আনতে পারিনি"
@@ -411,6 +413,7 @@ const Timeline = () => {
                         onChange={(e) => setCommentDrafts((d) => ({ ...d, [post.id]: e.target.value }))}
                         onKeyDown={(e) => { if (e.key === "Enter") handleAddComment(post.id); }}
                         placeholder="Write a comment..."
+                        aria-label="Write a comment"
                         maxLength={2000}
                         className="flex-1 glass rounded-full px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
                       />

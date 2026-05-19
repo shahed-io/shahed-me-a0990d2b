@@ -277,7 +277,7 @@ const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
                   <div className="relative flex items-center gap-4">
                     <div className="relative shrink-0">
                       {profile?.avatar_url ? (
-                        <SmartImage src={profile.avatar_url} alt={profile.display_name ?? "Profile"} className="w-16 h-16 rounded-2xl object-cover ring-2 ring-white/40 shadow-lg" fallbackMessage="" />
+                        <SmartImage src={profile.avatar_url} alt={`${profile.display_name ?? "User"} profile photo`} className="w-16 h-16 rounded-2xl object-cover ring-2 ring-white/40 shadow-lg" fallbackMessage="" />
                       ) : (
                         <span className="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur flex items-center justify-center text-lg font-bold text-white ring-2 ring-white/40 shadow-lg">
                           {initials}
@@ -516,7 +516,7 @@ const HeroSection = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
           </div>
 
           {/* Name */}
-          <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter mb-5 leading-[1.05] text-foreground">
+          <h1 aria-label="MD Shahed — Web Developer & Entrepreneur from Bangladesh" className="font-heading text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter mb-5 leading-[1.05] text-foreground">
             MD <span className="text-gradient">SHAHED</span>
           </h1>
 
@@ -1010,6 +1010,7 @@ const ContactSection = () => {
                 <label className="text-xs text-muted-foreground mb-2 block uppercase tracking-wider">Name</label>
                 <input
                   type="text"
+                  aria-label="Your name"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   placeholder="Your Name"
@@ -1020,6 +1021,7 @@ const ContactSection = () => {
                 <label className="text-xs text-muted-foreground mb-2 block uppercase tracking-wider">Email</label>
                 <input
                   type="email"
+                  aria-label="Your email address"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   placeholder="your@email.com"
@@ -1029,6 +1031,7 @@ const ContactSection = () => {
               <div>
                 <label className="text-xs text-muted-foreground mb-2 block uppercase tracking-wider">Message</label>
                 <textarea
+                  aria-label="Your message"
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   placeholder="Tell me about your project..."
@@ -1098,6 +1101,7 @@ const NewsletterSection = () => {
             <form onSubmit={(e) => e.preventDefault()} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
               <input
                 type="email"
+                aria-label="Email address for newsletter"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"

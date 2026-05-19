@@ -5,7 +5,7 @@ const MdShahed = () => (
     slug="/md-shahed"
     title="MD Shahed — Web Developer, Entrepreneur ও Digital Creator (Dhaka)"
     description="MD Shahed (শাহেদ) — Dhaka, Bangladesh-ভিত্তিক web developer, entrepreneur ও digital creator। Portfolio, projects, services ও যোগাযোগের সব তথ্য এক জায়গায়।"
-    h1="MD Shahed"
+    h1="MD Shahed — Web Developer & Entrepreneur (Dhaka, Bangladesh)"
     tagline="Official Profile"
     intro="আমি MD Shahed — Dhaka, Bangladesh থেকে কাজ করা একজন web developer, entrepreneur এবং digital creator। modern web technology ব্যবহার করে business website, web application ও digital solution তৈরি করি যা ক্লায়েন্টের real growth আনে।"
     keywords={[
