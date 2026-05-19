@@ -516,7 +516,7 @@ const HeroSection = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
           </div>
 
           {/* Name */}
-          <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter mb-5 leading-[1.05] text-foreground">
+          <h1 aria-label="MD Shahed — Web Developer & Entrepreneur from Bangladesh" className="font-heading text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter mb-5 leading-[1.05] text-foreground">
             MD <span className="text-gradient">SHAHED</span>
           </h1>
 
