@@ -20,6 +20,8 @@ interface Post {
   seo_title: string | null;
   seo_description: string | null;
   og_image: string | null;
+  slug: string | null;
+  published: boolean;
 }
 
 const Blog = () => {
@@ -45,6 +47,8 @@ const Blog = () => {
       seo_title: editing.seo_title || null,
       seo_description: editing.seo_description || null,
       og_image: editing.og_image || null,
+      slug: editing.slug || null,
+      published: editing.published ?? true,
     };
     const { error } = editing.id
       ? await supabase.from("posts").update(payload).eq("id", editing.id)
@@ -141,13 +145,15 @@ const Blog = () => {
               <DialogContent className="max-h-[90vh] overflow-y-auto">
                 <DialogHeader><DialogTitle>{editing?.id ? "Edit" : "New"} Post</DialogTitle></DialogHeader>
                 <div className="grid gap-3">
-                  <div><Label>Content</Label><Textarea rows={12} value={editing?.content ?? ""} onChange={e => setEditing({ ...editing, content: e.target.value })} /></div>
+                  <div><Label>Content (Markdown supported)</Label><Textarea rows={12} value={editing?.content ?? ""} onChange={e => setEditing({ ...editing, content: e.target.value })} /></div>
                   <div className="rounded-md border bg-white/5 backdrop-blur-md p-3">
                     <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">SEO Overrides (optional)</p>
                     <div className="grid gap-3">
                       <div><Label>SEO Title</Label><Input maxLength={70} value={editing?.seo_title ?? ""} onChange={e => setEditing({ ...editing, seo_title: e.target.value })} /></div>
                       <div><Label>Meta Description</Label><Textarea rows={2} maxLength={200} value={editing?.seo_description ?? ""} onChange={e => setEditing({ ...editing, seo_description: e.target.value })} /></div>
+                      <div><Label>Slug (URL, auto if empty)</Label><Input placeholder="my-awesome-post" value={editing?.slug ?? ""} onChange={e => setEditing({ ...editing, slug: e.target.value })} /></div>
                       <div><Label>OG Image URL</Label><Input value={editing?.og_image ?? ""} onChange={e => setEditing({ ...editing, og_image: e.target.value })} /></div>
+                      <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={editing?.published ?? true} onChange={e => setEditing({ ...editing, published: e.target.checked })} /> Published (visible on /blog)</label>
                     </div>
                   </div>
                 </div>
@@ -165,7 +171,13 @@ const Blog = () => {
             <div className="min-w-0 flex-1">
               {p.seo_title && <p className="mb-1 text-xs text-accent">SEO: {p.seo_title}</p>}
               <p className="line-clamp-3 text-sm">{p.content}</p>
-              <p className="mt-2 text-xs text-muted-foreground">{new Date(p.created_at).toLocaleString()}</p>
+              <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+                <span>{new Date(p.created_at).toLocaleString()}</span>
+                {p.slug && (
+                  <a href={`/blog/${p.slug}`} target="_blank" rel="noreferrer" className="text-accent hover:underline">/blog/{p.slug}</a>
+                )}
+                {!p.published && <span className="rounded bg-yellow-500/20 px-2 py-0.5 text-yellow-300">Draft</span>}
+              </div>
             </div>
             <div className="flex gap-1">
               <Button size="icon" variant="ghost" onClick={() => { setEditing(p); setOpen(true); }}><Edit className="h-4 w-4" /></Button>

@@ -328,8 +328,10 @@ export type Database = {
           id: string
           image_urls: string[]
           og_image: string | null
+          published: boolean
           seo_description: string | null
           seo_title: string | null
+          slug: string | null
           updated_at: string
         }
         Insert: {
@@ -339,8 +341,10 @@ export type Database = {
           id?: string
           image_urls?: string[]
           og_image?: string | null
+          published?: boolean
           seo_description?: string | null
           seo_title?: string | null
+          slug?: string | null
           updated_at?: string
         }
         Update: {
@@ -350,8 +354,10 @@ export type Database = {
           id?: string
           image_urls?: string[]
           og_image?: string | null
+          published?: boolean
           seo_description?: string | null
           seo_title?: string | null
+          slug?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -586,6 +592,7 @@ export type Database = {
           read_ct: number
         }[]
       }
+      slugify: { Args: { input: string }; Returns: string }
     }
     Enums: {
       app_role: "admin" | "user"
