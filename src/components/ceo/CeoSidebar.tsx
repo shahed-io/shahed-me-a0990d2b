@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import {
-  LayoutDashboard, BookOpen, Search as SearchIcon, Globe, LifeBuoy, Settings, Home,
+  LayoutDashboard, BookOpen, Search as SearchIcon, Globe, LifeBuoy, Settings, Home, TrendingUp,
 } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
@@ -14,6 +14,7 @@ const groups: Group[] = [
   { label: "Overview", items: [{ title: "Dashboard", url: "/ceo", icon: LayoutDashboard }] },
   { label: "Content & SEO", items: [
     { title: "Blog", url: "/ceo/blog", icon: BookOpen },
+    { title: "Search Rankings", url: "/ceo/rankings", icon: TrendingUp },
     { title: "SEO Manager", url: "/ceo/seo", icon: SearchIcon },
     { title: "Page SEO Overrides", url: "/ceo/page-seo", icon: Globe },
   ]},
