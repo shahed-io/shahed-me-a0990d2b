@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BookOpen, Plus, Trash2, Edit } from "lucide-react";
+import { BookOpen, Plus, Trash2, Edit, Sparkles, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/use-auth";
@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface Post {
   id: string;
@@ -25,6 +26,9 @@ const Blog = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<Partial<Post> | null>(null);
+  const [aiOpen, setAiOpen] = useState(false);
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiForm, setAiForm] = useState({ topic: "", keywords: "", tone: "professional", language: "english" });
   const { user } = useAuth();
   const { toast } = useToast();
 
@@ -50,6 +54,31 @@ const Blog = () => {
   };
   const remove = async (id: string) => { if (!confirm("Delete?")) return; await supabase.from("posts").delete().eq("id", id); load(); };
 
+  const generateWithAI = async (autoSave: boolean) => {
+    if (!aiForm.topic.trim()) return toast({ title: "Topic required", variant: "destructive" });
+    setAiLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("ai-blog-writer", {
+        body: { ...aiForm, autoSave },
+      });
+      if (error) throw error;
+      if (data?.error) throw new Error(data.error);
+      toast({ title: autoSave ? "Post generated & saved" : "Draft ready — review & save" });
+      if (autoSave) {
+        setAiOpen(false);
+        load();
+      } else {
+        setAiOpen(false);
+        setEditing({ content: data.content, seo_title: data.seo_title, seo_description: data.seo_description });
+        setOpen(true);
+      }
+    } catch (e: any) {
+      toast({ title: "AI error", description: e.message, variant: "destructive" });
+    } finally {
+      setAiLoading(false);
+    }
+  };
+
   return (
     <>
       <PageHeader
@@ -58,26 +87,74 @@ const Blog = () => {
         breadcrumb={["Content & SEO", "Blog"]}
         icon={BookOpen}
         actions={
-          <Dialog open={open} onOpenChange={(o) => { setOpen(o); if (!o) setEditing(null); }}>
-            <DialogTrigger asChild>
-              <Button size="sm" onClick={() => setEditing({})}><Plus className="mr-1 h-4 w-4" /> New Post</Button>
-            </DialogTrigger>
-            <DialogContent className="max-h-[90vh] overflow-y-auto">
-              <DialogHeader><DialogTitle>{editing?.id ? "Edit" : "New"} Post</DialogTitle></DialogHeader>
-              <div className="grid gap-3">
-                <div><Label>Content</Label><Textarea rows={6} value={editing?.content ?? ""} onChange={e => setEditing({ ...editing, content: e.target.value })} /></div>
-                <div className="rounded-md border bg-white/5 backdrop-blur-md p-3">
-                  <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">SEO Overrides (optional)</p>
-                  <div className="grid gap-3">
-                    <div><Label>SEO Title</Label><Input maxLength={70} value={editing?.seo_title ?? ""} onChange={e => setEditing({ ...editing, seo_title: e.target.value })} /></div>
-                    <div><Label>Meta Description</Label><Textarea rows={2} maxLength={200} value={editing?.seo_description ?? ""} onChange={e => setEditing({ ...editing, seo_description: e.target.value })} /></div>
-                    <div><Label>OG Image URL</Label><Input value={editing?.og_image ?? ""} onChange={e => setEditing({ ...editing, og_image: e.target.value })} /></div>
+          <div className="flex gap-2">
+            <Dialog open={aiOpen} onOpenChange={setAiOpen}>
+              <DialogTrigger asChild>
+                <Button size="sm" variant="outline" className="gap-1"><Sparkles className="h-4 w-4" /> AI Write</Button>
+              </DialogTrigger>
+              <DialogContent className="max-h-[90vh] overflow-y-auto">
+                <DialogHeader><DialogTitle className="flex items-center gap-2"><Sparkles className="h-5 w-5 text-accent" /> AI Blog Writer</DialogTitle></DialogHeader>
+                <div className="grid gap-3">
+                  <div><Label>Topic *</Label><Input placeholder="e.g. Best Web Developer in Bangladesh 2026" value={aiForm.topic} onChange={e => setAiForm({ ...aiForm, topic: e.target.value })} /></div>
+                  <div><Label>Target Keywords (comma separated)</Label><Input placeholder="web developer bangladesh, react developer dhaka" value={aiForm.keywords} onChange={e => setAiForm({ ...aiForm, keywords: e.target.value })} /></div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <Label>Tone</Label>
+                      <Select value={aiForm.tone} onValueChange={v => setAiForm({ ...aiForm, tone: v })}>
+                        <SelectTrigger><SelectValue /></SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="professional">Professional</SelectItem>
+                          <SelectItem value="friendly">Friendly</SelectItem>
+                          <SelectItem value="authoritative">Authoritative</SelectItem>
+                          <SelectItem value="storytelling">Storytelling</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label>Language</Label>
+                      <Select value={aiForm.language} onValueChange={v => setAiForm({ ...aiForm, language: v })}>
+                        <SelectTrigger><SelectValue /></SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="english">English</SelectItem>
+                          <SelectItem value="bangla">Bangla</SelectItem>
+                          <SelectItem value="banglish">Banglish (mix)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <DialogFooter><Button onClick={save}>Save</Button></DialogFooter>
-            </DialogContent>
-          </Dialog>
+                <DialogFooter className="gap-2">
+                  <Button variant="outline" disabled={aiLoading} onClick={() => generateWithAI(false)}>
+                    {aiLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Preview First"}
+                  </Button>
+                  <Button disabled={aiLoading} onClick={() => generateWithAI(true)}>
+                    {aiLoading ? <><Loader2 className="mr-1 h-4 w-4 animate-spin" /> Writing…</> : <><Sparkles className="mr-1 h-4 w-4" /> Generate & Publish</>}
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+
+            <Dialog open={open} onOpenChange={(o) => { setOpen(o); if (!o) setEditing(null); }}>
+              <DialogTrigger asChild>
+                <Button size="sm" onClick={() => setEditing({})}><Plus className="mr-1 h-4 w-4" /> New Post</Button>
+              </DialogTrigger>
+              <DialogContent className="max-h-[90vh] overflow-y-auto">
+                <DialogHeader><DialogTitle>{editing?.id ? "Edit" : "New"} Post</DialogTitle></DialogHeader>
+                <div className="grid gap-3">
+                  <div><Label>Content</Label><Textarea rows={12} value={editing?.content ?? ""} onChange={e => setEditing({ ...editing, content: e.target.value })} /></div>
+                  <div className="rounded-md border bg-white/5 backdrop-blur-md p-3">
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">SEO Overrides (optional)</p>
+                    <div className="grid gap-3">
+                      <div><Label>SEO Title</Label><Input maxLength={70} value={editing?.seo_title ?? ""} onChange={e => setEditing({ ...editing, seo_title: e.target.value })} /></div>
+                      <div><Label>Meta Description</Label><Textarea rows={2} maxLength={200} value={editing?.seo_description ?? ""} onChange={e => setEditing({ ...editing, seo_description: e.target.value })} /></div>
+                      <div><Label>OG Image URL</Label><Input value={editing?.og_image ?? ""} onChange={e => setEditing({ ...editing, og_image: e.target.value })} /></div>
+                    </div>
+                  </div>
+                </div>
+                <DialogFooter><Button onClick={save}>Save</Button></DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </div>
         }
       />
 
