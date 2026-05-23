@@ -24,6 +24,7 @@ const CeoTickets = lazy(() => import("./pages/ceo/Tickets.tsx"));
 const CeoBlog = lazy(() => import("./pages/ceo/Blog.tsx"));
 const SeoManager = lazy(() => import("./pages/ceo/SeoManager.tsx"));
 const PageSeo = lazy(() => import("./pages/ceo/PageSeo.tsx"));
+const CeoRankings = lazy(() => import("./pages/ceo/Rankings.tsx"));
 const CeoSettings = lazy(() => import("./pages/ceo/Settings.tsx"));
 const MdShahedWebDeveloper = lazy(() => import("./pages/MdShahedWebDeveloper.tsx"));
 const BangladeshWebDevelopment = lazy(() => import("./pages/BangladeshWebDevelopment.tsx"));
@@ -91,6 +92,7 @@ const AnimatedRoutes = () => {
               <Route path="blog" element={<CeoBlog />} />
               <Route path="seo" element={<SeoManager />} />
               <Route path="page-seo" element={<PageSeo />} />
+              <Route path="rankings" element={<CeoRankings />} />
               <Route path="tickets" element={<CeoTickets />} />
               <Route path="settings" element={<CeoSettings />} />
             </Route>
