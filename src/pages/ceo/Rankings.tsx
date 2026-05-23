@@ -147,6 +147,7 @@ const Rankings = () => {
   return (
     <div className="space-y-6">
       <PageHeader
+        icon={TrendingUp}
         title="Search Rankings"
         subtitle="Google Search Console performance for shahed.com.bd"
         actions={
