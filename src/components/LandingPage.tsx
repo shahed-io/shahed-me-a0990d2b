@@ -153,6 +153,9 @@ export const LandingPage = ({
               <Button asChild variant="outline" size="lg">
                 <Link to="/timeline">Timeline দেখুন</Link>
               </Button>
+              <Button asChild variant="ghost" size="lg">
+                <Link to="/blog">Read the Blog →</Link>
+              </Button>
             </div>
           </div>
 
