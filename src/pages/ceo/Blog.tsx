@@ -47,6 +47,8 @@ const Blog = () => {
       seo_title: editing.seo_title || null,
       seo_description: editing.seo_description || null,
       og_image: editing.og_image || null,
+      slug: editing.slug || null,
+      published: editing.published ?? true,
     };
     const { error } = editing.id
       ? await supabase.from("posts").update(payload).eq("id", editing.id)
