@@ -35,7 +35,7 @@ const BlogPost = () => {
       setLoading(true);
       const { data } = await supabase
         .from("posts")
-        .select("id,slug,seo_title,seo_description,content,og_image,created_at,updated_at")
+        .select("id,slug,seo_title,seo_description,content,og_image,created_at,updated_at,tags")
         .eq("slug", slug)
         .eq("published", true)
         .maybeSingle();
@@ -46,7 +46,7 @@ const BlogPost = () => {
       setPost(data as PostRow);
       const { data: more } = await supabase
         .from("posts")
-        .select("id,slug,seo_title,seo_description,content,og_image,created_at,updated_at")
+        .select("id,slug,seo_title,seo_description,content,og_image,created_at,updated_at,tags")
         .eq("published", true)
         .neq("id", (data as PostRow).id)
         .order("created_at", { ascending: false })
