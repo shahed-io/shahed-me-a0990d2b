@@ -156,6 +156,15 @@ const Blog = () => {
                       <div><Label>Meta Description</Label><Textarea rows={2} maxLength={200} value={editing?.seo_description ?? ""} onChange={e => setEditing({ ...editing, seo_description: e.target.value })} /></div>
                       <div><Label>Slug (URL, auto if empty)</Label><Input placeholder="my-awesome-post" value={editing?.slug ?? ""} onChange={e => setEditing({ ...editing, slug: e.target.value })} /></div>
                       <div><Label>OG Image URL</Label><Input value={editing?.og_image ?? ""} onChange={e => setEditing({ ...editing, og_image: e.target.value })} /></div>
+                      <div>
+                        <Label>Tags / Categories (comma separated)</Label>
+                        <Input
+                          placeholder="React, SEO, Bangladesh"
+                          value={(editing?.tags ?? []).join(", ")}
+                          onChange={e => setEditing({ ...editing, tags: parseTagsInput(e.target.value) })}
+                        />
+                        <p className="mt-1 text-[11px] text-muted-foreground">Each tag becomes a /blog/category/&lt;slug&gt; archive page.</p>
+                      </div>
                       <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={editing?.published ?? true} onChange={e => setEditing({ ...editing, published: e.target.checked })} /> Published (visible on /blog)</label>
                     </div>
                   </div>
