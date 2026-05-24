@@ -176,10 +176,19 @@ const BlogPost = () => {
               {desc && (
                 <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{desc}</p>
               )}
-              <div className="mt-6 flex gap-2">
+              <div className="mt-6 flex flex-wrap items-center gap-2">
                 <Button variant="outline" size="sm" onClick={share}>
                   <Share2 className="mr-2 h-4 w-4" /> Share
                 </Button>
+                {(post.tags ?? []).map((t) => (
+                  <Link
+                    key={t}
+                    to={`/blog/category/${tagSlug(t)}`}
+                    className="inline-flex items-center gap-1 rounded-full border border-border/50 bg-white/[0.03] px-3 py-1 text-xs font-medium text-muted-foreground transition-all hover:border-accent/60 hover:bg-accent/10 hover:text-accent"
+                  >
+                    <Tag className="h-3 w-3" /> {t}
+                  </Link>
+                ))}
               </div>
             </header>
 
