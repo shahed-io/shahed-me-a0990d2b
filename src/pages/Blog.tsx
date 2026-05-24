@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, Calendar, Tag } from "lucide-react";
+import { tagSlug } from "@/lib/blog-tags";
 
 interface PostRow {
   id: string;
@@ -13,6 +14,7 @@ interface PostRow {
   content: string;
   og_image: string | null;
   created_at: string;
+  tags: string[] | null;
 }
 
 const SITE = "https://shahed.com.bd";
@@ -25,13 +27,27 @@ const Blog = () => {
     (async () => {
       const { data } = await supabase
         .from("posts")
-        .select("id,slug,seo_title,seo_description,content,og_image,created_at")
+        .select("id,slug,seo_title,seo_description,content,og_image,created_at,tags")
         .eq("published", true)
         .order("created_at", { ascending: false });
       setPosts((data as PostRow[]) ?? []);
       setLoading(false);
     })();
   }, []);
+
+  // Unique tag list across all posts, sorted by usage count.
+  const allTags = useMemo(() => {
+    const counts = new Map<string, number>();
+    posts.forEach((p) => (p.tags ?? []).forEach((t) => {
+      const key = t.trim();
+      if (!key) return;
+      counts.set(key, (counts.get(key) ?? 0) + 1);
+    }));
+    return Array.from(counts.entries())
+      .sort((a, b) => b[1] - a[1])
+      .map(([t]) => t);
+  }, [posts]);
+
 
   const title = "Blog — Md Shahed | Web Development & SEO in Bangladesh";
   const desc =
@@ -85,6 +101,20 @@ const Blog = () => {
             </nav>
           </header>
 
+          {allTags.length > 0 && (
+            <nav aria-label="Categories" className="mb-10 flex flex-wrap justify-center gap-2">
+              {allTags.map((t) => (
+                <Link
+                  key={t}
+                  to={`/blog/category/${tagSlug(t)}`}
+                  className="inline-flex items-center gap-1 rounded-full border border-border/50 bg-white/[0.03] px-3 py-1 text-xs font-medium text-muted-foreground transition-all hover:border-accent/60 hover:bg-accent/10 hover:text-accent"
+                >
+                  <Tag className="h-3 w-3" /> {t}
+                </Link>
+              ))}
+            </nav>
+          )}
+
           {loading && (
             <div className="grid gap-4">
               {[0, 1, 2].map((i) => (
@@ -96,6 +126,7 @@ const Blog = () => {
           {!loading && posts.length === 0 && (
             <Card className="p-12 text-center text-muted-foreground">No posts yet.</Card>
           )}
+
 
           <div className="grid gap-5">
             {posts.map((p) => {
@@ -124,6 +155,15 @@ const Blog = () => {
                       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                         {excerpt}
                       </p>
+                      {(p.tags ?? []).length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-1.5">
+                          {(p.tags ?? []).slice(0, 4).map((t) => (
+                            <span key={t} className="rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-accent">
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                       <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent">
                         Read article <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                       </span>

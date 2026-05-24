@@ -4,8 +4,9 @@ import { Helmet } from "react-helmet-async";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { supabase } from "@/integrations/supabase/client";
-import { ArrowLeft, Calendar, Share2 } from "lucide-react";
+import { ArrowLeft, Calendar, Share2, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { tagSlug } from "@/lib/blog-tags";
 
 interface PostRow {
   id: string;
@@ -16,6 +17,7 @@ interface PostRow {
   og_image: string | null;
   created_at: string;
   updated_at: string;
+  tags: string[] | null;
 }
 
 const SITE = "https://shahed.com.bd";
@@ -33,7 +35,7 @@ const BlogPost = () => {
       setLoading(true);
       const { data } = await supabase
         .from("posts")
-        .select("id,slug,seo_title,seo_description,content,og_image,created_at,updated_at")
+        .select("id,slug,seo_title,seo_description,content,og_image,created_at,updated_at,tags")
         .eq("slug", slug)
         .eq("published", true)
         .maybeSingle();
@@ -44,7 +46,7 @@ const BlogPost = () => {
       setPost(data as PostRow);
       const { data: more } = await supabase
         .from("posts")
-        .select("id,slug,seo_title,seo_description,content,og_image,created_at,updated_at")
+        .select("id,slug,seo_title,seo_description,content,og_image,created_at,updated_at,tags")
         .eq("published", true)
         .neq("id", (data as PostRow).id)
         .order("created_at", { ascending: false })
@@ -174,10 +176,19 @@ const BlogPost = () => {
               {desc && (
                 <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{desc}</p>
               )}
-              <div className="mt-6 flex gap-2">
+              <div className="mt-6 flex flex-wrap items-center gap-2">
                 <Button variant="outline" size="sm" onClick={share}>
                   <Share2 className="mr-2 h-4 w-4" /> Share
                 </Button>
+                {(post.tags ?? []).map((t) => (
+                  <Link
+                    key={t}
+                    to={`/blog/category/${tagSlug(t)}`}
+                    className="inline-flex items-center gap-1 rounded-full border border-border/50 bg-white/[0.03] px-3 py-1 text-xs font-medium text-muted-foreground transition-all hover:border-accent/60 hover:bg-accent/10 hover:text-accent"
+                  >
+                    <Tag className="h-3 w-3" /> {t}
+                  </Link>
+                ))}
               </div>
             </header>
 

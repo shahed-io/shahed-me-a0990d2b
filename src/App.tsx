@@ -31,6 +31,7 @@ const BangladeshWebDevelopment = lazy(() => import("./pages/BangladeshWebDevelop
 const DigitalConsulting = lazy(() => import("./pages/DigitalConsulting.tsx"));
 const Blog = lazy(() => import("./pages/Blog.tsx"));
 const BlogPost = lazy(() => import("./pages/BlogPost.tsx"));
+const BlogCategory = lazy(() => import("./pages/BlogCategory.tsx"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -102,6 +103,7 @@ const AnimatedRoutes = () => {
             <Route path="/bangladesh-web-development" element={<BangladeshWebDevelopment />} />
             <Route path="/digital-consulting" element={<DigitalConsulting />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/category/:tag" element={<BlogCategory />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
