@@ -189,6 +189,9 @@ const Blog = () => {
                   <a href={`/blog/${p.slug}`} target="_blank" rel="noreferrer" className="text-accent hover:underline">/blog/{p.slug}</a>
                 )}
                 {!p.published && <span className="rounded bg-yellow-500/20 px-2 py-0.5 text-yellow-300">Draft</span>}
+                {(p.tags ?? []).map(t => (
+                  <span key={t} className="rounded-full bg-accent/15 px-2 py-0.5 text-[10px] font-medium text-accent">#{t}</span>
+                ))}
               </div>
             </div>
             <div className="flex gap-1">
