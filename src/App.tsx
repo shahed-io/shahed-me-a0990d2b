@@ -31,6 +31,7 @@ const BangladeshWebDevelopment = lazy(() => import("./pages/BangladeshWebDevelop
 const DigitalConsulting = lazy(() => import("./pages/DigitalConsulting.tsx"));
 const Blog = lazy(() => import("./pages/Blog.tsx"));
 const BlogPost = lazy(() => import("./pages/BlogPost.tsx"));
+const BlogCategory = lazy(() => import("./pages/BlogCategory.tsx"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
