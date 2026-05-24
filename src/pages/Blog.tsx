@@ -155,6 +155,15 @@ const Blog = () => {
                       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                         {excerpt}
                       </p>
+                      {(p.tags ?? []).length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-1.5">
+                          {(p.tags ?? []).slice(0, 4).map((t) => (
+                            <span key={t} className="rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-accent">
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                       <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-accent">
                         Read article <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                       </span>
