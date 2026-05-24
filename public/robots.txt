@@ -81,4 +81,4 @@ User-agent: ClaudeBot
 Disallow: /
 
 Sitemap: https://shahed.com.bd/sitemap.xml
-Host: shahed.com.bd
+
