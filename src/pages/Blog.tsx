@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, Calendar, Tag } from "lucide-react";
+import { tagSlug } from "@/lib/blog-tags";
 
 interface PostRow {
   id: string;
@@ -13,6 +14,7 @@ interface PostRow {
   content: string;
   og_image: string | null;
   created_at: string;
+  tags: string[] | null;
 }
 
 const SITE = "https://shahed.com.bd";
@@ -25,13 +27,27 @@ const Blog = () => {
     (async () => {
       const { data } = await supabase
         .from("posts")
-        .select("id,slug,seo_title,seo_description,content,og_image,created_at")
+        .select("id,slug,seo_title,seo_description,content,og_image,created_at,tags")
         .eq("published", true)
         .order("created_at", { ascending: false });
       setPosts((data as PostRow[]) ?? []);
       setLoading(false);
     })();
   }, []);
+
+  // Unique tag list across all posts, sorted by usage count.
+  const allTags = useMemo(() => {
+    const counts = new Map<string, number>();
+    posts.forEach((p) => (p.tags ?? []).forEach((t) => {
+      const key = t.trim();
+      if (!key) return;
+      counts.set(key, (counts.get(key) ?? 0) + 1);
+    }));
+    return Array.from(counts.entries())
+      .sort((a, b) => b[1] - a[1])
+      .map(([t]) => t);
+  }, [posts]);
+
 
   const title = "Blog — Md Shahed | Web Development & SEO in Bangladesh";
   const desc =
