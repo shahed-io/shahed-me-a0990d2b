@@ -101,6 +101,20 @@ const Blog = () => {
             </nav>
           </header>
 
+          {allTags.length > 0 && (
+            <nav aria-label="Categories" className="mb-10 flex flex-wrap justify-center gap-2">
+              {allTags.map((t) => (
+                <Link
+                  key={t}
+                  to={`/blog/category/${tagSlug(t)}`}
+                  className="inline-flex items-center gap-1 rounded-full border border-border/50 bg-white/[0.03] px-3 py-1 text-xs font-medium text-muted-foreground transition-all hover:border-accent/60 hover:bg-accent/10 hover:text-accent"
+                >
+                  <Tag className="h-3 w-3" /> {t}
+                </Link>
+              ))}
+            </nav>
+          )}
+
           {loading && (
             <div className="grid gap-4">
               {[0, 1, 2].map((i) => (
@@ -112,6 +126,7 @@ const Blog = () => {
           {!loading && posts.length === 0 && (
             <Card className="p-12 text-center text-muted-foreground">No posts yet.</Card>
           )}
+
 
           <div className="grid gap-5">
             {posts.map((p) => {
