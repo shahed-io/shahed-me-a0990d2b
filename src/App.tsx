@@ -103,6 +103,7 @@ const AnimatedRoutes = () => {
             <Route path="/bangladesh-web-development" element={<BangladeshWebDevelopment />} />
             <Route path="/digital-consulting" element={<DigitalConsulting />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/category/:tag" element={<BlogCategory />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
