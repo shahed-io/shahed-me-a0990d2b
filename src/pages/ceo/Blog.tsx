@@ -51,6 +51,7 @@ const Blog = () => {
       og_image: editing.og_image || null,
       slug: editing.slug || null,
       published: editing.published ?? true,
+      tags: editing.tags ?? [],
     };
     const { error } = editing.id
       ? await supabase.from("posts").update(payload).eq("id", editing.id)
