@@ -4,8 +4,9 @@ import { Helmet } from "react-helmet-async";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { supabase } from "@/integrations/supabase/client";
-import { ArrowLeft, Calendar, Share2 } from "lucide-react";
+import { ArrowLeft, Calendar, Share2, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { tagSlug } from "@/lib/blog-tags";
 
 interface PostRow {
   id: string;
@@ -16,6 +17,7 @@ interface PostRow {
   og_image: string | null;
   created_at: string;
   updated_at: string;
+  tags: string[] | null;
 }
 
 const SITE = "https://shahed.com.bd";
