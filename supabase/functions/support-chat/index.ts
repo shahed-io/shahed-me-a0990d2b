@@ -22,50 +22,13 @@ Your job:
 - Reply in the same language the user writes (English or Bangla)
 - If you don't know something specific, suggest contacting Shahed directly via WhatsApp`;
 
-const MAX_MESSAGES = 20;
-const MAX_MSG_CHARS = 2000;
-
-type ChatMessage = { role: "user" | "assistant"; content: string };
-
-function validateMessages(input: unknown): { ok: true; messages: ChatMessage[] } | { ok: false; error: string } {
-  if (!Array.isArray(input)) return { ok: false, error: "messages must be an array" };
-  if (input.length === 0) return { ok: false, error: "messages cannot be empty" };
-  if (input.length > MAX_MESSAGES) return { ok: false, error: `too many messages (max ${MAX_MESSAGES})` };
-  const out: ChatMessage[] = [];
-  for (const m of input) {
-    if (!m || typeof m !== "object") return { ok: false, error: "invalid message" };
-    const role = (m as any).role;
-    const content = (m as any).content;
-    if (role !== "user" && role !== "assistant") {
-      return { ok: false, error: "role must be 'user' or 'assistant'" };
-    }
-    if (typeof content !== "string" || content.length === 0) {
-      return { ok: false, error: "content must be a non-empty string" };
-    }
-    if (content.length > MAX_MSG_CHARS) {
-      return { ok: false, error: `message too long (max ${MAX_MSG_CHARS} chars)` };
-    }
-    out.push({ role, content });
-  }
-  return { ok: true, messages: out };
-}
-
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const body = await req.json().catch(() => null);
-    const validation = validateMessages((body as any)?.messages);
-    if (!validation.ok) {
-      return new Response(JSON.stringify({ error: validation.error }), {
-        status: 400,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
-    const messages = validation.messages;
-
+    const { messages } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
       throw new Error("LOVABLE_API_KEY is not configured");

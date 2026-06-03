@@ -122,17 +122,13 @@
   }
 
   body {
-    @apply text-foreground antialiased;
+    @apply bg-background text-foreground antialiased;
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* Transparent so the global 3D scene (Scene3D) shows through */
-    background-color: transparent;
-  }
-
-  /* Fallback solid color before JS hydrates (prevents white flash) */
-  html {
-    background-color: #050510;
+    /* Subtle mesh background on the whole page */
+    background-image: var(--gradient-mesh);
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {

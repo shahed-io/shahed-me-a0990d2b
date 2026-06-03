@@ -1,11 +1,22 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
+const CACHE_KEY = "is_admin_cache_v1";
+
+const readCache = (): boolean | null => {
+  try {
+    const v = localStorage.getItem(CACHE_KEY);
+    if (v === "1") return true;
+    if (v === "0") return false;
+    return null;
+  } catch { return null; }
+};
+
 export const useIsAdmin = () => {
-  // Never trust client-side cache for authorization decisions.
-  // Always start unauthenticated and loading until the server confirms.
-  const [isAdmin, setIsAdmin] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
+  const cached = readCache();
+  const [isAdmin, setIsAdmin] = useState<boolean>(cached ?? false);
+  // If we have a cached value, skip the loading state to avoid flicker.
+  const [loading, setLoading] = useState<boolean>(cached === null);
 
   useEffect(() => {
     let mounted = true;
@@ -15,6 +26,7 @@ export const useIsAdmin = () => {
         if (mounted) {
           setIsAdmin(false);
           setLoading(false);
+          try { localStorage.setItem(CACHE_KEY, "0"); } catch {}
         }
         return;
       }
@@ -25,13 +37,14 @@ export const useIsAdmin = () => {
         .eq("role", "admin")
         .maybeSingle();
       if (mounted) {
-        setIsAdmin(!!data);
+        const v = !!data;
+        setIsAdmin(v);
         setLoading(false);
+        try { localStorage.setItem(CACHE_KEY, v ? "1" : "0"); } catch {}
       }
     };
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, session) => {
-      setLoading(true);
       check(session?.user?.id);
     });
     supabase.auth.getSession().then(({ data: { session } }) => check(session?.user?.id));
