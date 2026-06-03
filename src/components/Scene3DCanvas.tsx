@@ -1,19 +1,22 @@
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Float, Environment, MeshTransmissionMaterial } from "@react-three/drei";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Mesh, Group } from "three";
+import * as THREE from "three";
 
 /**
  * Floating Glass Prism — central centerpiece with orbiting fragments.
- * Scroll-tied gentle camera dolly + cursor parallax.
+ * Scroll-tied gentle camera dolly + cursor parallax + click burst effects.
  */
 
-const Prism = () => {
+const Prism = ({ pulse }: { pulse: number }) => {
   const mesh = useRef<Mesh>(null!);
   useFrame((_, dt) => {
     if (!mesh.current) return;
-    mesh.current.rotation.x += dt * 0.15;
-    mesh.current.rotation.y += dt * 0.22;
+    mesh.current.rotation.x += dt * (0.15 + pulse * 2);
+    mesh.current.rotation.y += dt * (0.22 + pulse * 2.5);
+    const s = 1 + pulse * 0.25;
+    mesh.current.scale.setScalar(s);
   });
   return (
     <mesh ref={mesh}>
@@ -35,12 +38,12 @@ const Prism = () => {
   );
 };
 
-const Core = () => {
+const Core = ({ pulse }: { pulse: number }) => {
   const ref = useRef<Mesh>(null!);
   useFrame(({ clock }) => {
     if (!ref.current) return;
     const t = clock.getElapsedTime();
-    ref.current.scale.setScalar(0.9 + Math.sin(t * 1.4) * 0.08);
+    ref.current.scale.setScalar(0.9 + Math.sin(t * 1.4) * 0.08 + pulse * 0.8);
   });
   return (
     <mesh ref={ref}>
@@ -48,7 +51,7 @@ const Core = () => {
       <meshStandardMaterial
         color="#22d3ee"
         emissive="#8b5cf6"
-        emissiveIntensity={1.6}
+        emissiveIntensity={1.6 + pulse * 4}
         roughness={0.2}
         metalness={0.7}
       />
@@ -56,11 +59,13 @@ const Core = () => {
   );
 };
 
-const Fragments = () => {
+const Fragments = ({ pulse }: { pulse: number }) => {
   const group = useRef<Group>(null!);
   useFrame(({ clock }) => {
     if (!group.current) return;
-    group.current.rotation.y = clock.getElapsedTime() * 0.05;
+    group.current.rotation.y = clock.getElapsedTime() * (0.05 + pulse * 1.5);
+    const s = 1 + pulse * 0.35;
+    group.current.scale.setScalar(s);
   });
   const items = [
     { pos: [-3.4, 1.6, -1] as const, size: 0.5, color: "#22d3ee" },
@@ -90,7 +95,7 @@ const Fragments = () => {
               roughness={0.15}
               metalness={0.85}
               emissive={it.color}
-              emissiveIntensity={0.25}
+              emissiveIntensity={0.25 + pulse * 2}
             />
           </mesh>
         </Float>
@@ -99,13 +104,135 @@ const Fragments = () => {
   );
 };
 
-const Rig = () => {
-  useFrame((state) => {
-    const { camera, pointer } = state;
-    // Cursor parallax
+type Burst = {
+  id: number;
+  position: THREE.Vector3;
+  born: number;
+  color: string;
+  particles: Array<{ dir: THREE.Vector3; speed: number }>;
+};
+
+const BurstFx = ({
+  burst,
+  onDone,
+}: {
+  burst: Burst;
+  onDone: (id: number) => void;
+}) => {
+  const group = useRef<Group>(null!);
+  const ringRef = useRef<Mesh>(null!);
+  const bornRef = useRef<number | null>(null);
+  const DURATION = 1.1;
+
+  useFrame(({ clock }) => {
+    if (bornRef.current === null) bornRef.current = clock.getElapsedTime();
+    const elapsed = clock.getElapsedTime() - bornRef.current;
+    const t = Math.min(elapsed / DURATION, 1);
+    if (group.current) {
+      group.current.children.forEach((child, i) => {
+        const p = burst.particles[i];
+        if (!p) return;
+        const d = p.speed * t * 2.4;
+        child.position.set(p.dir.x * d, p.dir.y * d, p.dir.z * d);
+        (child as Mesh).scale.setScalar(Math.max(0.001, 1 - t));
+      });
+    }
+    if (ringRef.current) {
+      const s = 0.2 + t * 3.2;
+      ringRef.current.scale.set(s, s, s);
+      const mat = ringRef.current.material as THREE.MeshBasicMaterial;
+      mat.opacity = (1 - t) * 0.8;
+    }
+    if (t >= 1) onDone(burst.id);
+  });
+
+  return (
+    <group position={burst.position}>
+      <mesh ref={ringRef}>
+        <ringGeometry args={[0.35, 0.42, 48]} />
+        <meshBasicMaterial
+          color={burst.color}
+          transparent
+          opacity={0.8}
+          side={THREE.DoubleSide}
+          toneMapped={false}
+        />
+      </mesh>
+      <group ref={group}>
+        {burst.particles.map((_, i) => (
+          <mesh key={i}>
+            <sphereGeometry args={[0.06, 8, 8]} />
+            <meshBasicMaterial color={burst.color} toneMapped={false} />
+          </mesh>
+        ))}
+      </group>
+    </group>
+  );
+};
+
+const Scene = () => {
+  const { camera, gl, pointer } = useThree();
+  const [bursts, setBursts] = useState<Burst[]>([]);
+  const [pulse, setPulse] = useState(0);
+  const pulseTarget = useRef(0);
+  const idRef = useRef(0);
+
+  // Click → spawn burst at cursor projected onto z=0 plane
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      // Ignore clicks on actual interactive UI
+      const el = e.target as HTMLElement | null;
+      if (el && el.closest("a, button, input, textarea, select, [role='button']")) {
+        return;
+      }
+      const rect = gl.domElement.getBoundingClientRect();
+      const ndc = new THREE.Vector2(
+        ((e.clientX - rect.left) / rect.width) * 2 - 1,
+        -((e.clientY - rect.top) / rect.height) * 2 + 1,
+      );
+      const raycaster = new THREE.Raycaster();
+      raycaster.setFromCamera(ndc, camera);
+      const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+      const point = new THREE.Vector3();
+      raycaster.ray.intersectPlane(plane, point);
+
+      const palette = ["#a78bfa", "#22d3ee", "#ec4899", "#8b5cf6"];
+      const color = palette[Math.floor(Math.random() * palette.length)];
+      const particles = Array.from({ length: 18 }, () => {
+        const v = new THREE.Vector3(
+          Math.random() * 2 - 1,
+          Math.random() * 2 - 1,
+          Math.random() * 2 - 1,
+        ).normalize();
+        return { dir: v, speed: 0.6 + Math.random() * 1.2 };
+      });
+
+      const id = ++idRef.current;
+      setBursts((b) => [
+        ...b,
+        {
+          id,
+          position: point,
+          born: performance.now() / 1000,
+          color,
+          particles,
+        },
+      ]);
+      pulseTarget.current = 1;
+    };
+
+    window.addEventListener("click", handler);
+    return () => window.removeEventListener("click", handler);
+  }, [camera, gl]);
+
+  useFrame((state, dt) => {
+    // Smooth pulse decay
+    pulseTarget.current = Math.max(0, pulseTarget.current - dt * 2.2);
+    setPulse((prev) => prev + (pulseTarget.current - prev) * Math.min(1, dt * 8));
+
+    // Cursor parallax + scroll dolly
     camera.position.x += (pointer.x * 1.2 - camera.position.x) * 0.03;
     camera.position.y += (-pointer.y * 0.8 - camera.position.y) * 0.03;
-    // Scroll dolly
     const scroll =
       typeof window !== "undefined"
         ? window.scrollY /
@@ -115,7 +242,31 @@ const Rig = () => {
     camera.position.z += (targetZ - camera.position.z) * 0.04;
     camera.lookAt(0, 0, 0);
   });
-  return null;
+
+  // Fix burst born timestamps to clock-time
+  useEffect(() => {
+    // no-op; born uses performance.now relative; convert in BurstFx by passing clock — handled there
+  }, []);
+
+  const removeBurst = (id: number) =>
+    setBursts((b) => b.filter((x) => x.id !== id));
+
+  return (
+    <>
+      <ambientLight intensity={0.4} />
+      <pointLight position={[5, 5, 5]} intensity={1.2 + pulse * 3} color="#a78bfa" />
+      <pointLight position={[-5, -3, 2]} intensity={1 + pulse * 3} color="#22d3ee" />
+      <Float speed={1.2} rotationIntensity={0.4} floatIntensity={0.8}>
+        <Prism pulse={pulse} />
+      </Float>
+      <Core pulse={pulse} />
+      <Fragments pulse={pulse} />
+      {bursts.map((b) => (
+        <BurstFx key={b.id} burst={b} onDone={removeBurst} />
+      ))}
+      <Environment preset="night" />
+    </>
+  );
 };
 
 const Scene3DCanvas = () => {
@@ -126,16 +277,7 @@ const Scene3DCanvas = () => {
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       style={{ background: "transparent" }}
     >
-      <ambientLight intensity={0.4} />
-      <pointLight position={[5, 5, 5]} intensity={1.2} color="#a78bfa" />
-      <pointLight position={[-5, -3, 2]} intensity={1} color="#22d3ee" />
-      <Float speed={1.2} rotationIntensity={0.4} floatIntensity={0.8}>
-        <Prism />
-      </Float>
-      <Core />
-      <Fragments />
-      <Environment preset="night" />
-      <Rig />
+      <Scene />
     </Canvas>
   );
 };
