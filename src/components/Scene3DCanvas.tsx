@@ -121,10 +121,12 @@ const BurstFx = ({
 }) => {
   const group = useRef<Group>(null!);
   const ringRef = useRef<Mesh>(null!);
+  const bornRef = useRef<number | null>(null);
   const DURATION = 1.1;
 
   useFrame(({ clock }) => {
-    const elapsed = clock.getElapsedTime() - burst.born;
+    if (bornRef.current === null) bornRef.current = clock.getElapsedTime();
+    const elapsed = clock.getElapsedTime() - bornRef.current;
     const t = Math.min(elapsed / DURATION, 1);
     if (group.current) {
       group.current.children.forEach((child, i) => {
