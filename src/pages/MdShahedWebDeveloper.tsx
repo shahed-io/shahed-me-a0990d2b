@@ -3,7 +3,7 @@ import { LandingPage } from "@/components/LandingPage";
 const MdShahedWebDeveloper = () => (
   <LandingPage
     slug="/md-shahed-web-developer"
-    title="MD Shahed — Web Developer in Dhaka, Bangladesh | React, Next.js"
+    title="MD Shahed — React & Next.js Developer in Dhaka"
     description="MD Shahed — Dhaka-ভিত্তিক web developer। React, Next.js, TypeScript ও modern stack দিয়ে fast, SEO-friendly website ও web app develop করেন Bangladesh-এ।"
     h1="MD Shahed — Web Developer"
     tagline="React · Next.js · Full-Stack"

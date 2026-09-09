@@ -3,8 +3,8 @@ import { LandingPage } from "@/components/LandingPage";
 const ShahedBusiness = () => (
   <LandingPage
     slug="/shahed-business"
-    title="Shahed Business — Web Solutions & Consulting in Dhaka, Bangladesh"
-    description="Shahed Business — Dhaka-ভিত্তিক startup ও SME-দের জন্য web development, digital strategy এবং consulting service। আপনার business-কে Bangladesh-এ online-এ scale করতে কাজ করুন।"
+    title="Shahed Business — Web Solutions in Dhaka"
+    description="Shahed Business — Dhaka-ভিত্তিক startup ও SME-দের জন্য web development, digital strategy ও consulting service। Bangladesh-এ business online-এ scale করুন।"
     h1="Shahed Business — Web Solutions & Consulting in Dhaka, Bangladesh"
     tagline="Web Solutions · Strategy · Consulting"
     intro="Shahed Business — MD Shahed-এর professional service brand, Dhaka, Bangladesh থেকে operate করা। startup, SME ও entrepreneur-দের জন্য end-to-end web solution, e-commerce, branding ও digital growth strategy দিই।"

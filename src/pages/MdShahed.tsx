@@ -3,7 +3,7 @@ import { LandingPage } from "@/components/LandingPage";
 const MdShahed = () => (
   <LandingPage
     slug="/md-shahed"
-    title="MD Shahed — Web Developer, Entrepreneur ও Digital Creator (Dhaka)"
+    title="MD Shahed — Web Developer & Entrepreneur, Dhaka"
     description="MD Shahed (শাহেদ) — Dhaka, Bangladesh-ভিত্তিক web developer, entrepreneur ও digital creator। Portfolio, projects, services ও যোগাযোগের সব তথ্য এক জায়গায়।"
     h1="MD Shahed — Web Developer & Entrepreneur (Dhaka, Bangladesh)"
     tagline="Official Profile"

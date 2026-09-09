@@ -1,7 +1,7 @@
 // Generates public/sitemap.xml at predev / prebuild time.
 // Includes static routes + all published blog post slugs from Supabase.
 
-import { writeFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 import { resolve } from "path";
 
 const BASE_URL = "https://shahed.com.bd";
@@ -16,17 +16,17 @@ interface Entry {
   priority?: string;
 }
 
-const today = new Date().toISOString().slice(0, 10);
-
+// No build-time `lastmod` for static routes: a generation-time date is not a
+// page-specific "last modified" signal and crawlers discount it.
 const staticEntries: Entry[] = [
-  { path: "/", lastmod: today, changefreq: "daily", priority: "1.0" },
-  { path: "/timeline", lastmod: today, changefreq: "weekly", priority: "0.8" },
-  { path: "/md-shahed", lastmod: today, changefreq: "weekly", priority: "0.9" },
-  { path: "/shahed-business", lastmod: today, changefreq: "weekly", priority: "0.8" },
-  { path: "/md-shahed-web-developer", lastmod: today, changefreq: "weekly", priority: "0.9" },
-  { path: "/bangladesh-web-development", lastmod: today, changefreq: "weekly", priority: "0.9" },
-  { path: "/digital-consulting", lastmod: today, changefreq: "weekly", priority: "0.8" },
-  { path: "/blog", lastmod: today, changefreq: "daily", priority: "0.9" },
+  { path: "/", changefreq: "daily", priority: "1.0" },
+  { path: "/timeline", changefreq: "weekly", priority: "0.8" },
+  { path: "/md-shahed", changefreq: "weekly", priority: "0.9" },
+  { path: "/shahed-business", changefreq: "weekly", priority: "0.8" },
+  { path: "/md-shahed-web-developer", changefreq: "weekly", priority: "0.9" },
+  { path: "/bangladesh-web-development", changefreq: "weekly", priority: "0.9" },
+  { path: "/digital-consulting", changefreq: "weekly", priority: "0.8" },
+  { path: "/blog", changefreq: "daily", priority: "0.9" },
 ];
 
 async function fetchPosts(): Promise<Entry[]> {
@@ -41,7 +41,7 @@ async function fetchPosts(): Promise<Entry[]> {
       .filter((p) => p.slug)
       .map((p) => ({
         path: `/blog/${p.slug}`,
-        lastmod: (p.updated_at || today).slice(0, 10),
+        lastmod: p.updated_at ? p.updated_at.slice(0, 10) : undefined,
         changefreq: "monthly" as const,
         priority: "0.7",
       }));
@@ -69,7 +69,25 @@ function render(entries: Entry[]) {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 }
 
-const posts = await fetchPosts();
+// If the database is unreachable at build time, keep the blog URLs that are
+// already in the committed sitemap instead of silently dropping them.
+function existingPostEntries(): Entry[] {
+  try {
+    const xml = readFileSync(resolve("public/sitemap.xml"), "utf8");
+    const blocks = xml.match(/<url>[\s\S]*?<\/url>/g) ?? [];
+    return blocks.flatMap((b) => {
+      const loc = b.match(/<loc>([^<]+)<\/loc>/)?.[1] ?? "";
+      if (!loc.startsWith(`${BASE_URL}/blog/`)) return [];
+      const lastmod = b.match(/<lastmod>([^<]+)<\/lastmod>/)?.[1];
+      return [{ path: loc.slice(BASE_URL.length), lastmod, changefreq: "monthly" as const, priority: "0.7" }];
+    });
+  } catch {
+    return [];
+  }
+}
+
+const fetched = await fetchPosts();
+const posts = fetched.length ? fetched : existingPostEntries();
 const all = [...staticEntries, ...posts];
 writeFileSync(resolve("public/sitemap.xml"), render(all));
 console.log(`sitemap.xml written (${all.length} entries; ${posts.length} blog posts)`);
