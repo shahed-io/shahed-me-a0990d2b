@@ -16,17 +16,17 @@ interface Entry {
   priority?: string;
 }
 
-const today = new Date().toISOString().slice(0, 10);
-
+// No build-time `lastmod` for static routes: a generation-time date is not a
+// page-specific "last modified" signal and crawlers discount it.
 const staticEntries: Entry[] = [
-  { path: "/", lastmod: today, changefreq: "daily", priority: "1.0" },
-  { path: "/timeline", lastmod: today, changefreq: "weekly", priority: "0.8" },
-  { path: "/md-shahed", lastmod: today, changefreq: "weekly", priority: "0.9" },
-  { path: "/shahed-business", lastmod: today, changefreq: "weekly", priority: "0.8" },
-  { path: "/md-shahed-web-developer", lastmod: today, changefreq: "weekly", priority: "0.9" },
-  { path: "/bangladesh-web-development", lastmod: today, changefreq: "weekly", priority: "0.9" },
-  { path: "/digital-consulting", lastmod: today, changefreq: "weekly", priority: "0.8" },
-  { path: "/blog", lastmod: today, changefreq: "daily", priority: "0.9" },
+  { path: "/", changefreq: "daily", priority: "1.0" },
+  { path: "/timeline", changefreq: "weekly", priority: "0.8" },
+  { path: "/md-shahed", changefreq: "weekly", priority: "0.9" },
+  { path: "/shahed-business", changefreq: "weekly", priority: "0.8" },
+  { path: "/md-shahed-web-developer", changefreq: "weekly", priority: "0.9" },
+  { path: "/bangladesh-web-development", changefreq: "weekly", priority: "0.9" },
+  { path: "/digital-consulting", changefreq: "weekly", priority: "0.8" },
+  { path: "/blog", changefreq: "daily", priority: "0.9" },
 ];
 
 async function fetchPosts(): Promise<Entry[]> {
@@ -41,7 +41,7 @@ async function fetchPosts(): Promise<Entry[]> {
       .filter((p) => p.slug)
       .map((p) => ({
         path: `/blog/${p.slug}`,
-        lastmod: (p.updated_at || today).slice(0, 10),
+        lastmod: p.updated_at ? p.updated_at.slice(0, 10) : undefined,
         changefreq: "monthly" as const,
         priority: "0.7",
       }));
