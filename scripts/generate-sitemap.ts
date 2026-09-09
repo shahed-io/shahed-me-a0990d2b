@@ -1,7 +1,7 @@
 // Generates public/sitemap.xml at predev / prebuild time.
 // Includes static routes + all published blog post slugs from Supabase.
 
-import { writeFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 import { resolve } from "path";
 
 const BASE_URL = "https://shahed.com.bd";
@@ -69,7 +69,25 @@ function render(entries: Entry[]) {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 }
 
-const posts = await fetchPosts();
+// If the database is unreachable at build time, keep the blog URLs that are
+// already in the committed sitemap instead of silently dropping them.
+function existingPostEntries(): Entry[] {
+  try {
+    const xml = readFileSync(resolve("public/sitemap.xml"), "utf8");
+    const blocks = xml.match(/<url>[\s\S]*?<\/url>/g) ?? [];
+    return blocks.flatMap((b) => {
+      const loc = b.match(/<loc>([^<]+)<\/loc>/)?.[1] ?? "";
+      if (!loc.startsWith(`${BASE_URL}/blog/`)) return [];
+      const lastmod = b.match(/<lastmod>([^<]+)<\/lastmod>/)?.[1];
+      return [{ path: loc.slice(BASE_URL.length), lastmod, changefreq: "monthly" as const, priority: "0.7" }];
+    });
+  } catch {
+    return [];
+  }
+}
+
+const fetched = await fetchPosts();
+const posts = fetched.length ? fetched : existingPostEntries();
 const all = [...staticEntries, ...posts];
 writeFileSync(resolve("public/sitemap.xml"), render(all));
 console.log(`sitemap.xml written (${all.length} entries; ${posts.length} blog posts)`);
