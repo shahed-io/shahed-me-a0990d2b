@@ -3,7 +3,7 @@ import { LandingPage } from "@/components/LandingPage";
 const DigitalConsulting = () => (
   <LandingPage
     slug="/digital-consulting"
-    title="Digital Consulting in Dhaka, Bangladesh — Strategy, SEO & Growth"
+    title="Digital Consulting in Dhaka — SEO & Growth Strategy"
     description="Dhaka-ভিত্তিক digital strategy, SEO ও online growth consulting। Bangladesh-এর business-কে digitally transform করতে MD Shahed-এর expert consulting service নিন।"
     h1="Digital Consulting"
     tagline="Strategy · SEO · Growth"

@@ -3,7 +3,7 @@ import { LandingPage } from "@/components/LandingPage";
 const BangladeshWebDevelopment = () => (
   <LandingPage
     slug="/bangladesh-web-development"
-    title="Bangladesh Web Development Services in Dhaka — MD Shahed"
+    title="Web Development Services in Bangladesh — MD Shahed"
     description="Dhaka, Bangladesh-এ professional web development service। Business website, e-commerce, custom web app — local expertise (bKash, Nagad, Bangla), global standard।"
     h1="Bangladesh Web Development"
     tagline="Local Expertise · Global Standard"
