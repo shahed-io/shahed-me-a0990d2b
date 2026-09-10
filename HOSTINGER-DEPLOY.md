@@ -1,87 +1,97 @@
 # Hostinger এ ওয়েবসাইট হোস্ট করার গাইড
 
-এই সাইটটি একটি static build (Vite + React)। Hostinger এর যেকোনো Shared/Premium/Business plan এ চলবে।
-Database, login, blog — সব Lovable Cloud (backend) থেকেই আসবে, তাই Hostinger এ শুধু ফাইল রাখলেই হবে।
+এই সাইটটি Vite + React দিয়ে বানানো। Hostinger এ দুইভাবে হোস্ট করা যায় —
+**Deploy Web App (GitHub থেকে, সবচেয়ে সহজ)** অথবা **ম্যানুয়াল ফাইল আপলোড**।
+Database, login, blog — সব Lovable Cloud (backend) থেকেই আসবে, Hostinger এ আলাদা কিছু লাগবে না।
 
 ---
 
-## ১) এক নজরে
+## ১) এক নজরে (Hostinger এ যা লিখতে হবে)
 
-| কী | মান |
+| ঘর | মান |
 | --- | --- |
-| Build কমান্ড | `npm run build` |
-| Publish ফোল্ডার | `dist` |
-| Node ভার্সন | 20 |
-| Upload করার জায়গা | `public_html` |
+| Repository | আপনার GitHub repo (branch: `main`) |
+| Node version | `20` |
+| Install command | `npm ci` |
+| Build command | `npm run build` |
+| Output / Publish directory | `dist` |
+| Start command (চাইলে) | `npm start` |
 
-`public/.htaccess` ফাইলটি build এর সময় নিজে থেকে `dist` এ চলে যায় — এটি সব পেজের লিংক (যেমন `/blog`, `/timeline`) ঠিকভাবে কাজ করায়, HTTPS জোর করে চালু করে, আর ছবি/ফাইল ক্যাশ করে সাইট দ্রুত করে।
+প্রজেক্টে এগুলো আগে থেকেই প্রস্তুত আছে:
 
----
-
-## ২) সবচেয়ে সহজ পদ্ধতি (ম্যানুয়াল আপলোড)
-
-1. কম্পিউটারে প্রজেক্ট নামান, তারপর:
-   ```bash
-   npm install
-   npm run build
-   ```
-2. `dist` ফোল্ডারের **ভিতরের সব ফাইল** (ফোল্ডারটি নয়) কপি করুন।
-3. Hostinger hPanel → **File Manager** → `public_html` খুলুন → পুরনো ফাইল মুছে নতুনগুলো আপলোড করুন।
-4. লুকানো ফাইল দেখাতে File Manager এর Settings এ "Show hidden files" চালু করুন, নিশ্চিত করুন `.htaccess` আপলোড হয়েছে।
+- `.nvmrc` → Node 20 নিজে থেকেই বেছে নেবে
+- `package.json` → `start` কমান্ড ও `engines` যোগ করা
+- `public/.htaccess` → ভেতরের পেজ (`/blog`, `/timeline`) খুললে 404 আসবে না, HTTPS চালু, ক্যাশিং
+- `Dockerfile` → Hostinger container দিয়ে চালাতে চাইলে ব্যবহার হবে
+- `.env` → Supabase-এর পাবলিক মানগুলো repo-তেই আছে, তাই আলাদা environment variable না দিলেও build হবে
 
 ---
 
-## ৩) GitHub থেকে অটো-ডিপ্লয় (একবার সেট করলেই যথেষ্ট)
+## ২) Deploy Web App (GitHub → Hostinger)
 
-প্রতিবার GitHub এর `main` branch এ কোড গেলে সাইট নিজে থেকেই আপডেট হবে।
-ফাইলটি আছে: `.github/workflows/deploy-hostinger.yml`
+1. hPanel → **Websites → Add website → Deploy Web App** বেছে নিন।
+2. **GitHub** নির্বাচন করে Hostinger কে আপনার GitHub account এর অনুমতি দিন।
+3. এই প্রজেক্টের repository ও `main` branch বাছুন।
+4. সেটিংসে উপরের টেবিলের মানগুলো দিন (Node 20, build `npm run build`, output `dist`)।
+5. **Deploy** চাপুন। প্রথমবার ২–৪ মিনিট লাগতে পারে।
+6. এরপর থেকে GitHub এ কোড push করলেই সাইট নিজে থেকে আপডেট হবে।
 
-### ধাপ ১ — Hostinger এ FTP তথ্য নিন
-hPanel → **Files → FTP Accounts**। সেখান থেকে নিন: FTP hostname, username, password.
+> Hostinger যদি "static site" না ধরে Node app হিসেবে চালাতে চায়, তাহলে Start command এ `npm start` দিন — এটি `dist` ফোল্ডারটি `PORT` পোর্টে সার্ভ করবে।
 
-### ধাপ ২ — GitHub এ Secrets যোগ করুন
-GitHub repo → **Settings → Secrets and variables → Actions → New repository secret**:
+---
 
-| Secret নাম | মান |
+## ৩) বিকল্প: FTP দিয়ে অটো-আপলোড (GitHub Actions)
+
+`.github/workflows/deploy-hostinger.yml` ফাইলটি এই কাজ করে। GitHub repo →
+**Settings → Secrets and variables → Actions** এ এগুলো যোগ করুন:
+
+| Secret | মান |
 | --- | --- |
-| `FTP_SERVER` | Hostinger এর FTP hostname (যেমন `ftp.shahed.com.bd`) |
+| `FTP_SERVER` | Hostinger এর FTP hostname |
 | `FTP_USERNAME` | FTP ইউজারনেম |
 | `FTP_PASSWORD` | FTP পাসওয়ার্ড |
 | `FTP_SERVER_DIR` | `/public_html/` |
-| `VITE_SUPABASE_URL` | প্রজেক্টের `.env` ফাইলে যা আছে |
-| `VITE_SUPABASE_PUBLISHABLE_KEY` | প্রজেক্টের `.env` ফাইলে যা আছে |
-| `VITE_SUPABASE_PROJECT_ID` | প্রজেক্টের `.env` ফাইলে যা আছে |
-
-এই তিনটি Supabase মান গোপন নয় — এগুলো ব্রাউজারে ব্যবহারের জন্যই বানানো।
-
-### ধাপ ৩ — চালু করুন
-GitHub এর **Actions** ট্যাবে গিয়ে "Deploy to Hostinger" → **Run workflow** চাপুন, অথবা যেকোনো একটি কোড push করুন।
+| `VITE_SUPABASE_URL` | `.env` এ যা আছে |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | `.env` এ যা আছে |
+| `VITE_SUPABASE_PROJECT_ID` | `.env` এ যা আছে |
 
 ---
 
-## ৪) ডোমেইন সেটআপ
+## ৪) বিকল্প: ম্যানুয়াল আপলোড
 
-- ডোমেইন `shahed.com.bd` যদি Hostinger এ থাকে: hPanel → Domains এ সেটি `public_html` এর সাথে যুক্ত করুন।
-- অন্য জায়গায় থাকলে nameserver গুলো Hostinger এর দিকে দিন (`ns1.dns-parking.com`, `ns2.dns-parking.com`)।
-- hPanel → **SSL** থেকে ফ্রি SSL চালু করুন, তারপর "Force HTTPS" অন করুন।
+```bash
+npm install
+npm run build
+```
+`dist` ফোল্ডারের **ভিতরের সব ফাইল** hPanel → File Manager → `public_html` এ আপলোড করুন।
+File Manager এ "Show hidden files" চালু করে দেখে নিন `.htaccess` উঠেছে কিনা।
 
 ---
 
-## ৫) আপলোডের পর চেক করার তালিকা
+## ৫) ডোমেইন ও SSL
+
+- ডোমেইন Hostinger এ থাকলে hPanel → Domains থেকে সাইটের সাথে যুক্ত করুন।
+- বাইরে থাকলে nameserver দিন: `ns1.dns-parking.com`, `ns2.dns-parking.com`।
+- hPanel → **SSL** থেকে ফ্রি SSL চালু করে "Force HTTPS" অন করুন।
+
+---
+
+## ৬) আপলোডের পর চেক করুন
 
 - [ ] `https://shahed.com.bd` খুলছে
-- [ ] `/blog`, `/timeline` সরাসরি লিখে খুললেও কাজ করছে (404 আসছে না)
-- [ ] `/sitemap.xml` এবং `/robots.txt` দেখা যাচ্ছে
-- [ ] লগইন ও ব্লগ ডেটা ঠিকমতো আসছে
-- [ ] Google Search Console এ নতুন করে sitemap জমা দিন
+- [ ] `/blog`, `/timeline` সরাসরি লিখে খুললেও 404 আসছে না
+- [ ] `/sitemap.xml`, `/robots.txt` দেখা যাচ্ছে
+- [ ] লগইন ও ব্লগের ডেটা আসছে
+- [ ] Google Search Console এ sitemap আবার জমা দিন
 
 ---
 
-## ৬) সমস্যা হলে
+## ৭) সমস্যা হলে
 
 | সমস্যা | সমাধান |
 | --- | --- |
-| ভেতরের পেজে 404 | `.htaccess` `public_html` এ আছে কিনা দেখুন |
-| সাদা পেজ | ফাইলগুলো `public_html` এর ভেতরে সরাসরি আছে কিনা দেখুন, `dist` নামের ফোল্ডারের ভেতর নয় |
-| পুরনো ভার্সন দেখাচ্ছে | ব্রাউজার ক্যাশ পরিষ্কার করুন / hPanel এর cache purge করুন |
-| ডেটা আসছে না | GitHub Secrets এ `VITE_SUPABASE_*` মানগুলো ঠিক আছে কিনা দেখুন |
+| Build ব্যর্থ | Node version 20 দেওয়া আছে কিনা দেখুন |
+| ভেতরের পেজে 404 | Output directory `dist` আছে কিনা, আর `.htaccess` উঠেছে কিনা দেখুন |
+| সাদা পেজ | ফাইলগুলো `public_html` এর ভেতরে সরাসরি আছে কিনা দেখুন |
+| ডেটা আসছে না | `.env` / GitHub Secrets এ `VITE_SUPABASE_*` মানগুলো ঠিক আছে কিনা দেখুন |
+| পুরনো ভার্সন | ব্রাউজার ক্যাশ পরিষ্কার করুন, hPanel থেকে cache purge করুন |

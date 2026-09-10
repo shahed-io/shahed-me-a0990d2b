@@ -16,6 +16,12 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
+  // Used when the host runs `npm start` (Hostinger "Deploy Web App" / Node app).
+  preview: {
+    host: "0.0.0.0",
+    port: Number(process.env.PORT) || 3000,
+    allowedHosts: true,
+  },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
     alias: {
