@@ -92,8 +92,11 @@ export default function Backup() {
     <div className="space-y-6">
       <PageHeader
         title="Data Backup"
-        description="সব ডেটা নিজের কপিতে রাখুন — ফাইল হিসেবে ডাউনলোড করুন অথবা নিজের ব্যাকআপ প্রজেক্টে কপি করুন।"
+        icon={Database}
+        breadcrumb={["CEO", "Backup"]}
+        subtitle="সব ডেটা নিজের কপিতে রাখুন — ফাইল হিসেবে ডাউনলোড করুন অথবা নিজের ব্যাকআপ প্রজেক্টে কপি করুন।"
       />
+
 
       <Alert>
         <ShieldCheck className="h-4 w-4" />
