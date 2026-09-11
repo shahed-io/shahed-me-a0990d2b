@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import {
-  LayoutDashboard, BookOpen, Search as SearchIcon, Globe, LifeBuoy, Settings, Home, TrendingUp,
+  LayoutDashboard, BookOpen, Search as SearchIcon, Globe, LifeBuoy, Settings, Home, TrendingUp, DatabaseBackup,
 } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
