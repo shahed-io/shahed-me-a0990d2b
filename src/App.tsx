@@ -97,6 +97,7 @@ const AnimatedRoutes = () => {
               <Route path="page-seo" element={<PageSeo />} />
               <Route path="rankings" element={<CeoRankings />} />
               <Route path="tickets" element={<CeoTickets />} />
+              <Route path="backup" element={<CeoBackup />} />
               <Route path="settings" element={<CeoSettings />} />
             </Route>
             <Route path="/md-shahed-web-developer" element={<MdShahedWebDeveloper />} />
