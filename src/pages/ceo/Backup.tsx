@@ -155,6 +155,19 @@ export default function Backup() {
             <Button className="w-full" variant="ghost" size="sm" onClick={downloadSchema} disabled={!status}>
               টেবিল তৈরির SQL ডাউনলোড
             </Button>
+            <Button
+              className="w-full"
+              variant="ghost"
+              size="sm"
+              disabled={!status}
+              onClick={() => {
+                if (!status?.schemaSql) return;
+                navigator.clipboard.writeText(status.schemaSql);
+                toast.success("SQL কপি হয়েছে — ব্যাকআপ প্রজেক্টের SQL Editor-এ পেস্ট করে Run দিন");
+              }}
+            >
+              টেবিল তৈরির SQL কপি করো
+            </Button>
             {lastRun && <p className="text-xs text-muted-foreground">শেষ কপি: {lastRun}</p>}
           </CardContent>
         </Card>
