@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import {
-  LayoutDashboard, BookOpen, Search as SearchIcon, Globe, LifeBuoy, Settings, Home, TrendingUp,
+  LayoutDashboard, BookOpen, Search as SearchIcon, Globe, LifeBuoy, Settings, Home, TrendingUp, DatabaseBackup,
 } from "lucide-react";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
@@ -22,6 +22,7 @@ const groups: Group[] = [
     { title: "Support Tickets", url: "/ceo/tickets", icon: LifeBuoy },
   ]},
   { label: "System", items: [
+    { title: "Data Backup", url: "/ceo/backup", icon: DatabaseBackup },
     { title: "Settings", url: "/ceo/settings", icon: Settings },
   ]},
 ];

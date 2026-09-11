@@ -26,6 +26,7 @@ const SeoManager = lazy(() => import("./pages/ceo/SeoManager.tsx"));
 const PageSeo = lazy(() => import("./pages/ceo/PageSeo.tsx"));
 const CeoRankings = lazy(() => import("./pages/ceo/Rankings.tsx"));
 const CeoSettings = lazy(() => import("./pages/ceo/Settings.tsx"));
+const CeoBackup = lazy(() => import("./pages/ceo/Backup.tsx"));
 const MdShahedWebDeveloper = lazy(() => import("./pages/MdShahedWebDeveloper.tsx"));
 const BangladeshWebDevelopment = lazy(() => import("./pages/BangladeshWebDevelopment.tsx"));
 const DigitalConsulting = lazy(() => import("./pages/DigitalConsulting.tsx"));
@@ -97,6 +98,7 @@ const AnimatedRoutes = () => {
               <Route path="page-seo" element={<PageSeo />} />
               <Route path="rankings" element={<CeoRankings />} />
               <Route path="tickets" element={<CeoTickets />} />
+              <Route path="backup" element={<CeoBackup />} />
               <Route path="settings" element={<CeoSettings />} />
             </Route>
             <Route path="/md-shahed-web-developer" element={<MdShahedWebDeveloper />} />
