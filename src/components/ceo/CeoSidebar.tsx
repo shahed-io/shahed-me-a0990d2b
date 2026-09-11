@@ -22,6 +22,7 @@ const groups: Group[] = [
     { title: "Support Tickets", url: "/ceo/tickets", icon: LifeBuoy },
   ]},
   { label: "System", items: [
+    { title: "Data Backup", url: "/ceo/backup", icon: DatabaseBackup },
     { title: "Settings", url: "/ceo/settings", icon: Settings },
   ]},
 ];
