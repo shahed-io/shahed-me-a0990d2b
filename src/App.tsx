@@ -12,7 +12,9 @@ import Index from "./pages/Index.tsx";
 
 // Lazy-load secondary routes to keep the initial bundle small.
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
-const LazySupportWidget = lazy(() => import("@/components/SupportWidget"));
+const LazySupportWidget = lazy(() =>
+  import("@/components/SupportWidget").then(({ SupportWidget }) => ({ default: SupportWidget }))
+);
 const Auth = lazy(() => import("./pages/Auth.tsx"));
 const Timeline = lazy(() => import("./pages/Timeline.tsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.tsx"));
