@@ -18,6 +18,10 @@ interface Settings {
   default_description?: string;
   site_name?: string;
   twitter_handle?: string;
+  brand_name?: string;
+  brand_name_bn?: string;
+  target_keywords?: string;
+  social_profiles?: string;
 }
 
 const SITE = "https://shahed.com.bd";
@@ -126,6 +130,8 @@ const SeoManager = () => {
   };
 
   const checks = useMemo(() => [
+    { ok: (s.brand_name ?? "").trim().length >= 3, label: "Official brand name সেট করা হয়েছে" },
+    { ok: (s.target_keywords ?? "").split(",").filter(Boolean).length >= 3, label: "Target keywords সংরক্ষণ করা হয়েছে" },
     { ok: isGA4(s.ga4_id), label: "Google Analytics কানেক্ট করা হয়েছে" },
     { ok: isGTM(s.gtm_id), label: "Google Tag Manager কানেক্ট করা হয়েছে", warn: !isGTM(s.gtm_id) },
     { ok: isToken(s.gsc_token), label: "Google Search Console ভেরিফাই করা হয়েছে", warn: !isToken(s.gsc_token) },
@@ -209,6 +215,39 @@ const SeoManager = () => {
             <div>
               <Label>Google Tag Manager ID</Label>
               <Input placeholder="GTM-XXXXXXX" value={s.gtm_id ?? ""} onChange={e => set("gtm_id", e.target.value.trim())} />
+            </div>
+          </div>
+        </Section>
+
+        {/* Branded ranking controls */}
+        <Section icon={Sparkles} title="🎯 Branded Ranking Controls" subtitle="আপনার নাম ও target keyword-এর SEO signals" badge={<StatusBadge ok={!!s.brand_name && !!s.target_keywords} label={s.brand_name && s.target_keywords ? "✓ প্রস্তুত" : "সেট করুন"} />} defaultOpen>
+          <div className="space-y-4">
+            <div className="rounded-xl border border-primary/20 bg-primary/5 p-4 text-sm text-muted-foreground">
+              এখানে আপনার official identity ও keyword list রাখুন। সাইটের metadata, profile schema এবং content planning-এ এগুলো consistent রাখলে branded search relevance বাড়ে। Ranking-এর জন্য Google indexing ও external mentions-ও দরকার।
+            </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div>
+                <Label>Official name</Label>
+                <Input placeholder="MD Shahed" value={s.brand_name ?? ""} onChange={e => set("brand_name", e.target.value)} />
+              </div>
+              <div>
+                <Label>Bangla name variant</Label>
+                <Input placeholder="শাহেদ" value={s.brand_name_bn ?? ""} onChange={e => set("brand_name_bn", e.target.value)} />
+              </div>
+            </div>
+            <div>
+              <Label>Target keywords <span className="text-muted-foreground">(comma-separated)</span></Label>
+              <Textarea rows={3} placeholder="MD Shahed, Md Shahed, Shahed web developer, MD Shahed Bangladesh" value={s.target_keywords ?? ""} onChange={e => set("target_keywords", e.target.value)} />
+              <p className="mt-1 text-xs text-muted-foreground">একই keyword অস্বাভাবিকভাবে বারবার ব্যবহার করবেন না; প্রতিটি page-এর জন্য ১টি primary intent রাখুন।</p>
+            </div>
+            <div>
+              <Label>Official social/profile URLs <span className="text-muted-foreground">(one per line)</span></Label>
+              <Textarea rows={4} placeholder="https://github.com/shahed-io\nhttps://linkedin.com/in/shahed-io" value={s.social_profiles ?? ""} onChange={e => set("social_profiles", e.target.value)} />
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Button asChild variant="outline" size="sm"><a href={`${SITE}/sitemap.xml`} target="_blank" rel="noreferrer"><ExternalLink className="mr-1 h-3 w-3" /> Sitemap দেখুন</a></Button>
+              <Button asChild variant="outline" size="sm"><a href="https://search.google.com/search-console" target="_blank" rel="noreferrer"><ExternalLink className="mr-1 h-3 w-3" /> GSC-তে Submit/Inspect</a></Button>
+              <Button asChild variant="outline" size="sm"><a href={`https://search.google.com/test/rich-results?url=${encodeURIComponent(SITE)}`} target="_blank" rel="noreferrer"><ExternalLink className="mr-1 h-3 w-3" /> Schema Test</a></Button>
             </div>
           </div>
         </Section>

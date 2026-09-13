@@ -1,8 +1,18 @@
 # MD Shahed
 
-> Md Shahed — Bangladesh-based entrepreneur, businessman, and web developer specializing in React.js, Next.js, SEO, branding, and scalable web applications focused on business growth and modern digital experiences.
+> MD Shahed (also written as Md Shahed, MD SHAHED, Shahed, or শাহেদ) is a Dhaka, Bangladesh-based web developer, entrepreneur, and digital creator.
+
+MD Shahed specializes in React.js, Next.js, TypeScript, SEO, branding, e-commerce, and scalable web applications focused on business growth and modern digital experiences.
 
 Md Shahed combines technology, branding, and business strategy to build impactful, performance-driven digital solutions for startups, SMEs, and enterprises — locally in Dhaka, Bangladesh and globally.
+
+## Identity
+
+- Official website: https://shahed.com.bd
+- Name variants: MD Shahed; Md Shahed; MD SHAHED; Shahed; শাহেদ
+- Role: Web Developer & Entrepreneur
+- Location: Dhaka, Bangladesh
+- Primary topics: React.js, Next.js, TypeScript, SEO, e-commerce, branding, and digital consulting
 
 ## Pages
 

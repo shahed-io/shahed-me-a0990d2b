@@ -10,6 +10,8 @@ interface PublicSettings {
   default_description?: string;
   site_name?: string;
   twitter_handle?: string;
+  brand_name?: string;
+  target_keywords?: string;
 }
 
 const upsertMeta = (name: string, content: string, attr: "name" | "property" = "name") => {
@@ -85,6 +87,11 @@ export const SiteSettingsLoader = () => {
         }
       }
       if (s.twitter_handle) upsertMeta("twitter:site", s.twitter_handle);
+      if (s.brand_name) {
+        upsertMeta("author", s.brand_name);
+        upsertMeta("og:site_name", s.brand_name, "property");
+      }
+      if (s.target_keywords) upsertMeta("keywords", s.target_keywords);
     })();
   }, []);
 

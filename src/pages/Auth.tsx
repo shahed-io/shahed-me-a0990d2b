@@ -3,7 +3,6 @@ import { useNavigate, Link } from "react-router-dom";
 import { z } from "zod";
 import { Sparkles, Mail, Lock, User, ArrowLeft } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
 import { RippleButton } from "@/components/ui/ripple-button";
 import { useToast } from "@/hooks/use-toast";
 
@@ -26,6 +25,7 @@ const AuthPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [googleEnabled, setGoogleEnabled] = useState(true);
 
   useEffect(() => {
     document.title = mode === "signup" ? "Sign up — SHAHED" : "Login — SHAHED";
@@ -34,6 +34,10 @@ const AuthPage = () => {
     });
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) navigate("/", { replace: true });
+    });
+    supabase.rpc("get_public_site_settings").then(({ data }) => {
+      const settings = data as { google_login_enabled?: boolean } | null;
+      if (typeof settings?.google_login_enabled === "boolean") setGoogleEnabled(settings.google_login_enabled);
     });
     return () => subscription.unsubscribe();
   }, [mode, navigate]);
@@ -84,14 +88,14 @@ const AuthPage = () => {
   const handleGoogle = async () => {
     setLoading(true);
     try {
-      const result = await lovable.auth.signInWithOAuth("google", {
-        redirect_uri: window.location.origin,
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: window.location.origin },
       });
-      if (result.error) {
-        toast({ title: "Google sign-in failed", description: result.error.message, variant: "destructive" });
+      if (error) {
+        toast({ title: "Google sign-in failed", description: error.message, variant: "destructive" });
         return;
       }
-      if (result.redirected) return;
     } finally {
       setLoading(false);
     }
@@ -122,7 +126,7 @@ const AuthPage = () => {
             </p>
           </div>
 
-          <button
+          {googleEnabled && <button
             type="button"
             onClick={handleGoogle}
             disabled={loading}
@@ -135,7 +139,7 @@ const AuthPage = () => {
               <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
             </svg>
             Continue with Google
-          </button>
+          </button>}
 
           <div className="flex items-center gap-3 my-5">
             <div className="flex-1 h-px bg-border" />

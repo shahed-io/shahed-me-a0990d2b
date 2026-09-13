@@ -65,16 +65,25 @@ export const LandingPage = ({
       isPartOf: { "@type": "WebSite", name: "MD Shahed", url: SITE },
       about: {
         "@type": "Person",
+        "@id": `${SITE}/#person`,
         name: "MD Shahed",
-        alternateName: ["Shahed", "শাহেদ"],
+        alternateName: ["Md Shahed", "MD SHAHED", "Shahed", "শাহেদ"],
         url: SITE,
         image,
+        jobTitle: "Web Developer & Entrepreneur",
+        sameAs: [
+          "https://github.com/shahed-io",
+          "https://facebook.com/shahed.io",
+          "https://instagram.com/shahed.io",
+          "https://linkedin.com/in/shahed-io",
+        ],
         address: {
           "@type": "PostalAddress",
           addressLocality: "Dhaka",
           addressCountry: "BD",
         },
       },
+      mainEntity: { "@id": `${SITE}/#person` },
     },
     {
       "@context": "https://schema.org",
@@ -122,6 +131,8 @@ export const LandingPage = ({
         canonical={canonical}
         image={image}
         type="profile"
+        keywords={keywords.join(", ")}
+        author="MD Shahed"
         jsonLd={jsonLd}
       />
 

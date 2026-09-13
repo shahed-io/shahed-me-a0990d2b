@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { RippleButton } from "@/components/ui/ripple-button";
 import { SEO } from "@/components/SEO";
 import { SmartImage } from "@/components/ui/smart-image";
+import profilePortrait from "@/assets/profile-portrait.jpg";
 
 const SITE_URL = "https://shahed.com.bd";
 const DEFAULT_OG = "https://shahed.com.bd/og-image.jpg";
@@ -319,11 +320,11 @@ const Timeline = () => {
             <article key={post.id} className="glass-card p-5">
               <div className="flex items-start gap-3 mb-3">
                 <SmartImage
-                  src={profile?.avatar_url ?? DEFAULT_OG}
-                  fallbackSrc={DEFAULT_OG}
+                  src={profile?.avatar_url ?? profilePortrait}
+                  fallbackSrc={profilePortrait}
                   alt="MD Shahed avatar"
-                  className="w-10 h-10 rounded-full object-cover"
-                  fallbackMessage="N/A"
+                  className="h-10 w-10 shrink-0 rounded-full object-cover object-center ring-1 ring-white/20"
+                  fallbackMessage="MD Shahed"
                 />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-foreground">MD Shahed</p>

@@ -24,6 +24,7 @@ import blogWebDev from "@/assets/blog-web-development.jpg";
 import blogBranding from "@/assets/blog-branding.jpg";
 import blogEcom from "@/assets/blog-ecommerce.jpg";
 import { SmartImage } from "@/components/ui/smart-image";
+import { SEO } from "@/components/SEO";
 
 /* ---------- Typing animation ---------- */
 const useTypingAnimation = (words: string[], typingSpeed = 100, deletingSpeed = 50, pauseTime = 2000) => {
@@ -1318,8 +1319,49 @@ const FloatingButtons = () => {
 /* ---------- Page ---------- */
 const Index = () => {
   const { open, setOpen } = useGlobalSearch();
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "@id": "https://shahed.com.bd/#person",
+      name: "MD Shahed",
+      alternateName: ["Md Shahed", "MD SHAHED", "Shahed", "শাহেদ"],
+      url: "https://shahed.com.bd/",
+      image: "https://shahed.com.bd/hero-portrait.jpg",
+      jobTitle: "Web Developer & Entrepreneur",
+      description: "MD Shahed is a web developer and entrepreneur based in Dhaka, Bangladesh.",
+      sameAs: [
+        "https://github.com/shahed-io",
+        "https://facebook.com/shahed.io",
+        "https://instagram.com/shahed.io",
+        "https://linkedin.com/in/shahed-io",
+      ],
+      worksFor: { "@id": "https://shahed.com.bd/#organization" },
+      address: { "@type": "PostalAddress", addressLocality: "Dhaka", addressCountry: "BD" },
+      knowsAbout: ["Web Development", "React.js", "Next.js", "SEO", "E-commerce", "Branding"],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://shahed.com.bd/#website",
+      name: "MD Shahed",
+      alternateName: "Shahed",
+      url: "https://shahed.com.bd/",
+      about: { "@id": "https://shahed.com.bd/#person" },
+    },
+  ];
   return (
     <main className="relative">
+      <SEO
+        title="MD Shahed — Web Developer & Entrepreneur in Bangladesh"
+        description="MD Shahed is a Dhaka-based web developer, entrepreneur and digital creator specializing in React.js, Next.js, SEO, e-commerce and digital branding."
+        canonical="https://shahed.com.bd/"
+        image="https://shahed.com.bd/og-image.jpg"
+        imageAlt="MD Shahed — Web Developer and Entrepreneur in Bangladesh"
+        keywords="MD Shahed, Md Shahed, Shahed, শাহেদ, web developer Bangladesh, entrepreneur Bangladesh, React developer Dhaka, SEO expert Bangladesh"
+        author="MD Shahed"
+        jsonLd={jsonLd}
+      />
       <Navbar onOpenSearch={() => setOpen(true)} />
       <HeroSection onOpenSearch={() => setOpen(true)} />
       <Reveal><AboutSection /></Reveal>
