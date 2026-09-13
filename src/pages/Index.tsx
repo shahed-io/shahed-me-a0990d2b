@@ -1125,36 +1125,37 @@ const NewsletterSection = () => {
 const Footer = () => {
   const footerMenus = [
     {
-      title: "Explore",
+      title: "Discover",
       icon: Package,
       links: [
-        { label: "Home", href: "/" },
-        { label: "About", href: "#about" },
-        { label: "Skills", href: "#skills" },
-        { label: "Projects", href: "#projects" },
-        { label: "Blog", href: "#blog" },
-        { label: "Contact", href: "#contact" },
+        { label: "The Home Studio", href: "/" },
+        { label: "About MD Shahed", href: "/md-shahed" },
+        { label: "Capabilities", href: "#skills" },
+        { label: "Selected Work", href: "#projects" },
+        { label: "Insights & Ideas", href: "#blog" },
+        { label: "Start a Conversation", href: "#contact" },
       ],
     },
     {
-      title: "Services",
+      title: "What I Do",
       icon: Info,
       links: [
-        { label: "Web Development", href: "/bangladesh-web-development" },
-        { label: "Digital Consulting", href: "/digital-consulting" },
-        { label: "Business Growth", href: "/shahed-business" },
-        { label: "CEO Insights", href: "/ceo" },
+        { label: "Web Product Engineering", href: "/bangladesh-web-development" },
+        { label: "E-commerce & Digital Commerce", href: "/bangladesh-web-development" },
+        { label: "Brand & Experience Design", href: "/shahed-business" },
+        { label: "SEO & Growth Strategy", href: "/digital-consulting" },
+        { label: "Digital Transformation", href: "/digital-consulting" },
       ],
     },
     {
-      title: "Resources",
+      title: "Inside the Work",
       icon: FileText,
       links: [
-        { label: "Timeline", href: "/timeline" },
-        { label: "MD Shahed", href: "/md-shahed" },
-        { label: "Web Developer", href: "/md-shahed-web-developer" },
-        { label: "GitHub", href: "https://github.com/shahed-io" },
-        { label: "Sign In", href: "/login" },
+        { label: "My Journey", href: "/timeline" },
+        { label: "Founder Profile", href: "/md-shahed" },
+        { label: "Web Development", href: "/md-shahed-web-developer" },
+        { label: "Business & Entrepreneurship", href: "/shahed-business" },
+        { label: "Open-source Work", href: "https://github.com/shahed-io" },
       ],
     },
   ];
@@ -1183,8 +1184,8 @@ const Footer = () => {
             SHAHED<span className="text-gradient">.</span>
           </a>
           <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Building <span className="text-gradient font-medium">digital experiences</span> that drive growth, brand value,
-            and meaningful impact from Bangladesh to the world.
+            I design and engineer <span className="text-gradient font-medium">high-performance digital products</span> that
+            turn ambitious ideas into credible brands, better customer experiences, and measurable business growth.
           </p>
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
@@ -1275,8 +1276,7 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} MD Shahed. Crafted with{" "}
-            <span className="text-gradient font-medium">passion</span> in Bangladesh.
+            © {new Date().getFullYear()} MD Shahed Studio. Independent digital products, brands and growth systems from Dhaka.
           </p>
           <div className="flex items-center gap-5 text-xs text-muted-foreground">
             <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>
