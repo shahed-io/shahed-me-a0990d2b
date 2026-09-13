@@ -3,40 +3,40 @@ import { LandingPage } from "@/components/LandingPage";
 const DigitalConsulting = () => (
   <LandingPage
     slug="/digital-consulting"
-    title="Digital Consulting in Dhaka — SEO & Growth Strategy"
-    description="Dhaka-ভিত্তিক digital strategy, SEO ও online growth consulting। Bangladesh-এর business-কে digitally transform করতে MD Shahed-এর expert consulting service নিন।"
-    h1="Digital Consulting"
-    tagline="Strategy · SEO · Growth"
-    intro="শুধু website বা app-এ থেমে গেলে business grow করে না। Dhaka, Bangladesh থেকে আমি আপনার পুরো digital presence — branding, SEO, content, conversion funnel ও analytics — audit করে actionable strategy দিই, যা real revenue তৈরি করে।"
+    title="Digital Consulting in Dhaka | SEO, Strategy & Growth — MD Shahed"
+    description="Practical digital consulting for Bangladesh businesses: positioning, technical SEO, content, conversion and analytics strategy led by MD Shahed from Dhaka."
+    h1="Digital Consulting for Sustainable Growth"
+    tagline="Positioning · SEO · Conversion"
+    intro="একটি website তখনই valuable যখন তা সঠিক audience-কে attract করে, বিশ্বাস তৈরি করে এবং next step নিতে সাহায্য করে। Dhaka থেকে branding, SEO, content, conversion এবং analytics-এর মধ্যে clear connection তৈরি করতে consulting দিই।"
     keywords={[
       "digital consulting Dhaka", "digital strategy Bangladesh",
-      "SEO consultant Dhaka", "online growth consultant Bangladesh",
-      "digital transformation Bangladesh", "MD Shahed consulting",
-      "business digital advisor Dhaka", "startup consultant Bangladesh",
-      "Bangladesh SEO expert", "digital marketing strategy Dhaka",
+      "SEO consultant Bangladesh", "growth strategy consultant Dhaka",
+      "digital transformation for SMEs", "MD Shahed consulting",
+      "business digital advisor Bangladesh", "startup growth consultant",
+      "technical SEO consulting Dhaka", "conversion strategy Bangladesh",
     ]}
     highlights={[
-      { title: "360° Digital Audit", body: "Website, SEO, social, conversion — সব channel review করে exact bottleneck identify করি।" },
-      { title: "Data-Driven Strategy", body: "Analytics + Bangladesh market research + competitor analysis — evidence-based roadmap।" },
-      { title: "Hands-On Implementation", body: "শুধু advice দিয়ে চলে যাই না — execution-এও পাশে থাকি যতক্ষণ না result আসে।" },
+      { title: "A Complete Digital View", body: "Website, positioning, content, search visibility and conversion journey একসাথে review করে real bottleneck চিহ্নিত করি।" },
+      { title: "Evidence Before Opinion", body: "Analytics, search data, customer intent এবং competitor context ব্যবহার করে prioritised roadmap তৈরি করি।" },
+      { title: "Strategy That Can Ship", body: "শুধু presentation নয় — team কীভাবে execute, measure এবং improve করবে তার practical direction দিই।" },
     ]}
-    about={`Bangladesh-এর digital landscape দ্রুত বদলাচ্ছে — Facebook থেকে TikTok, bKash থেকে Binimoy, traditional commerce থেকে quick-commerce। এই পরিবর্তনের মধ্যে Dhaka-র startup ও established business-কে সঠিক digital strategy দিতে আমি কাজ করি।\n\nGulshan-এর tech startup, ধানমন্ডি-র fashion brand, চট্টগ্রাম-এর import-export business — প্রত্যেকের জন্য Bangladesh-specific digital roadmap তৈরি করি, যেখানে local consumer behavior, payment habit, এবং Bangla SEO-র সব factor consider করা হয়।`}
+    about={`Bangladesh-এর digital market-এ attention, trust এবং customer expectation দ্রুত বদলাচ্ছে। এই বাস্তবতার মধ্যে business-কে sustainableভাবে grow করতে হলে random marketing নয় — clear positioning, useful content, technically sound website এবং measurable conversion system দরকার।\n\nDhaka ও Bangladesh-এর founders এবং teams-এর সঙ্গে কাজ করে আমি সেই priorities-কে একটি practical roadmap-এ রূপ দিই, যেখানে Bangla search behaviour, local competition এবং customer journey বিবেচনায় থাকে।`}
     services={[
-      "Digital audit ও strategy roadmap",
-      "SEO consulting (Bangla + English keyword)",
-      "Conversion funnel optimization",
-      "Google Analytics ও Search Console setup",
-      "Content & social media strategy (Bangladesh market)",
-      "Founder/CEO 1-on-1 advisory session",
+      "Digital audit and prioritised strategy roadmap",
+      "Technical SEO and Bangla-English search strategy",
+      "Website messaging and conversion optimisation",
+      "Analytics and Search Console measurement setup",
+      "Content direction for the Bangladesh market",
+      "Founder and leadership advisory sessions",
     ]}
     faqs={[
       {
-        q: "Bangladesh-এ digital consulting service-এর ROI কেমন?",
-        a: "সঠিক consulting-এর পর সাধারণত ৩-৬ মাসে organic traffic ২-৫x, lead conversion ১.৫-৩x বাড়ে। Dhaka-র অনেক startup আমার strategy follow করে প্রথম বছরেই break-even-এ পৌঁছেছে।",
+        q: "Digital consulting থেকে কী ধরনের outcome আশা করা যায়?",
+        a: "প্রথম outcome হলো clarity: কোন audience, message, channel এবং product priority-তে focus করা উচিত। তারপর measurement setup ও consistent execution-এর মাধ্যমে traffic quality, enquiries এবং conversion-এর উন্নতি track করা যায়।",
       },
       {
-        q: "Dhaka-তে SEO consultant হিসেবে কীভাবে কাজ করেন?",
-        a: "প্রথমে free 30-min discovery call, তারপর paid audit (১-২ সপ্তাহ), এরপর monthly retainer-এ ongoing strategy ও implementation guidance — সব remote বা ঢাকায় in-person, আপনার preference অনুযায়ী।",
+        q: "Dhaka-তে SEO consulting কীভাবে শুরু হয়?",
+        a: "প্রথমে business goal, existing website এবং search opportunity বোঝা হয়। এরপর technical audit, content priorities এবং measurement plan দিয়ে একটি practical roadmap তৈরি করা হয় — remote বা Dhaka-based session দুটোই সম্ভব।",
       },
     ]}
     ctaLabel="Free Consultation"

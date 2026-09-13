@@ -3,39 +3,39 @@ import { LandingPage } from "@/components/LandingPage";
 const ShahedBusiness = () => (
   <LandingPage
     slug="/shahed-business"
-    title="Shahed Business — Web Solutions in Dhaka"
-    description="Shahed Business — Dhaka-ভিত্তিক startup ও SME-দের জন্য web development, digital strategy ও consulting service। Bangladesh-এ business online-এ scale করুন।"
-    h1="Shahed Business — Web Solutions & Consulting in Dhaka, Bangladesh"
-    tagline="Web Solutions · Strategy · Consulting"
-    intro="Shahed Business — MD Shahed-এর professional service brand, Dhaka, Bangladesh থেকে operate করা। startup, SME ও entrepreneur-দের জন্য end-to-end web solution, e-commerce, branding ও digital growth strategy দিই।"
+    title="Shahed Business | Digital Solutions for Bangladesh Startups & SMEs"
+    description="Shahed Business helps Bangladesh startups, SMEs and founders build credible brands, high-converting websites and practical digital systems from Dhaka."
+    h1="Shahed Business — Digital Solutions for Growth"
+    tagline="Strategy · Design · Technology"
+    intro="Shahed Business হলো MD Shahed-এর founder-led digital practice — যেখানে business strategy, brand experience এবং reliable technology একসাথে কাজ করে। Bangladesh-এর startups, SMEs ও entrepreneurs-এর জন্য digital growth-এর একটি focused partner।"
     keywords={[
       "Shahed Business", "MD Shahed business",
-      "web development agency Dhaka", "digital agency Bangladesh",
-      "business website Dhaka", "Shahed consulting Bangladesh",
-      "startup web service Dhaka", "SME digital solution Bangladesh",
+      "digital solutions Bangladesh", "startup web development Dhaka",
+      "SME website development Bangladesh", "business branding Dhaka",
+      "e-commerce solution Bangladesh", "founder-led digital agency",
     ]}
     highlights={[
-      { title: "Custom Web Solutions", body: "আপনার business-এর জন্য tailor-made website ও web app — শুধু template না, real product।" },
-      { title: "Growth-Focused Strategy", body: "SEO, performance ও conversion — Bangladesh market-এ real customer আনার জন্য optimize।" },
-      { title: "Long-term Partnership", body: "শুধু একবার delivery নয় — maintenance, update ও growth-এ partner হিসেবে পাশে থাকি।" },
+      { title: "Built Around Your Business", body: "Template-driven output নয় — আপনার audience, offer এবং operating model অনুযায়ী digital solution design করি।" },
+      { title: "Clarity Before Execution", body: "Positioning, content, customer journey এবং technology decision আগে পরিষ্কার করি, তারপর build করি।" },
+      { title: "A Partner Beyond Launch", body: "Launch-এর পর measurement, maintenance এবং focused improvements-এর মাধ্যমে product-কে এগিয়ে নেওয়ার পরিকল্পনা থাকে।" },
     ]}
-    about={`Shahed Business Dhaka-ভিত্তিক হলেও সারা Bangladesh-এ — চট্টগ্রাম, খুলনা, রাজশাহী, সিলেট-এর entrepreneur ও SME-দের সাথে কাজ করে। আমাদের focus: Bangladesh-এর local market বুঝে এমন digital product বানানো, যা শুধু সুন্দর নয় — actual revenue generate করে।\n\nbKash/Nagad payment, Bangla content, local SEO, Facebook/Google ads integration — সব এক জায়গায়।`}
+    about={`Shahed Business Dhaka থেকে Bangladesh-এর founders, entrepreneurs এবং growing teams-এর সঙ্গে কাজ করে। লক্ষ্য হলো একটি business-কে online-এ শুধু উপস্থিত করা নয়; তাকে clear, credible এবং easier to choose করে তোলা।\n\nBrand identity, website, e-commerce, content, analytics এবং growth foundations — project-এর প্রয়োজন অনুযায়ী একটি connected digital system হিসেবে পরিকল্পনা করা হয়।`}
     services={[
-      "Business website (corporate, SME, startup)",
-      "E-commerce store with bKash/Nagad/SSLCommerz",
-      "Brand identity ও logo design",
-      "Local SEO — Dhaka, Chittagong keyword targeting",
-      "Social media + website integration",
-      "Ongoing maintenance ও growth consulting",
+      "Business websites for founders and growing teams",
+      "E-commerce with Bangladesh payment gateways",
+      "Brand identity, messaging and launch direction",
+      "Local SEO and content foundations",
+      "Analytics, conversion and digital workflow setup",
+      "Ongoing maintenance and growth advisory",
     ]}
     faqs={[
       {
-        q: "Bangladesh-এ একটা professional website বানাতে কত খরচ হয়?",
-        a: "Project scope-এর উপর নির্ভর করে। Simple business website ৩০-৮০ হাজার টাকা, e-commerce ১-৩ লাখ টাকা, custom web app ২ লাখ থেকে শুরু। সঠিক quotation-এর জন্য contact করুন।",
+        q: "একটি professional business website-এর scope কীভাবে নির্ধারণ হয়?",
+        a: "Business goal, audience, content, integrations এবং launch timeline review করে scope নির্ধারণ করা হয়। এতে প্রয়োজনীয় features অগ্রাধিকার পায় এবং project অপ্রয়োজনীয় complexity থেকে মুক্ত থাকে।",
       },
       {
-        q: "Dhaka-র বাইরে থেকে আমরা কি service নিতে পারব?",
-        a: "অবশ্যই। চট্টগ্রাম, সিলেট, খুলনা, রাজশাহী সহ Bangladesh-এর যেকোনো জায়গা থেকে remote-এ পুরো process করা যায় — meeting, design review, delivery সব online।",
+        q: "Dhaka-এর বাইরে থেকেও কি Shahed Business-এর সাথে কাজ করা যায়?",
+        a: "অবশ্যই। Bangladesh-এর যেকোনো শহর বা international location থেকে discovery, design review, development এবং handover structured remote process-এ করা যায়।",
       },
     ]}
     ctaLabel="Project শুরু করুন"

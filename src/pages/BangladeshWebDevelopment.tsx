@@ -3,40 +3,40 @@ import { LandingPage } from "@/components/LandingPage";
 const BangladeshWebDevelopment = () => (
   <LandingPage
     slug="/bangladesh-web-development"
-    title="Web Development Services in Bangladesh — MD Shahed"
-    description="Dhaka, Bangladesh-এ professional web development service। Business website, e-commerce, custom web app — local expertise (bKash, Nagad, Bangla), global standard।"
-    h1="Bangladesh Web Development"
-    tagline="Local Expertise · Global Standard"
-    intro="Dhaka থেকে operate করে সারা Bangladesh-এর startup, SME ও corporate-দের জন্য end-to-end web development service দিই। আমরা শুধু website বানাই না — আপনার business goal-কে digital product-এ রূপ দিই।"
+    title="Web Development Services in Bangladesh | MD Shahed"
+    description="Professional web development in Bangladesh for startups, SMEs and growing brands. MD Shahed builds fast business websites, e-commerce stores and custom web applications from Dhaka."
+    h1="Web Development Services in Bangladesh"
+    tagline="Local Context · Product Quality · Business Growth"
+    intro="Dhaka থেকে Bangladesh-এর startup, SME এবং ambitious businesses-এর জন্য strategy-led web development করি। আপনার website-কে শুধু online presence নয়, একটি credible digital product এবং growth channel হিসেবে তৈরি করি।"
     keywords={[
-      "Bangladesh web development", "web development company Dhaka",
-      "web developer Dhaka Bangladesh", "website design Dhaka",
-      "e-commerce development Bangladesh", "bKash integration developer",
-      "Nagad payment website", "Bangla website developer",
-      "Dhaka web design agency", "best web development Bangladesh",
+      "web development Bangladesh", "web development company Dhaka",
+      "business website developer Bangladesh", "website design Dhaka",
+      "e-commerce development Bangladesh", "bKash payment integration",
+      "Nagad payment website", "Bangla website development",
+      "custom web application Bangladesh", "MD Shahed web development",
     ]}
     highlights={[
-      { title: "Local Payment Integration", body: "bKash, Nagad, Rocket, SSLCommerz — সব major Bangladeshi payment gateway support।" },
-      { title: "Bangla + English Ready", body: "Proper Bangla font rendering, multilingual SEO — local audience-এর জন্য optimized।" },
-      { title: "Affordable & Reliable", body: "International quality, কিন্তু Bangladesh-friendly pricing। On-time delivery + post-launch support।" },
+      { title: "Designed for Bangladesh", body: "bKash, Nagad, Rocket, SSLCommerz, Bangla content এবং local customer behaviour-এর জন্য practical solutions।" },
+      { title: "Fast, Clear and Search-Ready", body: "Mobile-first interfaces, structured content, technical SEO এবং dependable performance শুরু থেকেই plan করা হয়।" },
+      { title: "Built for Business Growth", body: "একটি polished website-এর পাশাপাশি clear positioning, conversion path এবং post-launch improvement-এর foundation তৈরি করি।" },
     ]}
-    about={`Bangladesh-এ web development মানে শুধু design বা code নয় — এটা local market, ভাষা, payment ecosystem ও user behavior-এর গভীর understanding দাবি করে। ঢাকা-র গুলশান, বনানী, ধানমন্ডি-র high-end client থেকে শুরু করে চট্টগ্রাম, সিলেট, রাজশাহী, খুলনা-র growing business — সবার আলাদা চাহিদা।\n\nআমরা প্রতিটি project-এ Bangladesh-এর mobile-first user behavior, slow internet condition, এবং local payment habit বুঝে design ও develop করি। তাই আমাদের তৈরি website Bangladesh-এ real conversion আনে।`}
+    about={`Bangladesh-এর customers দ্রুত, trustworthy এবং সহজ digital experience আশা করেন। তাই web development-এ local language, mobile usage, payment preference, content clarity এবং network performance — সবকিছুকে product decision হিসেবে দেখি।\n\nDhaka, Chattogram, Sylhet, Rajshahi, Khulna বা দেশের যেকোনো জায়গার business-এর জন্য একটি clear discovery process, thoughtful design এবং maintainable technology stack-এর মাধ্যমে website তৈরি করি।`}
     services={[
-      "Business website for Dhaka & Bangladesh SMEs",
-      "E-commerce with bKash, Nagad, Rocket, SSLCommerz",
-      "Bangla content website ও blog",
-      "Local SEO — Dhaka, Chittagong, Sylhet ranking",
-      "Hosting setup with Bangladesh-optimized CDN",
-      "Government/corporate website (RFP-ready)",
+      "Business websites for Bangladesh startups and SMEs",
+      "E-commerce with bKash, Nagad, Rocket and SSLCommerz",
+      "Bangla and English content experiences",
+      "Local SEO foundations for Dhaka and Bangladesh",
+      "Hosting, deployment and performance setup",
+      "Corporate websites and custom digital platforms",
     ]}
     faqs={[
       {
-        q: "Bangladesh-এ best web development company কোনটি?",
-        a: "এটা আপনার project type-এর উপর নির্ভর করে। ছোট ও মাঝারি business-এর জন্য individual expert বা boutique agency (যেমন MD Shahed / Shahed Business) সাধারণত বেশি personalized service ও affordable rate দেয়, যা বড় agency-র চেয়ে কার্যকর।",
+        q: "Bangladesh-এ web development project শুরু করার আগে কী দরকার?",
+        a: "আপনার business goal, audience, required pages, content এবং integrations-এর একটি initial outline যথেষ্ট। Discovery-এর মাধ্যমে scope, technology, milestones এবং launch plan পরিষ্কার করা হয়।",
       },
       {
-        q: "Dhaka-তে e-commerce website-এ bKash payment integrate করতে কত খরচ?",
-        a: "bKash merchant account-এর সাথে integration সাধারণত ১০-২৫ হাজার টাকার মধ্যে হয়, full e-commerce setup-এর অংশ হিসেবে। Nagad ও SSLCommerz-ও similar range-এ add করা যায়।",
+        q: "E-commerce website-এ bKash বা Nagad payment যুক্ত করা যাবে?",
+        a: "হ্যাঁ। Merchant account, product catalogue, checkout flow এবং required gateway access অনুযায়ী bKash, Nagad, Rocket বা SSLCommerz integration পরিকল্পনা করা যায়।",
       },
     ]}
     ctaLabel="Quote নিন"

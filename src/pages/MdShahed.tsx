@@ -3,39 +3,39 @@ import { LandingPage } from "@/components/LandingPage";
 const MdShahed = () => (
   <LandingPage
     slug="/md-shahed"
-    title="MD Shahed — Web Developer & Entrepreneur, Dhaka"
-    description="MD Shahed (শাহেদ) — Dhaka, Bangladesh-ভিত্তিক web developer, entrepreneur ও digital creator। Portfolio, projects, services ও যোগাযোগের সব তথ্য এক জায়গায়।"
-    h1="MD Shahed — Web Developer & Entrepreneur (Dhaka, Bangladesh)"
-    tagline="Official Profile"
-    intro="আমি MD Shahed — Dhaka, Bangladesh থেকে কাজ করা একজন web developer, entrepreneur এবং digital creator। modern web technology ব্যবহার করে business website, web application ও digital solution তৈরি করি যা ক্লায়েন্টের real growth আনে।"
+    title="MD Shahed | Web Developer, Entrepreneur & Digital Product Builder"
+    description="MD Shahed is a Dhaka-based web developer and entrepreneur building high-performance websites, digital products and growth-focused online businesses for ambitious brands in Bangladesh and beyond."
+    h1="MD Shahed — Web Developer & Entrepreneur"
+    tagline="Digital Products · Growth · Leadership"
+    intro="আমি MD Shahed — Dhaka, Bangladesh-এর একজন web developer, entrepreneur এবং digital product builder। strategy, design ও technology একসাথে ব্যবহার করে এমন digital experience তৈরি করি যা brand-কে credible করে এবং business-কে এগিয়ে দেয়।"
     keywords={[
       "MD Shahed", "Md Shahed", "Shahed", "শাহেদ",
-      "MD Shahed Dhaka", "MD Shahed Bangladesh",
-      "Shahed portfolio", "MD Shahed entrepreneur",
-      "Shahed developer Dhaka", "shahed.com.bd",
+      "MD Shahed Dhaka", "MD Shahed Bangladesh", "MD Shahed entrepreneur",
+      "Shahed portfolio", "Shahed web developer", "digital product builder Bangladesh",
+      "web developer entrepreneur Dhaka", "shahed.com.bd",
     ]}
     highlights={[
-      { title: "Modern Web Development", body: "React, TypeScript ও modern tools দিয়ে fast, scalable ও SEO-friendly website তৈরি করি।" },
-      { title: "Entrepreneur Mindset", body: "শুধু code নয় — business goal বুঝে এমন solution বানাই যা ROI বাড়ায়।" },
-      { title: "Dhaka-based, Global Quality", body: "Local market বুঝি, কিন্তু international standard maintain করি প্রতিটা delivery-তে।" },
+      { title: "Engineering with Intent", body: "React, TypeScript ও modern web architecture ব্যবহার করে fast, maintainable এবং search-ready products তৈরি করি।" },
+      { title: "Business-Led Thinking", body: "প্রতিটি design decision-এর পেছনে থাকে customer experience, conversion এবং long-term business value।" },
+      { title: "Local Insight, Global Craft", body: "Dhaka ও Bangladesh-এর market context বুঝে international-quality digital execution দিই।" },
     ]}
-    about={`Dhaka-তে বসে আমি Bangladesh ও বিশ্বের বিভিন্ন প্রান্তের client-দের সাথে কাজ করি। স্থানীয় startup থেকে শুরু করে international SaaS পর্যন্ত — প্রতিটি project-এ Bangladesh-এর market context, ভাষা (বাংলা typography, font rendering), এবং local payment system (bKash, Nagad) সম্পর্কে গভীর understanding কাজে লাগাই।\n\nগুলশান, বনানী, উত্তরা থেকে শুরু করে চট্টগ্রাম, সিলেট — দেশের সব বড় শহরের ব্যবসা প্রতিষ্ঠানের সাথে কাজ করার অভিজ্ঞতা আছে।`}
+    about={`Dhaka থেকে আমি Bangladesh ও international clients-এর জন্য websites, web applications এবং digital growth systems তৈরি করি। আমার কাজের কেন্দ্রে থাকে clear positioning, thoughtful UX, reliable engineering এবং measurable business outcomes।\n\nবাংলা typography, mobile-first behaviour, local payment systems এবং Bangladesh-এর fast-changing digital market সম্পর্কে বাস্তব understanding ব্যবহার করে প্রতিটি product-কে তার audience-এর জন্য relevant করে তুলি।`}
     services={[
-      "Custom website development (React, Next.js)",
-      "E-commerce solution (bKash, Nagad, SSLCommerz integration)",
-      "Business landing page ও portfolio",
-      "SEO optimization — Bangladesh keyword targeting",
-      "Web app, dashboard ও SaaS development",
-      "Maintenance, hosting ও technical consulting",
+      "Custom websites with React and Next.js",
+      "E-commerce and local payment integration",
+      "Web applications, dashboards and SaaS products",
+      "Technical SEO and performance foundations",
+      "Digital positioning for founders and growing brands",
+      "Post-launch maintenance and product improvement",
     ]}
     faqs={[
       {
-        q: "MD Shahed কোথায় থাকেন এবং কোন এলাকার client-দের সাথে কাজ করেন?",
-        a: "আমি Dhaka, Bangladesh-এ অবস্থিত। প্রধানত ঢাকা, চট্টগ্রাম, সিলেট সহ সারা Bangladesh-এর client-দের সাথে কাজ করি, পাশাপাশি international remote project-ও handle করি।",
+        q: "MD Shahed কোথায় কাজ করেন?",
+        a: "আমি Dhaka, Bangladesh-এ ভিত্তি করে সারা Bangladesh এবং international clients-এর সাথে remote ও in-person project-এ কাজ করি।",
       },
       {
-        q: "Bangladesh থেকে আপনার সাথে কীভাবে যোগাযোগ করব?",
-        a: "Website-এর Contact section-এ থাকা email, WhatsApp ও social link দিয়ে যোগাযোগ করতে পারেন। Dhaka-তে in-person meeting-ও possible, prior appointment নিয়ে।",
+        q: "একটি project নিয়ে কীভাবে শুরু করা যায়?",
+        a: "Website-এর contact section থেকে আপনার goal, timeline এবং প্রয়োজনীয়তা পাঠান। আমি scope বুঝে একটি practical next step এবং delivery approach শেয়ার করব।",
       },
     ]}
   />
