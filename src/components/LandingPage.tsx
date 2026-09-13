@@ -185,7 +185,7 @@ export const LandingPage = ({
 
       {/* Highlights */}
       <section className="container mx-auto px-4 pb-12">
-        <h2 className="mb-8 text-2xl font-semibold md:text-3xl">কেন {h1}?</h2>
+        <h2 className="mb-8 text-2xl font-semibold md:text-3xl">A more thoughtful way to build digital value</h2>
         <div className="grid gap-5 md:grid-cols-3">
           {highlights.map((h) => (
             <Card key={h.title} className="p-6">
@@ -203,7 +203,7 @@ export const LandingPage = ({
       {about && (
         <section className="container mx-auto px-4 pb-12">
           <Card className="p-6 md:p-8">
-            <h2 className="mb-4 text-2xl font-semibold">About — Bangladesh-এ আমার কাজ</h2>
+            <h2 className="mb-4 text-2xl font-semibold">The thinking behind the work</h2>
             <p className="leading-relaxed text-muted-foreground whitespace-pre-line">{about}</p>
           </Card>
         </section>
@@ -212,7 +212,7 @@ export const LandingPage = ({
       {/* Services */}
       {services && services.length > 0 && (
         <section className="container mx-auto px-4 pb-12">
-          <h2 className="mb-6 text-2xl font-semibold md:text-3xl">Services in Dhaka & Bangladesh</h2>
+          <h2 className="mb-6 text-2xl font-semibold md:text-3xl">Capabilities built around your goals</h2>
           <ul className="grid gap-3 sm:grid-cols-2">
             {services.map((s) => (
               <li key={s} className="flex items-start gap-3 rounded-lg border border-border bg-muted/20 p-4">
@@ -227,7 +227,7 @@ export const LandingPage = ({
       {/* FAQ */}
       {faqs && faqs.length > 0 && (
         <section className="container mx-auto px-4 pb-12">
-          <h2 className="mb-6 text-2xl font-semibold md:text-3xl">Frequently Asked Questions</h2>
+          <h2 className="mb-6 text-2xl font-semibold md:text-3xl">Questions founders often ask</h2>
           <Accordion type="single" collapsible className="rounded-xl border border-border bg-muted/20 px-4">
             {faqs.map((f, i) => (
               <AccordionItem key={i} value={`item-${i}`}>
