@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { z } from "zod";
-import { Sparkles, Mail, Lock, User, ArrowLeft } from "lucide-react";
+import { Sparkles, Mail, Lock, User, ArrowLeft, KeyRound } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { RippleButton } from "@/components/ui/ripple-button";
 import { useToast } from "@/hooks/use-toast";
@@ -17,23 +17,38 @@ const loginSchema = z.object({
   password: z.string().min(1, "Password is required").max(72),
 });
 
+const resetSchema = z.object({
+  password: z.string().min(6, "Password must be at least 6 characters").max(72),
+  confirmPassword: z.string(),
+}).refine((value) => value.password === value.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
+});
+
 const AuthPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
-  const [mode, setMode] = useState<"login" | "signup">("signup");
+  const [mode, setMode] = useState<"login" | "signup" | "forgot" | "reset">(() => location.pathname === "/login" ? "login" : "signup");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [googleEnabled, setGoogleEnabled] = useState(true);
 
   useEffect(() => {
-    document.title = mode === "signup" ? "Sign up — SHAHED" : "Login — SHAHED";
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session) navigate("/", { replace: true });
+    document.title = mode === "signup" ? "Sign up — SHAHED" : mode === "forgot" ? "Forgot password — SHAHED" : mode === "reset" ? "Set new password — SHAHED" : "Login — SHAHED";
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "PASSWORD_RECOVERY") {
+        setMode("reset");
+        setLoading(false);
+      } else if (session && mode !== "reset") {
+        navigate("/", { replace: true });
+      }
     });
     supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) navigate("/", { replace: true });
+      if (session && mode !== "reset") navigate("/", { replace: true });
     });
     supabase.rpc("get_public_site_settings").then(({ data }) => {
       const settings = data as { google_login_enabled?: boolean } | null;
@@ -46,7 +61,37 @@ const AuthPage = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      if (mode === "signup") {
+      if (mode === "reset") {
+        const parsed = resetSchema.safeParse({ password, confirmPassword });
+        if (!parsed.success) {
+          toast({ title: "Invalid password", description: parsed.error.issues[0].message, variant: "destructive" });
+          return;
+        }
+        const { error } = await supabase.auth.updateUser({ password: parsed.data.password });
+        if (error) {
+          toast({ title: "Password update failed", description: error.message, variant: "destructive" });
+          return;
+        }
+        toast({ title: "Password updated", description: "You can now log in with your new password." });
+        await supabase.auth.signOut();
+        setPassword("");
+        setConfirmPassword("");
+        setMode("login");
+      } else if (mode === "forgot") {
+        const parsed = z.string().trim().email("Invalid email address").safeParse(email);
+        if (!parsed.success) {
+          toast({ title: "Invalid email", description: parsed.error.issues[0].message, variant: "destructive" });
+          return;
+        }
+        const { error } = await supabase.auth.resetPasswordForEmail(parsed.data, {
+          redirectTo: `${window.location.origin}/login`,
+        });
+        if (error) {
+          toast({ title: "Could not send reset email", description: error.message, variant: "destructive" });
+          return;
+        }
+        toast({ title: "Reset email sent", description: "Check your inbox and follow the password reset link." });
+      } else if (mode === "signup") {
         const parsed = signupSchema.safeParse({ name, email, password });
         if (!parsed.success) {
           toast({ title: "Invalid input", description: parsed.error.issues[0].message, variant: "destructive" });
@@ -101,6 +146,8 @@ const AuthPage = () => {
     }
   };
 
+  const isFormMode = mode === "login" || mode === "signup";
+
   return (
     <main className="min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden">
       <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -119,14 +166,14 @@ const AuthPage = () => {
               <Sparkles className="w-5 h-5 text-primary-foreground" />
             </div>
             <h1 className="font-heading text-3xl font-semibold tracking-tight mb-2">
-              {mode === "signup" ? "Create account" : "Welcome back"}
+              {mode === "signup" ? "Create account" : mode === "forgot" ? "Forgot password?" : mode === "reset" ? "Set a new password" : "Welcome back"}
             </h1>
             <p className="text-sm text-muted-foreground">
-              {mode === "signup" ? "Sign up to get started" : "Login to your account"}
+              {mode === "signup" ? "Sign up to get started" : mode === "forgot" ? "Enter your email and we will send a reset link" : mode === "reset" ? "Choose a strong password for your account" : "Login to your account"}
             </p>
           </div>
 
-          {googleEnabled && <button
+          {googleEnabled && isFormMode && <button
             type="button"
             onClick={handleGoogle}
             disabled={loading}
@@ -141,11 +188,11 @@ const AuthPage = () => {
             Continue with Google
           </button>}
 
-          <div className="flex items-center gap-3 my-5">
+          {isFormMode && <div className="flex items-center gap-3 my-5">
             <div className="flex-1 h-px bg-border" />
             <span className="text-xs text-muted-foreground">or</span>
             <div className="flex-1 h-px bg-border" />
-          </div>
+          </div>}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {mode === "signup" && (
@@ -163,7 +210,7 @@ const AuthPage = () => {
                 />
               </div>
             )}
-            <div className="relative">
+            {mode !== "reset" && <div className="relative">
               <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 type="email"
@@ -175,8 +222,8 @@ const AuthPage = () => {
                 maxLength={255}
                 className="w-full glass rounded-full pl-11 pr-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
               />
-            </div>
-            <div className="relative">
+            </div>}
+            {mode !== "forgot" && mode !== "reset" && <div className="relative">
               <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 type="password"
@@ -188,21 +235,30 @@ const AuthPage = () => {
                 maxLength={72}
                 className="w-full glass rounded-full pl-11 pr-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
               />
-            </div>
+            </div>}
+            {mode === "reset" && <div className="relative">
+              <KeyRound className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <input type="password" aria-label="New password" placeholder="New password" value={password} onChange={(e) => setPassword(e.target.value)} required maxLength={72} className="w-full glass rounded-full pl-11 pr-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50" />
+            </div>}
+            {mode === "reset" && <div className="relative">
+              <KeyRound className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <input type="password" aria-label="Confirm new password" placeholder="Confirm new password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required maxLength={72} className="w-full glass rounded-full pl-11 pr-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50" />
+            </div>}
 
             <RippleButton type="submit" variant="primary" size="lg" disabled={loading} className="w-full">
-              {loading ? "Please wait..." : mode === "signup" ? "Create account" : "Login"}
+              {loading ? "Please wait..." : mode === "signup" ? "Create account" : mode === "forgot" ? "Send reset link" : mode === "reset" ? "Update password" : "Login"}
             </RippleButton>
           </form>
 
+          {mode === "login" && <button type="button" onClick={() => setMode("forgot")} className="mt-4 w-full text-center text-sm text-primary hover:underline">Forgot password?</button>}
           <p className="text-center text-sm text-muted-foreground mt-6">
-            {mode === "signup" ? "Already have an account?" : "Don't have an account?"}{" "}
+            {mode === "signup" ? "Already have an account?" : mode === "login" ? "Don't have an account?" : "Remember your password?"}{" "}
             <button
               type="button"
-              onClick={() => setMode(mode === "signup" ? "login" : "signup")}
+              onClick={() => setMode(mode === "signup" || mode === "reset" ? "login" : "signup")}
               className="text-gradient font-medium hover:underline"
             >
-              {mode === "signup" ? "Login" : "Sign up"}
+              {mode === "signup" || mode === "reset" ? "Login" : "Sign up"}
             </button>
           </p>
         </div>
