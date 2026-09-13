@@ -35,7 +35,7 @@ const AuthPage = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [googleEnabled, setGoogleEnabled] = useState(true);
+  const [googleEnabled] = useState(false);
 
   useEffect(() => {
     document.title = mode === "signup" ? "Sign up — SHAHED" : mode === "forgot" ? "Forgot password — SHAHED" : mode === "reset" ? "Set new password — SHAHED" : "Login — SHAHED";
@@ -49,10 +49,6 @@ const AuthPage = () => {
     });
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session && mode !== "reset") navigate("/", { replace: true });
-    });
-    supabase.rpc("get_public_site_settings").then(({ data }) => {
-      const settings = data as { google_login_enabled?: boolean } | null;
-      if (typeof settings?.google_login_enabled === "boolean") setGoogleEnabled(settings.google_login_enabled);
     });
     return () => subscription.unsubscribe();
   }, [mode, navigate]);

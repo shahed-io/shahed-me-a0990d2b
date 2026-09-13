@@ -17,7 +17,7 @@ AS $$
       'default_description', data->>'default_description',
       'site_name', data->>'site_name',
       'twitter_handle', data->>'twitter_handle',
-      'google_login_enabled', COALESCE(data->'google_login_enabled', 'true'::jsonb),
+      'google_login_enabled', false,
       'brand_name', data->>'brand_name',
       'brand_name_bn', data->>'brand_name_bn',
       'target_keywords', data->>'target_keywords'
@@ -30,3 +30,7 @@ AS $$
 $$;
 
 GRANT EXECUTE ON FUNCTION public.get_public_site_settings() TO anon, authenticated;
+
+UPDATE public.site_settings
+SET data = data || '{"google_login_enabled": false}'::jsonb
+WHERE singleton = true;

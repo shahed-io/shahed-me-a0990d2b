@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Settings as SettingsIcon, Save, Copy, ExternalLink } from "lucide-react";
+import { Settings as SettingsIcon, Save } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { PageHeader } from "@/components/ceo/PageHeader";
@@ -47,12 +47,6 @@ const Settings = () => {
     value: data?.[k] ?? "",
     onChange: (e: any) => setData({ ...data, [k]: e.target.value }),
   });
-  const redirectUri = `${import.meta.env.VITE_SUPABASE_URL}/auth/v1/callback`;
-  const copyRedirectUri = async () => {
-    await navigator.clipboard.writeText(redirectUri);
-    toast({ title: "Redirect URL copied" });
-  };
-  const googleCredentialsSaved = Boolean(data?.google_client_id && data?.google_client_secret);
 
   return (
     <>
@@ -65,27 +59,14 @@ const Settings = () => {
         <div className="space-y-4 border-t border-border/50 pt-6">
           <div>
             <h2 className="text-lg font-semibold">Google Login</h2>
-            <p className="text-sm text-muted-foreground">এখানে credentials সংরক্ষণ করতে পারবেন। Login চালু করতে Supabase Auth-এ provider Enable করাও বাধ্যতামূলক।</p>
+            <p className="text-sm text-muted-foreground">Google Login এই সাইটে বন্ধ রাখা হয়েছে। Email/password login এবং Forgot Password চালু আছে।</p>
           </div>
-          <div className={`rounded-lg border p-3 text-sm ${googleCredentialsSaved ? "border-emerald-400/30 bg-emerald-400/10" : "border-amber-400/30 bg-amber-400/10"}`}>
-            {googleCredentialsSaved
-              ? "Client ID ও Client Secret সংরক্ষিত আছে। এখন Supabase Auth → Providers → Google-এ এগুলো বসিয়ে Enable করুন।"
-              : "Client ID ও Client Secret এখনো সংরক্ষণ করা হয়নি।"}
+          <div className="rounded-lg border border-muted-foreground/20 bg-muted/20 p-3 text-sm text-muted-foreground">
+            Google provider বন্ধ। Client ID বা Client Secret পরিবর্তন করার প্রয়োজন নেই।
           </div>
           <div className="flex items-center justify-between rounded-lg border border-border/50 p-4">
             <div><Label htmlFor="google-login-enabled">Show Google login</Label><p className="text-xs text-muted-foreground">Login page-এ Google button দেখাবে</p></div>
-            <Switch id="google-login-enabled" checked={data.google_login_enabled !== false} onCheckedChange={(checked) => setData({ ...data, google_login_enabled: checked })} />
-          </div>
-          <div><Label>Google Client ID</Label><Input {...f("google_client_id")} placeholder="123456789.apps.googleusercontent.com" /></div>
-          <div><Label>Google Client Secret</Label><Input type="password" autoComplete="new-password" {...f("google_client_secret")} placeholder="Paste your Google OAuth client secret" /><p className="mt-1 text-xs text-muted-foreground">শুধু admin-restricted settings-এ রাখা হবে; public metadata-তে যাবে না।</p></div>
-          <div className="rounded-lg border border-border/50 bg-muted/20 p-4 text-sm space-y-3">
-            <p className="font-medium">Setup checklist</p>
-            <p className="text-muted-foreground">1. Google Cloud Console-এ OAuth Web application তৈরি করুন। 2. নিচের redirect URI Google-এ Authorized redirect URI হিসেবে যোগ করুন। 3. Supabase Dashboard → Authentication → Providers → Google-এ একই Client ID/Secret বসিয়ে Enable করুন।</p>
-            <div className="flex gap-2">
-              <Input readOnly value={redirectUri} aria-label="Supabase OAuth redirect URI" />
-              <Button type="button" variant="outline" size="icon" onClick={copyRedirectUri} aria-label="Copy redirect URI"><Copy className="h-4 w-4" /></Button>
-            </div>
-            <a className="inline-flex items-center gap-1 text-primary hover:underline" href="https://supabase.com/dashboard/project/rporlqbfzsodsajgoasb/auth/providers" target="_blank" rel="noreferrer">Open Supabase Auth providers <ExternalLink className="h-3 w-3" /></a>
+            <Switch id="google-login-enabled" checked={false} disabled />
           </div>
         </div>
         <Button onClick={save} disabled={loading}><Save className="mr-2 h-4 w-4" /> Save</Button>
