@@ -119,6 +119,11 @@ const Rankings = () => {
         body: { startDate: isoDaysAgo(days), endDate: isoDaysAgo(1) },
       });
       if (err) throw err;
+      if ((res as any)?.configured === false) {
+        setError("Google Search Console is not connected yet. Add the connector credentials and verify shahed.com.bd first.");
+        setData(null);
+        return;
+      }
       if ((res as any)?.error) throw new Error((res as any).error);
       setData(res as Data);
     } catch (e: any) {
@@ -171,22 +176,36 @@ const Rankings = () => {
           <AlertDescription>
             {error}
             <div className="mt-2 text-xs opacity-80">
-              Common causes: Google Search Console connector not authorized for shahed.com.bd, site not verified yet, or no data collected yet (new sites take ~2-3 days).
+              Verify the <code>https://shahed.com.bd/</code> property in Google Search Console and configure the Search Console connector secrets for the <code>gsc-analytics</code> Edge Function. New properties can take 2-3 days to collect data.
+            </div>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <Button asChild size="sm" variant="outline">
+                <a href="https://search.google.com/search-console" target="_blank" rel="noreferrer">Open Search Console <ExternalLink className="ml-1 h-3 w-3" /></a>
+              </Button>
+              <Button asChild size="sm" variant="outline">
+                <a href="https://supabase.com/dashboard/project/rporlqbfzsodsajgoasb/functions" target="_blank" rel="noreferrer">Open Edge Functions <ExternalLink className="ml-1 h-3 w-3" /></a>
+              </Button>
             </div>
           </AlertDescription>
         </Alert>
       )}
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {loading || !data ? (
+        {loading ? (
           [...Array(4)].map((_, i) => <Skeleton key={i} className="h-24" />)
-        ) : (
+        ) : data ? (
           <>
             <Stat icon={MousePointerClick} label="Total Clicks" value={fmt(data.totals.clicks)} />
             <Stat icon={Eye} label="Impressions" value={fmt(data.totals.impressions)} />
             <Stat icon={Target} label="Average CTR" value={pct(data.totals.ctr)} />
             <Stat icon={TrendingUp} label="Avg. Position" value={pos(data.totals.position)} hint="Lower is better (1 = top)" />
           </>
+        ) : (
+          <Card className="sm:col-span-2 lg:col-span-4 border-white/10 bg-white/[0.03]">
+            <CardContent className="p-6 text-center text-sm text-muted-foreground">
+              Connect Google Search Console to show clicks, impressions, queries and ranking positions here.
+            </CardContent>
+          </Card>
         )}
       </div>
 
@@ -195,6 +214,8 @@ const Rankings = () => {
         <CardContent>
           {loading ? (
             <Skeleton className="h-72 w-full" />
+          ) : !data ? (
+            <div className="text-center text-muted-foreground py-12">Search Console data will appear after the connection is configured.</div>
           ) : chartData.length === 0 ? (
             <div className="text-center text-muted-foreground py-12">No daily data yet.</div>
           ) : (
@@ -229,11 +250,11 @@ const Rankings = () => {
       </Card>
 
       <div className="grid gap-4 lg:grid-cols-2">
-        {loading || !data ? (
+        {loading ? (
           <>
             <Skeleton className="h-96" /><Skeleton className="h-96" />
           </>
-        ) : (
+        ) : data ? (
           <>
             <RowTable title="Top Search Queries" rows={data.queries} keyLabel="Query" />
             <RowTable title="Top Landing Pages" rows={data.pages} keyLabel="Page" isUrl />
@@ -242,11 +263,11 @@ const Rankings = () => {
       </div>
 
       <div className="grid gap-4 lg:grid-cols-2">
-        {loading || !data ? (
+        {loading ? (
           <>
             <Skeleton className="h-72" /><Skeleton className="h-72" />
           </>
-        ) : (
+        ) : data ? (
           <>
             <RowTable title="By Device" rows={data.devices} keyLabel="Device" />
             <RowTable title="By Country" rows={data.countries} keyLabel="Country" />

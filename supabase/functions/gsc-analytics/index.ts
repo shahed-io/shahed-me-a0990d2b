@@ -32,8 +32,13 @@ Deno.serve(async (req) => {
     const GSC_KEY = Deno.env.get("GOOGLE_SEARCH_CONSOLE_API_KEY");
     const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
     const SERVICE_ROLE = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-    if (!LOVABLE_API_KEY) return json({ error: "LOVABLE_API_KEY missing" }, 500);
-    if (!GSC_KEY) return json({ error: "Google Search Console not connected" }, 500);
+    if (!LOVABLE_API_KEY || !GSC_KEY) {
+      return json({
+        configured: false,
+        site: SITE_URL,
+        error: "Google Search Console is not connected yet. Add the connector secrets, verify shahed.com.bd in Search Console, then try again.",
+      });
+    }
     if (!SUPABASE_URL || !SERVICE_ROLE) return json({ error: "Supabase env missing" }, 500);
 
     // ---- admin auth check ----
@@ -94,7 +99,11 @@ Deno.serve(async (req) => {
     );
     const totalsJson = await totalsRes.json();
     if (!totalsRes.ok) {
-      return json({ error: `GSC totals ${totalsRes.status}: ${JSON.stringify(totalsJson)}` }, 502);
+      return json({
+        configured: true,
+        site: SITE_URL,
+        error: `Google Search Console returned ${totalsRes.status}. Confirm the property is verified and the connector has access to ${SITE_URL}.`,
+      });
     }
     const totalsRow = totalsJson.rows?.[0] ?? { clicks: 0, impressions: 0, ctr: 0, position: 0 };
 
@@ -111,6 +120,7 @@ Deno.serve(async (req) => {
     ]);
 
     return json({
+      configured: true,
       site: SITE_URL,
       range: { startDate, endDate },
       totals: {
