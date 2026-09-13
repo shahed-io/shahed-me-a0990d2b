@@ -138,7 +138,10 @@ const AuthPage = () => {
         options: { redirectTo: window.location.origin },
       });
       if (error) {
-        toast({ title: "Google sign-in failed", description: error.message, variant: "destructive" });
+        const description = /missing oauth secret|unsupported provider/i.test(error.message)
+          ? "Supabase Dashboard → Authentication → Providers → Google-এ Client ID ও Client Secret বসিয়ে Google provider Enable করুন।"
+          : error.message;
+        toast({ title: "Google sign-in failed", description, variant: "destructive" });
         return;
       }
     } finally {
