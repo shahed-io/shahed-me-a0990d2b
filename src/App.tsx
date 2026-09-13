@@ -7,12 +7,12 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { PageTransition } from "@/components/ui/page-transition";
 import { SiteSettingsLoader } from "@/components/SiteSettingsLoader";
 import { PageSeoLoader } from "@/components/PageSeoLoader";
-import { SupportWidget } from "@/components/SupportWidget";
 // Splash handled by inline loader in index.html for instant paint
 import Index from "./pages/Index.tsx";
 
 // Lazy-load secondary routes to keep the initial bundle small.
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
+const LazySupportWidget = lazy(() => import("@/components/SupportWidget"));
 const Auth = lazy(() => import("./pages/Auth.tsx"));
 const Timeline = lazy(() => import("./pages/Timeline.tsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.tsx"));
@@ -111,7 +111,11 @@ const AnimatedRoutes = () => {
             <Route path="*" element={<NotFound />} />
           </Routes>
           {/* Hide the public chat widget inside the admin panel and while routes are loading */}
-          {!isAdminRoute && <SupportWidget />}
+          {!isAdminRoute && (
+            <Suspense fallback={null}>
+              <LazySupportWidget />
+            </Suspense>
+          )}
         </Suspense>
       </PageTransition>
     </>

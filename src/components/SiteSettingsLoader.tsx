@@ -37,6 +37,14 @@ const injectScript = (id: string, src?: string, inline?: string) => {
   document.head.appendChild(s);
 };
 
+const runWhenIdle = (task: () => void) => {
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(task, { timeout: 2500 });
+  } else {
+    window.setTimeout(task, 1200);
+  }
+};
+
 export const SiteSettingsLoader = () => {
   useEffect(() => {
     (async () => {
@@ -54,28 +62,31 @@ export const SiteSettingsLoader = () => {
 
       // Google Analytics 4
       if (s.ga4_id && /^G-[A-Z0-9]+$/i.test(s.ga4_id)) {
-        injectScript("ga4-src", `https://www.googletagmanager.com/gtag/js?id=${s.ga4_id}`);
-        injectScript(
-          "ga4-init",
-          undefined,
-          `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${s.ga4_id}');`
-        );
+        runWhenIdle(() => {
+          injectScript("ga4-src", `https://www.googletagmanager.com/gtag/js?id=${s.ga4_id}`);
+          injectScript(
+            "ga4-init",
+            undefined,
+            `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${s.ga4_id}');`
+          );
+        });
       }
 
       // Google Tag Manager
       if (s.gtm_id && /^GTM-[A-Z0-9]+$/i.test(s.gtm_id)) {
-        injectScript(
-          "gtm-init",
-          undefined,
-          `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${s.gtm_id}');`
-        );
-        // GTM noscript body fallback
-        if (!document.getElementById("gtm-noscript")) {
-          const ns = document.createElement("noscript");
-          ns.id = "gtm-noscript";
-          ns.innerHTML = `<iframe src="https://www.googletagmanager.com/ns.html?id=${s.gtm_id}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
-          document.body.insertBefore(ns, document.body.firstChild);
-        }
+        runWhenIdle(() => {
+          injectScript(
+            "gtm-init",
+            undefined,
+            `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${s.gtm_id}');`
+          );
+          if (!document.getElementById("gtm-noscript")) {
+            const ns = document.createElement("noscript");
+            ns.id = "gtm-noscript";
+            ns.innerHTML = `<iframe src="https://www.googletagmanager.com/ns.html?id=${s.gtm_id}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
+            document.body.insertBefore(ns, document.body.firstChild);
+          }
+        });
       }
 
       // Default OG fallback

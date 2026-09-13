@@ -259,6 +259,8 @@ const Rankings = () => {
             <RowTable title="Top Search Queries" rows={data.queries} keyLabel="Query" />
             <RowTable title="Top Landing Pages" rows={data.pages} keyLabel="Page" isUrl />
           </>
+        ) : (
+          <div className="lg:col-span-2 rounded-lg border border-white/10 p-6 text-center text-sm text-muted-foreground">Connect Search Console to see query and landing-page data.</div>
         )}
       </div>
 
@@ -272,6 +274,8 @@ const Rankings = () => {
             <RowTable title="By Device" rows={data.devices} keyLabel="Device" />
             <RowTable title="By Country" rows={data.countries} keyLabel="Country" />
           </>
+        ) : (
+          <div className="lg:col-span-2 rounded-lg border border-white/10 p-6 text-center text-sm text-muted-foreground">Connect Search Console to see device and country data.</div>
         )}
       </div>
 
