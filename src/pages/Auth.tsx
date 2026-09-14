@@ -36,6 +36,7 @@ const AuthPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [googleEnabled] = useState(false);
+  const [networkError, setNetworkError] = useState(false);
 
   useEffect(() => {
     document.title = mode === "signup" ? "Sign up — SHAHED" : mode === "forgot" ? "Forgot password — SHAHED" : mode === "reset" ? "Set new password — SHAHED" : "Login — SHAHED";
@@ -117,9 +118,16 @@ const AuthPage = () => {
           password: parsed.data.password,
         });
         if (error) {
-          toast({ title: "Login failed", description: error.message, variant: "destructive" });
+          const offline = /failed to fetch|network|fetch/i.test(error.message);
+          setNetworkError(offline);
+          toast({
+            title: offline ? "Connection problem" : "Login failed",
+            description: offline ? "Supabase server-এ সংযোগ করা যাচ্ছে না। Internet/DNS connection পরীক্ষা করে আবার চেষ্টা করুন।" : error.message,
+            variant: "destructive",
+          });
           return;
         }
+        setNetworkError(false);
       }
     } finally {
       setLoading(false);
@@ -194,6 +202,12 @@ const AuthPage = () => {
           </div>}
 
           <form onSubmit={handleSubmit} className="space-y-4">
+            {networkError && (
+              <div className="rounded-xl border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
+                Login service এখন reachable নয়। Internet connection পরীক্ষা করে আবার চেষ্টা করুন।
+                <button type="button" onClick={() => window.location.reload()} className="ml-2 font-medium underline">Retry</button>
+              </div>
+            )}
             {mode === "signup" && (
               <div className="relative">
                 <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
