@@ -91,7 +91,7 @@ export const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
           {/* Nav pill track */}
           <div className="relative hidden md:flex items-center gap-0.5 p-1 rounded-full bg-black/20 border border-white/[0.06] shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)]">
             {navItems.map((item) => {
-              const href = item === "Timeline" || item === "Blog" ? `/${item.toLowerCase()}` : `/#${item.toLowerCase()}`;
+              const href = `/${item.toLowerCase()}`;
               return (
               <Link
                 key={item}
@@ -289,7 +289,7 @@ export const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
                     "from-violet-500/30 to-fuchsia-500/20",
                   ];
                   const tint = tints[idx % tints.length];
-                  const href = item === "Timeline" || item === "Blog" ? `/${item.toLowerCase()}` : `/#${item.toLowerCase()}`;
+                  const href = `/${item.toLowerCase()}`;
                   return (
                     <Link
                       key={item}

@@ -21,8 +21,8 @@ const Services = () => {
   return (
     <main className="relative pt-20">
       <SEO 
-        title="Services | MD Shahed" 
-        description="Digital services including custom web development, e-commerce, UI/UX design, and branding by MD Shahed." 
+        title="Services — Shahed Web Developer & Graphic Designer" 
+        description="Digital services by Shahed: custom web development, e-commerce, UI/UX, graphic design, and branding strategy." 
         canonical="https://shahed.com.bd/services" 
       />
       <Navbar onOpenSearch={() => setOpen(true)} />

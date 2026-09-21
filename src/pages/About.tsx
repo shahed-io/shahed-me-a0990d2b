@@ -12,8 +12,8 @@ const About = () => {
   return (
     <main className="relative pt-20">
       <SEO 
-        title="About MD Shahed — Web Developer & Entrepreneur" 
-        description="Learn about MD Shahed's journey, experience, and vision as a Web Developer and Entrepreneur in Bangladesh." 
+        title="Md Shahed — Web Developer & Entrepreneur | About/Profile" 
+        description="Learn about Md Shahed, a Web Developer, Entrepreneur, and digital expert based in Bangladesh. Explore my journey and business profile." 
         canonical="https://shahed.com.bd/about" 
       />
       <Navbar onOpenSearch={() => setOpen(true)} />
@@ -38,19 +38,13 @@ const About = () => {
             </div>
             <div>
               <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6">
-                I'm <span className="text-foreground font-medium">Md Shahed</span>, a Bangladesh-based
-                entrepreneur, businessman, and web developer involved in multiple business ventures and
-                digital projects.
+                I engineer digital products at the intersection of <span className="text-foreground font-medium">robust architecture</span> and premium user experience. Based in Bangladesh, I operate as a web developer and digital entrepreneur, building solutions that scale.
               </p>
               <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6">
-                I specialize in <span className="text-foreground font-medium">React.js</span>,{" "}
-                <span className="text-foreground font-medium">Next.js</span>, SEO optimization,
-                branding, and scalable web applications focused on business growth and modern digital
-                experiences.
+                My engineering stack is heavily focused on <span className="text-foreground font-medium">React, Next.js, and modern TypeScript ecosystems</span>. Beyond writing code, my philosophy centers on solving complex business challenges through elegant system design, obsessive performance tuning, and seamless micro-interactions.
               </p>
               <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-8">
-                My goal is to combine technology, branding, and business strategy to build{" "}
-                <span className="text-gradient font-medium">impactful and performance-driven digital solutions</span>.
+                The ultimate goal is to build <span className="text-gradient font-medium">high-performance digital platforms</span> that don't just look exceptional, but deliver measurable business impact.
               </p>
               <div className="space-y-3">
                 {["7+ Years Building Digital Products", "International Client Base", "Startup to Enterprise Experience"].map((item) => (
