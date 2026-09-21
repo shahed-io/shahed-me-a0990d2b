@@ -25,6 +25,9 @@ import blogBranding from "@/assets/blog-branding.jpg";
 import blogEcom from "@/assets/blog-ecommerce.jpg";
 import { SmartImage } from "@/components/ui/smart-image";
 import { SEO } from "@/components/SEO";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
+import { SectionHeading } from "@/components/SectionHeading";
 
 /* ---------- Typing animation ---------- */
 const useTypingAnimation = (words: string[], typingSpeed = 100, deletingSpeed = 50, pauseTime = 2000) => {
@@ -52,7 +55,7 @@ const useTypingAnimation = (words: string[], typingSpeed = 100, deletingSpeed = 
 };
 
 /* ---------- Section heading helper ---------- */
-const SectionHeading = ({ eyebrow, title, accent }: { eyebrow: string; title: string; accent?: string }) => (
+const OldSectionHeading = ({ eyebrow, title, accent }: { eyebrow: string; title: string; accent?: string }) => (
   <div className="text-center mb-16">
     <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium text-muted-foreground tracking-wide mb-5">
       <span className="w-1.5 h-1.5 rounded-full bg-gradient-accent" />
@@ -65,7 +68,7 @@ const SectionHeading = ({ eyebrow, title, accent }: { eyebrow: string; title: st
 );
 
 /* ---------- Navbar ---------- */
-const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
+const OldNavbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -1122,7 +1125,7 @@ const NewsletterSection = () => {
 };
 
 /* ---------- Footer ---------- */
-const Footer = () => {
+const OldFooter = () => {
   const footerMenus = [
     {
       title: "Discover",

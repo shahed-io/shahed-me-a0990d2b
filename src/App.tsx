@@ -35,6 +35,11 @@ const DigitalConsulting = lazy(() => import("./pages/DigitalConsulting.tsx"));
 const Blog = lazy(() => import("./pages/Blog.tsx"));
 const BlogPost = lazy(() => import("./pages/BlogPost.tsx"));
 const BlogCategory = lazy(() => import("./pages/BlogCategory.tsx"));
+const About = lazy(() => import("./pages/About.tsx"));
+const Skills = lazy(() => import("./pages/Skills.tsx"));
+const Projects = lazy(() => import("./pages/Projects.tsx"));
+const Services = lazy(() => import("./pages/Services.tsx"));
+const Contact = lazy(() => import("./pages/Contact.tsx"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -109,6 +114,11 @@ const AnimatedRoutes = () => {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/category/:tag" element={<BlogCategory />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/skills" element={<Skills />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/contact" element={<Contact />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
