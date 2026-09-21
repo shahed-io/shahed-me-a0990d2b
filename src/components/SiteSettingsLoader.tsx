@@ -38,11 +38,11 @@ const injectScript = (id: string, src?: string, inline?: string) => {
 };
 
 const runWhenIdle = (task: () => void) => {
-  if ("requestIdleCallback" in window) {
-    window.requestIdleCallback(task, { timeout: 2500 });
-  } else {
-    window.setTimeout(task, 1200);
-  }
+  const ric = (window as Window & {
+    requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+  }).requestIdleCallback;
+  if (typeof ric === "function") ric(task, { timeout: 2500 });
+  else setTimeout(task, 1200);
 };
 
 export const SiteSettingsLoader = () => {
