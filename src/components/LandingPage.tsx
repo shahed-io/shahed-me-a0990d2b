@@ -91,7 +91,6 @@ export const LandingPage = ({
       name: "MD Shahed",
       image,
       url: canonical,
-      telephone: "+8801XXXXXXXXX",
       priceRange: "$$",
       address: {
         "@type": "PostalAddress",
