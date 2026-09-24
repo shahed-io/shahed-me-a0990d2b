@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import { SEO } from "@/components/SEO";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -20,7 +22,36 @@ const faqItems = [
 const Contact = () => {
   const { open, setOpen } = useGlobalSearch();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [sending, setSending] = useState(false);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const name = form.name.trim();
+    const email = form.email.trim();
+    const message = form.message.trim();
+    if (!name || !email || !message) {
+      toast({ title: "Missing details", description: "Please fill in your name, email and message.", variant: "destructive" });
+      return;
+    }
+    setSending(true);
+    const { error } = await supabase.from("support_tickets").insert({
+      name,
+      email,
+      subject: "Contact form message",
+      message,
+      priority: "normal",
+      status: "open",
+    });
+    setSending(false);
+    if (error) {
+      toast({ title: "Could not send", description: "Something went wrong. Please try again or email ceo@shahed.com.bd directly.", variant: "destructive" });
+    } else {
+      toast({ title: "Message sent!", description: "Thanks for reaching out — I'll get back to you soon." });
+      setForm({ name: "", email: "", message: "" });
+    }
+  };
 
   return (
     <main className="relative pt-20">
@@ -37,7 +68,7 @@ const Contact = () => {
           <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
             {/* Form */}
             <div className="glass-card p-8 md:p-10 h-full flex flex-col">
-              <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
                   <label className="text-xs text-muted-foreground mb-2 block uppercase tracking-wider">Name</label>
                   <input
@@ -72,8 +103,8 @@ const Contact = () => {
                   />
                 </div>
                 <Magnetic strength={0.2}>
-                  <RippleButton variant="accent" size="lg" className="w-full">
-                    <Send className="w-4 h-4" /> Send Message
+                  <RippleButton variant="accent" size="lg" className="w-full" disabled={sending}>
+                    <Send className="w-4 h-4" /> {sending ? "Sending…" : "Send Message"}
                   </RippleButton>
                 </Magnetic>
               </form>
