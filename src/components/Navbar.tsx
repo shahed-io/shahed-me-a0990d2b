@@ -78,13 +78,14 @@ export const Navbar = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
           <span aria-hidden className="pointer-events-none absolute -top-32 left-1/4 w-80 h-32 rounded-full bg-primary/15 blur-3xl opacity-70" />
           <span aria-hidden className="pointer-events-none absolute -bottom-32 right-1/4 w-80 h-32 rounded-full bg-accent/15 blur-3xl opacity-60" />
 
-          {/* Logo */}
-          <Link to="/" className="relative flex items-center gap-2 pl-2 pr-3 group max-md:absolute max-md:left-1/2 max-md:-translate-x-1/2 max-md:pl-0 max-md:pr-0">
-            <span className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-accent to-primary text-primary-foreground font-bold text-sm shadow-[inset_0_1px_0_hsl(0_0%_100%/0.3),0_4px_14px_-4px_hsl(var(--primary)/0.6)] ring-1 ring-white/15 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3 max-md:hidden">
-              S
+          {/* Brand signature */}
+          <Link to="/" aria-label="Md Shahed — Home" className="group relative flex shrink-0 items-center gap-2.5 pl-1 pr-3 max-md:absolute max-md:left-1/2 max-md:-translate-x-1/2 max-md:px-0">
+            <span aria-hidden="true" className="relative hidden h-9 w-9 items-center justify-center overflow-hidden rounded-md border border-primary/45 bg-card/80 font-heading text-xl font-semibold leading-none text-foreground shadow-sm transition-colors duration-300 group-hover:border-accent/70 group-hover:bg-card sm:flex max-md:hidden">
+              S<span className="absolute bottom-0 left-0 h-0.5 w-full bg-gradient-accent" />
             </span>
-            <span className="font-heading font-bold text-base tracking-tight max-md:inline hidden sm:inline">
-              SHAHED<span className="text-gradient">.</span>
+            <span className="relative inline-flex flex-col justify-center font-heading text-lg font-semibold leading-none text-foreground">
+              <span>SHAHED<span className="text-gradient">.</span></span>
+              <span aria-hidden="true" className="mt-1 h-px w-6 bg-gradient-accent transition-[width] duration-300 group-hover:w-full" />
             </span>
           </Link>
 
