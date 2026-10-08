@@ -490,6 +490,7 @@ const HeroSection = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
                   width={160}
                   height={160}
                   fetchPriority="high"
+                  loading="eager"
                   decoding="async"
                   className="w-36 h-36 md:w-40 md:h-40 rounded-full object-cover border-4 border-background"
                   fallbackMessage="ছবি লোড হয়নি"

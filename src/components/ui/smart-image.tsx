@@ -44,6 +44,7 @@ export const SmartImage = ({
   className,
   wrapperClassName,
   onError,
+  loading = "lazy",
   ...rest
 }: SmartImageProps) => {
   const [stage, setStage] = useState<"primary" | "fallback" | "failed">(
@@ -72,6 +73,7 @@ export const SmartImage = ({
   return (
     <img
       {...rest}
+      loading={loading}
       src={withCacheBust(currentSrc)}
       alt={alt}
       className={className}
