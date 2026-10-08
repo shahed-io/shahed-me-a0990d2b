@@ -37,7 +37,7 @@ const setLink = (rel: string, href: string) => {
 /**
  * Applies per-route SEO overrides from the page_seo table AND always pins
  * the canonical + og:url to the production origin for the current route.
- * This prevents Google from treating preview/lovable.app subdomains as
+ * This prevents Google from treating preview subdomains as
  * duplicates, and removes the "Duplicate without user-selected canonical"
  * issue across every route.
  */
