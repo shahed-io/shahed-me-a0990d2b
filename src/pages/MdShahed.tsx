@@ -3,16 +3,16 @@ import { LandingPage } from "@/components/LandingPage";
 const MdShahed = () => (
   <LandingPage
     slug="/md-shahed"
-    title="MD Shahed | Web Developer, Entrepreneur & Digital Product Builder"
-    description="MD Shahed is a Dhaka-based web developer and entrepreneur building high-performance websites, digital products and growth-focused online businesses for ambitious brands in Bangladesh and beyond."
+    title="MD Shahed | Web Developer & Entrepreneur"
+    description="MD Shahed is a Dhaka-based web developer, entrepreneur and the Founder of Shahed IT, building high-performance websites and growth-focused online businesses for ambitious brands in Bangladesh and beyond."
     h1="MD Shahed — Web Developer & Entrepreneur"
-    tagline="Digital Products · Growth · Leadership"
-    intro="আমি MD Shahed — Dhaka, Bangladesh-এর একজন web developer, entrepreneur এবং digital product builder। strategy, design ও technology একসাথে ব্যবহার করে এমন digital experience তৈরি করি যা brand-কে credible করে এবং business-কে এগিয়ে দেয়।"
+    tagline="IT Services · Growth · Leadership"
+    intro="আমি MD Shahed — Dhaka, Bangladesh-এর একজন web developer, entrepreneur এবং Shahed IT (https://shahedit.com) এর Founder ও CEO। strategy, design ও technology একসাথে ব্যবহার করে এমন digital experience তৈরি করি যা brand-কে credible করে এবং business-কে এগিয়ে দেয়।"
     keywords={[
       "MD Shahed", "Md Shahed", "Shahed", "শাহেদ",
       "MD Shahed Dhaka", "MD Shahed Bangladesh", "MD Shahed entrepreneur",
-      "Shahed portfolio", "Shahed web developer", "digital product builder Bangladesh",
-      "web developer entrepreneur Dhaka", "shahed.com.bd",
+      "Shahed portfolio", "Shahed web developer", "Shahed IT Founder",
+      "web developer entrepreneur Dhaka", "shahed.com.bd", "shahedit.com"
     ]}
     highlights={[
       { title: "Engineering with Intent", body: "React, TypeScript ও modern web architecture ব্যবহার করে fast, maintainable এবং search-ready products তৈরি করি।" },

@@ -4,7 +4,7 @@ const MdShahedWebDeveloper = () => (
   <LandingPage
     slug="/md-shahed-web-developer"
     title="MD Shahed — React, Next.js & TypeScript Developer in Dhaka"
-    description="Hire MD Shahed for thoughtful React, Next.js and TypeScript development in Dhaka. Build fast, accessible and SEO-ready websites, web apps and digital products with a clear delivery process."
+    description="Hire MD Shahed for thoughtful React, Next.js and TypeScript development in Dhaka. Build fast, accessible and SEO-ready websites, web apps and IT solutions with a clear delivery process."
     h1="React & Next.js Web Developer in Dhaka"
     tagline="Product Engineering · Performance · Scale"
     intro="Dhaka থেকে modern React, Next.js ও TypeScript technology ব্যবহার করে production-ready websites এবং web applications তৈরি করি। clean architecture, performance, accessibility ও search visibility-কে product quality-এর অংশ হিসেবে দেখি।"
@@ -15,7 +15,7 @@ const MdShahedWebDeveloper = () => (
       "SEO-friendly web development Bangladesh", "Shahed React developer",
     ]}
     highlights={[
-      { title: "Modern Product Engineering", body: "React, Next.js, TypeScript, Tailwind এবং Supabase দিয়ে maintainable, scalable digital products তৈরি করি।" },
+      { title: "Modern Product Engineering", body: "React, Next.js, TypeScript, Tailwind এবং Supabase দিয়ে maintainable, scalable web applications তৈরি করি।" },
       { title: "Built for Users and Search", body: "Fast loading, responsive UX, semantic content, technical SEO এবং accessible interfaces শুরু থেকেই বিবেচনায় থাকে।" },
       { title: "Clear, End-to-End Delivery", body: "Discovery থেকে interface, API, database, deployment এবং handover পর্যন্ত একটি focused process-এ কাজ করি।" },
     ]}

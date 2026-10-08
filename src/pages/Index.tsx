@@ -633,8 +633,7 @@ const AboutSection = () => (
         <div>
           <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6">
             I'm <span className="text-foreground font-medium">Md Shahed</span>, a Bangladesh-based
-            entrepreneur, businessman, and web developer involved in multiple business ventures and
-            digital projects.
+            entrepreneur, businessman, and web developer. I am the Founder & CEO of <a href="https://shahedit.com/" target="_blank" rel="noreferrer" className="text-primary hover:underline font-medium">Shahed IT</a>, leading multiple business ventures and IT projects.
           </p>
           <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6">
             I specialize in <span className="text-foreground font-medium">React.js</span>,{" "}
@@ -647,7 +646,7 @@ const AboutSection = () => (
             <span className="text-gradient font-medium">impactful and performance-driven digital solutions</span>.
           </p>
           <div className="space-y-3">
-            {["7+ Years Building Digital Products", "International Client Base", "Startup to Enterprise Experience"].map((item) => (
+            {["7+ Years Building IT Solutions", "International Client Base", "Startup to Enterprise Experience"].map((item) => (
               <div key={item} className="flex items-center gap-3 text-sm glass rounded-full px-4 py-2.5">
                 <span className="w-2 h-2 rounded-full bg-gradient-accent" />
                 <span className="text-foreground">{item}</span>
@@ -1223,7 +1222,7 @@ const OldFooter = () => {
             SHAHED<span className="text-gradient">.</span>
           </a>
           <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            I design and engineer <span className="text-gradient font-medium">high-performance digital products</span> that
+            I design and engineer <span className="text-gradient font-medium">high-performance web applications</span> that
             turn ambitious ideas into credible brands, better customer experiences, and measurable business growth.
           </p>
 
@@ -1315,7 +1314,7 @@ const OldFooter = () => {
         {/* Bottom bar */}
         <div className="pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} MD Shahed Studio. Independent digital products, brands and growth systems from Dhaka.
+            © {new Date().getFullYear()} MD Shahed Studio. Independent IT solutions, brands and growth systems from Dhaka.
           </p>
           <div className="flex items-center gap-5 text-xs text-muted-foreground">
             <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>

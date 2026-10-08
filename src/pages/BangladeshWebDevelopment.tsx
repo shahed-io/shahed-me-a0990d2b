@@ -7,7 +7,7 @@ const BangladeshWebDevelopment = () => (
     description="Professional web development in Bangladesh for startups, SMEs and growing brands. MD Shahed builds fast business websites, e-commerce stores and custom web applications from Dhaka."
     h1="Web Development Services in Bangladesh"
     tagline="Local Context · Product Quality · Business Growth"
-    intro="Dhaka থেকে Bangladesh-এর startup, SME এবং ambitious businesses-এর জন্য strategy-led web development করি। আপনার website-কে শুধু online presence নয়, একটি credible digital product এবং growth channel হিসেবে তৈরি করি।"
+    intro="Dhaka থেকে Bangladesh-এর startup, SME এবং ambitious businesses-এর জন্য strategy-led web development করি। আপনার website-কে শুধু online presence নয়, একটি credible digital platform এবং growth channel হিসেবে তৈরি করি।"
     keywords={[
       "web development Bangladesh", "web development company Dhaka",
       "business website developer Bangladesh", "website design Dhaka",

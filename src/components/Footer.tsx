@@ -63,7 +63,7 @@ export const Footer = () => {
             SHAHED<span className="text-gradient">.</span>
           </a>
           <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            I design and engineer <span className="text-gradient font-medium">high-performance digital products</span> that
+            I design and engineer <span className="text-gradient font-medium">high-performance web applications</span> that
             turn ambitious ideas into credible brands, better customer experiences, and measurable business growth.
           </p>
 
@@ -155,7 +155,7 @@ export const Footer = () => {
         {/* Bottom bar */}
         <div className="pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} MD Shahed Studio. Independent digital products, brands and growth systems from Dhaka.
+            © {new Date().getFullYear()} MD Shahed Studio. Independent IT solutions, brands and growth systems from Dhaka.
           </p>
           <div className="flex items-center gap-5 text-xs text-muted-foreground">
             <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>

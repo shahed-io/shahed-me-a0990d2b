@@ -28,7 +28,7 @@ const Skills = () => {
     <main className="relative pt-20">
       <SEO 
         title="Skills & Tech Stack | MD Shahed" 
-        description="Explore the technical skills, tools, and expertise MD Shahed uses to build high-performance digital products." 
+        description="Explore the technical skills, tools, and expertise MD Shahed uses to build high-performance web applications and IT solutions." 
         canonical="https://shahed.com.bd/skills" 
       />
       <Navbar onOpenSearch={() => setOpen(true)} />
