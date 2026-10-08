@@ -12,7 +12,7 @@ const WHATSAPP_URL = "https://wa.me/8801823378888";
 const INITIAL_MESSAGE: Msg = {
   role: "assistant",
   content:
-    "👋 Hi! I'm **Shahed AI** — ask me anything about services, pricing, timelines or projects.\n\nHow can I help you today?",
+    "✨ Welcome to **Shahed AI**.\n\nI am your advanced digital assistant. Ask me anything about our premium web applications, IT solutions, timelines, or business growth strategies.\n\nHow may I elevate your digital experience today?",
 };
 
 export interface SupportWidgetProps {
@@ -245,7 +245,7 @@ export const SupportWidget = ({
                 />
                 <div className="relative w-11 h-11 rounded-full p-[2px]" style={accentStyle ?? { background: "var(--gradient-support)" }}>
                   <div className="w-full h-full rounded-full bg-background/80 backdrop-blur-xl flex items-center justify-center">
-                    <Bot className="w-5 h-5 text-white" />
+                    <Sparkles className="w-5 h-5 text-white" />
                   </div>
                 </div>
                 <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-background" />
@@ -361,7 +361,7 @@ export const SupportWidget = ({
                       {msg.role === "user" ? (
                         <User className="w-3.5 h-3.5 text-white" />
                       ) : (
-                        <Bot className="w-3.5 h-3.5 text-white" />
+                        <Sparkles className="w-3.5 h-3.5 text-white" />
                       )}
                     </div>
                     <div
@@ -384,7 +384,7 @@ export const SupportWidget = ({
                       className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 shadow-md"
                       style={accentStyle ?? { background: "var(--gradient-support)" }}
                     >
-                      <Bot className="w-3.5 h-3.5 text-white" />
+                      <Sparkles className="w-3.5 h-3.5 text-white" />
                     </div>
                     <div className="glass rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground animate-bounce" style={{ animationDelay: "0ms" }} />
