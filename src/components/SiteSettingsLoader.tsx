@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 interface PublicSettings {
   gsc_token?: string;
   bing_token?: string;
+  semrush_token?: string;
   ga4_id?: string;
   gtm_id?: string;
   default_og_image?: string;
@@ -59,6 +60,7 @@ export const SiteSettingsLoader = () => {
         else upsertMeta("google-site-verification", s.gsc_token);
       }
       if (s.bing_token) upsertMeta("msvalidate.01", s.bing_token);
+      if (s.semrush_token) upsertMeta("semrush-bot-verification", s.semrush_token);
 
       // Google Analytics 4
       if (s.ga4_id && /^G-[A-Z0-9]+$/i.test(s.ga4_id)) {

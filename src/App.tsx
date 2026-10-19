@@ -26,6 +26,7 @@ const CeoDashboard = lazy(() => import("./pages/ceo/Dashboard.tsx"));
 const CeoTickets = lazy(() => import("./pages/ceo/Tickets.tsx"));
 const CeoBlog = lazy(() => import("./pages/ceo/Blog.tsx"));
 const SeoManager = lazy(() => import("./pages/ceo/SeoManager.tsx"));
+const SemrushSuite = lazy(() => import("./pages/ceo/SemrushSuite.tsx"));
 const PageSeo = lazy(() => import("./pages/ceo/PageSeo.tsx"));
 const CeoRankings = lazy(() => import("./pages/ceo/Rankings.tsx"));
 const CeoSettings = lazy(() => import("./pages/ceo/Settings.tsx"));
@@ -102,6 +103,7 @@ const AnimatedRoutes = () => {
             <Route path="/ceo" element={<CeoLayout />}>
               <Route index element={<CeoDashboard />} />
               <Route path="blog" element={<CeoBlog />} />
+              <Route path="semrush" element={<SemrushSuite />} />
               <Route path="seo" element={<SeoManager />} />
               <Route path="page-seo" element={<PageSeo />} />
               <Route path="rankings" element={<CeoRankings />} />

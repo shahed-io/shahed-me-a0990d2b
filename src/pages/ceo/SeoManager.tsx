@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 interface Settings {
   gsc_token?: string;
   bing_token?: string;
+  semrush_token?: string;
   ga4_id?: string;
   gtm_id?: string;
   default_og_image?: string;
@@ -207,7 +208,7 @@ const SeoManager = () => {
             <Button asChild variant="outline" size="sm"><a href="https://search.google.com/search-console" target="_blank" rel="noreferrer"><ExternalLink className="mr-1 h-3 w-3" /> Search Console খুলুন</a></Button>
             <Button asChild variant="outline" size="sm"><a href="https://analytics.google.com" target="_blank" rel="noreferrer"><ExternalLink className="mr-1 h-3 w-3" /> Analytics খুলুন</a></Button>
           </div>
-          <div className="mt-4 grid gap-3 md:grid-cols-2">
+          <div className="mt-4 grid gap-3 md:grid-cols-3">
             <div>
               <Label>Bing Webmaster Token</Label>
               <Input placeholder="Bing verification code" value={s.bing_token ?? ""} onChange={e => set("bing_token", e.target.value.trim())} />
@@ -216,6 +217,20 @@ const SeoManager = () => {
               <Label>Google Tag Manager ID</Label>
               <Input placeholder="GTM-XXXXXXX" value={s.gtm_id ?? ""} onChange={e => set("gtm_id", e.target.value.trim())} />
             </div>
+            <div>
+              <Label>Semrush Verification Token</Label>
+              <Input placeholder="Semrush token" value={s.semrush_token ?? ""} onChange={e => set("semrush_token", e.target.value.trim())} />
+            </div>
+          </div>
+          <div className="mt-3 p-3 rounded-xl bg-primary/5 border border-primary/20 flex flex-wrap items-center justify-between gap-2">
+            <span className="text-xs text-muted-foreground">
+              ⚡ পূর্ণাঙ্গ সেমরাশ সাইট অডিট ও কীওয়ার্ড পজিশন ট্র্যাকিংয়ের জন্য সেমরাশ স্যুট ব্যবহার করুন।
+            </span>
+            <Button asChild size="sm" variant="default" className="text-xs h-7">
+              <a href="/ceo/semrush">
+                <Sparkles className="mr-1 h-3 w-3" /> Semrush Suite খুলুন
+              </a>
+            </Button>
           </div>
         </Section>
 

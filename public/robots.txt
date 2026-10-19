@@ -60,6 +60,27 @@ Allow: /
 User-agent: Discordbot
 Allow: /
 
+# SEMrush Crawlers (Site Audit, Position Tracking & Backlink Analytics)
+User-agent: SemrushBot
+Allow: /
+Disallow: /ceo
+Disallow: /dashboard
+
+User-agent: SemrushBot-SA
+Allow: /
+
+User-agent: SemrushBot-BA
+Allow: /
+
+User-agent: SemrushBot-SI
+Allow: /
+
+User-agent: SemrushBot-SWA
+Allow: /
+
+User-agent: SemrushBot-CT
+Allow: /
+
 # Allow AI assistants to index for AI Overviews / answers
 User-agent: Google-Extended
 Allow: /
