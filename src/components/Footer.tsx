@@ -46,11 +46,11 @@ export const Footer = () => {
   ];
 
   const socials = [
-    { icon: <Facebook className="w-4 h-4" />, href: "https://facebook.com/shahed.io", label: "Facebook" },
-    { icon: <Instagram className="w-4 h-4" />, href: "https://instagram.com/shahed.io", label: "Instagram" },
-    { icon: <Linkedin className="w-4 h-4" />, href: "https://linkedin.com/in/shahed-io", label: "LinkedIn" },
-    { icon: <Github className="w-4 h-4" />, href: "https://github.com/shahed-io", label: "GitHub" },
-    { icon: <MessageCircle className="w-4 h-4" />, href: "https://wa.me/8801823378888", label: "WhatsApp" },
+    { icon: <Facebook className="w-4 h-4" />, href: "https://facebook.com/shahed.io", label: "Facebook", rel: "me noopener noreferrer" },
+    { icon: <Instagram className="w-4 h-4" />, href: "https://instagram.com/shahed.io", label: "Instagram", rel: "me noopener noreferrer" },
+    { icon: <Linkedin className="w-4 h-4" />, href: "https://linkedin.com/in/shahed-io", label: "LinkedIn", rel: "me noopener noreferrer" },
+    { icon: <Github className="w-4 h-4" />, href: "https://github.com/shahed-io", label: "GitHub", rel: "me noopener noreferrer" },
+    { icon: <MessageCircle className="w-4 h-4" />, href: "https://wa.me/8801823378888", label: "WhatsApp", rel: "noopener noreferrer" },
     { icon: <Send className="w-4 h-4" />, href: "mailto:ceo@shahed.com.bd", label: "Email" },
   ];
 
@@ -89,7 +89,7 @@ export const Footer = () => {
                 href={s.href}
                 aria-label={s.label}
                 target={s.href.startsWith("http") ? "_blank" : undefined}
-                rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                rel={s.rel ?? (s.href.startsWith("http") ? "noopener noreferrer" : undefined)}
                 className="w-10 h-10 rounded-full glass flex items-center justify-center text-muted-foreground hover:text-foreground hover:scale-110 transition-all shrink-0"
               >
                 {s.icon}
@@ -155,12 +155,12 @@ export const Footer = () => {
         {/* Bottom bar */}
         <div className="pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} MD Shahed Studio. Independent IT solutions, brands and growth systems from Dhaka.
+            © {new Date().getFullYear()} Md Shahed | Official Website (shahed.com.bd). Independent IT solutions from Dhaka.
           </p>
           <div className="flex items-center gap-5 text-xs text-muted-foreground">
             <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-foreground transition-colors">Terms & Conditions</a>
-            <a href="#" className="hover:text-foreground transition-colors">Sitemap</a>
+            <a href="/sitemap.xml" className="hover:text-foreground transition-colors">Sitemap</a>
           </div>
         </div>
       </div>

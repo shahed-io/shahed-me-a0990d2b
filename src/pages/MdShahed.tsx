@@ -3,16 +3,15 @@ import { LandingPage } from "@/components/LandingPage";
 const MdShahed = () => (
   <LandingPage
     slug="/md-shahed"
-    title="MD Shahed | Web Developer & Entrepreneur"
-    description="MD Shahed is a Dhaka-based web developer, entrepreneur and the Founder of Shahed IT, building high-performance websites and growth-focused online businesses for ambitious brands in Bangladesh and beyond."
-    h1="MD Shahed — Web Developer & Entrepreneur"
-    tagline="IT Services · Growth · Leadership"
-    intro="আমি MD Shahed — Dhaka, Bangladesh-এর একজন web developer, entrepreneur এবং Shahed IT (https://shahedit.com) এর Founder ও CEO। strategy, design ও technology একসাথে ব্যবহার করে এমন digital experience তৈরি করি যা brand-কে credible করে এবং business-কে এগিয়ে দেয়।"
+    title="Md Shahed | Official Website — Who is Md Shahed?"
+    description="This is the official website of Md Shahed (MD Shahed), a Dhaka-based web developer and entrepreneur, Founder & CEO of Shahed IT. Contact ceo@shahed.com.bd · +880 1823-378888."
+    h1="Md Shahed | Official Website"
+    tagline="Official profile · Web Developer · Entrepreneur"
+    intro="আমি Md Shahed (MD Shahed / Mohammad Shahed) — Dhaka, Bangladesh-এর একজন web developer ও entrepreneur, এবং Shahed IT (https://shahedit.com) এর Founder ও CEO। shahed.com.bd আমার official personal website। অন্য যেসব public figure-এর নাম একই, তাদের সাথে এই সাইটের কোনো সম্পর্ক নেই।"
     keywords={[
-      "MD Shahed", "Md Shahed", "Shahed", "শাহেদ",
-      "MD Shahed Dhaka", "MD Shahed Bangladesh", "MD Shahed entrepreneur",
-      "Shahed portfolio", "Shahed web developer", "Shahed IT Founder",
-      "web developer entrepreneur Dhaka", "shahed.com.bd", "shahedit.com"
+      "Md Shahed", "MD Shahed", "Md. Shahed", "Mohammad Shahed", "শাহেদ",
+      "Md Shahed official website", "MD Shahed Dhaka", "MD Shahed Bangladesh",
+      "Shahed IT Founder", "Shahed web developer", "shahed.com.bd", "shahedit.com"
     ]}
     highlights={[
       { title: "Engineering with Intent", body: "React, TypeScript ও modern web architecture ব্যবহার করে fast, maintainable এবং search-ready products তৈরি করি।" },
@@ -29,6 +28,14 @@ const MdShahed = () => (
       "Post-launch maintenance and product improvement",
     ]}
     faqs={[
+      {
+        q: "Who is Md Shahed?",
+        a: "Md Shahed is a web developer and entrepreneur based in Dhaka, Bangladesh. He is the Founder & CEO of Shahed IT. Official website: https://shahed.com.bd. Email: ceo@shahed.com.bd. Phone: +880 1823-378888.",
+      },
+      {
+        q: "shahed.com.bd কি Md Shahed-এর official website?",
+        a: "হ্যাঁ। shahed.com.bd হলো Md Shahed-এর official personal website। এটি অন্য কোনো সমনামী public figure-এর সাইট নয়।",
+      },
       {
         q: "MD Shahed কোথায় কাজ করেন?",
         a: "আমি Dhaka, Bangladesh-এ ভিত্তি করে সারা Bangladesh এবং international clients-এর সাথে remote ও in-person project-এ কাজ করি।",

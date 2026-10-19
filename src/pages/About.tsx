@@ -12,9 +12,11 @@ const About = () => {
   return (
     <main className="relative pt-20">
       <SEO 
-        title="Md Shahed — Web Developer & Entrepreneur | About/Profile" 
-        description="Learn about Md Shahed, a Web Developer, Entrepreneur, and digital expert based in Bangladesh. Explore my journey and business profile." 
-        canonical="https://shahed.com.bd/about" 
+        title="About Md Shahed | Official Website — Web Developer in Bangladesh"
+        description="About Md Shahed (MD Shahed): Dhaka-based web developer, entrepreneur, and Founder of Shahed IT. Official site shahed.com.bd · ceo@shahed.com.bd · +880 1823-378888."
+        canonical="https://shahed.com.bd/about"
+        type="profile"
+        keywords="About Md Shahed, MD Shahed, official website, web developer Bangladesh, Shahed IT" 
       />
       <Navbar onOpenSearch={() => setOpen(true)} />
       
@@ -38,7 +40,7 @@ const About = () => {
             </div>
             <div>
               <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6">
-                I engineer web applications and IT solutions at the intersection of <span className="text-foreground font-medium">robust architecture</span> and premium user experience. Based in Bangladesh, I operate as a web developer and digital entrepreneur, building solutions that scale.
+                I am <span className="text-foreground font-medium">Md Shahed</span> (MD Shahed). This is my official website. I engineer web applications and IT solutions at the intersection of <span className="text-foreground font-medium">robust architecture</span> and premium user experience. Based in Dhaka, Bangladesh, I am a web developer, entrepreneur, and Founder of Shahed IT.
               </p>
               <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6">
                 My engineering stack is heavily focused on <span className="text-foreground font-medium">React, Next.js, and modern TypeScript ecosystems</span>. Beyond writing code, my philosophy centers on solving complex business challenges through elegant system design, obsessive performance tuning, and seamless micro-interactions.

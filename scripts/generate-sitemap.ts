@@ -19,14 +19,19 @@ interface Entry {
 // No build-time `lastmod` for static routes: a generation-time date is not a
 // page-specific "last modified" signal and crawlers discount it.
 const staticEntries: Entry[] = [
-  { path: "/", changefreq: "daily", priority: "1.0" },
-  { path: "/timeline", changefreq: "weekly", priority: "0.8" },
-  { path: "/md-shahed", changefreq: "weekly", priority: "0.9" },
-  { path: "/shahed-business", changefreq: "weekly", priority: "0.8" },
+  { path: "/", lastmod: "2026-10-19", changefreq: "daily", priority: "1.0" },
+  { path: "/md-shahed", lastmod: "2026-10-19", changefreq: "weekly", priority: "1.0" },
+  { path: "/about", lastmod: "2026-10-19", changefreq: "monthly", priority: "0.9" },
   { path: "/md-shahed-web-developer", changefreq: "weekly", priority: "0.9" },
   { path: "/bangladesh-web-development", changefreq: "weekly", priority: "0.9" },
-  { path: "/digital-consulting", changefreq: "weekly", priority: "0.8" },
   { path: "/blog", changefreq: "daily", priority: "0.9" },
+  { path: "/timeline", changefreq: "weekly", priority: "0.8" },
+  { path: "/shahed-business", changefreq: "weekly", priority: "0.8" },
+  { path: "/digital-consulting", changefreq: "weekly", priority: "0.8" },
+  { path: "/services", changefreq: "monthly", priority: "0.8" },
+  { path: "/projects", changefreq: "monthly", priority: "0.8" },
+  { path: "/skills", changefreq: "monthly", priority: "0.7" },
+  { path: "/contact", changefreq: "monthly", priority: "0.8" },
 ];
 
 async function fetchPosts(): Promise<Entry[]> {

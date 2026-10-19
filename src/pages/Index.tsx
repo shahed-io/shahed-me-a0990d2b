@@ -29,6 +29,7 @@ import { SEO } from "@/components/SEO";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { SectionHeading } from "@/components/SectionHeading";
+import { HOME_DESCRIPTION, HOME_TITLE, personJsonLd, profilePageJsonLd } from "@/lib/identity";
 
 /* ---------- Typing animation ---------- */
 const useTypingAnimation = (words: string[], typingSpeed = 100, deletingSpeed = 50, pauseTime = 2000) => {
@@ -522,9 +523,12 @@ const HeroSection = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
           </div>
 
           {/* Name */}
-          <h1 aria-label="MD Shahed — Web Developer & Entrepreneur from Bangladesh" className="font-heading text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter mb-5 leading-[1.05] text-foreground">
+          <h1 aria-label="Md Shahed | Official Website — Web Developer and Entrepreneur from Bangladesh" className="font-heading text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tighter mb-5 leading-[1.05] text-foreground">
             MD <span className="text-gradient">SHAHED</span>
           </h1>
+          <p className="text-sm md:text-base text-muted-foreground mb-4 tracking-wide">
+            Official website of Md Shahed · Web Developer &amp; Entrepreneur · Dhaka, Bangladesh
+          </p>
 
           {/* Typing role */}
           <div className="font-mono text-secondary text-sm md:text-base mb-6 h-6 flex items-center gap-1">
@@ -535,7 +539,9 @@ const HeroSection = ({ onOpenSearch }: { onOpenSearch: () => void }) => {
           </div>
 
           {/* Tagline */}
-          <p className="text-muted-foreground text-base md:text-lg max-w-xl leading-relaxed mb-10">
+          <p className="text-muted-foreground text-base md:text-lg max-w-xl leading-relaxed mb-10" data-speakable>
+            I am <span className="text-foreground font-medium">Md Shahed</span> — Founder of{" "}
+            <a href="https://shahedit.com/" target="_blank" rel="noreferrer" className="text-primary hover:underline">Shahed IT</a>.
             I build powerful digital brands that turn ideas into{" "}
             <span className="text-gradient font-medium">profitable online businesses</span>.
           </p>
@@ -632,9 +638,9 @@ const AboutSection = () => (
           </div>
         </div>
         <div>
-          <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6">
-            I'm <span className="text-foreground font-medium">Md Shahed</span>, a Bangladesh-based
-            entrepreneur, businessman, and web developer. I am the Founder & CEO of <a href="https://shahedit.com/" target="_blank" rel="noreferrer" className="text-primary hover:underline font-medium">Shahed IT</a>, leading multiple business ventures and IT projects.
+          <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6" data-speakable>
+            I'm <span className="text-foreground font-medium">Md Shahed</span> (MD Shahed), a Dhaka-based
+            web developer and entrepreneur. This is my official website — shahed.com.bd. I am the Founder &amp; CEO of <a href="https://shahedit.com/" target="_blank" rel="noreferrer" className="text-primary hover:underline font-medium">Shahed IT</a>, building websites, e-commerce, and digital brands for clients in Bangladesh and worldwide.
           </p>
           <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6">
             I specialize in <span className="text-foreground font-medium">React.js</span>,{" "}
@@ -991,6 +997,8 @@ const BlogSection = () => (
 
 /* ---------- FAQ ---------- */
 const faqItems = [
+  { q: "Who is Md Shahed?", a: "Md Shahed (also written MD Shahed or Mohammad Shahed) is a web developer and entrepreneur based in Dhaka, Bangladesh. He is the Founder & CEO of Shahed IT. His official website is shahed.com.bd. Contact: ceo@shahed.com.bd · +880 1823-378888." },
+  { q: "Is shahed.com.bd the official website of Md Shahed?", a: "Yes. shahed.com.bd is the official personal website of Md Shahed, the Dhaka-based web developer and founder of Shahed IT. It is not affiliated with other public figures who share the same name." },
   { q: "What types of projects do you work on?", a: "I work on a wide range of projects including business websites, e-commerce stores, portfolio sites, SaaS dashboards, and brand identity design. Every project is tailored to meet the client's specific needs." },
   { q: "How long does a typical project take?", a: "A typical website project takes 2-4 weeks depending on complexity. E-commerce stores may take 4-6 weeks. I always provide a detailed timeline before starting any project." },
   { q: "Do you provide ongoing support after project delivery?", a: "Yes! I offer ongoing maintenance and support packages. I believe in long-term partnerships and ensure your website stays updated and performs optimally." },
@@ -1359,38 +1367,14 @@ const FloatingButtons = () => {
 const Index = () => {
   const { open, setOpen } = useGlobalSearch();
   const jsonLd = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "@id": "https://shahed.com.bd/#person",
-      name: "MD Shahed",
-      alternateName: [
-        "Md Shahed", "MD SHAHED", "Shahed", "শাহেদ", "Md. Shahed",
-        "Md Shahed Bangladesh", "Shahed Bangladesh", "Shahed BD",
-        "Shahed Rajshahi", "Md Shahed Rajshahi", "Shahed Rajshahi Bangladesh",
-        "Shahed Bangladesh Developer", "Shahed Developer", "Shahed Freelancer",
-        "Shahed Official", "Shahed Official Website", "Shahed Personal Website"
-      ],
-      url: "https://shahed.com.bd/",
-      image: "https://shahed.com.bd/hero-portrait.jpg",
-      jobTitle: "Web Developer & Entrepreneur",
-      description: "MD Shahed is a web developer and entrepreneur based in Dhaka, Bangladesh.",
-      sameAs: [
-        "https://github.com/shahed-io",
-        "https://facebook.com/shahed.io",
-        "https://instagram.com/shahed.io",
-        "https://linkedin.com/in/shahed-io",
-      ],
-      worksFor: { "@id": "https://shahed.com.bd/#organization" },
-      address: { "@type": "PostalAddress", addressLocality: "Dhaka", addressCountry: "BD" },
-      knowsAbout: ["Web Development", "React.js", "Next.js", "SEO", "E-commerce", "Branding"],
-    },
+    personJsonLd,
+    profilePageJsonLd,
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "@id": "https://shahed.com.bd/#website",
-      name: "MD Shahed",
-      alternateName: "Shahed",
+      name: "Md Shahed | Official Website",
+      alternateName: ["MD Shahed", "shahed.com.bd"],
       url: "https://shahed.com.bd/",
       about: { "@id": "https://shahed.com.bd/#person" },
     },
@@ -1398,13 +1382,14 @@ const Index = () => {
   return (
     <main className="relative">
       <SEO
-        title="MD Shahed — Web Developer & Entrepreneur in Bangladesh"
-        description="MD Shahed is a Dhaka-based web developer, entrepreneur and digital creator specializing in React.js, Next.js, SEO, e-commerce and digital branding."
+        title={HOME_TITLE}
+        description={HOME_DESCRIPTION}
         canonical="https://shahed.com.bd/"
         image="https://shahed.com.bd/og-image.jpg"
-        imageAlt="MD Shahed — Web Developer and Entrepreneur in Bangladesh"
-        keywords="MD Shahed, Md Shahed, Shahed, Md. Shahed, Md Shahed Bangladesh, Shahed Bangladesh, Shahed BD, Shahed Rajshahi, Shahed Bangladesh Developer, Shahed Web Developer, Shahed Website Developer, Shahed Web Designer, Shahed Graphic Designer, Shahed UI Designer, Shahed UI/UX Designer, Shahed Developer, Shahed Designer, Shahed Entrepreneur, Shahed Digital Entrepreneur, Shahed Portfolio, Shahed Personal Website, Shahed Official, Shahed Official Website, Md Shahed BD, Md. Shahed BD, Md Shahed Rajshahi, Shahed Rajshahi Bangladesh, Shahed Web Developer Bangladesh, Shahed Graphic Designer Bangladesh, Shahed Software Developer Bangladesh, Shahed Website Designer Bangladesh, Shahed Freelancer, Shahed Digital Services, Shahed Technology, Shahed Tech"
-        author="MD Shahed"
+        imageAlt="Md Shahed — Official Website, Web Developer and Entrepreneur in Bangladesh"
+        type="profile"
+        keywords="Md Shahed, MD Shahed, Md. Shahed, Mohammad Shahed, Shahed, শাহেদ, Md Shahed official website, Md Shahed web developer, MD Shahed Bangladesh, Shahed IT, shahed.com.bd, React developer Dhaka, Next.js developer Bangladesh"
+        author="Md Shahed"
         jsonLd={jsonLd}
       />
       <Navbar onOpenSearch={() => setOpen(true)} />

@@ -67,11 +67,14 @@ export const LandingPage = ({
         "@type": "Person",
         "@id": `${SITE}/#person`,
         name: "MD Shahed",
-        alternateName: ["Md Shahed", "MD SHAHED", "Shahed", "শাহেদ"],
+        alternateName: ["Md Shahed", "MD SHAHED", "Md. Shahed", "Mohammad Shahed", "Shahed", "শাহেদ"],
         url: SITE,
         image,
         jobTitle: "Web Developer & Entrepreneur",
+        disambiguatingDescription:
+          "Official website of Md Shahed, a Dhaka-based web developer and entrepreneur, Founder & CEO of Shahed IT (shahedit.com).",
         sameAs: [
+          "https://shahedit.com",
           "https://github.com/shahed-io",
           "https://facebook.com/shahed.io",
           "https://instagram.com/shahed.io",
@@ -87,8 +90,9 @@ export const LandingPage = ({
     },
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      name: "MD Shahed",
+      "@type": "ProfessionalService",
+      name: "Shahed IT",
+      founder: { "@id": `${SITE}/#person` },
       image,
       url: canonical,
       priceRange: "$$",

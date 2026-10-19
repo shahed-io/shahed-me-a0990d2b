@@ -1,28 +1,33 @@
-# MD Shahed
+# Md Shahed | Official Website
 
-> MD Shahed (also written as Md Shahed, MD SHAHED, Shahed, or শাহেদ) is a Dhaka, Bangladesh-based web developer, entrepreneur, and digital creator.
+> This is the official website of Md Shahed (also written as MD Shahed, Md. Shahed, Mohammad Shahed, Shahed, or শাহেদ) — a web developer and entrepreneur based in Dhaka, Bangladesh, and Founder & CEO of Shahed IT.
 
-MD Shahed specializes in React.js, Next.js, TypeScript, SEO, branding, e-commerce, and scalable web applications focused on business growth and modern digital experiences.
+Md Shahed builds modern websites, e-commerce platforms, and digital brands using React.js, Next.js, TypeScript, and SEO. Official domain: https://shahed.com.bd. Company: https://shahedit.com.
 
-Md Shahed combines technology, branding, and business strategy to build impactful, performance-driven digital solutions for startups, SMEs, and enterprises — locally in Dhaka, Bangladesh and globally.
+This personal brand is not affiliated with other public figures who share the same name.
 
 ## Identity
 
 - Official website: https://shahed.com.bd
-- Name variants: MD Shahed; Md Shahed; MD SHAHED; Shahed; শাহেদ
-- Role: Web Developer & Entrepreneur
+- Company: https://shahedit.com (Shahed IT)
+- Name variants: Md Shahed; MD Shahed; Md. Shahed; Mohammad Shahed; Shahed; শাহেদ
+- Role: Web Developer & Entrepreneur; Founder & CEO of Shahed IT
 - Location: Dhaka, Bangladesh
-- Primary topics: React.js, Next.js, TypeScript, SEO, e-commerce, branding, and digital consulting
+- Email: ceo@shahed.com.bd
+- Phone: +880 1823-378888
+- GitHub: https://github.com/shahed-io
+- LinkedIn: https://linkedin.com/in/shahed-io
+- Facebook: https://facebook.com/shahed.io
 
 ## Pages
 
-- [Home](/): Portfolio overview, services, skills, and contact.
-- [Timeline](/timeline): Career and project timeline of Md Shahed.
-- [Md Shahed](/md-shahed): About Md Shahed — entrepreneur and web developer.
-- [Md Shahed — Web Developer](/md-shahed-web-developer): Web development services, stack, and process.
-- [Shahed Business](/shahed-business): Business ventures and entrepreneurial portfolio.
-- [Bangladesh Web Development](/bangladesh-web-development): Web development services in Dhaka, Bangladesh — local payment integration, Bangla support.
-- [Digital Consulting](/digital-consulting): Digital strategy, SEO, and online growth consulting for Bangladesh businesses.
+- [Home](/): Official website of Md Shahed.
+- [Who is Md Shahed](/md-shahed): Official profile and identity page.
+- [About](/about): Biography of Md Shahed.
+- [Web Developer](/md-shahed-web-developer): React, Next.js and TypeScript services.
+- [Timeline](/timeline): Career and project timeline.
+- [Shahed Business](/shahed-business): Business ventures.
+- [Contact](/contact): Email, phone, and WhatsApp.
 
 ## Optional
 
