@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { PageTransition } from "@/components/ui/page-transition";
 import { SiteSettingsLoader } from "@/components/SiteSettingsLoader";
 import { PageSeoLoader } from "@/components/PageSeoLoader";
+import { CustomCursor } from "@/components/CustomCursor";
 // Splash handled by inline loader in index.html for instant paint
 import Index from "./pages/Index.tsx";
 
@@ -137,7 +138,7 @@ const AnimatedRoutes = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      
+      <CustomCursor />
       <Toaster />
       <Sonner />
       <BrowserRouter>
