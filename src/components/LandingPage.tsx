@@ -72,7 +72,7 @@ export const LandingPage = ({
         image,
         jobTitle: "Web Developer & Entrepreneur",
         disambiguatingDescription:
-          "Official website of Md Shahed, a Dhaka-based web developer and entrepreneur, Founder & CEO of Shahed IT (shahedit.com).",
+          "Official website of Md Shahed, a Bangladeshi web developer and entrepreneur based in Dhaka, Bangladesh, Founder & CEO of Shahed IT (shahedit.com).",
         sameAs: [
           "https://shahedit.com",
           "https://github.com/shahed-io",
@@ -99,10 +99,9 @@ export const LandingPage = ({
       address: {
         "@type": "PostalAddress",
         addressLocality: "Dhaka",
-        addressRegion: "Dhaka Division",
         addressCountry: "BD",
       },
-      areaServed: ["Bangladesh", "Dhaka", "Chittagong", "Sylhet", "Worldwide"],
+      areaServed: ["Bangladesh", "Dhaka"],
     },
     {
       "@context": "https://schema.org",

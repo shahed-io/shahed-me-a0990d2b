@@ -156,7 +156,8 @@ const BlogCategory = () => {
                       <div className="mb-2 flex items-center gap-2 text-xs text-muted-foreground">
                         <Calendar className="h-3 w-3" />
                         <time dateTime={p.created_at}>
-                          {new Date(p.created_at).toLocaleDateString("en-US", {
+                          {new Date(p.created_at).toLocaleDateString("en-BD", {
+                            timeZone: "Asia/Dhaka",
                             year: "numeric", month: "long", day: "numeric",
                           })}
                         </time>

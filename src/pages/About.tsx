@@ -13,7 +13,7 @@ const About = () => {
     <main className="relative pt-20">
       <SEO 
         title="About Md Shahed | Official Website — Web Developer in Bangladesh"
-        description="About Md Shahed (MD Shahed): Dhaka-based web developer, entrepreneur, and Founder of Shahed IT. Official site shahed.com.bd · ceo@shahed.com.bd · +880 1823-378888."
+        description="About Md Shahed (MD Shahed): Bangladeshi web developer and entrepreneur based in Dhaka, Bangladesh, and Founder of Shahed IT. Official site shahed.com.bd · ceo@shahed.com.bd · +880 1823-378888."
         canonical="https://shahed.com.bd/about"
         type="profile"
         keywords="About Md Shahed, MD Shahed, official website, web developer Bangladesh, Shahed IT" 
@@ -40,7 +40,7 @@ const About = () => {
             </div>
             <div>
               <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6">
-                I am <span className="text-foreground font-medium">Md Shahed</span> (MD Shahed). This is my official website. I engineer web applications and IT solutions at the intersection of <span className="text-foreground font-medium">robust architecture</span> and premium user experience. Based in Dhaka, Bangladesh, I am a web developer, entrepreneur, and Founder of Shahed IT.
+                I am <span className="text-foreground font-medium">Md Shahed</span> (MD Shahed), a Bangladeshi web developer and entrepreneur based in Dhaka, Bangladesh. This is my official website. I engineer web applications and IT solutions at the intersection of <span className="text-foreground font-medium">robust architecture</span> and premium user experience, and I am the Founder of Shahed IT.
               </p>
               <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6">
                 My engineering stack is heavily focused on <span className="text-foreground font-medium">React, Next.js, and modern TypeScript ecosystems</span>. Beyond writing code, my philosophy centers on solving complex business challenges through elegant system design, obsessive performance tuning, and seamless micro-interactions.
@@ -49,7 +49,7 @@ const About = () => {
                 The ultimate goal is to build <span className="text-gradient font-medium">high-performance digital platforms</span> that don't just look exceptional, but deliver measurable business impact.
               </p>
               <div className="space-y-3">
-                {["7+ Years Building IT Solutions", "International Client Base", "Startup to Enterprise Experience"].map((item) => (
+                {["7+ Years Building IT Solutions", "Bangladesh-Based Client Work", "Startup to Enterprise Experience"].map((item) => (
                   <div key={item} className="flex items-center gap-3 text-sm glass rounded-full px-4 py-2.5">
                     <span className="w-2 h-2 rounded-full bg-gradient-accent" />
                     <span className="text-foreground">{item}</span>

@@ -163,7 +163,8 @@ const BlogPost = () => {
               <div className="mb-3 flex items-center gap-3 text-xs text-muted-foreground">
                 <Calendar className="h-3 w-3" />
                 <time dateTime={post.created_at}>
-                  {new Date(post.created_at).toLocaleDateString("en-US", {
+                  {new Date(post.created_at).toLocaleDateString("en-BD", {
+                    timeZone: "Asia/Dhaka",
                     year: "numeric", month: "long", day: "numeric",
                   })}
                 </time>

@@ -155,7 +155,7 @@ export const Footer = () => {
         {/* Bottom bar */}
         <div className="pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Md Shahed | Official Website (shahed.com.bd). Independent IT solutions from Dhaka.
+            © {new Date().getFullYear()} Md Shahed | Official Website (shahed.com.bd). Bangladesh-focused IT solutions from Dhaka.
           </p>
           <div className="flex items-center gap-5 text-xs text-muted-foreground">
             <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>

@@ -1,6 +1,6 @@
 # Md Shahed | Official Website
 
-> This is the official website of Md Shahed (also written as MD Shahed, Md. Shahed, Mohammad Shahed, Shahed, or শাহেদ) — a web developer and entrepreneur based in Dhaka, Bangladesh, and Founder & CEO of Shahed IT.
+> This is the official website of Md Shahed (also written as MD Shahed, Md. Shahed, Mohammad Shahed, Shahed, or শাহেদ) — a Bangladeshi web developer and entrepreneur based in Dhaka, Bangladesh, and Founder & CEO of Shahed IT.
 
 Md Shahed builds modern websites, e-commerce platforms, and digital brands using React.js, Next.js, TypeScript, and SEO. Official domain: https://shahed.com.bd. Company: https://shahedit.com.
 

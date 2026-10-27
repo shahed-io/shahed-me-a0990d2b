@@ -20,7 +20,7 @@ const BangladeshWebDevelopment = () => (
       { title: "Fast, Clear and Search-Ready", body: "Mobile-first interfaces, structured content, technical SEO এবং dependable performance শুরু থেকেই plan করা হয়।" },
       { title: "Built for Business Growth", body: "একটি polished website-এর পাশাপাশি clear positioning, conversion path এবং post-launch improvement-এর foundation তৈরি করি।" },
     ]}
-    about={`Bangladesh-এর customers দ্রুত, trustworthy এবং সহজ digital experience আশা করেন। তাই web development-এ local language, mobile usage, payment preference, content clarity এবং network performance — সবকিছুকে product decision হিসেবে দেখি।\n\nDhaka, Chattogram, Sylhet, Rajshahi, Khulna বা দেশের যেকোনো জায়গার business-এর জন্য একটি clear discovery process, thoughtful design এবং maintainable technology stack-এর মাধ্যমে website তৈরি করি।`}
+    about={`Bangladesh-এর customers দ্রুত, trustworthy এবং সহজ digital experience আশা করেন। তাই web development-এ local language, mobile usage, payment preference, content clarity এবং network performance — সবকিছুকে product decision হিসেবে দেখি।\n\nDhaka-ভিত্তিক কাজের মাধ্যমে বাংলাদেশের business-গুলোর জন্য clear discovery process, thoughtful design এবং maintainable technology stack-এ website তৈরি করি।`}
     services={[
       "Business websites for Bangladesh startups and SMEs",
       "E-commerce with bKash, Nagad, Rocket and SSLCommerz",

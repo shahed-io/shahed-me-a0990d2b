@@ -52,7 +52,7 @@ export const SEO = ({
   author = "MD Shahed",
   publishedTime,
   modifiedTime,
-  locale = "en_US",
+  locale = "en_BD",
   noindex = false,
   jsonLd,
 }: SEOProps) => {

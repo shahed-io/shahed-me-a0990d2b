@@ -92,7 +92,7 @@ const Blog = () => {
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground md:text-lg">
               Practical articles on web development, React, Next.js, SEO and digital strategy
-              — written for Bangladesh and the world.
+              — written with Bangladesh businesses and audiences in mind.
             </p>
             <nav aria-label="Breadcrumb" className="mt-4 text-xs text-muted-foreground">
               <Link to="/" className="hover:text-foreground">Home</Link>
@@ -144,7 +144,8 @@ const Blog = () => {
                       <div className="mb-2 flex items-center gap-2 text-xs text-muted-foreground">
                         <Calendar className="h-3 w-3" />
                         <time dateTime={p.created_at}>
-                          {new Date(p.created_at).toLocaleDateString("en-US", {
+                          {new Date(p.created_at).toLocaleDateString("en-BD", {
+                            timeZone: "Asia/Dhaka",
                             year: "numeric", month: "long", day: "numeric",
                           })}
                         </time>

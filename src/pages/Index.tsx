@@ -639,8 +639,7 @@ const AboutSection = () => (
         </div>
         <div>
           <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6" data-speakable>
-            I'm <span className="text-foreground font-medium">Md Shahed</span> (MD Shahed), a Dhaka-based
-            web developer and entrepreneur. This is my official website — shahed.com.bd. I am the Founder &amp; CEO of <a href="https://shahedit.com/" target="_blank" rel="noreferrer" className="text-primary hover:underline font-medium">Shahed IT</a>, building websites, e-commerce, and digital brands for clients in Bangladesh and worldwide.
+            I'm <span className="text-foreground font-medium">Md Shahed</span> (MD Shahed), a Bangladeshi web developer and entrepreneur based in Dhaka, Bangladesh. This is my official website — shahed.com.bd. I am the Founder &amp; CEO of <a href="https://shahedit.com/" target="_blank" rel="noreferrer" className="text-primary hover:underline font-medium">Shahed IT</a>, building websites, e-commerce, and digital brands for businesses in Bangladesh.
           </p>
           <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6">
             I specialize in <span className="text-foreground font-medium">React.js</span>,{" "}
@@ -653,7 +652,7 @@ const AboutSection = () => (
             <span className="text-gradient font-medium">impactful and performance-driven digital solutions</span>.
           </p>
           <div className="space-y-3">
-            {["7+ Years Building IT Solutions", "International Client Base", "Startup to Enterprise Experience"].map((item) => (
+            {["7+ Years Building IT Solutions", "Bangladesh-Based Client Work", "Startup to Enterprise Experience"].map((item) => (
               <div key={item} className="flex items-center gap-3 text-sm glass rounded-full px-4 py-2.5">
                 <span className="w-2 h-2 rounded-full bg-gradient-accent" />
                 <span className="text-foreground">{item}</span>
@@ -726,10 +725,10 @@ const SkillsSection = () => (
 /* ---------- Experience timeline ---------- */
 const timeline = [
   { year: "2017", fn: "init()", title: "Started Web Development", desc: "Began my journey building websites and learning modern technologies." },
-  { year: "2019", fn: "launch()", title: "Freelance Career", desc: "Started taking international clients and building brands for startups." },
+  { year: "2019", fn: "launch()", title: "Freelance Career", desc: "Started working with Bangladesh-based clients and building brands for startups." },
   { year: "2021", fn: "scale()", title: "Founded IT Business", desc: "Launched an IT service company providing digital solutions to businesses." },
   { year: "2023", fn: "expand()", title: "E-Commerce Expansion", desc: "Expanded into e-commerce development with WooCommerce and custom solutions." },
-  { year: "2024", fn: "milestone()", title: "100+ Projects Milestone", desc: "Crossed 100+ successfully delivered projects with clients worldwide." },
+  { year: "2024", fn: "milestone()", title: "100+ Projects Milestone", desc: "Crossed 100+ successfully delivered projects for clients in Bangladesh." },
 ];
 
 const ExperienceSection = () => (

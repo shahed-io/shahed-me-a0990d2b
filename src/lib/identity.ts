@@ -22,15 +22,15 @@ export const PERSON_ALTERNATE_NAMES = [
 export const PERSON_JOB_TITLE = "Web Developer & Entrepreneur";
 
 export const DISAMBIGUATING_DESCRIPTION =
-  "Official website of Md Shahed, a web developer and entrepreneur based in Dhaka, Bangladesh, and Founder & CEO of Shahed IT. Contact: ceo@shahed.com.bd · +880 1823-378888. This site is the personal brand of this developer — not other public figures who share the same name.";
+  "Official website of Md Shahed, a Bangladeshi web developer and entrepreneur based in Dhaka, Bangladesh, and Founder & CEO of Shahed IT. Contact: ceo@shahed.com.bd · +880 1823-378888. This site is the personal brand of this developer — not other public figures who share the same name.";
 
 export const PERSON_DESCRIPTION =
-  "Md Shahed is a Dhaka-based web developer, entrepreneur, and Founder & CEO of Shahed IT. He builds modern websites, e-commerce platforms, and digital brands using React, Next.js, TypeScript, and SEO.";
+  "Md Shahed is a Bangladeshi web developer and entrepreneur based in Dhaka, Bangladesh, and Founder & CEO of Shahed IT. He builds modern websites, e-commerce platforms, and digital brands using React, Next.js, TypeScript, and SEO.";
 
-export const HOME_TITLE = "Md Shahed | Official Website — Web Developer in Bangladesh";
+export const HOME_TITLE = "Md Shahed | Official Website — Bangladeshi Web Developer in Dhaka";
 
 export const HOME_DESCRIPTION =
-  "Official website of Md Shahed (MD Shahed) — web developer & entrepreneur in Dhaka, Bangladesh. Founder of Shahed IT. React, Next.js, SEO. ceo@shahed.com.bd · +880 1823-378888";
+  "Official website of Md Shahed (MD Shahed) — Bangladeshi web developer & entrepreneur based in Dhaka, Bangladesh. Founder of Shahed IT. React, Next.js, SEO. ceo@shahed.com.bd · +880 1823-378888";
 
 export const SAME_AS = [
   "https://shahedit.com",
@@ -57,7 +57,7 @@ export const personJsonLd = {
   image: {
     "@type": "ImageObject",
     url: `${SITE_ORIGIN}/hero-portrait.jpg`,
-    caption: "Md Shahed — Web Developer and Entrepreneur, Dhaka, Bangladesh",
+    caption: "Md Shahed — Bangladeshi Web Developer and Entrepreneur, Dhaka, Bangladesh",
   },
   email: "ceo@shahed.com.bd",
   telephone: "+8801823378888",
