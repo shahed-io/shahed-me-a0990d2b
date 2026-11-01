@@ -102,7 +102,7 @@ const Blog = () => {
               <DialogContent className="max-h-[90vh] overflow-y-auto">
                 <DialogHeader><DialogTitle className="flex items-center gap-2"><Sparkles className="h-5 w-5 text-accent" /> AI Blog Writer</DialogTitle></DialogHeader>
                 <div className="grid gap-3">
-                  <div><Label>Topic *</Label><Input placeholder="e.g. Best Web Developer in Bangladesh 2026" value={aiForm.topic} onChange={e => setAiForm({ ...aiForm, topic: e.target.value })} /></div>
+                  <div><Label>Topic *</Label><Input placeholder="e.g. Best Web Developer 2026" value={aiForm.topic} onChange={e => setAiForm({ ...aiForm, topic: e.target.value })} /></div>
                   <div><Label>Target Keywords (comma separated)</Label><Input placeholder="web developer bangladesh, react developer bangladesh" value={aiForm.keywords} onChange={e => setAiForm({ ...aiForm, keywords: e.target.value })} /></div>
                   <div className="grid grid-cols-2 gap-3">
                     <div>

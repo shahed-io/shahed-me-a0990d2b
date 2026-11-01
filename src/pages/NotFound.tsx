@@ -20,7 +20,6 @@ const NotFound = () => {
         <meta name="googlebot" content="noindex, nofollow" />
         {/* Prerender/rendering hint — Googlebot honors this header-style meta */}
         <meta name="prerender-status-code" content="404" />
-        <link rel="canonical" href="https://shahed.com.bd/" />
       </Helmet>
 
       <main

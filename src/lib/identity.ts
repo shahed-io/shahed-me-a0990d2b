@@ -22,18 +22,17 @@ export const PERSON_ALTERNATE_NAMES = [
 export const PERSON_JOB_TITLE = "Web Developer & Entrepreneur";
 
 export const DISAMBIGUATING_DESCRIPTION =
-  "Official website of Md Shahed, a Bangladeshi web developer and entrepreneur proudly representing Bangladesh, and Founder & CEO of Shahed IT. Contact: ceo@shahed.com.bd · +880 1823-378888. This site is the personal brand of this developer — not other public figures who share the same name.";
+  "Official website of Md Shahed, a Bangladeshi web developer and entrepreneur proudly representing Bangladesh. Contact: ceo@shahed.com.bd · +880 1823-378888. This site is the personal brand of this developer — not other public figures who share the same name.";
 
 export const PERSON_DESCRIPTION =
-  "Md Shahed is a Bangladeshi web developer and entrepreneur proudly representing Bangladesh, and Founder & CEO of Shahed IT. He builds modern websites, e-commerce platforms, and digital brands using React, Next.js, TypeScript, and SEO.";
+  "Md Shahed is a Bangladeshi web developer and entrepreneur proudly representing Bangladesh. He builds modern websites, e-commerce platforms, and digital brands using React, Next.js, TypeScript, and SEO.";
 
 export const HOME_TITLE = "Md Shahed | Official Website — Bangladeshi Web Developer";
 
 export const HOME_DESCRIPTION =
-  "Official website of Md Shahed (MD Shahed) — Bangladeshi web developer & entrepreneur proudly representing Bangladesh. Founder of Shahed IT. React, Next.js, SEO. ceo@shahed.com.bd · +880 1823-378888";
+  "Official website of Md Shahed (MD Shahed) — Bangladeshi web developer & entrepreneur proudly representing Bangladesh. React, Next.js, SEO. ceo@shahed.com.bd · +880 1823-378888";
 
 export const SAME_AS = [
-  "https://shahedit.com",
   "https://github.com/shahed-io",
   "https://facebook.com/shahed.io",
   "https://instagram.com/shahed.io",
@@ -79,7 +78,6 @@ export const personJsonLd = {
     "SEO",
     "E-commerce",
     "Branding",
-    "Shahed IT",
   ],
   knowsLanguage: ["en", "bn"],
 };

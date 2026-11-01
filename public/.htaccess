@@ -20,8 +20,10 @@
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # Everything else -> index.html (client-side router handles it)
-  RewriteRule . /index.html [L]
+  # Only known SPA routes are served as 200. Any other URL falls through to
+  # ErrorDocument 404 below, so Google gets a real 404 status (not a soft 404).
+  RewriteRule ^(index\.html)?$ /index.html [L]
+  RewriteRule ^(login|signup|timeline|dashboard|md-shahed|shahed-business|md-shahed-web-developer|bangladesh-web-development|digital-consulting|about|skills|projects|services|contact|blog|ceo)(/.*)?$ /index.html [L]
 </IfModule>
 
 # 2) Compression

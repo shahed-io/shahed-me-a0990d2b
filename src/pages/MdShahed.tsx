@@ -4,14 +4,14 @@ const MdShahed = () => (
   <LandingPage
     slug="/md-shahed"
     title="Md Shahed | Official Website — Who is Md Shahed?"
-    description="This is the official website of Md Shahed (MD Shahed), a Bangladeshi web developer and entrepreneur proudly representing Bangladesh, Founder & CEO of Shahed IT. Contact ceo@shahed.com.bd · +880 1823-378888."
+    description="This is the official website of Md Shahed (MD Shahed), a Bangladeshi web developer and entrepreneur proudly representing Bangladesh. Contact ceo@shahed.com.bd · +880 1823-378888."
     h1="Md Shahed | Official Website"
     tagline="Official profile · Web Developer · Entrepreneur"
-    intro="আমি Md Shahed (MD Shahed / Mohammad Shahed), একজন বাংলাদেশি web developer ও entrepreneur; Bangladesh-এ আমার কাজের ভিত্তি। আমি Shahed IT (https://shahedit.com)-এর Founder ও CEO। shahed.com.bd আমার official personal website। একই নামে অন্য public figure-দের সঙ্গে এই সাইটের কোনো সম্পর্ক নেই।"
+    intro="আমি Md Shahed (MD Shahed / Mohammad Shahed), একজন বাংলাদেশি web developer ও entrepreneur; Bangladesh-এ আমার কাজের ভিত্তি। আমি shahed.com.bd আমার official personal website। একই নামে অন্য public figure-দের সঙ্গে এই সাইটের কোনো সম্পর্ক নেই।"
     keywords={[
       "Md Shahed", "MD Shahed", "Md. Shahed", "Mohammad Shahed", "শাহেদ",
       "Md Shahed official website", "MD Shahed Bangladesh", "MD Shahed Bangladesh",
-      "Shahed IT Founder", "Shahed web developer", "shahed.com.bd", "shahedit.com"
+      "Shahed web developer", "shahed.com.bd"
     ]}
     highlights={[
       { title: "Engineering with Intent", body: "React, TypeScript ও modern web architecture ব্যবহার করে fast, maintainable এবং search-ready products তৈরি করি।" },
@@ -30,7 +30,7 @@ const MdShahed = () => (
     faqs={[
       {
         q: "Who is Md Shahed?",
-        a: "Md Shahed is a web developer and entrepreneur proudly representing Bangladesh. He is the Founder & CEO of Shahed IT. Official website: https://shahed.com.bd. Email: ceo@shahed.com.bd. Phone: +880 1823-378888.",
+        a: "Md Shahed is a web developer and entrepreneur proudly representing Bangladesh. Official website: https://shahed.com.bd. Email: ceo@shahed.com.bd. Phone: +880 1823-378888.",
       },
       {
         q: "shahed.com.bd কি Md Shahed-এর official website?",

@@ -117,7 +117,7 @@ const DEFAULT_KEYWORDS: KeywordCatalogItem[] = [
   },
   {
     id: "9",
-    keyword: "Shahed IT",
+    keyword: "Md Shahed",
     intent: "Navigational",
     targetRank: 1,
     estVolume: "1.1K",

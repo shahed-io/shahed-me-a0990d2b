@@ -72,9 +72,8 @@ export const LandingPage = ({
         image,
         jobTitle: "Web Developer & Entrepreneur",
         disambiguatingDescription:
-          "Official website of Md Shahed, a Bangladeshi web developer and entrepreneur proudly representing Bangladesh, Founder & CEO of Shahed IT (shahedit.com).",
+          "Official website of Md Shahed, a Bangladeshi web developer and entrepreneur proudly representing Bangladesh.",
         sameAs: [
-          "https://shahedit.com",
           "https://github.com/shahed-io",
           "https://facebook.com/shahed.io",
           "https://instagram.com/shahed.io",
@@ -91,7 +90,7 @@ export const LandingPage = ({
     {
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
-      name: "Shahed IT",
+      name: "Md Shahed",
       founder: { "@id": `${SITE}/#person` },
       image,
       url: canonical,
