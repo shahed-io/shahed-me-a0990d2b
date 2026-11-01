@@ -3,15 +3,15 @@ import { LandingPage } from "@/components/LandingPage";
 const MdShahedWebDeveloper = () => (
   <LandingPage
     slug="/md-shahed-web-developer"
-    title="MD Shahed — React, Next.js & TypeScript Developer in Dhaka"
-    description="Hire MD Shahed for thoughtful React, Next.js and TypeScript development in Dhaka. Build fast, accessible and SEO-ready websites, web apps and IT solutions with a clear delivery process."
-    h1="React & Next.js Web Developer in Dhaka"
+    title="MD Shahed — React, Next.js & TypeScript Developer in Bangladesh"
+    description="Hire MD Shahed for thoughtful React, Next.js and TypeScript development in Bangladesh. Build fast, accessible and SEO-ready websites, web apps and IT solutions with a clear delivery process."
+    h1="React & Next.js Web Developer in Bangladesh"
     tagline="Product Engineering · Performance · Scale"
-    intro="Dhaka থেকে modern React, Next.js ও TypeScript technology ব্যবহার করে production-ready websites এবং web applications তৈরি করি। clean architecture, performance, accessibility ও search visibility-কে product quality-এর অংশ হিসেবে দেখি।"
+    intro="Bangladesh থেকে modern React, Next.js ও TypeScript technology ব্যবহার করে production-ready websites এবং web applications তৈরি করি। clean architecture, performance, accessibility ও search visibility-কে product quality-এর অংশ হিসেবে দেখি।"
     keywords={[
-      "MD Shahed web developer", "React developer Dhaka",
-      "Next.js developer Bangladesh", "TypeScript developer Dhaka",
-      "full-stack web developer Bangladesh", "hire React developer Dhaka",
+      "MD Shahed web developer", "React developer Bangladesh",
+      "Next.js developer Bangladesh", "TypeScript developer Bangladesh",
+      "full-stack web developer Bangladesh", "hire React developer Bangladesh",
       "SEO-friendly web development Bangladesh", "Shahed React developer",
     ]}
     highlights={[
@@ -30,7 +30,7 @@ const MdShahedWebDeveloper = () => (
     ]}
     faqs={[
       {
-        q: "Dhaka-তে React developer hire করার process কী?",
+        q: "bangladesh-তে React developer hire করার process কী?",
         a: "আপনার product goal, existing design বা technical requirement পাঠান। Scope review-এর পর deliverables, timeline, responsibilities এবং next steps পরিষ্কারভাবে শেয়ার করা হয়।",
       },
       {

@@ -95,7 +95,7 @@ const DEFAULT_KEYWORDS: KeywordCatalogItem[] = [
   },
   {
     id: "7",
-    keyword: "React developer Dhaka",
+    keyword: "React developer Bangladesh",
     intent: "Commercial",
     targetRank: 2,
     estVolume: "920",

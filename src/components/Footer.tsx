@@ -42,7 +42,7 @@ export const Footer = () => {
   const contacts = [
     { icon: <Phone className="w-4 h-4" />, label: "+880 1823-378888", href: "tel:+8801823378888", tint: "from-primary/20 to-primary/5 text-primary" },
     { icon: <Mail className="w-4 h-4" />, label: "ceo@shahed.com.bd", href: "mailto:ceo@shahed.com.bd", tint: "from-secondary/20 to-secondary/5 text-secondary" },
-    { icon: <MapPin className="w-4 h-4" />, label: "Dhaka, Bangladesh", href: "https://maps.google.com/?q=Dhaka,Bangladesh", tint: "from-accent/20 to-accent/5 text-accent" },
+    { icon: <MapPin className="w-4 h-4" />, label: "Representing Bangladesh", href: "https://maps.google.com/?q=Bangladesh", tint: "from-accent/20 to-accent/5 text-accent" },
   ];
 
   const socials = [
@@ -155,7 +155,7 @@ export const Footer = () => {
         {/* Bottom bar */}
         <div className="pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Md Shahed | Official Website (shahed.com.bd). Bangladesh-focused IT solutions from Dhaka.
+            © {new Date().getFullYear()} Md Shahed | Official Website (shahed.com.bd). Bangladesh-focused IT solutions from Bangladesh.
           </p>
           <div className="flex items-center gap-5 text-xs text-muted-foreground">
             <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>

@@ -4,13 +4,13 @@ const BangladeshWebDevelopment = () => (
   <LandingPage
     slug="/bangladesh-web-development"
     title="Web Development Services in Bangladesh | MD Shahed"
-    description="Professional web development in Bangladesh for startups, SMEs and growing brands. MD Shahed builds fast business websites, e-commerce stores and custom web applications from Dhaka."
+    description="Professional web development in Bangladesh for startups, SMEs and growing brands. MD Shahed builds fast business websites, e-commerce stores and custom web applications from Bangladesh."
     h1="Web Development Services in Bangladesh"
     tagline="Local Context · Product Quality · Business Growth"
-    intro="Dhaka থেকে Bangladesh-এর startup, SME এবং ambitious businesses-এর জন্য strategy-led web development করি। আপনার website-কে শুধু online presence নয়, একটি credible digital platform এবং growth channel হিসেবে তৈরি করি।"
+    intro="Bangladesh থেকে Bangladesh-এর startup, SME এবং ambitious businesses-এর জন্য strategy-led web development করি। আপনার website-কে শুধু online presence নয়, একটি credible digital platform এবং growth channel হিসেবে তৈরি করি।"
     keywords={[
-      "web development Bangladesh", "web development company Dhaka",
-      "business website developer Bangladesh", "website design Dhaka",
+      "web development Bangladesh", "web development company Bangladesh",
+      "business website developer Bangladesh", "website design Bangladesh",
       "e-commerce development Bangladesh", "bKash payment integration",
       "Nagad payment website", "Bangla website development",
       "custom web application Bangladesh", "MD Shahed web development",
@@ -20,12 +20,12 @@ const BangladeshWebDevelopment = () => (
       { title: "Fast, Clear and Search-Ready", body: "Mobile-first interfaces, structured content, technical SEO এবং dependable performance শুরু থেকেই plan করা হয়।" },
       { title: "Built for Business Growth", body: "একটি polished website-এর পাশাপাশি clear positioning, conversion path এবং post-launch improvement-এর foundation তৈরি করি।" },
     ]}
-    about={`Bangladesh-এর customers দ্রুত, trustworthy এবং সহজ digital experience আশা করেন। তাই web development-এ local language, mobile usage, payment preference, content clarity এবং network performance — সবকিছুকে product decision হিসেবে দেখি।\n\nDhaka-ভিত্তিক কাজের মাধ্যমে বাংলাদেশের business-গুলোর জন্য clear discovery process, thoughtful design এবং maintainable technology stack-এ website তৈরি করি।`}
+    about={`Bangladesh-এর customers দ্রুত, trustworthy এবং সহজ digital experience আশা করেন। তাই web development-এ local language, mobile usage, payment preference, content clarity এবং network performance — সবকিছুকে product decision হিসেবে দেখি।\n\nবাংলাদেশ থেকে রিপ্রেজেন্ট করে আমি বাংলাদেশের business-গুলোর জন্য clear discovery process, thoughtful design এবং maintainable technology stack-এ website তৈরি করি।`}
     services={[
       "Business websites for Bangladesh startups and SMEs",
       "E-commerce with bKash, Nagad, Rocket and SSLCommerz",
       "Bangla and English content experiences",
-      "Local SEO foundations for Dhaka and Bangladesh",
+      "Local SEO foundations for Bangladesh",
       "Hosting, deployment and performance setup",
       "Corporate websites and custom digital platforms",
     ]}

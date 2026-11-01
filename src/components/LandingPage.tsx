@@ -72,7 +72,7 @@ export const LandingPage = ({
         image,
         jobTitle: "Web Developer & Entrepreneur",
         disambiguatingDescription:
-          "Official website of Md Shahed, a Bangladeshi web developer and entrepreneur based in Dhaka, Bangladesh, Founder & CEO of Shahed IT (shahedit.com).",
+          "Official website of Md Shahed, a Bangladeshi web developer and entrepreneur proudly representing Bangladesh, Founder & CEO of Shahed IT (shahedit.com).",
         sameAs: [
           "https://shahedit.com",
           "https://github.com/shahed-io",
@@ -82,7 +82,7 @@ export const LandingPage = ({
         ],
         address: {
           "@type": "PostalAddress",
-          addressLocality: "Dhaka",
+          addressLocality: "Bangladesh",
           addressCountry: "BD",
         },
       },
@@ -98,10 +98,10 @@ export const LandingPage = ({
       priceRange: "$$",
       address: {
         "@type": "PostalAddress",
-        addressLocality: "Dhaka",
+        addressLocality: "Bangladesh",
         addressCountry: "BD",
       },
-      areaServed: ["Bangladesh", "Dhaka"],
+      areaServed: ["Bangladesh"],
     },
     {
       "@context": "https://schema.org",
@@ -149,7 +149,7 @@ export const LandingPage = ({
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr] md:items-center">
           <div>
             <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-border bg-muted/40 px-3 py-1 text-xs uppercase tracking-wider text-muted-foreground">
-              <MapPin className="h-3 w-3" /> Dhaka, Bangladesh · {tagline}
+              <MapPin className="h-3 w-3" /> Bangladesh · {tagline}
             </p>
             <h1 className="mb-5 text-4xl font-bold leading-tight md:text-5xl">
               {h1}
@@ -176,7 +176,7 @@ export const LandingPage = ({
             <SmartImage
               src={image}
               fallbackSrc={DEFAULT_IMG}
-              alt={`${h1} — MD Shahed, Dhaka, Bangladesh`}
+              alt={`${h1} — MD Shahed, Bangladesh`}
               loading="eager"
               className="aspect-square w-full rounded-2xl object-cover shadow-lg"
               fallbackMessage="Portrait লোড করা যায়নি"
